@@ -1,0 +1,28 @@
+<% unless @srm.blank? %>
+<table>
+  <thead>
+  <tr>
+    <th>Tabella</th>
+    <th>Attributo</th>
+    <th>Min</th>
+    <th>Max</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@srm.size-1 %>
+      <tr>
+        <td><%= @srm.at(i).reference_table %></td>
+        <td><%= @srm.at(i).attr %></td>
+        <td><%= @srm.at(i).min %></td>
+        <td><%= @srm.at(i).max %></td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>
+
+ <% unless @srm.at(0).nome == "Standard" %>
+   <p>
+     <%= button_to "Elimina Modello", :controller => "admin/simple_range_model", :action => "delete_srm", :nome => @srm.at(0).nome %>
+   </p>
+ <% end %>
+<% end %>

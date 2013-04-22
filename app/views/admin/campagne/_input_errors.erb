@@ -1,0 +1,26 @@
+<% if @new_camp.errors.any? %>
+    <ul>
+    <% @new_camp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<% if @new_model_assoc.errors.any? %>
+    <ul>
+      <% @new_model_assoc.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+
+<% if @new_mask_assoc.errors.any? %>
+    <ul>
+      <% @new_mask_assoc.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+

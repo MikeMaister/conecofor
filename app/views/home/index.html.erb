@@ -1,0 +1,38 @@
+<h1>Home page</h1>
+
+<% if session[:user_id].blank? %>
+    <%= link_to "login", login_path %>
+<%end%>
+
+<% unless current_user.blank? || current_user.user_kind_id != 2%>
+
+<ul>
+    <li><%= link_to "Import Cops", :controller => "import_cops" %></li>
+    <li><%= link_to "Import Copl", :controller => "import_copl" %></li>
+    <li><%= link_to "Import Legnose", :controller => "import_legnose" %></li>
+    <li><%= link_to "Import Erbacee", :controller => "import_erbacee" %></li>
+    <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
+</ul>
+
+<% end %>
+
+<% unless current_user.blank? || current_user.user_kind_id != 1%>
+
+    <ul>
+      <li><%= link_to "Campagne", :controller => "admin/campagne" %></li>
+      <li><%= link_to "Plot", :controller => "admin/plot" %></li>
+      <li> <%= link_to "Approva Import", :controller => "admin/import_quick_view" %> </li>
+      <li><%= link_to "Controlla Specie", :controller => "admin/check_species" %></li>
+      <li><%= link_to "Visualizza errori di import", :controller => "admin/error_summary" %></li>
+      <li><%= link_to "Nuovo modello src", :controller => "admin/simple_range_model" %></li>
+      <li><%= link_to "Nuova Maschera d'obbligatorietà" ,:controller => "admin/mandatory_mask" %></li>
+      <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
+      <li><%= link_to "VEM", :controller => "admin/vem" %></li>
+      <li><%= link_to "PLV", :controller => "admin/plv" %></li>
+    </ul>
+
+<% end %>
+
+<% if logged_in? %>
+    <%= link_to "log out", :controller => "sessions", :action => "destroy" %>
+<%end%>

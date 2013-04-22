@@ -1,0 +1,55 @@
+<div id = "display_input_errors" style="display:none;"></div>
+
+<p><strong>Inserisci una nuova campagna</strong></p>
+<% form_remote_tag(:url =>{:controller => 'admin/campagne',:action => 'remote_save'}) do -%>
+    <p>
+      <strong>Stagione:<br /></strong>
+      <%= label_tag "Primavera" %>
+      <%= radio_button_tag "season_id",@id_primavera%>
+      <%= label_tag "Estate"%>
+      <%= radio_button_tag "season_id", @id_estate%>
+    </p>
+    <p>
+      <strong><%= label_tag "Inizio" %><br /></strong>
+      <%= calendar_date_select_tag :inizio, "" , :popup => "force" %>
+    </p>
+    <p>
+      <strong><%= label_tag "Fine" %><br /></strong>
+      <%= calendar_date_select_tag :fine, "" , :popup => "force" %>
+    </p>
+    <p>
+      <strong><%= label_tag "Giustifica stagione" %><br /></strong>
+      (Compilare solamente per giustificare la non corrispondenza tra le date e la stagione scelta.)<br />
+      <%= link_to_function ("Compila"),remote_function(:url => {:controller =>"admin/campagne", :action=>"show_season_note", :update =>"season_note"}) %>
+    </p>
+    <div id="season_note" style="display:none;" >
+      <p>
+        <%= text_area_tag :note_stagione,'', :size => "30x3" %>
+      </p>
+    </div>
+    <p>
+      <strong><%= label_tag "Osservazioni" %><br /></strong>
+      <%= text_area_tag :note,'', :size => "30x5" %>
+    </p>
+    <p>
+      <%= label_tag "Seleziona il modello di Simple Range Check da associare:" %>
+      <%= select_tag "model", "<option>-Seleziona-</option>" + options_from_collection_for_select(@model, "nome", "nome") %>
+      <%= observe_field "model", :url => {:controller=>"admin/campagne", :action=>"show_model",:update => "model_view"},:with =>"model" %>
+    </p>
+
+    <div id="model_view" style="display:none;">
+    </div>
+
+    <p>
+      <%= label_tag "Seleziona la maschera d'obbligatorietà da associare:" %>
+      <%= select_tag "mask", "<option>-Seleziona-</option>" + options_from_collection_for_select(@mask, "mask_name", "mask_name") %>
+      <%= observe_field "mask", :url => {:controller=>"admin/campagne", :action=>"show_mask",:update => "mask_view"},:with =>"mask" %>
+    </p>
+
+    <div id="mask_view" style="display:none;">
+    </div>
+
+    <p>
+      <%= submit_tag ("Salva")%><%= button_to_function "Annulla","new_campagna.hide()"%>
+    </p>
+<% end %>

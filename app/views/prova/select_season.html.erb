@@ -1,0 +1,14 @@
+
+<p>Seleziona la stagione relativa al file:</p>
+<% form_tag({:controller=>'prova', :action => 'save_file'}) do %>
+
+    <p>Stagione:
+      <%= label_tag "Primavera" %>
+      <%= radio_button_tag "season", "Primavera"%>
+      <%= label_tag "Estate"%>
+      <%= radio_button_tag "season", "Estate" %>
+    </p>
+    <p>
+      <%= submit_tag 'Ok' %>
+    </p>
+<% end %>

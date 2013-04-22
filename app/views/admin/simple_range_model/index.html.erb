@@ -1,0 +1,24 @@
+<h1>Admin::SimpleRangeModel</h1>
+
+
+    <p>
+      Seleziona il modello da visualizzare:
+    </p>
+    <p>
+      <%= select_tag "model", "<option>-Seleziona-</option>" + options_from_collection_for_select(@model, "nome", "nome") %>
+
+      <%= observe_field "model", :url => {:controller=>"admin/simple_range_model", :action=>"show_model",:update => "model_view"},:with =>"model" %>
+    </p>
+
+
+<div id="model_view" style="display:none;">
+</div>
+
+<p> <%= button_to_remote "Nuovo Modello", :url => { :controller =>"admin/simple_range_model",:action => "new", :update => "new_model"} %></p>
+
+<div id="new_model" style="display:none;">
+</div>
+
+
+
+

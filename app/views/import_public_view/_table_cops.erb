@@ -1,0 +1,44 @@
+<% unless @import_data.blank?%>
+    <table>
+      <thead>
+        <th>ID plot</th>
+        <th>Subplot</th>
+        <th>In/Out</th>
+        <th>Pri/Est</th>
+        <th>Strato</th>
+        <th>Copertura Specifica</th>
+        <th>Note</th>
+        <th>Data</th>
+        <th>Specie</th>
+        <th>Numero Plot</th>
+        <th>Substrate</th>
+        <th>Certainty Species Determination</th>
+      </thead>
+      <tbody>
+      <% for i in 0..@import_data.size-1 %>
+        <tr>
+            <td><%= @import_data.at(i).id_plot %></td>
+            <td><%= @import_data.at(i).subplot %></td>
+            <td><%= @import_data.at(i).in_out %></td>
+            <td><%= @import_data.at(i).priest %></td>
+            <td><%= @import_data.at(i).codice_strato %></td>
+            <td><%= CoperturaSpecifica.find(@import_data.at(i).copertura_specifica_id).identifier %></td>
+            <td><%= @import_data.at(i).note %></td>
+            <td><%= @import_data.at(i).data %></td>
+            <td><%= Specie.find(@import_data.at(i).specie_id).descrizione %></td>
+            <td><%= @import_data.at(i).numero_plot %></td>
+            <td>
+                <% unless @import_data.at(i).substrate_type_id.blank? %>
+                    <%= SubstrateType.find(@import_data.at(i).substrate_type_id).code %>
+                <% end %>
+            </td>
+            <td>
+                <% unless @import_data.at(i).certainty_species_determination_id.blank? %>
+                    <%= CertaintySpeciesDetermination.find(@import_data.at(i).certainty_species_determination_id).code %>
+                <% end %>
+            </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

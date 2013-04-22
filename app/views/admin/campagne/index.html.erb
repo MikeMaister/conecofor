@@ -1,0 +1,18 @@
+<h1>Admin::Campagne</h1>
+
+<div id="active_camp">
+  <%= render :partial => "active_campagna", :object => @campagna_attiva %>
+</div>
+
+
+
+
+<div id="camp_list">
+  <%= render :partial => "campagne_list", :object => @campagne %>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/campagne",:action => "new_camp", :update => "new_campagna"} %></p>
+
+
+<div id="new_campagna" style="display:none;">
+</div>

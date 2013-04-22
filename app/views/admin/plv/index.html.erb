@@ -1,0 +1,19 @@
+<h1>Admin::Plv#index</h1>
+<p>Seleziona l'anno per cui vuoi generare il VEM:</p>
+<% form_tag({:controller=>'admin/plv', :action => 'show'}) do %>
+    <p>
+      <%= select_tag "anno","<option value ='0'>-Seleziona-</option>" + options_for_select(@anno.collect{|y| [y.anno,y.anno]}) %>
+    </p>
+    <p>
+      <%= submit_tag 'Genera' %>
+    </p>
+<% end %>
+
+<h2>Archivio File PLV:</h2>
+<ul>
+  <% for i in 0..@plv_file.size-1 %>
+      <li>
+        <%= link_to @plv_file.at(i).file_name,@plv_file.at(i).relative_path %>
+      </li>
+  <% end %>
+</ul>

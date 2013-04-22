@@ -1,0 +1,112 @@
+<% form_tag :controller => "admin/mandatory_mask", :action => "create" do %>
+
+    <p>
+     <strong><%= label_tag "Nome Maschera:" %></strong>
+      <%= text_field_tag :nome %>
+    </p>
+
+    <p><strong>Cops:</strong></p>
+    <ul>
+      <li>
+        <%= check_box_tag("copertura_specifica","mandatory") %> <%= label_tag "Copertura Specifica" %>
+      </li>
+      <li>
+        <%= check_box_tag("substrate","mandatory") %> <%= label_tag "Substrate" %>
+      </li>
+      <li>
+        <%= check_box_tag("csd","mandatory") %> <%= label_tag "Certainty of Species Determination" %>
+      </li>
+    </ul>
+
+    <p><strong>Copl:</strong></p>
+    <ul>
+      <li>
+        <%= check_box_tag("copertura_arboreo","mandatory") %> <%= label_tag "Copertura Arboreo" %>
+      </li>
+      <li>
+        <%= check_box_tag("altezza_arboreo","mandatory") %> <%= label_tag "Altezza Arboreo" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_arbustivo","mandatory") %> <%= label_tag "Copertura Arbustivo" %>
+      </li>
+      <li>
+        <%= check_box_tag("altezza_arbustivo","mandatory") %> <%= label_tag "Altezza Arbustivo" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_erbaceo","mandatory") %> <%= label_tag "Copertura Erbaceo" %>
+      </li>
+      <li>
+        <%= check_box_tag("altezza_erbaceo","mandatory") %> <%= label_tag "Altezza Erbaceo" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_muscinale","mandatory") %> <%= label_tag "Copertura Muscinale" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_lettiera","mandatory") %> <%= label_tag "Copertura Lettiera" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_suolo_nudo","mandatory") %> <%= label_tag "Copertura Suolo Nudo" %>
+      </li>
+    </ul>
+
+    <p><strong>Erbacee:</strong></p>
+    <ul>
+      <li>
+        <%= check_box_tag("copertura","mandatory") %> <%= label_tag "Copertura" %>
+      </li>
+      <li>
+        <%= check_box_tag("copertura_esterna","mandatory") %> <%= label_tag "Copertura Esterna" %>
+      </li>
+      <li>
+        <%= check_box_tag("altezza_media","mandatory") %> <%= label_tag "Altezza Media" %>
+      </li>
+      <li>
+        <%= check_box_tag("n_cespi","mandatory") %> <%= label_tag "Numero Cespi" %>
+      </li>
+      <li>
+        <%= check_box_tag("n_stoloni","mandatory") %> <%= label_tag "Numero Stoloni" %>
+      </li>
+      <li>
+        <%= check_box_tag("n_stoloni_radicanti","mandatory") %> <%= label_tag "Numero Stoloni Radicanti" %>
+      </li>
+      <li>
+        <%= check_box_tag("n_foglie","mandatory") %> <%= label_tag "Numero Foglie" %>
+      </li>
+      <li>
+        <%= check_box_tag("n_getti","mandatory") %> <%= label_tag "Numero Getti" %>
+      </li>
+      <li>
+        <%= check_box_tag("danni_meccanici","mandatory") %> <%= label_tag "Danni Meccanici" %>
+      </li>
+      <li>
+        <%= check_box_tag("danni_parassitari","mandatory") %> <%= label_tag "Danni Parassitari" %>
+      </li>
+    </ul>
+
+    <p><strong>Legnose:</strong></p>
+    <ul>
+      <li>
+        <%= check_box_tag("copertura_legn","mandatory") %> <%= label_tag "Copertura" %>
+      </li>
+      <li>
+        <%= check_box_tag("altezza_legn","mandatory") %> <%= label_tag "Altezza" %>
+      </li>
+      <li>
+        <%= check_box_tag("eta_strutturale","mandatory") %> <%= label_tag "Età Strutturale" %>
+      </li>
+      <li>
+        <%= check_box_tag("danni_meccanici_legn","mandatory") %> <%= label_tag "Danni Meccanici" %>
+      </li>
+      <li>
+        <%= check_box_tag("danni_parassitari_legn","mandatory") %> <%= label_tag "Danni Parassitari" %>
+      </li>
+      <li>
+        <%= check_box_tag("radicanti_esterni","mandatory") %> <%= label_tag "Radicanti Esterni" %>
+      </li>
+    </ul>
+
+   <p>
+     <%= submit_tag "Salva"%> <%= button_to_function "Annulla","new_mask.hide()"%>
+   </p>
+
+<% end %>

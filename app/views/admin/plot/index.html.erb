@@ -1,0 +1,14 @@
+<h1>Admin::Plot</h1>
+<div id="plot_list">
+  <%= render :partial => "plot_list"%>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/plot",:action => "new", :update => "new_plot"} %></p>
+
+
+<div id="display_input_errors" style="display:none;">
+</div>
+
+<div id="new_plot" style="display:none;">
+
+</div>

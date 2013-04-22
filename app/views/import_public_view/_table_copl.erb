@@ -1,0 +1,46 @@
+<% unless @import_data.blank?%>
+    <table>
+      <thead>
+      <th>ID plot</th>
+      <th>Subplot</th>
+      <th>In/Out</th>
+      <th>Pri/Est</th>
+      <th>Note</th>
+      <th>Data</th>
+      <th>Numero Plot</th>
+      <th>Copertura Complessiva</th>
+      <th>Altezza Arboreo</th>
+      <th>Copertura Arboreo</th>
+      <th>Altezza Arbustivo</th>
+      <th>Copertura Arbustivo</th>
+      <th>Altezza Erbaceo</th>
+      <th>Copertura Erbaceo</th>
+      <th>Copertura Muscinale</th>
+      <th>Copertura Lettiera</th>
+      <th>Copertura Suolo Nudo</th>
+      </thead>
+      <tbody>
+      <% for i in 0..@import_data.size-1 %>
+          <tr>
+            <td><%= @import_data.at(i).id_plot %></td>
+            <td><%= @import_data.at(i).subplot %></td>
+            <td><%= @import_data.at(i).in_out %></td>
+            <td><%= @import_data.at(i).priest %></td>
+            <td><%= @import_data.at(i).note %></td>
+            <td><%= @import_data.at(i).data %></td>
+            <td><%= @import_data.at(i).numero_plot %></td>
+            <td><%= @import_data.at(i).copertura_complessiva %></td>
+            <td><%= @import_data.at(i).altezza_arboreo %></td>
+            <td><%= @import_data.at(i).copertura_arboreo %></td>
+            <td><%= @import_data.at(i).altezza_arbustivo %></td>
+            <td><%= @import_data.at(i).copertura_arbustivo %></td>
+            <td><%= @import_data.at(i).altezza_erbaceo %></td>
+            <td><%= @import_data.at(i).copertura_erbaceo %></td>
+            <td><%= @import_data.at(i).copertura_muscinale %></td>
+            <td><%= @import_data.at(i).copertura_lettiera %></td>
+            <td><%= @import_data.at(i).copertura_suolo_nudo %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

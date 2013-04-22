@@ -1,0 +1,63 @@
+<% if !@comp.blank? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Compliance</th>
+      </tr>
+      <tr>
+        <th>Riga</th>
+        <th>Errore</th>
+        <th>Creato il</th>
+        <th>N.Import</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>Specie</th>
+        <th>Copertura</th>
+        <th>Copertura Esterna</th>
+        <th>Altezza Media</th>
+        <th>N.Cespi</th>
+        <th>N.Stoloni</th>
+        <th>N.Stoloni Esterni</th>
+        <th>N.Foglie</th>
+        <th>N.Getti</th>
+        <th>Danni Meccanici</th>
+        <th>Danni Parassitari</th>
+        <th>Note</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@comp.size-1 %>
+          <tr>
+            <td><%= @comp.at(i).row %></td>
+            <td><%= @comp.at(i).error %></td>
+            <td><%= @comp.at(i).created_at %></td>
+            <td><%= @comp.at(i).import_num %></td>
+            <td><%= @comp.at(i).plot %></td>
+            <td><%= @comp.at(i).subplot %></td>
+
+            <td><%= @comp.at(i).specie %></td>
+
+            <td><%= @comp.at(i).copertura %></td>
+            <td><%= @comp.at(i).copertura_esterna %></td>
+            <td><%= @comp.at(i).altezza_media %></td>
+            <td><%= @comp.at(i).numero_cespi %></td>
+            <td><%= @comp.at(i).numero_stoloni %></td>
+            <td><%= @comp.at(i).numero_stoloni_radicanti %></td>
+            <td><%= @comp.at(i).numero_foglie %></td>
+            <td><%= @comp.at(i).numero_getti %></td>
+            <td><%= @comp.at(i).danni_meccanici %></td>
+            <td><%= @comp.at(i).danni_parassitari %></td>
+
+            <td><%= @comp.at(i).note %></td>
+            <td><%= @comp.at(i).data %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <p>
+      Nessun errore di tipo compliance presente.
+    </p>
+<% end %>

@@ -1,0 +1,2 @@
+module Admin::MandatoryMaskHelper
+end

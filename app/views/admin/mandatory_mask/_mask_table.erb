@@ -1,0 +1,50 @@
+<% unless @mask_erb.blank? && @mask_legn.blank? && @mask_cops.blank? && @mask_copl.blank? %>
+
+<% unless @mask_cops.blank? %>
+    <p><strong>Cops</strong></p>
+    <ul>
+      <% for i in 0..@mask_cops.size-1 %>
+          <li><%= @mask_cops.at(i).parameter %></li>
+      <% end  %>
+    </ul>
+<% end %>
+
+<% unless @mask_copl.blank? %>
+    <p><strong>Copl</strong></p>
+    <ul>
+      <% for i in 0..@mask_copl.size-1 %>
+          <li><%= @mask_copl.at(i).parameter %></li>
+      <% end  %>
+    </ul>
+<% end %>
+
+<% unless @mask_erb.blank? %>
+    <p><strong>Erbacee</strong></p>
+    <ul>
+      <% for i in 0..@mask_erb.size-1 %>
+          <li><%= @mask_erb.at(i).parameter %></li>
+      <% end  %>
+    </ul>
+<% end %>
+
+<% unless @mask_legn.blank? %>
+    <p><strong>Legnose</strong></p>
+    <ul>
+      <% for i in 0..@mask_legn.size-1 %>
+          <li><%= @mask_legn.at(i).parameter %></li>
+      <% end  %>
+    </ul>
+<% end %>
+
+    <p>
+      <%= button_to "Elimina Maschera", :controller => "admin/mandatory_mask", :action => "delete_mask", :mask_name => @mask_name %>
+    </p>
+
+<% end %>
+
+<% unless @null_mask.blank? %>
+    <p>Nessun Campo Obbligatorio.</p>
+    <p>
+      <%= button_to "Elimina Maschera", :controller => "admin/mandatory_mask", :action => "delete_mask", :mask_name => @mask_name %>
+    </p>
+<% end %>

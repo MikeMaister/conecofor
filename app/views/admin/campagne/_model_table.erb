@@ -1,0 +1,23 @@
+<% unless @srm.blank? %>
+<table>
+  <thead>
+  <tr>
+    <th>Tabella</th>
+    <th>Attributo</th>
+    <th>Min</th>
+    <th>Max</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@srm.size-1 %>
+      <tr>
+        <td><%= @srm.at(i).reference_table %></td>
+        <td><%= @srm.at(i).attr %></td>
+        <td><%= @srm.at(i).min %></td>
+        <td><%= @srm.at(i).max %></td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>
+
+<% end %>

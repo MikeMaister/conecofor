@@ -1,0 +1,33 @@
+<h1>Risultati analisi del file per le specie</h1>
+<h2>Colonna numero: <%= @column %></h2>
+
+<% if @error_list.blank? %>
+    <p>
+      Tutte le speci presenti nel file corrispondono a quelle memorizzate nel database.
+    </p>
+<% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>Riga file</th>
+          <th>Specie</th>
+          <th>Errore</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@error_list.size-1%>
+        <tr>
+          <td><%= @error_list.at(i).at(0)%></td>
+          <td><%= @error_list.at(i).at(1)%></td>
+          <td>Riferimento a specie mancante</td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <p>
+      <%= button_to_function("Stampa report", "javascript:print()") %>
+    </p>
+
+<% end %>
+

@@ -1,0 +1,35 @@
+<% form_tag :controller => "admin/simple_range_model", :action => "create" do %>
+
+    <p>
+     <strong><%= label_tag "Nome Modello:" %></strong>
+      <%= text_field_tag :nome %>
+    </p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Tabella</th>
+        <th>Attributo</th>
+        <th>Min</th>
+        <th>Max</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@standard_srm.size-1 %>
+          <tr>
+            <td><%= @standard_srm.at(i).reference_table %></td>
+            <td><%= @standard_srm.at(i).attr %></td>
+            <td><%= text_field_tag "min#{i}", "#{@standard_srm.at(i).min}",:size => 2 %></td>
+            <td><%= text_field_tag "max#{i}", "#{@standard_srm.at(i).max}",:size => 2 %></td>
+          </tr>
+      <%end%>
+      </tbody>
+    </table>
+
+
+
+   <p>
+     <%= submit_tag "Salva"%> <%= button_to_function "Annulla","new_model.hide()"%>
+   </p>
+
+<% end %>

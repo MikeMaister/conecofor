@@ -1,0 +1,35 @@
+<div id="p1"> p1</div>
+<div id="p2">p2</div>
+
+<% form_remote_tag(:url => {:controller => "prova", :action => "save_plot" }) do -%>
+    <p>
+      <%= label_tag "Identificativo" %><br/>
+      <%= text_field_tag :id_plot %>
+    </p>
+    <p>
+      <%= label_tag "Descrizione" %><br/>
+      <%= text_field_tag :descrizione %>
+    </p>
+    <p>
+      <%= label_tag "Latitudine" %><br/>
+      <%= text_field_tag :latitudine %>
+    </p>
+    <p>
+      <%= label_tag "Longitudine" %><br/>
+      <%= text_field_tag :longitudine %>
+    </p>
+    <p>
+      <%= label_tag "Altitudine" %><br/>
+      <%= text_field_tag :altitudine %>
+    </p>
+    <p>
+      <%= label_tag "Note" %><br/>
+      <%= text_field_tag :note %>
+    </p>
+    <p>
+      <%= submit_tag ("Salva")%><%= button_to_function "Annulla","new_plot.hide()"%>
+    </p>
+<% end %>
+
+<%= @mandatory %>
+

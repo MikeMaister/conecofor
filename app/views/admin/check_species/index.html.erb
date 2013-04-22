@@ -1,0 +1,14 @@
+<h1>Admin: Check Species</h1>
+<p>Seleziona il file da controllare:</p>
+<% form_tag({:controller=>'admin/check_species', :action => 'check'},:multipart => true) do %>
+    <p>
+      <%= file_field 'upload', 'datafile' %>
+    </p>
+    <p>
+      <%= label_tag "Colonna specie n°:"  %>
+      <%= text_field_tag :column_species , '',:size => 2 %>
+    </p>
+    <p>
+      <%= submit_tag 'Carica' %>
+    </p>
+<% end %>

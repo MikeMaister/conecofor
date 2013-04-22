@@ -1,0 +1,62 @@
+<% if !@mpe.blank? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Multiple Parameter</th>
+      </tr>
+      <tr>
+        <th>Riga</th>
+        <th>Errore</th>
+        <th>Creato il</th>
+        <th>N.Import</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>In/Out</th>
+        <th>Pri/Est</th>
+        <th>Copertura Complessiva</th>
+        <th>Altezza Arboreo</th>
+        <th>Copertura Arboreo</th>
+        <th>Altezza Arbustivo</th>
+        <th>Copertura Arbustivo</th>
+        <th>Altezza Erbaceo</th>
+        <th>Copertura Erbaceo</th>
+        <th>Copertura Muscinale</th>
+        <th>Copertura Lettiera</th>
+        <th>Copertura Suolo Nudo</th>
+        <th>Note</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@mpe.size-1 %>
+          <tr>
+            <td><%= @mpe.at(i).row %></td>
+            <td><%= @mpe.at(i).error %></td>
+            <td><%= @mpe.at(i).created_at %></td>
+            <td><%= @mpe.at(i).import_num %></td>
+            <td><%= @mpe.at(i).plot %></td>
+            <td><%= @mpe.at(i).subplot %></td>
+            <td><%= @mpe.at(i).in_out %></td>
+            <td><%= @mpe.at(i).priest %></td>
+            <td><%= @mpe.at(i).copertura_complessiva %></td>
+            <td><%= @mpe.at(i).altezza_arboreo %></td>
+            <td><%= @mpe.at(i).copertura_arboreo %></td>
+            <td><%= @mpe.at(i).altezza_arbustivo %></td>
+            <td><%= @mpe.at(i).copertura_arbustivo %></td>
+            <td><%= @mpe.at(i).altezza_erbaceo %></td>
+            <td><%= @mpe.at(i).copertura_erbaceo %></td>
+            <td><%= @mpe.at(i).copertura_muscinale %></td>
+            <td><%= @mpe.at(i).copertura_lettiera %></td>
+            <td><%= @mpe.at(i).copertura_suolo %></td>
+            <td><%= @mpe.at(i).note %></td>
+            <td><%= @mpe.at(i).data %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <p>
+      Nessun errore di tipo multiple parameter presente.
+    </p>
+<% end %>

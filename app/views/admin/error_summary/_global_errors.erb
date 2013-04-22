@@ -1,0 +1,29 @@
+<% if !@ge.blank? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Global</th>
+      </tr>
+      <tr>
+
+        <th>Errore</th>
+        <th>Creato il</th>
+        <th>N.Import</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@ge.size-1 %>
+          <tr>
+            <td><%= @ge.at(i).error %></td>
+            <td><%= @ge.at(i).created_at %></td>
+            <td><%= @ge.at(i).import_num %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <p>
+      Nessun errore di tipo globale presente.
+    </p>
+<% end %>

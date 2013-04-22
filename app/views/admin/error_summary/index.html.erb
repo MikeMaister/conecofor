@@ -1,0 +1,38 @@
+<h1>Admin: ErrorSummary</h1>
+<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
+    <p>
+        Seleziona il rilevatore:
+    </p>
+    <p>
+      <%= select_tag "rilevatore","<option>-Seleziona-</option>".html_safe + options_from_collection_for_select(@rilevatore, "id", "full_name") %>
+      <%= observe_field "rilevatore", :url => {:controller=>"admin/error_summary", :action=>"update_campagne",:update => "select_camp"},:with =>"rilevatore_selezionato" %>
+    </p>
+
+    <div id="select_camp" style="display:none;">
+    </div>
+
+    <div id="select_plot" style="display:none;">
+    </div>
+
+
+    <%= submit_tag "Cerca" %>
+<% end %>
+
+<div id="result" style="display:none;">
+</div>
+
+<div id="compliance" style="display:none;">
+</div>
+
+<div id="sre" style="display:none;">
+</div>
+
+<div id="mpe" style="display:none;">
+</div>
+
+<div id="ge" style="display:none;">
+</div>
+
+<p>
+  <%= button_to_function("Print this Page", "javascript:print()") %>
+</p>

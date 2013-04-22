@@ -1,0 +1,45 @@
+
+
+<% if !@plot.blank? %>
+
+    <p><%= @message if @message %></p>
+
+
+    <table>
+      <thead>
+      <tr>
+        <th colspan="7">Plot</th>
+      </tr>
+      <tr>
+        <th>Identificativo</th>
+        <th>Descrizione</th>
+        <th>Numero</th>
+        <th>Latitudine</th>
+        <th>Longitudine</th>
+        <th>Altitudine</th>
+        <th>Note</th>
+        <th>Opzioni</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@plot.size-1 %>
+          <tr>
+            <td><%= @plot.at(i).id_plot %></td>
+            <td><%= @plot.at(i).descrizione %></td>
+            <td><%= @plot.at(i).numero_plot %></td>
+            <td><%= @plot.at(i).latitudine %></td>
+            <td><%= @plot.at(i).longitudine %></td>
+            <td><%= @plot.at(i).altitudine %></td>
+            <td><%= @plot.at(i).note %></td>
+            <td><%= button_to_remote "Elimina", :url => { :controller =>"admin/plot",:action => "delete", :id =>@plot.at(i).id}, :confirm => "Eliminando questo plot cancellerai tutti i dati ad esso legati. Vuoi davvero eliminare questo plot?" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+<% else %>
+
+    <p>Nessun plot presente</p>
+
+<% end %>

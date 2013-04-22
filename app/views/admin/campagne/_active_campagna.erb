@@ -1,0 +1,7 @@
+
+<%if @campagna_attiva %>
+    <p><strong>Campagna attiva:</strong> <%= @campagna_attiva.descrizione %></p>
+    <p><%= button_to_remote("Disattiva",:url=>{ :controller => "admin/campagne", :action => "disattiva_campagna"}) %></p>
+<% else %>
+    <p><strong>Campagna attiva:</strong> Nessuna campagna attiva.</p>
+<% end %>

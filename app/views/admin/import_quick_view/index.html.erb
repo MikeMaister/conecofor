@@ -1,0 +1,26 @@
+<h1>Admin: Import Quick view</h1>
+<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
+
+    <p>
+        Seleziona la campagna:
+    </p>
+    <p>
+      <%= select_tag "campaign", options_from_collection_for_select(@campaign, "id", "descrizione") %>
+    </p>
+    <p>
+        Seleziona il plot:
+    </p>
+    <p>
+      <%= select_tag "plot", options_from_collection_for_select(@plot, "id", "id_plot") %>
+    </p>
+    <p>
+        Seleziona il tipo di rilevazione:
+    </p>
+    <p>
+      <%= select_tag "survey", "<option>Erb</option><option>Legn</option><option>Copl</option><option>Cops</option>".html_safe%>
+    </p>
+    <%= submit_tag "Ok" %>
+<% end %>
+
+<div id="result" style="display:none;">
+</div>

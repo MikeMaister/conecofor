@@ -1,0 +1,2 @@
+module ImportCopsHelper
+end

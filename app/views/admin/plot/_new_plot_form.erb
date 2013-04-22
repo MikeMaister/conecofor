@@ -1,0 +1,31 @@
+
+<% remote_form_for(@new_plot, :url => {:controller => "admin/plot", :action => "save_plot" }) do |f| %>
+    <p>
+      <%= f.label "Identificativo" %><br/>
+      <%= f.text_field :id_plot %>
+    </p>
+    <p>
+      <%= f.label "Descrizione" %><br/>
+      <%= f.text_field :descrizione %>
+    </p>
+    <p>
+      <%= f.label "Latitudine" %><br/>
+      <%= f.text_field :latitudine %>
+    </p>
+    <p>
+      <%= f.label "Longitudine" %><br/>
+      <%= f.text_field :longitudine %>
+    </p>
+    <p>
+      <%= f.label "Altitudine" %><br/>
+      <%= f.text_field :altitudine %>
+    </p>
+    <p>
+      <%= f.label "Note" %><br/>
+      <%= f.text_field :note %>
+    </p>
+    <p>
+      <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/plot",:action => "close_new_plot"} %>
+    </p>
+<% end %>
+

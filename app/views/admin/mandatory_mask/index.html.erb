@@ -1,0 +1,19 @@
+<h1>Admin::MandatoryMask</h1>
+
+<p>
+  Seleziona il modello da visualizzare:
+</p>
+<p>
+  <%= select_tag "mask", "<option>-Seleziona-</option>" + options_from_collection_for_select(@mask, "mask_name", "mask_name") %>
+
+  <%= observe_field "mask", :url => {:controller=>"admin/mandatory_mask", :action=>"show_model",:update => "mask_view"},:with =>"mask" %>
+</p>
+
+
+<div id="mask_view" style="display:none;">
+</div>
+
+<p> <%= button_to_remote "Nuova Maschera", :url => { :controller =>"admin/mandatory_mask",:action => "new", :update => "new_mask"} %></p>
+
+<div id="new_mask" style="display:none;">
+</div>

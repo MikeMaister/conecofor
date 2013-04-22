@@ -1,0 +1,19 @@
+<h1>Admin::Vem#index</h1>
+<p>Seleziona l'anno per cui vuoi generare il VEM:</p>
+<% form_tag({:controller=>'admin/vem', :action => 'show'}) do %>
+    <p>
+      <%= select_tag "anno","<option value ='0'>-Seleziona-</option>" + options_for_select(@anno.collect{|y| [y.anno,y.anno]}) %>
+    </p>
+    <p>
+      <%= submit_tag 'Genera' %>
+    </p>
+<% end %>
+
+<h2>Archivio File VEM:</h2>
+<ul>
+  <% for i in 0..@vem_file.size-1 %>
+    <li>
+      <%= link_to @vem_file.at(i).file_name,@vem_file.at(i).relative_path %>
+    </li>
+  <% end %>
+</ul>

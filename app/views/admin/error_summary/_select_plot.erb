@@ -1,0 +1,6 @@
+<p>
+  Seleziona il plot:
+</p>
+<p>
+  <%= select_tag "plot","<option>-Seleziona-</option>".html_safe + options_from_collection_for_select(@plot, "id", "id_plot") %>
+</p>

@@ -1,0 +1,33 @@
+<h1><%= @new_vem_file.file_name %></h1>
+<table>
+  <tr>
+    <th>Sequenze number of plots</th>
+    <th>Plot Number</th>
+    <th>Sample_ID</th>
+    <th>Survey number</th>
+    <th>Species Code</th>
+    <th>Layer</th>
+    <th>Substrate</th>
+    <th>Cover of the species in the layer</th>
+    <th>Certainty of species determination</th>
+    <th>Other Observation</th>
+  </tr>
+<% for i in 0..@vem_list.size-1 %>
+      <tr>
+        <td><%= @vem_list.at(i).plot_sequenze_number %></td>
+        <td><%= @vem_list.at(i).plot_number %></td>
+        <td><%= @vem_list.at(i).sample_id %></td>
+        <td><%= @vem_list.at(i).survey_number %></td>
+        <td><%= @vem_list.at(i).species_code %></td>
+        <td><%= @vem_list.at(i).layer %></td>
+        <td><%= @vem_list.at(i).substrate %></td>
+        <td><%= @vem_list.at(i).cover_species_layer %></td>
+        <td><%= @vem_list.at(i).species_determination %></td>
+        <td><%= @vem_list.at(i).other_observations %></td>
+      </tr>
+<% end %>
+</table>
+
+<p>
+  <%= link_to "Download File", @new_vem_file.relative_path %>
+</p>

@@ -1,0 +1,52 @@
+<% if !@mpe.blank? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Multiple Parameter</th>
+      </tr>
+      <tr>
+        <th>Riga</th>
+        <th>Errore</th>
+        <th>Creato il</th>
+        <th>N.Import</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>In/Out</th>
+        <th>Pri/Est</th>
+        <th>Codice Strato</th>
+        <th>Specie</th>
+        <th>Copertura Complessiva</th>
+        <th>Note</th>
+        <th>Data</th>
+        <th>Substrate</th>
+        <th>Certainty Species Determination</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@mpe.size-1 %>
+          <tr>
+            <td><%= @mpe.at(i).row %></td>
+            <td><%= @mpe.at(i).error %></td>
+            <td><%= @mpe.at(i).created_at %></td>
+            <td><%= @mpe.at(i).import_num %></td>
+            <td><%= @mpe.at(i).plot %></td>
+            <td><%= @mpe.at(i).subplot %></td>
+            <td><%= @mpe.at(i).in_out %></td>
+            <td><%= @mpe.at(i).priest %></td>
+            <td><%= @mpe.at(i).codice_strato %></td>
+            <td><%= @mpe.at(i).specie %></td>
+            <td><%= @mpe.at(i).copertura %></td>
+            <td><%= @mpe.at(i).note %></td>
+            <td><%= @mpe.at(i).data %></td>
+            <td><%= @mpe.at(i).substrate_code %></td>
+            <td><%= @mpe.at(i).certainty_species_determination_code %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <p>
+      Nessun errore di tipo multiple parameter presente.
+    </p>
+<% end %>

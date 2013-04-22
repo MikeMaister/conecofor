@@ -1,0 +1,9 @@
+<% if !@file.blank? %>
+    <ul>
+    <% for i in 0..@file.size-1 %>
+        <li><%= link_to_remote(@file.at(i).file_name, :url =>{:controller => "admin/error_summary", :action=>"show_error", :file_id =>@file.at(i).id , :survey_kind => @file.at(i).survey_kind}) %></li>
+    <% end %>
+    </ul>
+<%else%>
+<p> Nessun file trovato.</p>
+<% end %>

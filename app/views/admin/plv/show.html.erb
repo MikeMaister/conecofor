@@ -1,0 +1,59 @@
+
+<table>
+  <tr>
+    <th>Sequence number of plots</th>
+    <th>Country Code</th>
+    <th>Plot Number</th>
+    <th>Sample_ID</th>
+    <th>Team ID</th>
+    <th>Number of Team members</th>
+    <th>Survey Type</th>
+    <th>Survey Number</th>
+    <th>Date</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Altitude</th>
+    <th>Fence</th>
+    <th>Total Sampled Area</th>
+    <th>Tree layer cover</th>
+    <th>Shrub layer height</th>
+    <th>Shrub layer cover</th>
+    <th>Herb layer height</th>
+    <th>Herb layer cover</th>
+    <th>Mosses cover</th>
+    <th>Bare soil cover</th>
+    <th>Litter cover</th>
+    <th>Other observations</th>
+  </tr>
+  <% for i in 0..@plv_list.size-1 %>
+    <tr>
+        <td><%= @plv_list.at(i).plot_seq_number %></td>
+        <td><%= @plv_list.at(i).country_code %></td>
+        <td><%= @plv_list.at(i).plot_number %></td>
+        <td><%= @plv_list.at(i).sample_id %></td>
+        <td><%= @plv_list.at(i).team_id %></td>
+        <td><%= @plv_list.at(i).team_members %></td>
+        <td><%= @plv_list.at(i).survey_type %></td>
+        <td><%= @plv_list.at(i).survey_number %></td>
+        <td><%= @plv_list.at(i).date %></td>
+        <td><%= @plv_list.at(i).latitude %></td>
+        <td><%= @plv_list.at(i).longitude %></td>
+        <td><%= @plv_list.at(i).altitude %></td>
+        <td><%= @plv_list.at(i).fence %></td>
+        <td><%= @plv_list.at(i).total_area %></td>
+      <td><%= @plv_list.at(i).tree_layer_cover %></td>
+      <td><%= @plv_list.at(i).shrub_layer_height %></td>
+      <td><%= @plv_list.at(i).shrub_layer_cover %></td>
+      <td><%= @plv_list.at(i).herb_layer_height %></td>
+      <td><%= @plv_list.at(i).herb_layer_cover %></td>
+      <td><%= @plv_list.at(i).mosses_cover %></td>
+      <td><%= @plv_list.at(i).bare_soil_cover %></td>
+      <td><%= @plv_list.at(i).litter_cover %></td>
+      <td><%= @plv_list.at(i).other_observations %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>
+  <%= link_to "Download File", @new_plv_file.relative_path %>
+</p>

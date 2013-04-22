@@ -1,0 +1,49 @@
+<% unless @import_data.blank?%>
+    <table>
+      <thead>
+      <th>ID plot</th>
+      <th>Subplot</th>
+      <th>Specie</th>
+      <th>Copertura</th>
+      <th>Copertura Esterna</th>
+      <th>Altezza Media</th>
+      <th>N.Cespi</th>
+      <th>N.Stoloni</th>
+      <th>N.Stoloni Radicanti</th>
+      <th>N.Foglie</th>
+      <th>N.Getti</th>
+      <th>Danni Meccanici</th>
+      <th>Danni Parassitari</th>
+      <th>Note</th>
+      <th>Data</th>
+      <th>Numero Plot</th>
+      </thead>
+      <tbody>
+      <% for i in 0..@import_data.size-1 %>
+          <tr>
+            <td><%= @import_data.at(i).id_plot %></td>
+            <td><%= @import_data.at(i).subplot %></td>
+            <td>
+              <% unless @import_data.at(i).specie_id.blank? %>
+                  <%= Specie.find(@import_data.at(i).specie_id).descrizione %>
+              <% end %>
+            </td>
+            <td><%= @import_data.at(i).copertura %></td>
+            <td><%= @import_data.at(i).copertura_esterna %></td>
+            <td><%= @import_data.at(i).altezza_media %></td>
+            <td><%= @import_data.at(i).numero_cespi %></td>
+            <td><%= @import_data.at(i).numero_stoloni %></td>
+            <td><%= @import_data.at(i).numero_stoloni_radicanti %></td>
+            <td><%= @import_data.at(i).numero_foglie %></td>
+            <td><%= @import_data.at(i).numero_getti %></td>
+            <td><%= @import_data.at(i).danni_meccanici %></td>
+            <td><%= @import_data.at(i).danni_parassitari %></td>
+            <td><%= @import_data.at(i).note %></td>
+            <td><%= @import_data.at(i).data %></td>
+
+            <td><%= @import_data.at(i).numero_plot %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

@@ -1,0 +1,75 @@
+<h1>Multipleparameter Errors</h1>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Row</th>
+    <th>Error</th>
+    <th>Data</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <th>In/Out</th>
+    <th>Pri/Est</th>
+    <th>Copertura Complessiva</th>
+    <th>Altezza Arboreo</th>
+    <th>Copertura Arboreo</th>
+    <th>Altezza Arbustivo</th>
+    <th>Copertura Arbustivo</th>
+    <th>Altezza Erbaceo</th>
+    <th>Copertura Erbaceo</th>
+    <th>Copertura Muscinale</th>
+    <th>Copertura Lettiera</th>
+    <th>Copertura Suolo Nudo</th>
+    <th>Note</th>
+  </tr>
+  <% for i in 0..@mp_err.size-1%>
+      <tr>
+        <td><%= @mp_err.at(i).row %></td>
+        <td><%= @mp_err.at(i).error %></td>
+        <td><%= @mp_err.at(i).data %></td>
+        <td><%= @mp_err.at(i).plot %></td>
+        <td><%= @mp_err.at(i).subplot %></td>
+        <td><%= @mp_err.at(i).in_out %></td>
+        <td><%= @mp_err.at(i).priest %></td>
+        <td><%= @mp_err.at(i).copertura_complessiva %></td>
+        <td><%= @mp_err.at(i).altezza_arboreo %></td>
+        <td><%= @mp_err.at(i).copertura_arboreo %></td>
+        <td><%= @mp_err.at(i).altezza_arbustivo %></td>
+        <td><%= @mp_err.at(i).copertura_arbustivo %></td>
+        <td><%= @mp_err.at(i).altezza_erbaceo %></td>
+        <td><%= @mp_err.at(i).copertura_erbaceo %></td>
+        <td><%= @mp_err.at(i).copertura_muscinale %></td>
+        <td><%= @mp_err.at(i).copertura_lettiera %></td>
+        <td><%= @mp_err.at(i).copertura_suolo %></td>
+        <td><%= @mp_err.at(i).note %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>Global Errors</h2>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Error</th>
+  </tr>
+  <% for i in 0..@mp_gbe.size-1%>
+      <tr>
+        <td><%= @mp_gbe.at(i).error %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= button_to_function("Print this Page", "javascript:print()") %>
+</p>

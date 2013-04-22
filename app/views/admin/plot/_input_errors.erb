@@ -1,0 +1,7 @@
+<% if @new_plot.errors.any? %>
+    <ul>
+    <% @new_plot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>

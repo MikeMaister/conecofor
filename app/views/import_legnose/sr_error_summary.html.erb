@@ -1,0 +1,48 @@
+<h1>Simple Range Error</h1>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Row</th>
+    <th>Error</th>
+    <th>Data</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <th>Copertura</th>
+    <th>Altezza</th>
+    <th>Specie</th>
+    <th>Età Strutturale</th>
+    <th>Danni Meccanici</th>
+    <th>Danni Parassitari</th>
+    <th>Radicanti Esterni</th>
+    <th>Note</th>
+  </tr>
+  <% for i in 0..@sr_err.size-1%>
+      <tr>
+        <td><%= @sr_err.at(i).row %></td>
+        <td><%= @sr_err.at(i).error %></td>
+        <td><%= @sr_err.at(i).data %></td>
+        <td><%= @sr_err.at(i).plot %></td>
+        <td><%= @sr_err.at(i).subplot %></td>
+
+        <td><%= @sr_err.at(i).copertura %></td>
+        <td><%= @sr_err.at(i).altezza %></td>
+        <td><%= @sr_err.at(i).specie %></td>
+        <td><%= @sr_err.at(i).eta_strutturale%></td>
+        <td><%= @sr_err.at(i).danni_meccanici %></td>
+        <td><%= @sr_err.at(i).danni_parassitari %></td>
+        <td><%= @sr_err.at(i).radicanti_esterni %></td>
+
+        <td><%= @sr_err.at(i).note %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= button_to_function("Print this Page", "javascript:print()") %>
+</p>

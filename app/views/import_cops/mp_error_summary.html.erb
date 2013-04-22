@@ -1,0 +1,65 @@
+<h1>Multipleparameter Errors</h1>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="13">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Row</th>
+    <th>Error</th>
+    <th>Data</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <th>In/Out</th>
+    <th>Pri/Est</th>
+    <th>Strato</th>
+    <th>Specie</th>
+    <th>Copertura</th>
+    <th>Note</th>
+    <th>Substrate</th>
+    <th>Certainty Species Determination</th>
+  </tr>
+  <% for i in 0..@mp_err.size-1%>
+      <tr>
+        <td><%= @mp_err.at(i).row %></td>
+        <td><%= @mp_err.at(i).error %></td>
+        <td><%= @mp_err.at(i).data %></td>
+        <td><%= @mp_err.at(i).plot %></td>
+        <td><%= @mp_err.at(i).subplot %></td>
+        <td><%= @mp_err.at(i).in_out %></td>
+        <td><%= @mp_err.at(i).priest %></td>
+        <td><%= @mp_err.at(i).codice_strato %></td>
+        <td><%= @mp_err.at(i).specie %></td>
+        <td><%= @mp_err.at(i).copertura %></td>
+        <td><%= @mp_err.at(i).note %></td>
+        <td><%= @mp_err.at(i).substrate_code %></td>
+        <td><%= @mp_err.at(i).certainty_species_determination_code %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>Global Errors</h2>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Error</th>
+  </tr>
+  <% for i in 0..@mp_gbe.size-1%>
+      <tr>
+        <td><%= @mp_gbe.at(i).error %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= button_to_function("Print this Page", "javascript:print()") %>
+</p>

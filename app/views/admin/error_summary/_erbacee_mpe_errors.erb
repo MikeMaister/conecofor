@@ -1,0 +1,63 @@
+<% if !@mpe.blank? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Multiple Parameter</th>
+      </tr>
+      <tr>
+        <th>Riga</th>
+        <th>Errore</th>
+        <th>Creato il</th>
+        <th>N.Import</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>Specie</th>
+        <th>Copertura</th>
+        <th>Copertura Esterna</th>
+        <th>Altezza Media</th>
+        <th>N.Cespi</th>
+        <th>N.Stoloni</th>
+        <th>N.Stoloni Esterni</th>
+        <th>N.Foglie</th>
+        <th>N.Getti</th>
+        <th>Danni Meccanici</th>
+        <th>Danni Parassitari</th>
+        <th>Note</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@mpe.size-1 %>
+          <tr>
+            <td><%= @mpe.at(i).row %></td>
+            <td><%= @mpe.at(i).error %></td>
+            <td><%= @mpe.at(i).created_at %></td>
+            <td><%= @mpe.at(i).import_num %></td>
+            <td><%= @mpe.at(i).plot %></td>
+            <td><%= @mpe.at(i).subplot %></td>
+
+            <td><%= @mpe.at(i).specie %></td>
+
+            <td><%= @mpe.at(i).copertura %></td>
+            <td><%= @mpe.at(i).copertura_esterna %></td>
+            <td><%= @mpe.at(i).altezza_media %></td>
+            <td><%= @mpe.at(i).numero_cespi %></td>
+            <td><%= @mpe.at(i).numero_stoloni %></td>
+            <td><%= @mpe.at(i).numero_stoloni_radicanti %></td>
+            <td><%= @mpe.at(i).numero_foglie %></td>
+            <td><%= @mpe.at(i).numero_getti %></td>
+            <td><%= @mpe.at(i).danni_meccanici %></td>
+            <td><%= @mpe.at(i).danni_parassitari %></td>
+
+            <td><%= @mpe.at(i).note %></td>
+            <td><%= @mpe.at(i).data %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <p>
+      Nessun errore di tipo multiple parameter presente.
+    </p>
+<% end %>

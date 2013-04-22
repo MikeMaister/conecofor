@@ -1,0 +1,79 @@
+<h1>Multipleparameter Errors</h1>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Row</th>
+    <th>Error</th>
+    <th>Data</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <th>Specie</th>
+    <th>Copertura</th>
+    <th>Copertura Esterna</th>
+    <th>Altezza Media</th>
+    <th>N.Cespi</th>
+    <th>N.Stoloni</th>
+    <th>N.Stoloni Radicanti</th>
+    <th>N.Foglie</th>
+    <th>N.Getti</th>
+    <th>Danni Meccanici</th>
+    <th>Danni Parassitari</th>
+    <th>Note</th>
+  </tr>
+  <% for i in 0..@mp_err.size-1%>
+      <tr>
+        <td><%= @mp_err.at(i).row %></td>
+        <td><%= @mp_err.at(i).error %></td>
+        <td><%= @mp_err.at(i).data %></td>
+        <td><%= @mp_err.at(i).plot %></td>
+        <td><%= @mp_err.at(i).subplot %></td>
+
+        <td>
+          <% unless @mp_err.at(i).specie.blank? %>
+              <%= @mp_err.at(i).specie %>
+          <% end %>
+        </td>
+        <td><%= @mp_err.at(i).copertura %></td>
+        <td><%= @mp_err.at(i).copertura_esterna%></td>
+        <td><%= @mp_err.at(i).altezza_media %></td>
+        <td><%= @mp_err.at(i).numero_cespi %></td>
+        <td><%= @mp_err.at(i).numero_stoloni %></td>
+        <td><%= @mp_err.at(i).numero_stoloni_radicanti %></td>
+        <td><%= @mp_err.at(i).numero_foglie %></td>
+        <td><%= @mp_err.at(i).numero_getti %></td>
+        <td><%= @mp_err.at(i).danni_meccanici %></td>
+        <td><%= @mp_err.at(i).danni_parassitari %></td>
+
+        <td><%= @mp_err.at(i).note %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>Global Errors</h2>
+<table>
+  <tbody>
+  <tr>
+    <th colspan="11">
+      <%= @file.file_name %>
+    </th>
+  </tr>
+  <tr>
+    <th>Error</th>
+  </tr>
+  <% for i in 0..@mp_gbe.size-1%>
+      <tr>
+        <td><%= @mp_gbe.at(i).error %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= button_to_function("Print this Page", "javascript:print()") %>
+</p>
