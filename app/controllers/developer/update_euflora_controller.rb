@@ -26,8 +26,10 @@ class Developer::UpdateEufloraController < ApplicationController
           p_record = Specie.find(:first, :conditions => ["descrizione = ?",row[0]])
           #cerco il record euflora corrispondente alla descrizione
           eu_record = Euflora.find(:first,:conditions => ["descrizione = ?",row[1]])
-          p_record.euflora_id = eu_record.id
-          p_record.save
+          unless p_record.blank? || eu_record.blank?
+            p_record.euflora_id = eu_record.id
+            p_record.save
+          end
         end
       end
     end
@@ -37,6 +39,7 @@ class Developer::UpdateEufloraController < ApplicationController
       for j in 0..@euflora.size-1
         if @pignatti.at(i).euflora_id.nil? && @pignatti.at(i).descrizione.capitalize == @euflora.at(j).descrizione.capitalize
           @pignatti.at(i).euflora_id = @euflora.at(j).id
+          @pignatti.at(i).save
           break
         end
       end
