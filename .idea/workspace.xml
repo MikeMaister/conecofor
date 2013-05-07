@@ -26,73 +26,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="vs.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/vs.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="41" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plot_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plot.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="45" selection-start="637" selection-end="637" vertical-scroll-proportion="0.42618385">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_plot_list.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_plot_list.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="35" selection-start="832" selection-end="832" vertical-scroll-proportion="-0.3846154">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/plot/index.html.erb">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/vs/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="52" selection-start="237" selection-end="258" vertical-scroll-proportion="-5.230769">
+            <state line="13" column="39" selection-start="418" selection-end="418" vertical-scroll-proportion="-6.3846154">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_new_plot_form.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_new_plot_form.erb">
+      <file leaf-file-name="plv_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/plv_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="23" selection-start="611" selection-end="611" vertical-scroll-proportion="-15.038462">
+            <state line="191" column="68" selection-start="14837" selection-end="14837" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_input_errors.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_input_errors.erb">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/plv/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="79" selection-start="164" selection-end="164" vertical-scroll-proportion="-3.9230769">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/developer/update_euflora/update.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="53" column="63" selection-start="1915" selection-end="1915" vertical-scroll-proportion="-7.1923075">
               <folding />
             </state>
           </provider>
@@ -107,13 +62,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="update_euflora_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/vs/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="41" selection-start="1744" selection-end="1744" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1367914490376" expanded="true" signature="1717:1987" placeholder="for ... end" />
-              </folding>
+            <state line="51" column="57" selection-start="1487" selection-end="1487" vertical-scroll-proportion="-6.769231">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vs.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/vs.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="44" selection-start="1673" selection-end="1673" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vs_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/vs_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="102" column="74" selection-start="3302" selection-end="3302" vertical-scroll-proportion="3.1727018">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -134,22 +105,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/admin/plv/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/plv/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/vem_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/vem.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/plv_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/plv.rb" />
         <option value="$PROJECT_DIR$/app/views/developer/update_euflora/result.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/home/index.html.erb" />
         <option value="$PROJECT_DIR$/app/models/euflora.rb" />
         <option value="$PROJECT_DIR$/app/views/developer/update_euflora/update.html.erb" />
-        <option value="$PROJECT_DIR$/app/models/specie_vs.rb" />
         <option value="$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb" />
-        <option value="$PROJECT_DIR$/app/models/vs.rb" />
         <option value="$PROJECT_DIR$/app/views/admin/plot/_new_plot_form.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/plot/_plot_list.erb" />
         <option value="$PROJECT_DIR$/app/models/plot.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/plv_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/admin/vs/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/home/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/specie_vs.rb" />
+        <option value="$PROJECT_DIR$/app/models/vs.rb" />
+        <option value="$PROJECT_DIR$/app/views/admin/vs/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/vs_controller.rb" />
       </list>
     </option>
   </component>
@@ -428,7 +399,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
+              <option name="myItemId" value="developer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="update_euflora" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -450,11 +425,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="developer" />
+              <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="update_euflora" />
+              <option name="myItemId" value="vs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -503,32 +478,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="plv" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plot" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -876,12 +825,12 @@
       <method />
     </configuration>
     <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="IRB console.Rails console: conecofor" />
-      <item index="1" class="java.lang.String" itemvalue="IRB console.IRB console" />
-      <item index="2" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="3" class="java.lang.String" itemvalue="Rake.spec" />
-      <item index="4" class="java.lang.String" itemvalue="Rails.Production: conecofor" />
-      <item index="5" class="java.lang.String" itemvalue="Rails.Development: conecofor" />
+      <item index="0" class="java.lang.String" itemvalue="Rake.test" />
+      <item index="1" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="2" class="java.lang.String" itemvalue="Rails.Production: conecofor" />
+      <item index="3" class="java.lang.String" itemvalue="Rails.Development: conecofor" />
+      <item index="4" class="java.lang.String" itemvalue="IRB console.Rails console: conecofor" />
+      <item index="5" class="java.lang.String" itemvalue="IRB console.IRB console" />
     </list>
     <recent_temporary>
       <list size="5">
@@ -942,7 +891,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -952,7 +901,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5007576" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31414473" sideWeight="0.4939394" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31414473" sideWeight="0.4939394" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1017,47 +966,23 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="110" selection-start="1582" selection-end="1582" vertical-scroll-proportion="-10.461538" />
+        <state line="8" column="52" selection-start="237" selection-end="258" vertical-scroll-proportion="0.38526914">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="32" column="53" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.8678679">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/plv/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="69" selection-start="380" selection-end="380" vertical-scroll-proportion="0.34375" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/specie_vs.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="27" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/euflora.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="26" selection-start="61" selection-end="61" vertical-scroll-proportion="0.04336735">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="41" selection-start="1744" selection-end="1744" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1367914490376" expanded="true" signature="1717:1987" placeholder="for ... end" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/developer/update_euflora/update.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="6" column="37" selection-start="299" selection-end="299" vertical-scroll-proportion="-3.9230769">
           <folding />
         </state>
       </provider>
@@ -1069,56 +994,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/vs.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/vs/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="41" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+        <state line="13" column="39" selection-start="418" selection-end="418" vertical-scroll-proportion="-6.3846154">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/campagne.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/substrate_type.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_plot_list.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="35" selection-start="832" selection-end="832" vertical-scroll-proportion="-0.3846154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="237" selection-end="258" vertical-scroll-proportion="-5.230769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_new_plot_form.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="23" selection-start="611" selection-end="611" vertical-scroll-proportion="-15.038462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_input_errors.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="79" selection-start="164" selection-end="164" vertical-scroll-proportion="-3.9230769">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="45" selection-start="637" selection-end="637" vertical-scroll-proportion="0.42618385">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/campagne_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="73" selection-start="347" selection-end="347" vertical-scroll-proportion="0.04735376">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/import_cops_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-27.740948">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/specie_vs.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="48" selection-start="114" selection-end="114" vertical-scroll-proportion="0.13709678">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/plv_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="68" selection-start="14837" selection-end="14837" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/plv/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="63" selection-start="1915" selection-end="1915" vertical-scroll-proportion="-7.1923075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/vs/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="57" selection-start="1487" selection-end="1487" vertical-scroll-proportion="-6.769231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/vs.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="44" selection-start="1673" selection-end="1673" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/vs_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="74" selection-start="3302" selection-end="3302" vertical-scroll-proportion="3.1727018">
           <folding />
         </state>
       </provider>

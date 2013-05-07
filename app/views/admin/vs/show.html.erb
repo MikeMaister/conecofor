@@ -1,0 +1,61 @@
+<% if @vs_list.blank? %>
+    <p>Nessun dato su cui costruire il VS.</p>
+<% else %>
+
+<table>
+  <thead>
+    <tr>
+        <th>Subprog</th>
+        <th>Area</th>
+        <th>Inst</th>
+        <th>Scode</th>
+        <th>Medium</th>
+        <th>Listmed</th>
+        <th>Size</th>
+        <th>YYYYMM</th>
+        <th>Spool</th>
+        <th>PFlag</th>
+        <th>Species</th>
+        <th>ListSpe</th>
+        <th>Class</th>
+        <th>Param</th>
+        <th>ParList</th>
+        <th>Value</th>
+        <th>Unit</th>
+        <th>Flagqua</th>
+        <th>Flagsta</th>
+     </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@vs_list.size-1 %>
+    <tr>
+      <td><%= @vs_list.at(i).subprog %></td>
+      <td><%= @vs_list.at(i).area %></td>
+      <td><%= @vs_list.at(i).inst %></td>
+      <td><%= @vs_list.at(i).scode %></td>
+      <td><%= @vs_list.at(i).medium %></td>
+      <td><%= @vs_list.at(i).listmed %></td>
+      <td><%= @vs_list.at(i).size %></td>
+      <td><%= @vs_list.at(i).yyyymm %></td>
+      <td><%= @vs_list.at(i).spool %></td>
+      <td><%= @vs_list.at(i).pflag %></td>
+      <td><%= @vs_list.at(i).species %></td>
+      <td><%= @vs_list.at(i).listspe %></td>
+      <td><%= @vs_list.at(i).class %></td>
+      <td><%= @vs_list.at(i).param %></td>
+      <td><%= @vs_list.at(i).parlist %></td>
+      <td><%= @vs_list.at(i).value %></td>
+      <td><%= @vs_list.at(i).unit %></td>
+      <td><%= @vs_list.at(i).flagqua %></td>
+      <td><%= @vs_list.at(i).flagsta %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+    <p>
+      <%= link_to "Download File", @new_vs_file.relative_path %>
+    </p>
+
+
+<% end %>
