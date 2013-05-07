@@ -17,6 +17,7 @@
         <th>Latitudine</th>
         <th>Longitudine</th>
         <th>Altitudine</th>
+        <th>IM</th>
         <th>Note</th>
         <th>Opzioni</th>
       </tr>
@@ -30,6 +31,7 @@
             <td><%= @plot.at(i).latitudine %></td>
             <td><%= @plot.at(i).longitudine %></td>
             <td><%= @plot.at(i).altitudine %></td>
+            <td><%= @plot.at(i).im %></td>
             <td><%= @plot.at(i).note %></td>
             <td><%= button_to_remote "Elimina", :url => { :controller =>"admin/plot",:action => "delete", :id =>@plot.at(i).id}, :confirm => "Eliminando questo plot cancellerai tutti i dati ad esso legati. Vuoi davvero eliminare questo plot?" %></td>
           </tr>

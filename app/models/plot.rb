@@ -1,7 +1,7 @@
 class Plot < ActiveRecord::Base
   set_table_name "plot"
 
-  attr_accessible :id_plot,:descrizione,:latitudine,:longitudine,:altitudine,:note,:deleted,:numero_plot
+  attr_accessible :id_plot,:descrizione,:latitudine,:longitudine,:altitudine,:note,:deleted,:numero_plot,:im
 
   validates_presence_of :id_plot,:descrizione,:latitudine,:longitudine,:altitudine, :message => "non può essere vuoto."
   validates_format_of :id_plot, :with => /\d\d[A-Z][A-Z][A-Z]\d/, :message => "formato non valido."
@@ -10,6 +10,7 @@ class Plot < ActiveRecord::Base
   validates_numericality_of :altitudine, :message => "accetta solo caratteri numerici."
   validates_length_of :note, :maximum => 100 , :message => "massimo 200 caratteri."
   validate :no_dup, :unless => "id_plot.blank?"
+  validates_format_of :im, :with => /[I][T]\d\d/, :message => "formato non valido.", :allow_blank => true
 
   def no_dup
     #carico tutti i plot non eliminati
