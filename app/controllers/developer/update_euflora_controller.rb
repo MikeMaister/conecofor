@@ -47,4 +47,21 @@ class Developer::UpdateEufloraController < ApplicationController
 
   end
 
+  def link_eu_species_vs
+    @euflora = Euflora.find(:all)
+    @vs = SpecieVs.find(:all)
+
+    for i in 0..@euflora.size-1
+      for j in 0..@vs.size-1
+        if @euflora.at(i).descrizione.capitalize == @vs.at(j).descrizione.capitalize
+          @euflora.at(i).specie_vs_id = @vs.at(j).id
+          @euflora.at(i).save
+          break
+        end
+      end
+    end
+
+  end
+
+
 end
