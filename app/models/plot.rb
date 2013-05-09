@@ -3,14 +3,14 @@ class Plot < ActiveRecord::Base
 
   attr_accessible :id_plot,:descrizione,:latitudine,:longitudine,:altitudine,:note,:deleted,:numero_plot,:im
 
-  validates_presence_of :id_plot,:descrizione,:latitudine,:longitudine,:altitudine, :message => "non può essere vuoto."
-  validates_format_of :id_plot, :with => /\d\d[A-Z][A-Z][A-Z]\d/, :message => "formato non valido."
-  validates_length_of :descrizione, :maximum => 100 , :message => "massimo 100 caratteri."
+  validates_presence_of :id_plot,:descrizione,:latitudine,:longitudine,:altitudine, :message => "non può essere vuoto.", :on => :create
+  validates_format_of :id_plot, :with => /\d\d[A-Z][A-Z][A-Z]\d/, :message => "formato non valido." , :on => :create
+  validates_length_of :descrizione, :maximum => 100 , :message => "massimo 100 caratteri." , :on => :create
   validates_format_of :latitudine, :longitudine, :with =>/[\+-\-]\d\d\d\d\d\d/, :message => "formato non valido."
   validates_numericality_of :altitudine, :message => "accetta solo caratteri numerici."
-  validates_length_of :note, :maximum => 100 , :message => "massimo 200 caratteri."
-  validate :no_dup, :unless => "id_plot.blank?"
-  validates_format_of :im, :with => /[I][T]\d\d/, :message => "formato non valido.", :allow_blank => true
+  validates_length_of :note, :maximum => 100 , :message => "massimo 200 caratteri." , :on => :create
+  validate_on_create :no_dup ,:unless => "id_plot.blank?"
+  validates_format_of :im, :with => /[I][T]\d\d/, :message => "formato non valido.", :allow_blank => true   , :on => :create
 
   def no_dup
     #carico tutti i plot non eliminati
@@ -35,7 +35,6 @@ class Plot < ActiveRecord::Base
       end
     end
 
-
   end
 
   def set_num_plot
@@ -48,6 +47,13 @@ class Plot < ActiveRecord::Base
   def delete_it!
     self.update_attribute(:deleted,true)
     delete_dependencies(self.id)
+  end
+
+  def set_lat_long_alt(lat,long,alt)
+    self.latitudine = lat
+    self.longitudine = long
+    self.altitudine = alt
+    return true if self.save
   end
 
   private

@@ -6,9 +6,12 @@ class Admin::PlotController < ApplicationController
 
   def new
     @new_plot = Plot.new
+    @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => :numero_plot)
     #apro una finestra di input
     render :update do |page|
+      page.hide "display_input_errors"
       page.show "new_plot"
+      page.replace_html "plot_list", :partial => "plot_list", :object => @plot
       page.replace_html 'new_plot', :partial => 'new_plot_form', :object => @new_plot
     end
   end
@@ -55,6 +58,45 @@ class Admin::PlotController < ApplicationController
     @message = "Plot Eliminato."
     render :update do |page|
       page.replace_html "plot_list", :partial => "plot_list", :object => [:@plot,@message]
+    end
+  end
+
+  def edit
+    @id = params[:id]
+    @i = params[:i]
+    #ricarico i plot
+    @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => :numero_plot)
+    render :update do |page|
+      page.hide "new_plot"
+      page.hide "display_input_errors"
+      page.replace_html "plot_list", :partial => "edit_plot", :object => [:@id,@i,@plot]
+    end
+  end
+
+  def close_edit
+    #ricarico i plot
+    @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => :numero_plot)
+    render :update do |page|
+      page.hide "display_input_errors"
+      page.replace_html "plot_list", :partial => "plot_list", :object => @plot
+    end
+  end
+
+  def save_edit
+    @new_plot = Plot.find(params[:id])
+    if @new_plot.set_lat_long_alt(params[:latitudine],params[:longitudine],params[:altitudine])
+      @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => :numero_plot)
+      @message = "Modifica salvata."
+      render :update do |page|
+        page.hide "display_input_errors"
+        page.replace_html "plot_list", :partial => "plot_list", :object => [@plot,@message]
+      end
+    else
+      @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => :numero_plot)
+      render :update do |page|
+        page.show "display_input_errors"
+        page.replace_html "display_input_errors", :partial => "input_errors", :object => @new_plot
+      end
     end
   end
 

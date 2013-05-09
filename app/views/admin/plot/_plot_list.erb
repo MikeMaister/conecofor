@@ -33,7 +33,10 @@
             <td><%= @plot.at(i).altitudine %></td>
             <td><%= @plot.at(i).im %></td>
             <td><%= @plot.at(i).note %></td>
-            <td><%= button_to_remote "Elimina", :url => { :controller =>"admin/plot",:action => "delete", :id =>@plot.at(i).id}, :confirm => "Eliminando questo plot cancellerai tutti i dati ad esso legati. Vuoi davvero eliminare questo plot?" %></td>
+            <td>
+              <%= button_to_remote "Modifica", :url => { :controller =>"admin/plot",:action => "edit", :id =>@plot.at(i).id, :i => i} %>
+              <%= button_to_remote "Elimina", :url => { :controller =>"admin/plot",:action => "delete", :id =>@plot.at(i).id}, :confirm => "Eliminando questo plot cancellerai tutti i dati ad esso legati. Vuoi davvero eliminare questo plot?" %>
+            </td>
           </tr>
       <% end %>
       </tbody>
