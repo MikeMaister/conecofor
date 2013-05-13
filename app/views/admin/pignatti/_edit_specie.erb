@@ -1,0 +1,36 @@
+<% form_remote_tag :url => { :controller => "admin/pignatti", :action => "save_edit", :update => "pignatti_list"} do %>
+<table>
+  <thead>
+  <tr>
+    <th>Descrizione</th>
+    <th>Euflora</th>
+    <th>Opzioni</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@pignatti.size-1 %>
+      <% if i.to_i == @i.to_i  %>
+          <tr>
+            <td>
+              <%= hidden_field_tag :id ,@pignatti.at(i).id %>
+              <%= text_field_tag :descrizione, @pignatti.at(i).descrizione %>
+            </td>
+            <td><%= select_tag :euflora_id,"<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@euflora,:id,:descrizione,@pignatti.at(i).euflora_id) %></td>
+            <td>
+              <%= submit_tag "Salva" %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/pignatti",:action => "close_edit" } %>
+            </td>
+          </tr>
+      <%else%>
+        <tr>
+            <td><%= @pignatti.at(i).descrizione %></td>
+            <td>
+                <%= Euflora.find(@pignatti.at(i).euflora_id).descrizione unless @pignatti.at(i).euflora_id.blank? %>
+            </td>
+            <td></td>
+        </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

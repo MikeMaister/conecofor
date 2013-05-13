@@ -1,0 +1,13 @@
+<h1>Admin::Pignatti#index</h1>
+
+<div id="pignatti_list" >
+  <%= render :partial => "specie_list"%>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/pignatti",:action => "new", :update => "new_specie"} %></p>
+
+<div id="display_input_errors" style="display:none;">
+</div>
+
+<div id="new_specie" style="display:none;">
+</div>

@@ -1,0 +1,24 @@
+<p><%= @message if @message %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descrizione</th>
+      <th>Euflora</th>
+      <th>Opzioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for i in 0..@pignatti.size-1 %>
+    <tr>
+      <td><%= @pignatti.at(i).descrizione %></td>
+      <td>
+        <%= Euflora.find(@pignatti.at(i).euflora_id).descrizione unless @pignatti.at(i).euflora_id.blank? %>
+      </td>
+      <td>
+        <%= button_to_remote "Modifica", :url => { :controller =>"admin/pignatti",:action => "edit", :id =>@pignatti.at(i).id, :i => i} %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
