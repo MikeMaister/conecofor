@@ -443,7 +443,7 @@ class ImportCopsController < ApplicationController
   def unique_record_check(record,row)
     #recupero tutte le info necessarie per memorizzare la chiave primaria
     plot_id = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false",record.cod_plot]).id
-    specie_id = Specie.find(:first, :conditions => ["descrizione = ?", record.specie]).id
+    specie_id = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id
     active_campaign_id = Campagne.find(:first,:conditions => ["active = true"]).id
     file = ImportFile.find(session[:file_id])
     #cerco la chiave primaria
@@ -472,7 +472,7 @@ class ImportCopsController < ApplicationController
       session[:file_error] = true
     end
     #riferimenti alla specie
-    specie = Specie.find(:first, :conditions => ["descrizione = ?", record.specie])
+    specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie])
     #se la specie non esiste
     if specie.blank?
       save_error(record,"Riferimento a Specie",row)

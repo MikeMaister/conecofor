@@ -5,7 +5,7 @@ class Developer::UpdateEufloraController < ApplicationController
     #carico tutte le specie euflora
     @euflora = Euflora.find(:all)
     #carico tutte le specie pignatti
-    @pignatti = Specie.find(:all)
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
 
     require 'rubygems'
     gem 'ruby-ole','1.2.11.4'
@@ -23,7 +23,7 @@ class Developer::UpdateEufloraController < ApplicationController
         #fa saltare la prima riga
         if i != 0
           #cerco il record pignatti corrispondente alla descrizione
-          p_record = Specie.find(:first, :conditions => ["descrizione = ?",row[0]])
+          p_record = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false",row[0]])
           #cerco il record euflora corrispondente alla descrizione
           eu_record = Euflora.find(:first,:conditions => ["descrizione = ?",row[1]])
           unless p_record.blank? || eu_record.blank?

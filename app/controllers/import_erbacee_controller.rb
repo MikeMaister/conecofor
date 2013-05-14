@@ -240,7 +240,7 @@ class ImportErbaceeController < ApplicationController
   def hedera_helix_check(row)
     unless row.specie_id.blank?
     #cerco la specie Hedera helix
-    hedera_helix = Specie.find(:first,:conditions => ["descrizione = 'Hedera helix'"])
+    hedera_helix = Specie.find(:first,:conditions => ["descrizione = 'Hedera helix' AND deleted = false"])
       if row.specie_id == hedera_helix.id
         unless !row.copertura.nil? && !row.copertura_esterna.nil? && row.altezza_media.nil? && row.numero_cespi.nil? && row.numero_stoloni.nil? && row.numero_stoloni_radicanti.nil? && row.numero_foglie.nil? && row.numero_getti.nil?
           #segnalo l'errore
@@ -442,7 +442,7 @@ class ImportErbaceeController < ApplicationController
     if !record.specie.blank?
       #recupero tutte le info necessarie per memorizzare la chiave primaria
       plot_id = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false",record.cod_plot]).id
-      specie_id = Specie.find(:first, :conditions => ["descrizione = ?", record.specie]).id
+      specie_id = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id
       active_campaign_id = Campagne.find(:first,:conditions => ["active = true"]).id
       file = ImportFile.find(session[:file_id])
       #cerco la chiave primaria
@@ -524,7 +524,7 @@ class ImportErbaceeController < ApplicationController
     #a meno che la specie non sia presente
     unless record.specie.blank?
       #riferimenti alla specie
-      specie = Specie.find(:first, :conditions => ["descrizione = ?", record.specie])
+      specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie])
       #se la specie non esiste
       if specie.blank?
         save_error(record,"Riferimento a Specie",row)

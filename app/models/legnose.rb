@@ -3,7 +3,7 @@ class Legnose < ActiveRecord::Base
 
   def fill_temp(record,file_id,row)
     plot = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false", record.cod_plot])
-    specie = Specie.find(:first, :conditions => ["descrizione = ?", record.specie]) unless record.specie.blank?
+    specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]) unless record.specie.blank?
     file = ImportFile.find(file_id)
 
     self.id_plot = plot.id_plot

@@ -26,10 +26,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="specie.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="specie.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="69" selection-start="384" selection-end="384" vertical-scroll-proportion="0.50268817">
+            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="check_species_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="91" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_euflora_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="93" selection-start="983" selection-end="983" vertical-scroll-proportion="1.183844">
               <folding />
             </state>
           </provider>
@@ -38,7 +56,7 @@
       <file leaf-file-name="pignatti_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="73" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0">
+            <state line="96" column="28" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -48,43 +66,13 @@
         <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="12" column="37" selection-start="341" selection-end="341" vertical-scroll-proportion="-7.8461537">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_new_specie_form.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_new_specie_form.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="32" selection-start="285" selection-end="327" vertical-scroll-proportion="-5.230769">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plot_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="1" selection-start="2668" selection-end="3411" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_edit_plot.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_edit_plot.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="43" selection-start="549" selection-end="607" vertical-scroll-proportion="-5.8846154">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_edit_specie.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="49" selection-start="393" selection-end="393" vertical-scroll-proportion="-3.9230769">
-              <folding />
+              <folding>
+                <marker date="1368177630168" expanded="true" signature="55:104" placeholder="..." />
+                <marker date="1368177630168" expanded="false" signature="267:280" placeholder="..." />
+                <marker date="1368177630168" expanded="true" signature="281:288" placeholder="..." />
+                <marker date="1368177630168" expanded="false" signature="319:332" placeholder="..." />
+                <marker date="1368177630168" expanded="true" signature="333:340" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,7 +80,7 @@
       <file leaf-file-name="_specie_list.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="105" selection-start="288" selection-end="381" vertical-scroll-proportion="-7.8461537">
+            <state line="19" column="127" selection-start="674" selection-end="674" vertical-scroll-proportion="-4.8461537">
               <folding />
             </state>
           </provider>
@@ -101,16 +89,18 @@
       <file leaf-file-name="_input_errors.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="20" selection-start="62" selection-end="62" vertical-scroll-proportion="-1.3076923">
-              <folding />
+            <state line="7" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="-4.576923">
+              <folding>
+                <marker date="1368469452976" expanded="true" signature="40:163" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
+      <file leaf-file-name="_new_specie_form.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_new_specie_form.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="57" selection-start="946" selection-end="946" vertical-scroll-proportion="0.0">
+            <state line="8" column="32" selection-start="285" selection-end="327" vertical-scroll-proportion="-5.230769">
               <folding />
             </state>
           </provider>
@@ -132,22 +122,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/admin/plot/_edit_plot.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/plot/_edit_errors.erb" />
-        <option value="$PROJECT_DIR$/app/models/plot.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/plot_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/admin/import_quick_view/_table_copl.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/import_quick_view/_table_cops.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/import_quick_view/_table_erb.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/import_quick_view/_table_legn.erb" />
         <option value="$PROJECT_DIR$/app/views/home/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/_new_specie_form.erb" />
-        <option value="$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb" />
+        <option value="$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb" />
+        <option value="$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb" />
         <option value="$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/specie.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/import_cops_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/import_erbacee_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/import_legnose_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/cops.rb" />
+        <option value="$PROJECT_DIR$/app/models/erbacee.rb" />
+        <option value="$PROJECT_DIR$/app/models/legnose.rb" />
       </list>
     </option>
   </component>
@@ -190,120 +180,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Config" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ConfigFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Models" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ModelsFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportProcedureController" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportProcedureController" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="index" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ActionNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conecofor" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImportController" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -636,6 +512,120 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ConfigFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ModelsFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ImportProcedureController" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ImportProcedureController" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="index" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ActionNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conecofor" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ImportController" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -961,23 +951,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3305921" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.67105263" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42727274" sideWeight="0.68585527" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4409091" sideWeight="0.68585527" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31414473" sideWeight="0.5037879" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31414473" sideWeight="0.4909091" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31414473" sideWeight="0.4909091" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3305921" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1037,56 +1027,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/admin/mandatory_mask/_new_mask_form.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-5.3546324" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/campagne/_new_campagna_form.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="62" selection-start="1462" selection-end="1494" vertical-scroll-proportion="0.1086262" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_new_plot_form.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="83" selection-start="303" selection-end="303" vertical-scroll-proportion="-0.25525525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="205" selection-end="266" vertical-scroll-proportion="0.35735735" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_input_errors.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="164" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="57" selection-start="946" selection-end="946" vertical-scroll-proportion="0.0">
+        <state line="14" column="49" selection-start="393" selection-end="393" vertical-scroll-proportion="5.6153846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_plot_list.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="35" selection-start="1347" selection-end="1347" vertical-scroll-proportion="0.5915916">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="37" selection-start="341" selection-end="341" vertical-scroll-proportion="-7.8461537">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="105" selection-start="288" selection-end="381" vertical-scroll-proportion="-7.8461537">
-          <folding />
+        <state line="7" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="-4.576923">
+          <folding>
+            <marker date="1368469452976" expanded="true" signature="40:163" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,44 +1050,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="1" selection-start="2668" selection-end="3411" vertical-scroll-proportion="0.0">
+        <state line="19" column="127" selection-start="674" selection-end="674" vertical-scroll-proportion="-4.8461537">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="62" selection-end="62" vertical-scroll-proportion="-1.3076923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/plot/_edit_plot.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="43" selection-start="549" selection-end="607" vertical-scroll-proportion="-5.8846154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="49" selection-start="393" selection-end="393" vertical-scroll-proportion="-3.9230769">
-          <folding />
+        <state line="12" column="37" selection-start="341" selection-end="341" vertical-scroll-proportion="-7.8461537">
+          <folding>
+            <marker date="1368177630168" expanded="true" signature="55:104" placeholder="..." />
+            <marker date="1368177630168" expanded="false" signature="267:280" placeholder="..." />
+            <marker date="1368177630168" expanded="true" signature="281:288" placeholder="..." />
+            <marker date="1368177630168" expanded="false" signature="319:332" placeholder="..." />
+            <marker date="1368177630168" expanded="true" signature="333:340" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="73" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0">
+        <state line="96" column="28" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/import_cops_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="445" column="88" selection-start="17984" selection-end="17984" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/import_erbacee_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="444" column="90" selection-start="20321" selection-end="20321" vertical-scroll-proportion="0.331307">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/import_legnose_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="649" column="90" selection-start="25535" selection-end="25535" vertical-scroll-proportion="0.331307">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="69" selection-start="384" selection-end="384" vertical-scroll-proportion="0.50268817">
+        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="91" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/cops.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="93" selection-start="782" selection-end="782" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/erbacee.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="85" selection-start="285" selection-end="285" vertical-scroll-proportion="0.24355301">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/error_cops.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="18" selection-start="747" selection-end="747" vertical-scroll-proportion="0.9513678">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/legnose.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="85" selection-start="285" selection-end="285" vertical-scroll-proportion="0.2367688">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="93" selection-start="983" selection-end="983" vertical-scroll-proportion="1.183844">
           <folding />
         </state>
       </provider>

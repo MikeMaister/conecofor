@@ -56,7 +56,7 @@ class Admin::CheckSpeciesController < ApplicationController
         #fa saltare la prima riga
         if i != 0
           #cerco la specie in tabella confrontandola con quella della riga attuale
-          specie = Specie.find(:first, :conditions => ["descrizione = ?", row[col_num]])
+          specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", row[col_num]])
           #se la specie non è stata trovata nel database
           if specie.blank?
             #creo un nuovo errore sulla riga
