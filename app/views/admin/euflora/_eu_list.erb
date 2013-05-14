@@ -1,0 +1,24 @@
+<%= @message if @message%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Codice Europeo</th>
+      <th>Descrizione</th>
+      <th>Famiglia</th>
+      <th>Specie</th>
+      <th>Specie VS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for i in 0..@euflora.size-1 %>
+        <tr>
+            <td><%= @euflora.at(i).codice_eu %></td>
+            <td><%= @euflora.at(i).descrizione %></td>
+            <td><%= @euflora.at(i).famiglia %></td>
+            <td><%= @euflora.at(i).specie %></td>
+            <td><%= SpecieVs.find(@euflora.at(i).specie_vs_id).get_vs unless @euflora.at(i).specie_vs_id.blank? %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

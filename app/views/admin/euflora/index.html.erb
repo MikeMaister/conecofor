@@ -1,0 +1,13 @@
+<h1>Admin::Euflora#index</h1>
+
+<div id="euflora_list" >
+  <%= render :partial => "eu_list"%>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/euflora",:action => "new", :update => "new_euflora"} %></p>
+
+<div id="display_input_errors" style="display:none;">
+</div>
+
+<div id="new_euflora" style="display:none;">
+</div>

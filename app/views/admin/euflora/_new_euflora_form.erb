@@ -1,0 +1,26 @@
+
+<% remote_form_for(@new_euflora, :url => {:controller => "admin/euflora", :action => "save_eu" }) do |f| %>
+    <p>
+      <%= f.label "Codice Europeo" %><br/>
+      <%= f.text_field :codice_eu %>
+    </p>
+    <p>
+      <%= f.label "Descrizione" %><br/>
+      <%= f.text_field :descrizione %>
+    </p>
+    <p>
+      <%= f.label "Famiglia" %><br/>
+      <%= f.text_field :famiglia %>
+    </p>
+    <p>
+      <%= f.label "Specie" %><br/>
+      <%= f.text_field :specie %>
+    </p>
+    <p>
+      <%= f.label "Specie VS" %><br/>
+      <%= f.select :specie_vs_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@spe_vs,:id,:get_vs) %>
+    </p>
+    <p>
+      <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/euflora",:action => "close_new_euflora"} %>
+    </p>
+<% end %>
