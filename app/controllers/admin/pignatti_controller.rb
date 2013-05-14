@@ -1,12 +1,12 @@
 class Admin::PignattiController < ApplicationController
   def index
-    @pignatti = Specie.find(:all)
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
   end
 
   def new
     @new_specie = Specie.new
     @euflora = Euflora.find(:all,:order => "descrizione")
-    @pignatti = Specie.find(:all)
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
     #apro una finestra di input
     render :update do |page|
       page.hide "display_input_errors"
@@ -31,7 +31,7 @@ class Admin::PignattiController < ApplicationController
     #se riesco a salvare il plot passando tutte le restrizioni
     if @new_specie.save
       #carico nuovamente i plot
-      @pignatti = Specie.find(:all)
+      @pignatti = Specie.find(:all, :conditions => "deleted = false")
       #aggiorno la tabella dei plot e chiudo la maschera di input
       @message = "Nuova specie aggiunta."
       render :update do |page|
@@ -53,7 +53,7 @@ class Admin::PignattiController < ApplicationController
     @id = params[:id]
     @i = params[:i]
     #ricarico le specie
-    @pignatti = Specie.find(:all)
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
     @euflora = Euflora.find(:all, :order => "descrizione")
     render :update do |page|
       page.hide "new_specie"
@@ -64,7 +64,7 @@ class Admin::PignattiController < ApplicationController
 
   def close_edit
     #ricarico i plot
-    @pignatti = Specie.find(:all)
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
     render :update do |page|
       page.hide "display_input_errors"
       page.replace_html "pignatti_list", :partial => "specie_list", :object => @pignatti
@@ -74,18 +74,30 @@ class Admin::PignattiController < ApplicationController
   def save_edit
     @new_specie = Specie.find(params[:id])
     if @new_specie.update_specie(params[:descrizione],params[:euflora_id])
-      @pignatti = Specie.find(:all)
+      @pignatti = Specie.find(:all, :conditions => "deleted = false")
       @message = "Modifica salvata."
       render :update do |page|
         page.hide "display_input_errors"
         page.replace_html "pignatti_list", :partial => "specie_list", :object => [@pignatti,@message]
       end
     else
-      @pignatti = Specie.find(:all)
+      @pignatti = Specie.find(:all, :conditions => "deleted = false")
       render :update do |page|
         page.show "display_input_errors"
         page.replace_html "display_input_errors", :partial => "input_errors", :object => @new_specie
       end
+    end
+  end
+
+  def delete
+    to_delete = Specie.find(params[:id])
+    to_delete.delete_it!
+    @pignatti = Specie.find(:all, :conditions => "deleted = false")
+    @message = "Specie Eliminata."
+    render :update do |page|
+      page.hide "new_specie"
+      page.hide "display_input_errors"
+      page.replace_html "pignatti_list", :partial => "specie_list", :object => [@pignatti,@message]
     end
   end
 

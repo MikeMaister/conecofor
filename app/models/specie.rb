@@ -6,12 +6,12 @@ class Specie < ActiveRecord::Base
   validate :no_dup
 
   def no_dup
-    #carico tutti i plot non eliminati
-    specie_list = Specie.find(:all)
+    #carico tutte le specie non eliminate
+    specie_list = Specie.find(:all, :conditions => "deleted = false")
     unless specie_list.blank?
       #per ogni plot
       specie_list.each do |spec|
-        if spec.descrizione == descrizione && spec.id != self.id
+        if spec.descrizione.capitalize == descrizione.capitalize && spec.id != self.id
           #segnalo l'errore
           errors.add(:descrizione, " già presente tra le specie.")
         end
@@ -24,4 +24,37 @@ class Specie < ActiveRecord::Base
     self.euflora_id = euflora
     return true if self.save
   end
+
+  def delete_it!
+    self.deleted = true
+    delete_dependencies(self.id)
+    self.save
+  end
+
+  private
+
+  def delete_dependencies(specie_id)
+    #COPS
+    cops = Cops.find(:all,:conditions => ["deleted = false AND specie_id = ?",specie_id])
+    unless cops.blank?
+      for i in 0..cops.size-1
+        cops.at(i).delete_it!
+      end
+    end
+    #LEGNOSE
+    legn = Legnose.find(:all,:conditions => ["deleted = false AND specie_id = ?",specie_id])
+    unless legn.blank?
+      for i in 0..legn.size-1
+        legn.at(i).delete_it!
+      end
+    end
+    #ERBACEE
+    erb = Erbacee.find(:all, :conditions => ["deleted = false AND specie_id = ?",specie_id])
+    unless erb.blank?
+      for i in 0..erb.size-1
+        erb.at(i).delete_it!
+      end
+    end
+  end
+
 end

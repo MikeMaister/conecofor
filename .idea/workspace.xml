@@ -26,28 +26,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="specie.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="specie.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+            <state line="9" column="67" selection-start="368" selection-end="368" vertical-scroll-proportion="0.41129032">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_species_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb">
+      <file leaf-file-name="plot_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="91" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0">
+            <state line="57" column="4" selection-start="1856" selection-end="1884" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="update_euflora_controller.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
+      <file leaf-file-name="plot.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="93" selection-start="983" selection-end="983" vertical-scroll-proportion="1.183844">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -56,7 +56,7 @@
       <file leaf-file-name="pignatti_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="28" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.0">
+            <state line="100" column="98" selection-start="3477" selection-end="3477" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,8 +128,6 @@
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb" />
-        <option value="$PROJECT_DIR$/app/models/specie.rb" />
         <option value="$PROJECT_DIR$/app/controllers/import_cops_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/import_erbacee_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/import_legnose_controller.rb" />
@@ -138,6 +136,8 @@
         <option value="$PROJECT_DIR$/app/models/cops.rb" />
         <option value="$PROJECT_DIR$/app/models/erbacee.rb" />
         <option value="$PROJECT_DIR$/app/models/legnose.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/specie.rb" />
       </list>
     </option>
   </component>
@@ -951,7 +951,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1027,22 +1027,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="49" selection-start="393" selection-end="393" vertical-scroll-proportion="5.6153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_input_errors.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="-4.576923">
-          <folding>
-            <marker date="1368469452976" expanded="true" signature="40:163" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_new_specie_form.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="32" selection-start="285" selection-end="327" vertical-scroll-proportion="-5.230769">
@@ -1070,13 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="28" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/import_cops_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="445" column="88" selection-start="17984" selection-end="17984" vertical-scroll-proportion="0.33333334">
@@ -1094,20 +1071,6 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/import_legnose_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="649" column="90" selection-start="25535" selection-end="25535" vertical-scroll-proportion="0.331307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="91" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1142,7 +1105,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="93" selection-start="983" selection-end="983" vertical-scroll-proportion="1.183844">
+        <state line="25" column="93" selection-start="983" selection-end="983" vertical-scroll-proportion="-0.4100295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/check_species_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="91" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.44568247">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/plot_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="4" selection-start="1856" selection-end="1884" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/plot.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="98" selection-start="3477" selection-end="3477" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/specie.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="67" selection-start="368" selection-end="368" vertical-scroll-proportion="0.41129032">
           <folding />
         </state>
       </provider>
