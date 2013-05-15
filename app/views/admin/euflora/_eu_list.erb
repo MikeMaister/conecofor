@@ -8,6 +8,7 @@
       <th>Famiglia</th>
       <th>Specie</th>
       <th>Specie VS</th>
+      <th>Opzioni</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
             <td><%= @euflora.at(i).famiglia %></td>
             <td><%= @euflora.at(i).specie %></td>
             <td><%= SpecieVs.find(@euflora.at(i).specie_vs_id).get_vs unless @euflora.at(i).specie_vs_id.blank? %></td>
+            <td><%= button_to_remote "Modifica", :url => { :controller =>"admin/euflora",:action => "edit", :id =>@euflora.at(i).id, :i => i} %></td>
         </tr>
     <% end %>
   </tbody>

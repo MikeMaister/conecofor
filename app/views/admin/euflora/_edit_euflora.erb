@@ -1,0 +1,50 @@
+<% form_remote_tag :url => { :controller => "admin/euflora", :action => "save_edit", :update => "euflora_list"} do %>
+<table>
+  <thead>
+  <tr>
+    <th>Codice Europeo</th>
+    <th>Descrizione</th>
+    <th>Famiglia</th>
+    <th>Specie</th>
+    <th>Specie VS</th>
+    <th>Opzioni</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% for i in 0..@euflora.size-1 %>
+      <% if @i.to_i == i.to_i %>
+          <tr>
+            <td>
+              <%= hidden_field_tag :id ,@euflora.at(i).id %>
+              <%= text_field_tag :codice_eu, @euflora.at(i).codice_eu %>
+            </td>
+            <td>
+              <%= text_field_tag :descrizione, @euflora.at(i).descrizione %>
+            </td>
+            <td>
+              <%= text_field_tag :famiglia, @euflora.at(i).famiglia %>
+            </td>
+            <td>
+              <%= text_field_tag :specie, @euflora.at(i).specie %>
+            </td>
+            <td>
+              <%= select_tag :specie_vs_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@spe_vs,:id,:get_vs,@euflora.at(i).specie_vs_id) %>
+            </td>
+            <td>
+              <%= submit_tag "Salva" %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/euflora",:action => "close_edit" } %>
+            </td>
+          </tr>
+      <% else %>
+        <tr>
+            <td><%= @euflora.at(i).codice_eu %></td>
+            <td><%= @euflora.at(i).descrizione %></td>
+            <td><%= @euflora.at(i).famiglia %></td>
+            <td><%= @euflora.at(i).specie %></td>
+            <td><%= SpecieVs.find(@euflora.at(i).specie_vs_id).get_vs unless @euflora.at(i).specie_vs_id.blank? %></td>
+        </tr>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

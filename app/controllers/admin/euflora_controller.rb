@@ -49,4 +49,44 @@ class Admin::EufloraController < ApplicationController
     end
   end
 
+  def edit
+    @id = params[:id]
+    @i = params[:i]
+    #ricarico le specie
+    @euflora = Euflora.find(:all, :order => "codice_eu")
+    @spe_vs = SpecieVs.find(:all)
+    render :update do |page|
+      page.hide "new_euflora"
+      page.hide "display_input_errors"
+      page.replace_html "euflora_list", :partial => "edit_euflora", :object => [:@id,@i,@euflora,@spe_vs]
+    end
+  end
+
+  def close_edit
+    #ricarico i plot
+    @euflora = Euflora.find(:all,:order => "codice_eu")
+    render :update do |page|
+      page.hide "display_input_errors"
+      page.replace_html "euflora_list", :partial => "eu_list", :object => @euflora
+    end
+  end
+
+  def save_edit
+    @new_euflora = Euflora.find(params[:id])
+    if @new_euflora.update_eu(params[:codice_eu],params[:descrizione],params[:famiglia],params[:specie],params[:specie_vs_id])
+      @euflora = Euflora.find(:all,:order => "codice_eu")
+      @message = "Modifica salvata."
+      render :update do |page|
+        page.hide "display_input_errors"
+        page.replace_html "euflora_list", :partial => "eu_list", :object => [@euflora,@message]
+      end
+    else
+      @euflora = Euflora.find(:all,:order => "codice_eu")
+      render :update do |page|
+        page.show "display_input_errors"
+        page.replace_html "display_input_errors", :partial => "input_errors", :object => @new_euflora
+      end
+    end
+  end
+
 end
