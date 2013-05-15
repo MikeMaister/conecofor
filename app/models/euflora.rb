@@ -10,7 +10,7 @@ class Euflora < ActiveRecord::Base
   #controlla che ne il codice europeo ne la descrizione siano duplicati
   def no_dup
     #carico tutte le specie europee non eliminate
-    eu_list = Euflora.find(:all)#, :conditions => "deleted = false")
+    eu_list = Euflora.find(:all, :conditions => "deleted = false")
     unless eu_list.blank?
       #per ogni specie
       eu_list.each do |eu|
@@ -26,7 +26,6 @@ class Euflora < ActiveRecord::Base
     end
   end
 
-
   def update_eu(eucod,desc,fam,spe,vsspe)
     self.codice_eu = eucod
     self.descrizione = desc
@@ -34,6 +33,24 @@ class Euflora < ActiveRecord::Base
     self.specie = spe
     self.specie_vs_id = vsspe
     return true if self.save
+  end
+
+  def delete_it!
+    self.deleted = true
+    delete_dependencies(self.id)
+    self.save
+  end
+
+  private
+
+  def delete_dependencies(id)
+    #sganciare anche quelle eliminate
+    pignatti = Specie.find(:all,:conditions => ["euflora_id = ?",id])
+    unless pignatti.blank?
+      for i in 0..pignatti.size-1
+        pignatti.at(i).unlink_euflora!
+      end
+    end
   end
 
 end

@@ -3,7 +3,7 @@ class Developer::UpdateEufloraController < ApplicationController
   def update
 
     #carico tutte le specie euflora
-    @euflora = Euflora.find(:all)
+    @euflora = Euflora.find(:all, :conditions => "deleted = false")
     #carico tutte le specie pignatti
     @pignatti = Specie.find(:all, :conditions => "deleted = false")
 
@@ -25,7 +25,7 @@ class Developer::UpdateEufloraController < ApplicationController
           #cerco il record pignatti corrispondente alla descrizione
           p_record = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false",row[0]])
           #cerco il record euflora corrispondente alla descrizione
-          eu_record = Euflora.find(:first,:conditions => ["descrizione = ?",row[1]])
+          eu_record = Euflora.find(:first,:conditions => ["descrizione = ? AND deleted = false",row[1]])
           unless p_record.blank? || eu_record.blank?
             p_record.euflora_id = eu_record.id
             p_record.save
@@ -48,7 +48,7 @@ class Developer::UpdateEufloraController < ApplicationController
   end
 
   def link_eu_species_vs
-    @euflora = Euflora.find(:all)
+    @euflora = Euflora.find(:all,:conditions => "deleted = false")
     @vs = SpecieVs.find(:all)
 
     for i in 0..@euflora.size-1

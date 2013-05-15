@@ -19,7 +19,10 @@
             <td><%= @euflora.at(i).famiglia %></td>
             <td><%= @euflora.at(i).specie %></td>
             <td><%= SpecieVs.find(@euflora.at(i).specie_vs_id).get_vs unless @euflora.at(i).specie_vs_id.blank? %></td>
-            <td><%= button_to_remote "Modifica", :url => { :controller =>"admin/euflora",:action => "edit", :id =>@euflora.at(i).id, :i => i} %></td>
+            <td>
+              <%= button_to_remote "Modifica", :url => { :controller =>"admin/euflora",:action => "edit", :id =>@euflora.at(i).id, :i => i} %>
+              <%= button_to_remote "Elimina", :url => { :controller =>"admin/euflora",:action => "delete", :id =>@euflora.at(i).id}, :confirm => "Eliminando questa specie europea, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
+            </td>
         </tr>
     <% end %>
   </tbody>

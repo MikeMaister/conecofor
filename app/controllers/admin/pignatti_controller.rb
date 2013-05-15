@@ -5,7 +5,7 @@ class Admin::PignattiController < ApplicationController
 
   def new
     @new_specie = Specie.new
-    @euflora = Euflora.find(:all,:order => "descrizione")
+    @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "descrizione")
     @pignatti = Specie.find(:all, :conditions => "deleted = false")
     #apro una finestra di input
     render :update do |page|
@@ -54,7 +54,7 @@ class Admin::PignattiController < ApplicationController
     @i = params[:i]
     #ricarico le specie
     @pignatti = Specie.find(:all, :conditions => "deleted = false")
-    @euflora = Euflora.find(:all, :order => "descrizione")
+    @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "descrizione")
     render :update do |page|
       page.hide "new_specie"
       page.hide "display_input_errors"
