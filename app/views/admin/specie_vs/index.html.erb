@@ -1,0 +1,14 @@
+<h1>Admin::SpecieVS</h1>
+<div id="vs_spe_list">
+  <%= render :partial => "specie_vs_list"%>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/specie_vs",:action => "new", :update => "new_specie_vs"} %></p>
+
+
+<div id="display_input_errors" style="display:none;">
+</div>
+
+<div id="new_specie_vs" style="display:none;">
+
+</div>

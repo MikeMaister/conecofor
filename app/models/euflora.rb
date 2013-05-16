@@ -41,6 +41,11 @@ class Euflora < ActiveRecord::Base
     self.save
   end
 
+  def unlink_specie_vs!
+    self.specie_vs_id = nil
+    self.save
+  end
+
   private
 
   def delete_dependencies(id)

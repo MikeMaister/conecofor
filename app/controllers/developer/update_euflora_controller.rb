@@ -49,7 +49,7 @@ class Developer::UpdateEufloraController < ApplicationController
 
   def link_eu_species_vs
     @euflora = Euflora.find(:all,:conditions => "deleted = false")
-    @vs = SpecieVs.find(:all)
+    @vs = SpecieVs.find(:all,:conditions => "deleted = false")
 
     for i in 0..@euflora.size-1
       for j in 0..@vs.size-1

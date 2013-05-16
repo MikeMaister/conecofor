@@ -1,0 +1,38 @@
+<% form_remote_tag :url => { :controller => "admin/specie_vs", :action => "save_edit", :update => "vs_spe_list"} do %>
+<table>
+  <thead>
+  <tr>
+    <th>Species</th>
+    <th>Listspe</th>
+    <th>Opzioni</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@specie_vs.size-1 %>
+      <% if i.to_i == @i.to_i  %>
+          <tr>
+            <td>
+              <%= hidden_field_tag :id ,@specie_vs.at(i).id %>
+              <%= text_field_tag :species, @specie_vs.at(i).species %>
+            </td>
+            <td>
+              <%= select_tag :listspe, options_for_select({"- Seleziona -" =>"", "B4" => "B4", "L2"=>"L2", "M2" => "M2"},@specie_vs.at(i).listspe) %>
+            </td>
+            <td>
+              <%= submit_tag "Salva" %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/specie_vs",:action => "close_edit" } %>
+            </td>
+          </tr>
+      <%else%>
+        <tr>
+            <td><%= @specie_vs.at(i).species %></td>
+            <td>
+                <%= @specie_vs.at(i).listspe %>
+            </td>
+            <td></td>
+        </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -1,0 +1,7 @@
+<% if @new_specie_vs.errors.any? %>
+    <ul>
+    <% @new_specie_vs.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>

@@ -7,7 +7,7 @@ class Admin::EufloraController < ApplicationController
   def new
     @new_euflora = Euflora.new
     @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
-    @spe_vs = SpecieVs.find(:all, :order => "listspe")
+    @spe_vs = SpecieVs.find(:all,:conditions => "deleted = false", :order => "listspe")
     #apro una finestra di input
     render :update do |page|
       page.hide "display_input_errors"
@@ -54,7 +54,7 @@ class Admin::EufloraController < ApplicationController
     @i = params[:i]
     #ricarico le specie
     @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
-    @spe_vs = SpecieVs.find(:all)
+    @spe_vs = SpecieVs.find(:all,:conditions => "deleted = false")
     render :update do |page|
       page.hide "new_euflora"
       page.hide "display_input_errors"
