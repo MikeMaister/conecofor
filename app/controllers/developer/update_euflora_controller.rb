@@ -1,5 +1,11 @@
 class Developer::UpdateEufloraController < ApplicationController
 
+  def prova
+    require 'will_paginate'
+    @asd = Euflora.paginate(:page => params[:page], :per_page => 30)
+  end
+
+
   def update
 
     #carico tutte le specie euflora

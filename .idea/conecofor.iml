@@ -27,6 +27,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails (v2.3.14, ruby-1.8.7-p371) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v10.0.2, ruby-1.8.7-p371) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-ole (v1.2.11.4, ruby-1.8.7-p371) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="will_paginate (v2.3.16, ruby-1.8.7-p371) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

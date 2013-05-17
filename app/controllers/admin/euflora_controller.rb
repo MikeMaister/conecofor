@@ -1,12 +1,12 @@
 class Admin::EufloraController < ApplicationController
 
   def index
-    @euflora = Euflora.find(:all,:conditions =>"deleted = false",:order => "codice_eu")
+    @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
   end
 
   def new
     @new_euflora = Euflora.new
-    @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+    @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
     @spe_vs = SpecieVs.find(:all,:conditions => "deleted = false", :order => "listspe")
     #apro una finestra di input
     render :update do |page|
@@ -28,11 +28,10 @@ class Admin::EufloraController < ApplicationController
   def save_eu
     #compilo i campi del nuovo plot
     @new_euflora = Euflora.new(params[:euflora])
-
     #se riesco a salvare il plot passando tutte le restrizioni
     if @new_euflora.save
       #carico nuovamente i plot
-      @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+      @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
       #aggiorno la tabella dei plot e chiudo la maschera di input
       @message = "Nuova specie europea aggiunta."
       render :update do |page|
@@ -53,7 +52,7 @@ class Admin::EufloraController < ApplicationController
     @id = params[:id]
     @i = params[:i]
     #ricarico le specie
-    @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+    @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
     @spe_vs = SpecieVs.find(:all,:conditions => "deleted = false")
     render :update do |page|
       page.hide "new_euflora"
@@ -64,7 +63,7 @@ class Admin::EufloraController < ApplicationController
 
   def close_edit
     #ricarico i plot
-    @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+    @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
     render :update do |page|
       page.hide "display_input_errors"
       page.replace_html "euflora_list", :partial => "eu_list", :object => @euflora
@@ -74,14 +73,14 @@ class Admin::EufloraController < ApplicationController
   def save_edit
     @new_euflora = Euflora.find(params[:id])
     if @new_euflora.update_eu(params[:codice_eu],params[:descrizione],params[:famiglia],params[:specie],params[:specie_vs_id])
-      @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+      @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."
       render :update do |page|
         page.hide "display_input_errors"
         page.replace_html "euflora_list", :partial => "eu_list", :object => [@euflora,@message]
       end
     else
-      @euflora = Euflora.find(:all,:conditions => "deleted = false", :order => "codice_eu")
+      @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
       render :update do |page|
         page.show "display_input_errors"
         page.replace_html "display_input_errors", :partial => "input_errors", :object => @new_euflora
@@ -92,7 +91,7 @@ class Admin::EufloraController < ApplicationController
   def delete
     to_delete = Euflora.find(params[:id])
     to_delete.delete_it!
-    @euflora = Euflora.find(:all,:conditions => "deleted = false",:order => "codice_eu")
+    @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
     @message = "Specie europea Eliminata."
     render :update do |page|
       page.hide "new_euflora"

@@ -16,6 +16,7 @@
           <tr>
             <td>
               <%= hidden_field_tag :id ,@euflora.at(i).id %>
+              <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :codice_eu, @euflora.at(i).codice_eu %>
             </td>
             <td>
@@ -32,7 +33,7 @@
             </td>
             <td>
               <%= submit_tag "Salva" %>
-              <%= button_to_remote "Annulla", :url => { :controller =>"admin/euflora",:action => "close_edit" } %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/euflora",:action => "close_edit",:page => params[:page] } %>
             </td>
           </tr>
       <% else %>
@@ -48,3 +49,4 @@
   </tbody>
 </table>
 <% end %>
+
