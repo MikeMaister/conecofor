@@ -1,12 +1,14 @@
 class Admin::SpecieVsController < ApplicationController
 
   def index
-    @specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+    #@specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+    @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
   end
 
   def new
     @new_specie_vs = SpecieVs.new
-    @specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+    #@specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+    @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
     #apro una finestra di input
     render :update do |page|
       page.hide "display_input_errors"
@@ -31,7 +33,8 @@ class Admin::SpecieVsController < ApplicationController
     #se riesco a salvare il plot passando tutte le restrizioni
     if @new_specie_vs.save
       #carico nuovamente le specie vs
-      @specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+      #@specie_vs = SpecieVs.find(:all,:conditions => "deleted = false")
+      @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
       #aggiorno la tabella dei plot e chiudo la maschera di input
       @message = "Nuova specie VS aggiunta."
       render :update do |page|
@@ -52,7 +55,8 @@ class Admin::SpecieVsController < ApplicationController
     @id = params[:id]
     @i = params[:i]
     #ricarico le specie vs
-    @specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    #@specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
     render :update do |page|
       page.hide "new_specie_vs"
       page.hide "display_input_errors"
@@ -62,7 +66,8 @@ class Admin::SpecieVsController < ApplicationController
 
   def close_edit
     #ricarico i plot
-    @specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    #@specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
     render :update do |page|
       page.hide "display_input_errors"
       page.replace_html "vs_spe_list", :partial => "specie_vs_list", :object => @specie_vs
@@ -72,14 +77,16 @@ class Admin::SpecieVsController < ApplicationController
   def save_edit
     @new_specie_vs = SpecieVs.find(params[:id])
     if @new_specie_vs.update_specie_vs(params[:species],params[:listspe])
-      @specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+      #@specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+      @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."
       render :update do |page|
         page.hide "display_input_errors"
         page.replace_html "vs_spe_list", :partial => "specie_vs_list", :object => [@specie_vs,@message]
       end
     else
-      @specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+      #@specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+      @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
       render :update do |page|
         page.show "display_input_errors"
         page.replace_html "display_input_errors", :partial => "input_errors", :object => @new_specie_vs
@@ -90,7 +97,8 @@ class Admin::SpecieVsController < ApplicationController
   def delete
     to_delete = SpecieVs.find(params[:id])
     to_delete.delete_it!
-    @specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    #@specie_vs = SpecieVs.find(:all, :conditions => "deleted = false")
+    @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
     @message = "Specie VS Eliminata."
     render :update do |page|
       page.hide "new_specie_vs"

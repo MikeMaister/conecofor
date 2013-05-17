@@ -29,25 +29,25 @@
       <file leaf-file-name="euflora_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/euflora_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="42" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0">
+            <state line="3" column="123" selection-start="152" selection-end="191" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pignatti_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
+      <file leaf-file-name="specie_vs_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin/specie_vs_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
+            <state line="100" column="114" selection-start="4139" selection-end="4139" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb">
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="109" selection-start="255" selection-end="255" vertical-scroll-proportion="0.41337386">
+            <state line="7" column="89" selection-start="229" selection-end="229" vertical-scroll-proportion="-4.576923">
               <folding />
             </state>
           </provider>
@@ -56,7 +56,7 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="108" selection-start="247" selection-end="247" vertical-scroll-proportion="-4.1538463">
+            <state line="8" column="108" selection-start="226" selection-end="247" vertical-scroll-proportion="-4.1538463">
               <folding>
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
@@ -68,34 +68,34 @@
       <file leaf-file-name="_eu_list.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_eu_list.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="131" selection-start="931" selection-end="931" vertical-scroll-proportion="-15.038462">
+            <state line="23" column="131" selection-start="931" selection-end="931" vertical-scroll-proportion="-4.1538463">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_specie_list.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_specie_list.erb">
+      <file leaf-file-name="_specie_vs_list.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/_specie_vs_list.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="129" selection-start="699" selection-end="699" vertical-scroll-proportion="-5.4615383">
+            <state line="20" column="158" selection-start="753" selection-end="753" vertical-scroll-proportion="-3.2692308">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_edit_euflora.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_edit_specie_vs.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/_edit_specie_vs.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="64" selection-start="339" selection-end="339" vertical-scroll-proportion="-0.65384614">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_edit_euflora.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_edit_euflora.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="72" selection-start="348" selection-end="348" vertical-scroll-proportion="0.42307693">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_edit_specie.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="54" selection-start="460" selection-end="460" vertical-scroll-proportion="-3.9230769">
+            <state line="13" column="72" selection-start="348" selection-end="348" vertical-scroll-proportion="-0.038062282">
               <folding />
             </state>
           </provider>
@@ -117,10 +117,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/admin/specie_vs_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/admin/specie_vs/_specie_vs_list.erb" />
-        <option value="$PROJECT_DIR$/app/models/specie_vs.rb" />
-        <option value="$PROJECT_DIR$/app/models/euflora.rb" />
         <option value="$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb" />
         <option value="$PROJECT_DIR$/app/helpers/developer/remote_link_renderer_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/developer/update_euflora/prova.erb" />
@@ -133,6 +129,10 @@
         <option value="$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/admin/euflora/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/admin/specie_vs_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/admin/specie_vs/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/admin/specie_vs/_specie_vs_list.erb" />
+        <option value="$PROJECT_DIR$/app/views/admin/specie_vs/_edit_specie_vs.erb" />
       </list>
     </option>
   </component>
@@ -491,7 +491,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pignatti" />
+              <option name="myItemId" value="specie_vs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1022,30 +1022,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/euflora.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="5" selection-start="1119" selection-end="1119" vertical-scroll-proportion="1.2929578" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/developer/update_euflora_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/developer/update_euflora/prova.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="81" selection-end="107" vertical-scroll-proportion="0.1878453">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/developer/update_euflora_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="27" selection-start="182" selection-end="182" vertical-scroll-proportion="0.33521128">
@@ -1081,44 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_eu_list.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="131" selection-start="931" selection-end="931" vertical-scroll-proportion="-15.038462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/euflora_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="42" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_edit_euflora.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="72" selection-start="348" selection-end="348" vertical-scroll-proportion="0.42307693">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="108" selection-start="247" selection-end="247" vertical-scroll-proportion="-4.1538463">
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/_edit_specie.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="54" selection-start="460" selection-end="460" vertical-scroll-proportion="-3.9230769">
@@ -1129,6 +1067,72 @@
     <entry file="file://$PROJECT_DIR$/app/views/admin/pignatti/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="109" selection-start="255" selection-end="255" vertical-scroll-proportion="0.41337386">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/pignatti_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="68" selection-end="68" vertical-scroll-proportion="0.09577465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/euflora_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="123" selection-start="152" selection-end="191" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin/specie_vs_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="114" selection-start="4139" selection-end="4139" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="108" selection-start="226" selection-end="247" vertical-scroll-proportion="-4.1538463">
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="89" selection-start="229" selection-end="229" vertical-scroll-proportion="-4.576923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_eu_list.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="131" selection-start="931" selection-end="931" vertical-scroll-proportion="-4.1538463">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/_specie_vs_list.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="158" selection-start="753" selection-end="753" vertical-scroll-proportion="-3.2692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/specie_vs/_edit_specie_vs.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="64" selection-start="339" selection-end="339" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/euflora/_edit_euflora.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="72" selection-start="348" selection-end="348" vertical-scroll-proportion="-0.038062282">
           <folding />
         </state>
       </provider>

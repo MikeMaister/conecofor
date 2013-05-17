@@ -13,6 +13,7 @@
           <tr>
             <td>
               <%= hidden_field_tag :id ,@specie_vs.at(i).id %>
+              <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :species, @specie_vs.at(i).species %>
             </td>
             <td>
@@ -20,7 +21,7 @@
             </td>
             <td>
               <%= submit_tag "Salva" %>
-              <%= button_to_remote "Annulla", :url => { :controller =>"admin/specie_vs",:action => "close_edit" } %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/specie_vs",:action => "close_edit",:page =>params[:page] } %>
             </td>
           </tr>
       <%else%>

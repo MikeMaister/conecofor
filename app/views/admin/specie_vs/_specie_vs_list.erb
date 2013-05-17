@@ -17,8 +17,8 @@
               <td><%= @specie_vs.at(i).species %> </td>
               <td><%= @specie_vs.at(i).listspe %></td>
               <td>
-                <%= button_to_remote "Modifica", :url => { :controller =>"admin/specie_vs",:action => "edit", :id =>@specie_vs.at(i).id, :i => i} %>
-                <%= button_to_remote "Elimina", :url => { :controller =>"admin/specie_vs",:action => "delete", :id =>@specie_vs.at(i).id}, :confirm => "Eliminando questa specie VS, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
+                <%= button_to_remote "Modifica", :url => { :controller =>"admin/specie_vs",:action => "edit", :id =>@specie_vs.at(i).id, :i => i,:page =>params[:page]} %>
+                <%= button_to_remote "Elimina", :url => { :controller =>"admin/specie_vs",:action => "delete", :id =>@specie_vs.at(i).id,:page =>params[:page]}, :confirm => "Eliminando questa specie VS, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
               </td>
             </tr>
         <% end %>
