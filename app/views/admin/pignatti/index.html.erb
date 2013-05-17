@@ -4,7 +4,9 @@
   <%= render :partial => "specie_list"%>
 </div>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/pignatti",:action => "new", :update => "new_specie"} %></p>
+<p><%= will_paginate @pignatti %></p>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/pignatti",:action => "new",:page =>params[:page], :update => "new_specie"} %></p>
 
 <div id="display_input_errors" style="display:none;">
 </div>

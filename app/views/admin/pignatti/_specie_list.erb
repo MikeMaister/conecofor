@@ -16,8 +16,8 @@
         <%= Euflora.find(@pignatti.at(i).euflora_id).descrizione unless @pignatti.at(i).euflora_id.blank? %>
       </td>
       <td>
-        <%= button_to_remote "Modifica", :url => { :controller =>"admin/pignatti",:action => "edit", :id =>@pignatti.at(i).id, :i => i} %>
-        <%= button_to_remote "Elimina", :url => { :controller =>"admin/pignatti",:action => "delete", :id =>@pignatti.at(i).id}, :confirm => "Eliminando questa specie, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
+        <%= button_to_remote "Modifica", :url => { :controller =>"admin/pignatti",:action => "edit", :id =>@pignatti.at(i).id, :i => i, :page =>params[:page]} %>
+        <%= button_to_remote "Elimina", :url => { :controller =>"admin/pignatti",:action => "delete", :id =>@pignatti.at(i).id, :page=>params[:page]}, :confirm => "Eliminando questa specie, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
       </td>
     </tr>
     <% end %>

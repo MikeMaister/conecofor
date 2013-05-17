@@ -6,7 +6,7 @@
 
 <p><%= will_paginate @euflora %></p>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/euflora",:action => "new", :update => "new_euflora"} %></p>
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/euflora",:action => "new",:page =>params[:page], :update => "new_euflora"} %></p>
 
 <div id="display_input_errors" style="display:none;">
 </div>

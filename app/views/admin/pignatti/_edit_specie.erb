@@ -13,12 +13,13 @@
           <tr>
             <td>
               <%= hidden_field_tag :id ,@pignatti.at(i).id %>
+              <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :descrizione, @pignatti.at(i).descrizione %>
             </td>
             <td><%= select_tag :euflora_id,"<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@euflora,:id,:descrizione,@pignatti.at(i).euflora_id) %></td>
             <td>
               <%= submit_tag "Salva" %>
-              <%= button_to_remote "Annulla", :url => { :controller =>"admin/pignatti",:action => "close_edit" } %>
+              <%= button_to_remote "Annulla", :url => { :controller =>"admin/pignatti",:action => "close_edit",:page =>params[:page] } %>
             </td>
           </tr>
       <%else%>
