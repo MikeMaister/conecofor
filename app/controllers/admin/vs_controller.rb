@@ -96,7 +96,7 @@ class Admin::VsController < ApplicationController
     #creo la directory
     dir = "#{RAILS_ROOT}/public/VS/"
     #imposto il nome del file
-    file_name = "vs#{anno}.xls"
+    file_name = "IM It#{anno}vs.xls"
     #imposto il full_path e la relative_path
     full_path = dir + file_name
     relative_path = "/VS/#{file_name}"
