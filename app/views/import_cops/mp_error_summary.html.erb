@@ -45,7 +45,7 @@
 <table>
   <tbody>
   <tr>
-    <th colspan="11">
+    <th>
       <%= @file.file_name %>
     </th>
   </tr>
@@ -57,6 +57,9 @@
         <td><%= @mp_gbe.at(i).error %></td>
       </tr>
   <% end %>
+  <tr>
+    <td><%= button_to "Forza dati", :controller => "import_cops", :action => "force_input" %></td>
+  </tr>
   </tbody>
 </table>
 

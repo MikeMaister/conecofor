@@ -148,6 +148,8 @@ class ApplicationController < ActionController::Base
     session[:row_error] = nil
     session[:file_error] = nil
     session[:sr_error] = nil
+    session[:mp_error] = nil
+    session[:mp_warning] = nil
   end
 
   #estrapolo il numero del plot dal nome del file

@@ -1,7 +1,11 @@
 class ImportCopsController < ApplicationController
+  include Cops_checks
 
   before_filter :campaign_active?, :only => "index"
   before_filter :only =>"beginning" do |controller| controller.delete_old_record_cache!("Cops") end
+  before_filter :compliance_error?, :only => "simple_range_check"
+  before_filter :simple_range_error?, :only => "multiple_parameter_check"
+  before_filter :multiple_parameter_error?, :only => "finish"
 
   def index
     @active_campaign = Campagne.find(:first, :conditions => ["active = true"])
@@ -123,25 +127,8 @@ class ImportCopsController < ApplicationController
         end
       end
     end
-    #a fine parsing dell'intero file controllo se c'è stato almeno un errore;
-    #se c'è stato
-    if session[:file_error]
-
-      #NOTA: [TO_DO]: DEVE DIVENTARE UNA COSA ATOMICA (collegata all'utente, o al file in sessione ad esempio),
-      #altrimenti si rischierebbe di cancellare record di altri utenti.(E' già parzialmente così)
-
-      #carico il file che sto analizzando
-      file = ImportFile.find(session[:file_id])
-      #cancello in cops tutti i record temporanei memorizzati (cancello la cache per gli altri check)
-      Cops.connection.execute("DELETE FROM cops WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
-
-      #faccio il redirect verso il riepilogo degli errori trovati
-      redirect_to :controller => "import_cops", :action => "comp_error_summary"
-    #se non c'è stato nessun errore
-    else
-      #proseguo con la procedura di import verso i simple range check
-      redirect_to :controller => "import_cops", :action => "simple_range_check"
-    end
+    #proseguo con la procedura di import verso i simple range check
+    redirect_to :controller => "import_cops", :action => "simple_range_check"
   end
 
   def simple_range_check
@@ -164,18 +151,8 @@ class ImportCopsController < ApplicationController
         #SR Check 1
         data_range(rows.at(i))
       end
-      #se non c'è stato nemmeno un errore
-      #proseguo con i multiplerange, altrimenti
-      #visualizzo la schermata riassuntiva,
-      #con possibilità di forzare i dati errati,
-      #che si possono forzare.
-      if session[:sr_error] == false && session[:sr_warning] == false
-        #proseguo con i tipi di check successivi
-        redirect_to :controller => "import_cops", :action => "multiple_parameter_check"
-      else
-        flash[:error]="Controlla il report."
-        redirect_to :controller => "import_cops", :action => "sr_error_summary"
-      end
+      #proseguo con i tipi di check successivi
+      redirect_to :controller => "import_cops", :action => "multiple_parameter_check"
     end
   end
 
@@ -187,7 +164,8 @@ class ImportCopsController < ApplicationController
     #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
     rows = Cops.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
     #setto gli errori mp a 0
-    session[:mp_error] =  false
+    session[:mp_error] = false
+    session[:mp_warning] = false
     #scorro i record da controllare
     for i in (0..rows.size-1)
       #MP check 1
@@ -197,18 +175,22 @@ class ImportCopsController < ApplicationController
     #MP check 2
     all_subplot?
     #se non si è verificato nessun errore
-    if session[:mp_error] == false
+    #if session[:mp_error] == false
       #levo il flag di record temporaneo a tutti i record relativi a quest'import
-      for i in 0..rows.size-1
-        rows.at(i).permanent!
-      end
-      flash[:notice]="Complimenti nessun errore"
-      redirect_to :controller => "import_cops"
+      #for i in 0..rows.size-1
+        #rows.at(i).permanent!
+      #end
+      #flash[:notice]="Complimenti nessun errore"
+      #redirect_to :controller => "import_cops"
     #se si è verificato almeno 1 errore mostro il riepilogo degli errori
-    elsif session[:mp_error] == true
-      flash[:error]="Controlla il report."
-      redirect_to :controller => "import_cops", :action => "mp_error_summary"
-    end
+    #elsif session[:mp_error] == true
+      #flash[:error]="Controlla il report."
+      #redirect_to :controller => "import_cops", :action => "mp_error_summary"
+    #end
+    redirect_to :action => "finish"
+  end
+
+  def finish
   end
 
   def mp_error_summary
@@ -236,6 +218,19 @@ class ImportCopsController < ApplicationController
     #cioè tutti gli errori che corrispondono al numero di volte che è stato importato il file
     #ogni import ha i suoi errori, in base alla variabile import_num
     @comp_err = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Compliance' ",session[:file_id],@file.import_num])
+  end
+
+  def force_input
+    #carico il file
+    @file = ImportFile.find(session[:file_id])
+    #carico gli errori globali
+    @mp_gbe = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Global Error' ",session[:file_id],@file.import_num])
+    @mp_gbe.each do |gbe|
+      gbe.force_it!
+    end
+    session[:mp_warning]= false
+    flash[:notice] = "Procedura terminata. Warning Forzati."
+    redirect_to :action => "finish"
   end
 
   private
@@ -290,7 +285,7 @@ class ImportCopsController < ApplicationController
     #compilo l'errore globale
     gb_e.global_error_fill_and_save(error,file)
     #segnalo che c'è stato un errore
-    session[:mp_error] = true
+    session[:mp_warning] = true
   end
 
   def multiple_parameter_error(record,error)
@@ -669,6 +664,49 @@ class ImportCopsController < ApplicationController
       session[:row_error] = true
       #e segnalo l'errore sul file
       session[:file_error] = true
+    end
+  end
+
+  def compliance_error?
+    #controllo se si è verificato un errore di tipo compliance
+    if session[:file_error]
+      #carico il file che sto analizzando
+      file = ImportFile.find(session[:file_id])
+      #cancello in cops tutti i record temporanei memorizzati (cancello la cache per gli altri check)
+      Cops.connection.execute("DELETE FROM cops WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
+      #faccio il redirect verso il riepilogo degli errori trovati
+      redirect_to :controller => "import_cops", :action => "comp_error_summary"
+      #se non c'è stato nessun errore
+    end
+  end
+
+  def simple_range_error?
+   #controllo se si sono verificati errori simple range
+    if session[:sr_error] == true
+      #faccio il redirect verso il riepilogo errori
+      flash[:error]= "Controlla il report."
+      redirect_to :controller => "import_cops", :action => "sr_error_summary"
+    end
+  end
+
+  def multiple_parameter_error?
+    #carico la campagna attiva
+    open_camp = Campagne.find(:first,:conditions => ["active = true"])
+    #carico il file che sto analizzando
+    file = ImportFile.find(session[:file_id])
+    #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
+    rows = Cops.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
+    #se non si è verificato nessun errore
+    if session[:mp_error] == false && session[:mp_warning] == false
+      #levo il flag di record temporaneo a tutti i record relativi a quest'import
+      for i in 0..rows.size-1
+        rows.at(i).permanent!
+      end
+      flash[:notice]= "Complimenti nessun errore"
+      #se si è verificato almeno 1 errore mostro il riepilogo degli errori
+    elsif session[:mp_error] == true || session[:mp_warning] == true
+      flash[:error]= "Controlla il report."
+      redirect_to :controller => "import_cops", :action => "mp_error_summary"
     end
   end
 
