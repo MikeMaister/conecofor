@@ -55,6 +55,7 @@ class ImportCoplController < ApplicationController
 
   def import
 
+    #rimuovere le gemme da qua
     require 'rubygems'
     gem 'ruby-ole','1.2.11.4'
     require 'spreadsheet'

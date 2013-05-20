@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb" description="&lt;p&gt;" line="65" />
+    <bookmark url="file://$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb" description="&lt;p&gt;" line="67" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b6495b3-0a4a-4e95-89cb-5ed7d9916ff1" name="Default" comment="" />
@@ -29,7 +29,7 @@
       <file leaf-file-name="import_cops_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/import_cops_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="258" column="2" selection-start="11105" selection-end="11105" vertical-scroll-proportion="0.72357726">
+            <state line="251" column="7" selection-start="11200" selection-end="11200" vertical-scroll-proportion="5.284553">
               <folding />
             </state>
           </provider>
@@ -38,8 +38,20 @@
       <file leaf-file-name="cops_checks.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/cops_checks.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="2" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="2" column="46" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#149#2323#0" expanded="false" />
+                <element signature="e#2362#5537#0" expanded="false" />
+                <element signature="e#5576#7744#0" expanded="false" />
+                <element signature="e#7777#8862#0" expanded="false" />
+                <element signature="e#8911#9574#0" expanded="false" />
+                <element signature="e#9623#10661#0" expanded="false" />
+                <element signature="e#10727#11254#0" expanded="false" />
+                <element signature="e#11295#12845#0" expanded="false" />
+                <element signature="e#12956#13297#0" expanded="false" />
+                <element signature="e#13358#14034#0" expanded="false" />
+                <element signature="e#14094#15101#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,7 +59,7 @@
       <file leaf-file-name="mp_error_summary.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="89" selection-start="1504" selection-end="1504" vertical-scroll-proportion="-11.961538">
+            <state line="66" column="0" selection-start="1563" selection-end="1563" vertical-scroll-proportion="-43.153847">
               <folding />
             </state>
           </provider>
@@ -78,8 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/specie_vs.rb" />
-        <option value="$PROJECT_DIR$/app/views/home/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/listspe/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/listspe/_new_listspe_form.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/listspe/_input_errors.erb" />
@@ -89,10 +99,12 @@
         <option value="$PROJECT_DIR$/app/controllers/admin/specie_vs_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/listspe.rb" />
         <option value="$PROJECT_DIR$/app/views/import_cops/finish.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb" />
         <option value="$PROJECT_DIR$/app/models/error_cops.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/lib/cops_checks.rb" />
+        <option value="$PROJECT_DIR$/config/environment.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/import_copl_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/import_cops_controller.rb" />
       </list>
     </option>
@@ -873,18 +885,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3305921" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3305921" sideWeight="0.4969697" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.67105263" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47878787" sideWeight="0.6694079" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31414473" sideWeight="0.5068182" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3305921" sideWeight="0.49772727" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32072368" sideWeight="0.4878788" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -949,13 +961,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin/vs_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.8985074">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/euflora_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.2985916">
@@ -1012,27 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/import_copl_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="366" selection-end="366" vertical-scroll-proportion="0.3323782">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="89" selection-start="1504" selection-end="1504" vertical-scroll-proportion="-11.961538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/error_cops.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="13" selection-start="2260" selection-end="2260" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="5" selection-start="2015" selection-end="2015" vertical-scroll-proportion="1.8997135">
@@ -1047,16 +1031,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/import_copl_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="30" selection-start="2291" selection-end="2291" vertical-scroll-proportion="0.38968483">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="76" selection-start="525" selection-end="525" vertical-scroll-proportion="0.38968483">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/error_cops.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="13" selection-start="2260" selection-end="2260" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/import_cops/mp_error_summary.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="0" selection-start="1563" selection-end="1563" vertical-scroll-proportion="-43.153847">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/cops_checks.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="2" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="2" column="46" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#149#2323#0" expanded="false" />
+            <element signature="e#2362#5537#0" expanded="false" />
+            <element signature="e#5576#7744#0" expanded="false" />
+            <element signature="e#7777#8862#0" expanded="false" />
+            <element signature="e#8911#9574#0" expanded="false" />
+            <element signature="e#9623#10661#0" expanded="false" />
+            <element signature="e#10727#11254#0" expanded="false" />
+            <element signature="e#11295#12845#0" expanded="false" />
+            <element signature="e#12956#13297#0" expanded="false" />
+            <element signature="e#13358#14034#0" expanded="false" />
+            <element signature="e#14094#15101#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/import_cops_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="258" column="2" selection-start="11105" selection-end="11105" vertical-scroll-proportion="0.72357726">
+        <state line="251" column="7" selection-start="11200" selection-end="11200" vertical-scroll-proportion="5.284553">
           <folding />
         </state>
       </provider>

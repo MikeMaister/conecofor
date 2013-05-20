@@ -11,6 +11,10 @@ Rails::Initializer.run do |config|
   #gemma che permette la paginazione
   config.gem 'will_paginate', :version => '~> 2.3.16'
 
+  #gemme che permettono la lettura e la scrittura di file .xls, .ods, ecc...
+  config.gem 'ruby-ole', :version =>'1.2.11.4'
+  config.gem 'spreadsheet'
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

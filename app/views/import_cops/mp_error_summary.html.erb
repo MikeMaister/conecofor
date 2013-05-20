@@ -41,6 +41,7 @@
   </tbody>
 </table>
 
+<% unless @mp_gbe.blank? %>
 <h2>Global Errors</h2>
 <table>
   <tbody>
@@ -62,6 +63,7 @@
   </tr>
   </tbody>
 </table>
+<% end %>
 
 <p>
   <%= button_to_function("Print this Page", "javascript:print()") %>
