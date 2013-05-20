@@ -1,0 +1,31 @@
+
+
+<% if !@listspe.blank? %>
+
+    <p><%= @message if @message %></p>
+    <table>
+      <thead>
+      <tr>
+        <th>Listspe</th>
+        <th>Opzioni</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@listspe.size-1 %>
+          <tr>
+            <td><%= @listspe.at(i).listspe%> </td>
+            <td>
+              <%= button_to_remote "Modifica", :url => { :controller =>"admin/listspe",:action => "edit", :id =>@listspe.at(i).id, :i => i} %>
+              <%= button_to_remote "Elimina", :url => { :controller =>"admin/listspe",:action => "delete", :id =>@listspe.at(i).id}, :confirm => "Eliminando questa listspe, eliminerai anche tutti i dati ad essa collegati. Procedere?" %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+<% else %>
+
+    <p>Nessun plot presente</p>
+
+<% end %>

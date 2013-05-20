@@ -17,7 +17,7 @@
               <%= text_field_tag :species, @specie_vs.at(i).species %>
             </td>
             <td>
-              <%= select_tag :listspe, options_for_select({"- Seleziona -" =>"", "B4" => "B4", "L2"=>"L2", "M2" => "M2"},@specie_vs.at(i).listspe) %>
+              <%= select_tag :listspe_id,"<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@listspe,:id,:listspe,@specie_vs.at(i).listspe_id) %>
             </td>
             <td>
               <%= submit_tag "Salva" %>

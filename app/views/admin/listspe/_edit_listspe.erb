@@ -1,0 +1,33 @@
+<% form_remote_tag :url => { :controller => "admin/listspe", :action => "save_edit", :update => "listsoe_list"} do %>
+    <table>
+      <thead>
+      <tr>
+        <th>Listspe</th>
+        <th>Opzioni</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for i in 0..@listspe.size-1 %>
+          <% if i.to_i == @i.to_i  %>
+              <tr>
+                <td>
+                  <%= hidden_field_tag :id ,@listspe.at(i).id %>
+                  <%= text_field_tag :listspe,@listspe.at(i).listspe %>
+                </td>
+                <td>
+                  <%= submit_tag "Salva" %>
+                  <%= button_to_remote "Annulla", :url => { :controller =>"admin/listspe",:action => "close_edit" } %>
+                </td>
+              </tr>
+          <%else%>
+              <tr>
+                <td>
+                  <%= @listspe.at(i).listspe %>
+                </td>
+                <td></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

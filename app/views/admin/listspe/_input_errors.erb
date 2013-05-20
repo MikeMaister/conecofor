@@ -1,0 +1,7 @@
+<% if @new_listspe.errors.any? %>
+    <ul>
+    <% @new_listspe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>

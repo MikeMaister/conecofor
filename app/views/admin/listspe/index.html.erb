@@ -1,0 +1,14 @@
+<h1>Admin::Listspe</h1>
+<div id="listspe_list">
+  <%= render :partial => "listspe_list"%>
+</div>
+
+<p> <%= button_to_remote "+", :url => { :controller =>"admin/listspe",:action => "new", :update => "new_listspe"} %></p>
+
+
+<div id="display_input_errors" style="display:none;">
+</div>
+
+<div id="new_listspe" style="display:none;">
+
+</div>

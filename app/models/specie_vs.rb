@@ -1,8 +1,10 @@
 class SpecieVs < ActiveRecord::Base
   set_table_name "specie_vs"
 
-  validates_presence_of :species,:listspe ,:message => "non può essere vuoto."
-  validates_length_of :species,:listspe,:maximum => 200,:message => "massimo 200 caratteri."
+  #è per la ridondanza
+  before_save :set_listspe
+  validates_presence_of :species,:listspe_id ,:message => "non può essere vuoto."
+  validates_length_of :species,:maximum => 200,:message => "massimo 200 caratteri."
   validate :no_dup
 
   def no_dup
@@ -23,9 +25,9 @@ class SpecieVs < ActiveRecord::Base
     return "" + self.listspe + " - " + self.species
   end
 
-  def update_specie_vs(spe,listspe)
+  def update_specie_vs(spe,listspe_id)
     self.species = spe
-    self.listspe = listspe
+    self.listspe_id = listspe_id
     return true if self.save
   end
 
@@ -35,7 +37,13 @@ class SpecieVs < ActiveRecord::Base
     self.save
   end
 
+
+
   private
+
+  def set_listspe
+    self.listspe = Listspe.find(listspe_id).listspe
+  end
 
   def delete_dependencies(id)
     #sganciare anche quelle eliminate

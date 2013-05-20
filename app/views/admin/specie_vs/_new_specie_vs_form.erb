@@ -6,7 +6,7 @@
     </p>
     <p>
       <%= f.label "Listspe" %><br/>
-      <%= f.select :listspe, "<option value ="">-Seleziona-</option><option>B4</option><option>L2</option><option>M2</option>".html_safe %>
+      <%= f.select :listspe_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@listspe,:id,:listspe) %>
     </p>
     <p>
       <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/specie_vs",:action => "close_new_specie_vs"} %>
