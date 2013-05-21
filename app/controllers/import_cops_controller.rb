@@ -116,6 +116,8 @@ class ImportCopsController < ApplicationController
         end
       end
     end
+    #chiudo il file (controlla il file spreadsheet.rb in External Libraries,Spreadsheet,lib)
+    doc.io.close
     #controllo se ci sono errori di tipo compliance
     redirect_to :action => "compliance_error?"
   end
