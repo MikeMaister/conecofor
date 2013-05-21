@@ -69,4 +69,9 @@ class ErrorCopl < ActiveRecord::Base
     self.save
   end
 
+  def force_it!
+    self.forced = true
+    self.save
+  end
+
 end

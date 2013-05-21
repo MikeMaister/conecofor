@@ -51,24 +51,29 @@
   </tbody>
 </table>
 
-<h2>Global Errors</h2>
-<table>
-  <tbody>
-  <tr>
-    <th colspan="11">
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Error</th>
-  </tr>
-  <% for i in 0..@mp_gbe.size-1%>
+<% unless @mp_gbe.blank? %>
+    <h2>Global Errors</h2>
+    <table>
+      <tbody>
       <tr>
-        <td><%= @mp_gbe.at(i).error %></td>
+        <th>
+          <%= @file.file_name %>
+        </th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      <tr>
+        <th>Error</th>
+      </tr>
+      <% for i in 0..@mp_gbe.size-1%>
+          <tr>
+            <td><%= @mp_gbe.at(i).error %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <td><%= button_to "Forza dati", :controller => "import_copl", :action => "force_input" %></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
 
 <p>
   <%= button_to_function("Print this Page", "javascript:print()") %>
