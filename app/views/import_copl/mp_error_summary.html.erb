@@ -69,7 +69,11 @@
           </tr>
       <% end %>
       <tr>
-        <td><%= button_to "Forza dati", :controller => "import_copl", :action => "force_input" %></td>
+        <td>
+          <% if session[:mp_error] == false && session[:mp_warning] == true  %>
+            <%= button_to "Forza dati", :action => "force_input" %>
+          <% end %>
+        </td>
       </tr>
       </tbody>
     </table>
