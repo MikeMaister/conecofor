@@ -32,7 +32,7 @@ class ImportCopsController < ApplicationController
       when 3 #MULTIPLE PARAMETER
         #faccio il redirect verso il riepilogo errori
         flash[:error]= "Controlla il report."
-        redirect_to :controller => "import_cops", :action => "mp_error_summary"
+        redirect_to :action => "mp_error_summary"
       when 10
         flash[:error] = "Il file non contiene nessun dato."
         redirect_to :controller => "import_cops"
