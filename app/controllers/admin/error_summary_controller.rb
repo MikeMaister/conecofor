@@ -67,7 +67,7 @@ class Admin::ErrorSummaryController < ApplicationController
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
 
-      when "Legnose"
+      when "Leg"
         @comp = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Compliance'",file_id])
         @sre = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Simplerange'",file_id])
         @mpe = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Multipleparameter'",file_id])
@@ -84,7 +84,7 @@ class Admin::ErrorSummaryController < ApplicationController
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
 
-      when "Erbacee"
+      when "Erb"
         @comp = ErrorErbacee.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Compliance'",file_id])
         @sre = ErrorErbacee.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Simplerange'",file_id])
         @mpe = ErrorErbacee.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Multipleparameter'",file_id])
