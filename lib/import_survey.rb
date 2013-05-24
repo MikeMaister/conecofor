@@ -137,7 +137,6 @@ module Import_survey
     session[:file_id] = new_file.id
   end
 
-  #[TO_DO]: riadattare a tutte le survey
   #serve se ci sono Simple Range Error
   #cancella i vecchi record provenienti da import incompleti
   def delete_old_record_cache!
@@ -145,7 +144,7 @@ module Import_survey
     active_campaign = Campagne.find(:first, :conditions => ["active = true"])
     file = ImportFile.find(:first,:conditions => ["campagne_id = ? AND survey_kind = ? ",active_campaign.id,survey.capitalize])
     case survey
-      when "Legnose"
+      when "leg"
         if file
           #cancello tutti i record relativi ai vecchi import [NON I RECORD APPROVATI]
           Legnose.connection.execute("DELETE FROM legnose WHERE file_name_id = #{file.id} AND import_num < #{file.import_num} AND approved = false")
@@ -168,7 +167,6 @@ module Import_survey
     end
   end
 
-  #[TO_do]:fare per tutte le survey
   def delete_temp_compliance!(survey)
     #carico il file che sto analizzando
     file = ImportFile.find(session[:file_id])
@@ -182,10 +180,12 @@ module Import_survey
       when "erb"
         #cancello in legnose tutti i record temporanei memorizzati (cancello la cache per gli altri check)
         Erbacee.connection.execute("DELETE FROM erbacee WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
+      when "leg"
+        #cancello in legnose tutti i record temporanei memorizzati (cancello la cache per gli altri check)
+        Legnose.connection.execute("DELETE FROM legnose WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
     end
   end
 
-  #[TO_DO]:fare per tutte le survey
   def set_permanent_data!(survey)
     #carico la campagna attiva
     open_camp = Campagne.find(:first,:conditions => ["active = true"])
@@ -201,6 +201,9 @@ module Import_survey
       when "erb"
         #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
         rows = Erbacee.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
+      when "leg"
+        #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
+        rows = Legnose.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
     end
     #levo il flag di record temporaneo a tutti i record relativi a quest'import
     for i in 0..rows.size-1

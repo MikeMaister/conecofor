@@ -1,65 +1,101 @@
 class ImportLegnoseController < ApplicationController
-  include Legn_checks
+  include Legn_checks,Import_survey
 
-  before_filter :only =>"beginning" do |controller| controller.delete_old_record_cache!("Legnose") end
   before_filter :campaign_active?, :only => "index"
+  before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,
+                 :set_file,:delete_old_record_cache!],
+                :only => "import_procedure"
 
   def index
     @active_campaign = Campagne.find(:first, :conditions => ["active = true"])
   end
 
-  def beginning
-    #azzero tutte le variabili di sessione
-    session_reset!
-    #se non tutti i campi sono stati compilati
-    if params[:upload].blank?
-      #avviso
-      flash[:error] = "Riempi tutti i campi prima di proseguire."
-      redirect_to :controller => "import_legnose"
-      #se il file non ha estenzione valida o è di un altro tipo di rilevamento
-    elsif !valid_file_kind?(params[:upload],"leg")
-      flash[:error] = "Tipo di file non valido."
-      redirect_to :controller => "import_legnose"
-    else
-      #rintraccio la campagna aperta
-      @open_camp = Campagne.find(:first, :conditions => ["active = true"])
-      #se non c'è nessuna campagna aperta
-      if @open_camp.blank?
-        flash[:error] = "Nessuna campagna è disponibile per l'import."
+  def import_procedure
+    result = compliance_check
+    result = simple_range_check if result == 0
+    result = multiple_parameter_check if result == 0
+    #reindirizzo in base al risultato della procedura
+    case result
+      when 0
+        set_permanent_data!("leg")
+        flash[:notice] = "Complimenti nessun errore."
+        redirect_to :action => "finish"
+      when 1  #COMPLIANCE
+        delete_temp_compliance!("leg")
+        #faccio il redirect verso il riepilogo degli errori trovati
+        flash[:error] = "Controlla il report."
+        redirect_to :action => "comp_error_summary"
+      when 2 #SIMPLE RANGE
+        #faccio il redirect verso il riepilogo errori
+        flash[:error]= " Controlla il report."
+        redirect_to :action => "sr_error_summary"
+      when 3 #MULTIPLE PARAMETER
+        #faccio il redirect verso il riepilogo errori
+        flash[:error]= "Controlla il report."
+        redirect_to :action => "mp_error_summary"
+      when 10
+        flash[:error] = "Il file non contiene nessun dato."
         redirect_to :controller => "import_legnose"
-      else
-        #se il nome del file non corrisponde alla campagna aperta
-        if @open_camp.inizio.year != year_from_file_name(params[:upload])
-          #lancio l'errore
-          flash[:error] = "Il nome del file non corrisponde con la campagna aperta."
-          redirect_to :controller => "import_legnose"
-        else
-
-          #carico la maschera d'obbligatorietà nella sessione
-          session[:mask_name] = MandatoryMask.find(MandatoryMaskAssociation.find(:first,:conditions => ["campagna_id = ?",@open_camp.id]).mandatory_mask_id).mask_name
-
-          #se il file è già stato importato
-          if imported_file?(params[:upload],@open_camp)
-            #lo aggiorno
-            update_file!(params[:upload],@open_camp,"Legnose")
-            #se il file non è già stato importato
-          else
-            #upload del file + traccia nel db
-            upload_save_file!(params[:upload],@open_camp,"Legnose")
-          end
-          #proseguo con l'import del file
-          redirect_to :controller => "import_legnose" , :action => "import"
-        end
-      end
     end
   end
 
-  def import
+  #riassunto errori derivari dai check compliance
+  def comp_error_summary
+    #carico il file
+    @file = ImportFile.find(session[:file_id])
+    #carico tutti gli errori compliance determinati da questa sessione
+    #cioè tutti gli errori che corrispondono al numero di volte che è stato importato il file
+    #ogni import ha i suoi errori, in base alla variabile import_num
+    @comp_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Compliance' ",session[:file_id],@file.import_num])
+  end
 
-    require 'rubygems'
-    gem 'ruby-ole','1.2.11.4'
-    require 'spreadsheet'
+  def sr_error_summary
+    #carico il file
+    @file = ImportFile.find(session[:file_id])
+    #carico gli errori
+    @sr_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Simplerange' ",session[:file_id],@file.import_num])
+  end
 
+  def mp_error_summary
+    #carico il file
+    @file = ImportFile.find(session[:file_id])
+    #carico gli errori
+    @mp_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Multipleparameter' ",session[:file_id],@file.import_num])
+    #carico gli errori globali
+    @mp_gbe = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Global Error' ",session[:file_id],@file.import_num])
+
+  end
+
+  def force_input
+    if session[:mp_error] == false
+      #carico il file
+      @file = ImportFile.find(session[:file_id])
+      #carico gli errori globali
+      @mp_gbe = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Global Error' ",session[:file_id],@file.import_num])
+      @mp_gbe.each do |gbe|
+        gbe.force_it!
+      end
+      set_permanent_data!("leg")
+      flash[:notice] = "Warning Forzati."
+      redirect_to :action => "finish"
+    else
+      flash[:error] = "Qualcosa è andato storto, riprova."
+      redirect_to :controller => "import_legnose"
+    end
+  end
+
+  def finish
+    if session[:file_id].blank?
+      redirect_to :controller => "import_legnose"
+    else
+      @file = ImportFile.find(session[:file_id])
+      session_reset!
+    end
+  end
+
+  private
+
+  def compliance_check
     #rintraccio il file da importare
     file_to_import = ImportFile.find(session[:file_id])
     #imposto la codifica dei caratteri
@@ -121,37 +157,22 @@ class ImportLegnoseController < ApplicationController
         end
       end
     end
-    #a fine parsing dell'intero file controllo se c'è stato almeno un errore;
-    #se c'è stato
-    if session[:file_error]
-
-      #NOTA: [TO_DO]: DEVE DIVENTARE UNA COSA ATOMICA (collegata all'utente, o al file in sessione ad esempio),
-      #altrimenti si rischierebbe di cancellare record di altri utenti.(E' già parzialmente così)
-
-      #carico il file che sto analizzando
-      file = ImportFile.find(session[:file_id])
-      #cancello in legnose tutti i record temporanei memorizzati (cancello la cache per gli altri check)
-      Legnose.connection.execute("DELETE FROM legnose WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
-
-      #faccio il redirect verso il riepilogo degli errori trovati
-      redirect_to :controller => "import_legnose", :action => "comp_error_summary"
-      #se non c'è stato nessun errore
-    else
-      #proseguo con la procedura di import verso i simple range check
-      redirect_to :controller => "import_legnose", :action => "simple_range_check"
+    #chiudo il file (controlla il file spreadsheet.rb in External Libraries,Spreadsheet,lib)
+    doc.io.close
+    #ritorno 1 se ci sono stati errori di tipo compliance
+    if session[:file_error] == true
+      result = 1
+      #0 altrimenti
+    elsif session[:file_error] == false
+      result = 0
     end
+    return result
   end
 
-  #riassunto errori derivari dai check compliance
-  def comp_error_summary
-    #carico il file
-    @file = ImportFile.find(session[:file_id])
-    #carico tutti gli errori compliance determinati da questa sessione
-    #cioè tutti gli errori che corrispondono al numero di volte che è stato importato il file
-    #ogni import ha i suoi errori, in base alla variabile import_num
-    @comp_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Compliance' ",session[:file_id],@file.import_num])
+  def save_error(record,error,row)
+    @error = ErrorLegnose.new
+    @error.fill_and_save_from_file(record,"Compliance",error,row,session[:file_id])
   end
-
 
   def simple_range_check
     #carico il file che sto analizzando
@@ -160,9 +181,7 @@ class ImportLegnoseController < ApplicationController
     rows = Legnose.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ?",session[:file_id],file.import_num])
     #se non ci sono record da controllare
     if rows.blank?
-      #non va bene, avverto
-      flash[:error] = "Il file è vuoto"
-      redirect_to :controller => "import_legnose"
+      result = 10
       #altrimenti effettuo i check
     else
       #setto errori e warning a 0
@@ -174,22 +193,23 @@ class ImportLegnoseController < ApplicationController
         #applico i src
         do_src_on_rows(rows.at(i),file.campagne_id)
       end
-      #se non c'è stato nemmeno un errore, proseguo con i multiplerange, altrimenti, visualizzo la schermata riassuntiva
-      if session[:sr_error] == false
-        #proseguo con i tipi di check successivi
-        redirect_to :controller => "import_legnose", :action => "multiple_parameter_check"
-      else
-        flash[:error]="Controlla il report."
-        redirect_to :controller => "import_legnose", :action => "sr_error_summary"
+      #controllo se ci sono errori simple range
+      if session[:sr_error] == true
+        result = 2
+      elsif session[:sr_error] == false
+        result = 0
       end
     end
+    return result
   end
 
-  def sr_error_summary
-    #carico il file
-    @file = ImportFile.find(session[:file_id])
-    #carico gli errori
-    @sr_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Simplerange' ",session[:file_id],@file.import_num])
+  def simple_range_error(record,error)
+    #creo un nuovo errore
+    @sr_error = ErrorLegnose.new
+    #compilo l'errore
+    @sr_error.fill_and_save_from_db(record,"Simplerange",error,session[:file_id])
+    #segnalo che c'è stato un errore
+    session[:sr_error] = true
   end
 
   def multiple_parameter_check
@@ -201,6 +221,7 @@ class ImportLegnoseController < ApplicationController
     rows = Legnose.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
     #setto gli errori mp a 0
     session[:mp_error] =  false
+    session[:mp_warning] = false
     #MP CHECK N.1
     all_subplot_100?
     #check su ogni record
@@ -208,7 +229,7 @@ class ImportLegnoseController < ApplicationController
       #MP CHECK N.2
       rad1_not_null(rows.at(i))
       #MP CHECK N.3
-      rad2_not_null(rows.at(i))
+      #rad2_not_null(rows.at(i))
       #MP CHECK N.4
       altezza_not_null(rows.at(i))
       #MP CHECK N.5
@@ -216,33 +237,14 @@ class ImportLegnoseController < ApplicationController
       #MP CHECK N.6
       cop0(rows.at(i))
     end
-
-    #se non si è verificato nessun errore
-    if session[:mp_error] == false
-      #levo il flag di record temporaneo a tutti i record relativi a quest'import
-      for i in 0..rows.size-1
-        rows.at(i).permanent!
-      end
-      flash[:notice]="Complimenti nessun errore"
-      redirect_to :controller => "import_legnose"
-      #se si è verificato almeno 1 errore mostro il riepilogo degli errori
-    elsif session[:mp_error] == true
-      flash[:error]="Controlla il report."
-      redirect_to :controller => "import_legnose", :action => "mp_error_summary"
+    #controllo se ci sono stati errori
+    if session[:mp_error] == true || session[:mp_warning] == true
+      result = 3
+    elsif session[:mp_error] == false && session[:mp_warning] == false
+      result = 0
     end
+    return result
   end
-
-  def mp_error_summary
-    #carico il file
-    @file = ImportFile.find(session[:file_id])
-    #carico gli errori
-    @mp_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Multipleparameter' ",session[:file_id],@file.import_num])
-    #carico gli errori globali
-    @mp_gbe = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Global Error' ",session[:file_id],@file.import_num])
-
-  end
-
-  private
 
   def multiple_parameter_error(record,error)
     #creo un nuovo errore
@@ -260,24 +262,6 @@ class ImportLegnoseController < ApplicationController
     #compilo l'errore globale
     gb_e.global_error_fill_and_save(error,file)
     #segnalo che c'è stato un errore
-    session[:mp_error] = true
+    session[:mp_warning] = true
   end
-
-
-
-  def simple_range_error(record,error)
-    #creo un nuovo errore
-    @sr_error = ErrorLegnose.new
-    #compilo l'errore
-    @sr_error.fill_and_save_from_db(record,"Simplerange",error,session[:file_id])
-    #segnalo che c'è stato un errore
-    session[:sr_error] = true
-  end
-
-  def save_error(record,error,row)
-    @error = ErrorLegnose.new
-    @error.fill_and_save_from_file(record,"Compliance",error,row,session[:file_id])
-  end
-
-
 end
