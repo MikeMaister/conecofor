@@ -160,7 +160,7 @@ module Import_survey
           #cancello tutti i record relativi ai vecchi import [NON I RECORD APPROVATI]
           Copl.connection.execute("DELETE FROM copl WHERE file_name_id = #{file.id} AND import_num < #{file.import_num} AND approved = false")
         end
-      when "Erbacee"
+      when "erb"
         if file
           #cancello tutti i record relativi ai vecchi import [NON I RECORD APPROVATI]
           Erbacee.connection.execute("DELETE FROM erbacee WHERE file_name_id = #{file.id} AND import_num < #{file.import_num} AND approved = false")
@@ -179,7 +179,9 @@ module Import_survey
       when "copl"
         #cancello in cops tutti i record temporanei memorizzati (cancello la cache per gli altri check)
         Copl.connection.execute("DELETE FROM copl WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
-
+      when "erb"
+        #cancello in legnose tutti i record temporanei memorizzati (cancello la cache per gli altri check)
+        Erbacee.connection.execute("DELETE FROM erbacee WHERE temp = true AND file_name_id = #{session[:file_id]} AND import_num = #{file.import_num}")
     end
   end
 
@@ -196,6 +198,9 @@ module Import_survey
       when "copl"
         #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
         rows = Copl.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
+      when "erb"
+        #carico tutti i record temporanei del file attuale(cosiderando le volte che è stato importato) su cui effettuare i check
+        rows = Erbacee.find(:all, :conditions => ["temp = true AND file_name_id = ? AND import_num = ? AND campagne_id = ?",session[:file_id],file.import_num,open_camp.id])
     end
     #levo il flag di record temporaneo a tutti i record relativi a quest'import
     for i in 0..rows.size-1

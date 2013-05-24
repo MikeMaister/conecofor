@@ -6,9 +6,10 @@
     <p><strong>Inizio:</strong> <%= @active_campaign.inizio %> <strong>Fine:</strong> <%= @active_campaign.fine %></p>
 <% end %>
 <p>Seleziona il file Legnose da importare:</p>
-<% form_tag({:controller=>'import_erbacee', :action => 'beginning'},:multipart => true) do %>
+<% form_tag({:controller=>'import_erbacee', :action => 'import_procedure'},:multipart => true) do %>
     <p>
       <%= file_field 'upload', 'datafile' %>
+      <%= hidden_field_tag :survey, "erb" %>
     </p>
     <p>
       <%= submit_tag 'Carica' %>
