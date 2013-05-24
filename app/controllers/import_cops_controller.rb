@@ -84,8 +84,12 @@ class ImportCopsController < ApplicationController
   end
 
   def finish
-    @file = ImportFile.find(session[:file_id])
-    session_reset!
+    if session[:file_id].blank?
+      redirect_to :controller => "import_cops"
+    else
+      @file = ImportFile.find(session[:file_id])
+      session_reset!
+    end
   end
 
   private
