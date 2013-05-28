@@ -2,14 +2,24 @@
     Survey:<%= @survey %> <br>
     Field:<%= @field %><br>
     Plot:<%= @plot %><br>
-    Anno:<%= @anno %>
+    Anno:<%= @anno %><br>
+    In/Out:<%= @inout%><br>
+    Pri/Est:<%= @priest%><br>
+    Cod Strato:<%= @cod_strato%><br>
+    Specie:<%= @specie%><br>
+
 </p>
+
+<% unless @stats.blank? %>
 <p>
-    Max:<%= @stats.max %><br>
-    MIN:<%= @stats.min %><br>
-    MED:<%= @stats.med %><br>
-    STD:<%= @stats.std %><br>
-    STE:<%= @stats.ste %><br>
-    COV:<%= @stats.cov %><br>
-    N:<%= @stats.n %>
+  Max:<%= @stats.max %><br>
+  MIN:<%= @stats.min %><br>
+  MED:<%= @stats.med %><br>
+  STD:<%= @stats.std %><br>
+  STE:<%= @stats.ste %><br>
+  COV:<%= @stats.cov %><br>
+  N:<%= @stats.n %><br>
+  NOTE:<%= @stats.note %>
 </p>
+<% end %>
+
