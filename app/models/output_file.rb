@@ -10,4 +10,12 @@ class OutputFile < ActiveRecord::Base
     self.save
   end
 
+  def fill(file_name,complete_path,relative_path,file_type)
+    self.file_name = file_name
+    self.path = complete_path
+    self.relative_path = relative_path
+    self.file_type = file_type
+    self.created_at = Time.now
+  end
+
 end
