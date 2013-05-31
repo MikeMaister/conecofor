@@ -1,0 +1,27 @@
+<p>
+  <%= label_tag :campo %><br />
+  <%= select_tag :field,"<option value = "" >-Seleziona-</option>" + options_for_select({"Copertura Complessiva" => "copertura_complessiva",
+                                                                                         "Altezza Arboreo" =>"altezza_arboreo",
+                                                                                        "Copertura Arboreo" => "copertura_arboreo",
+                                                                                        "Altezza Arbustivo" => "altezza_arbustivo",
+                                                                                        "Copertura Arbustivo" => "copertura_arbustivo",
+                                                                                        "Altezza Erbaceo" => "altezza_erbaceo",
+                                                                                        "Copertura Erbaceo" => "copertura_erbaceo",
+                                                                                        "Copertura Muscinale" => "copertura_muscinale",
+                                                                                        "Copertura Lettiera" => "copertura_lettiera",
+                                                                                        "Copertura Suolo Nudo" => "copertura_suolo_nudo"}) %>
+</p>
+<table>
+  <tbody>
+  <tr>
+    <td><%= label_tag "In/Out" %></td>
+    <td>
+      <%= check_box_tag :inout %>
+    </td>
+  </tr>
+  <tr>
+    <td><%= label_tag "Pri/Est" %></td>
+    <td><%= check_box_tag :priest %></td>
+  </tr>
+  </tbody>
+</table>

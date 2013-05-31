@@ -6,7 +6,10 @@
   <tbody>
     <tr>
       <td><%= label_tag "In/Out" %></td>
-      <td><%= check_box_tag :inout %></td>
+      <td>
+        <%= check_box_tag :inout %>
+        <%= observe_field :inout, :url => {:controller=>"admin/statistics", :action=>"add_4x4",:update => "su4x4"}, :with =>"checked" %>
+      </td>
     </tr>
     <tr>
       <td><%= label_tag "Pri/Est" %></td>
@@ -22,6 +25,10 @@
     </tr>
   </tbody>
 </table>
+
+
+<div id="su4x4" style="display: none;"> </div>
+
 
 
 

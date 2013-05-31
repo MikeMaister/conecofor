@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Plot</th>
+      <th>Max</th>
+      <th>Min</th>
+      <th>Med</th>
+      <th>Std</th>
+      <th>Ste</th>
+      <th>Cov</th>
+      <th>N</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for i in 0..@stat_list.size-1 %>
+          <tr>
+            <td><%= @stat_list.at(i).plot %></td>
+            <td><%= @stat_list.at(i).max %></td>
+            <td><%= @stat_list.at(i).min %></td>
+            <td><%= @stat_list.at(i).med %></td>
+            <td><%= @stat_list.at(i).std %></td>
+            <td><%= @stat_list.at(i).ste %></td>
+            <td><%= @stat_list.at(i).cov %></td>
+            <td><%= @stat_list.at(i).n %></td>
+            <td><%= @stat_list.at(i).note %></td>
+          </tr>
+    <% end %>
+  </tbody>
+</table>
