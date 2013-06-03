@@ -125,8 +125,13 @@ class Admin::StatisticsController < ApplicationController
       end
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie WHERE specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id = ? #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part} #{query_4x4_group}",@plot,@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id = ? #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part} #{query_4x4_group}",@plot,@anno]
       @stat_list = format_data_filter(data)
+      if @subplot.blank?
+        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+      else
+        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
+      end
       render :update do |page|
         page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
       end
@@ -139,8 +144,13 @@ class Admin::StatisticsController < ApplicationController
       end
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie WHERE specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part},plot #{query_4x4_group}",@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part},plot #{query_4x4_group}",@anno]
       @stat_list = format_data_filter(data)
+      if @subplot.blank?
+        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+      else
+        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
+      end
       render :update do |page|
         page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list]
       end
@@ -165,6 +175,7 @@ class Admin::StatisticsController < ApplicationController
       query_part = build_group_by_copl!(@inout,@priest)
       data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part}",@plot,@anno]
       @stat_list = format_data_filter_copl(data)
+      @file = copl_filter_file(@stat_list,@inout,@priest)
       render :update do |page|
         page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
       end
@@ -173,13 +184,12 @@ class Admin::StatisticsController < ApplicationController
       query_part = build_group_by_copl!(@inout,@priest)
       data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part},plot ",@anno]
       @stat_list = format_data_filter_copl(data)
+      @file = copl_filter_file(@stat_list,@inout,@priest)
       render :update do |page|
-        page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list]
+        page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list,@file]
       end
     end
   end
-
-
 
   private
 
@@ -298,5 +308,194 @@ class Admin::StatisticsController < ApplicationController
     return new_stat_file
   end
 
+  def copl_filter_file(content,inout,priest)
+    #creo il nuovo documento
+    stat_file = Spreadsheet::Workbook.new
+    #aggiungo un nuovo foglio di lavoro
+    sheet1 = stat_file.create_worksheet :name => 'Foglio di lavoro 1'
+    #nella prima riga metto le intestazioni
+    j=0
+    sheet1[0,j] = "Plot"
+    if inout.to_i == 1
+      j +=1
+      sheet1[0,j] = "In/Out"
+    end
+    if priest.to_i == 1
+      j +=1
+      sheet1[0,j] = "Pri/Est"
+    end
+    j +=1
+    sheet1[0,j] = "Max"
+    j +=1
+    sheet1[0,j] = "Min"
+    j +=1
+    sheet1[0,j] = "Med"
+    j +=1
+    sheet1[0,j] = "Std"
+    j +=1
+    sheet1[0,j] = "Ste"
+    j +=1
+    sheet1[0,j] = "Cov"
+    j +=1
+    sheet1[0,j] = "Note"
+    #aggiungo tutti i dati
+    for i in 0..content.size-1
+      j = 0
+      sheet1[i+1,j] = content.at(i).plot
+      if inout.to_i == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).inout
+      end
+      if priest.to_i  == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).priest
+      end
+      j +=1
+      sheet1[i+1,j] = content.at(i).max
+      j +=1
+      sheet1[i+1,j] = content.at(i).min
+      j +=1
+      sheet1[i+1,j] = content.at(i).med
+      j +=1
+      sheet1[i+1,j] = content.at(i).std
+      j +=1
+      sheet1[i+1,j] = content.at(i).ste
+      j +=1
+      sheet1[i+1,j] = content.at(i).cov
+      j +=1
+      sheet1[i+1,j] = content.at(i).note
+    end
+
+    #formattazione file
+    bold = Spreadsheet::Format.new :weight => :bold
+    10.times do |x| sheet1.row(0).set_format(x, bold) end
+
+    #creo la directory
+    dir = "#{RAILS_ROOT}/public/Stat/"
+    #imposto il nome del file
+    file_name = "stats.xls"
+    #imposto il full_path e la relative_path
+    full_path = dir + file_name
+    relative_path = "/Stat/#{file_name}"
+    require 'ftools'
+    File.makedirs dir
+    #scrivo il file
+    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    #creo l'oggetto file
+    new_stat_file = OutputFile.new
+    new_stat_file.fill(file_name,full_path,relative_path,"Stats")
+    return new_stat_file
+  end
+
+  def cops_filter_file(content,inout,priest,cod_strato,specie,subplot)
+    #creo il nuovo documento
+    stat_file = Spreadsheet::Workbook.new
+    #aggiungo un nuovo foglio di lavoro
+    sheet1 = stat_file.create_worksheet :name => 'Foglio di lavoro 1'
+    #nella prima riga metto le intestazioni
+    j=0
+    sheet1[0,j] = "Plot"
+    if subplot.to_i == 1
+      j +=1
+      sheet1[0,j] = "Subplot"
+    end
+    if inout.to_i == 1
+      j +=1
+      sheet1[0,j] = "In/Out"
+    end
+    if priest.to_i == 1
+      j +=1
+      sheet1[0,j] = "Pri/Est"
+    end
+    if cod_strato.to_i == 1
+      j +=1
+      sheet1[0,j] = "Codice Strato"
+    end
+    if specie.to_i == 1
+      j +=1
+      sheet1[0,j] = "EU Code"
+      j +=1
+      sheet1[0,j] = "EU Desc"
+      j +=1
+      sheet1[0,j] = "Specie"
+    end
+    j +=1
+    sheet1[0,j] = "Max"
+    j +=1
+    sheet1[0,j] = "Min"
+    j +=1
+    sheet1[0,j] = "Med"
+    j +=1
+    sheet1[0,j] = "Std"
+    j +=1
+    sheet1[0,j] = "Ste"
+    j +=1
+    sheet1[0,j] = "Cov"
+    j +=1
+    sheet1[0,j] = "Note"
+    #aggiungo tutti i dati
+    for i in 0..content.size-1
+      j = 0
+      sheet1[i+1,j] = content.at(i).plot
+      if subplot.to_i == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).subplot
+      end
+      if inout.to_i == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).inout
+      end
+      if priest.to_i  == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).priest
+      end
+      if cod_strato.to_i  == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).cod_strato
+      end
+      if specie.to_i  == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).eucode
+        j +=1
+        sheet1[i+1,j] = content.at(i).eudesc
+        j +=1
+        sheet1[i+1,j] = content.at(i).specie
+      end
+      j +=1
+      sheet1[i+1,j] = content.at(i).max
+      j +=1
+      sheet1[i+1,j] = content.at(i).min
+      j +=1
+      sheet1[i+1,j] = content.at(i).med
+      j +=1
+      sheet1[i+1,j] = content.at(i).std
+      j +=1
+      sheet1[i+1,j] = content.at(i).ste
+      j +=1
+      sheet1[i+1,j] = content.at(i).cov
+      j +=1
+      sheet1[i+1,j] = content.at(i).note
+    end
+
+    #formattazione file
+    bold = Spreadsheet::Format.new :weight => :bold
+    12.times do |x| sheet1.row(0).set_format(x, bold) end
+
+    #creo la directory
+    dir = "#{RAILS_ROOT}/public/Stat/"
+    #imposto il nome del file
+    file_name = "stats.xls"
+    #imposto il full_path e la relative_path
+    full_path = dir + file_name
+    relative_path = "/Stat/#{file_name}"
+    require 'ftools'
+    File.makedirs dir
+    #scrivo il file
+    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    #creo l'oggetto file
+    new_stat_file = OutputFile.new
+    new_stat_file.fill(file_name,full_path,relative_path,"Stats")
+    return new_stat_file
+  end
 
 end

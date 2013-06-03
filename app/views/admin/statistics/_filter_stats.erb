@@ -16,6 +16,8 @@
         <th>Codice Strato</th>
     <% end %>
     <% unless @specie.blank? %>
+        <th>EU Code</th>
+        <th>EU Descrizione</th>
         <th>Specie</th>
     <% end %>
     <th>Max</th>
@@ -45,6 +47,8 @@
             <td><%= @stat_list.at(i).cod_strato %></td>
         <% end %>
         <% unless @specie.blank? %>
+            <td><%= @stat_list.at(i).eucode %></td>
+            <td><%= @stat_list.at(i).eudesc %></td>
             <td><%= @stat_list.at(i).specie %></td>
         <% end %>
         <td><%= @stat_list.at(i).max %></td>
@@ -59,3 +63,7 @@
   <% end %>
   </tbody>
 </table>
+
+<p>
+  <%= link_to "Download File", @file.relative_path  %>
+</p>
