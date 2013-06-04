@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>Plot</th>
+      <th>Eucode</th>
+      <th>Eudesc</th>
+      <th>Specie</th>
+      <th>Individui</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@stat_list.size-1 %>
+    <tr>
+      <td><%= @stat_list.at(i).plot %></td>
+      <td><%= @stat_list.at(i).eucode %></td>
+      <td><%= @stat_list.at(i).eudesc %></td>
+      <td><%= @stat_list.at(i).specie %></td>
+      <td><%= @stat_list.at(i).individui %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to "Download File", @file.relative_path %>
+</p>
