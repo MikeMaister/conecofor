@@ -176,7 +176,7 @@ class Admin::SpeStatController < ApplicationController
       stat = StatisticSpecie.new
       stat.fill_erb(data.at(i)) if survey == "erb"
       stat.fill_leg(data.at(i)) if survey == "leg" || survey == "cops"
-      list << stat unless stat.individui.to_i == 0 && survey != "erb" #erb aveva delle specie con individui = 0
+      list << stat #unless data.individui.to_i == 0 && survey != "erb" #erb aveva delle specie con individui = 0
     end
     return list
   end
@@ -285,7 +285,7 @@ class Admin::SpeStatController < ApplicationController
     end
     if priest.to_i == 1
       j += 1
-      sheet1[0,j] == "Pri/Est"
+      sheet1[0,j] = "Pri/Est"
     end
     if cod_strato.to_i == 1
       j += 1
@@ -309,7 +309,7 @@ class Admin::SpeStatController < ApplicationController
       end
       if priest.to_i == 1
         j += 1
-        sheet1[i+1,j] == content.at(i).priest
+        sheet1[i+1,j] = content.at(i).priest
       end
       if cod_strato.to_i == 1
         j += 1

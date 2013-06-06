@@ -1,0 +1,32 @@
+<table>
+  <thead>
+  <tr>
+    <th>Anno</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <th>Eucode</th>
+    <th>Eudesc</th>
+    <th>Specie</th>
+    <th>Copertura</th>
+    <th>Individui</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@stat_list.size-1 %>
+      <tr>
+        <td><%= @anno %></td>
+        <td><%= @stat_list.at(i).plot %></td>
+        <td><%= @stat_list.at(i).subplot %></td>
+        <td><%= @stat_list.at(i).eucode %></td>
+        <td><%= @stat_list.at(i).eudesc %></td>
+        <td><%= @stat_list.at(i).specie %></td>
+        <td><%= @stat_list.at(i).copertura %></td>
+        <td><%= @stat_list.at(i).individui %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to "Download File", @file.relative_path %>
+</p>

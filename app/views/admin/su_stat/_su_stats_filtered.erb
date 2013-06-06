@@ -1,0 +1,50 @@
+<table>
+  <thead>
+  <tr>
+    <th>Anno</th>
+    <th>Plot</th>
+    <th>Subplot</th>
+    <% unless @inout.blank? %>
+        <th>In/Out</th>
+    <% end %>
+    <% unless @priest.blank? %>
+        <th>Pri/Est</th>
+    <% end %>
+    <% unless @cod_strato.blank? %>
+        <th>Codice Strato</th>
+    <% end %>
+    <th>Eucode</th>
+    <th>Eudesc</th>
+    <th>Specie</th>
+    <th>Copertura</th>
+    <th>Individui</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for i in 0..@stat_list.size-1 %>
+      <tr>
+        <td><%= @anno %></td>
+        <td><%= @stat_list.at(i).plot %></td>
+        <td><%= @stat_list.at(i).subplot %></td>
+        <% unless @inout.blank? %>
+            <td><%= @stat_list.at(i).inout %></td>
+        <% end %>
+        <% unless @priest.blank? %>
+            <td><%= @stat_list.at(i).priest %></td>
+        <% end %>
+        <% unless @cod_strato.blank? %>
+            <td><%= @stat_list.at(i).cod_strato %></td>
+        <% end %>
+        <td><%= @stat_list.at(i).eucode %></td>
+        <td><%= @stat_list.at(i).eudesc %></td>
+        <td><%= @stat_list.at(i).specie %></td>
+        <td><%= @stat_list.at(i).copertura %></td>
+        <td><%= @stat_list.at(i).individui %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to "Download File", @file.relative_path %>
+</p>
