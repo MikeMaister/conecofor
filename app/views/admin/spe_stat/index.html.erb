@@ -1,5 +1,5 @@
 <h1>Admin::SpeStat#index</h1>
-<% form_remote_tag :url => { :action => 'result', :update => 'stat'} do %>
+<% form_remote_tag :url => { :action => 'result', :update => 'spe_stat'} do %>
     <p>
       <%= label_tag :survey %><br />
       <%= select_tag :survey,"<option value= "" >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Cops" => "cops","Erb+Leg" =>"erbleg"}) %>
