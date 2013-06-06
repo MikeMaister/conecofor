@@ -56,65 +56,113 @@ class Admin::StatisticsController < ApplicationController
 
     if @survey == "leg" && @plot != "all"
       data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     elsif @survey == "leg" && @plot == "all"
       data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     elsif @survey == "erb" && @plot != "all" && @field != "nif"
       data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     elsif @survey == "erb" && @plot == "all" && @field != "nif"
       data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     elsif @survey == "erb" && @plot != "all" && @field == "nif"
       data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      @stat_list = format_data_nif(data1,data2,data3)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data1.at(0).n.to_i == 0 && data2.at(0).n.to_i == 0 && data3.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_nif(data1,data2,data3)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     elsif @survey == "erb" && @plot == "all" && @field == "nif"
       data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      @stat_list = format_data_nif(data1,data2,data3)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data1.blank? && data2.blank? && data3.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_nif(data1,data2,data3)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     #se il tipo è cops ma senza l'aggiunta di altri filtri
     elsif @survey == "cops" && @plot != "all" && @inout.blank? && @priest.blank? && @cod_strato.blank? && @specie.blank?
       data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     #se il tipo è cops ma senza l'aggiunta di altri filtri
     elsif @survey == "cops" && @plot == "all" && @inout.blank? && @priest.blank? && @cod_strato.blank? && @specie.blank?
       data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     #se è un record su un plot di tipo cops con uno o più filtri aggiunti
     elsif @survey == "cops" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1 || @specie.to_i == 1)
@@ -126,14 +174,20 @@ class Admin::StatisticsController < ApplicationController
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
       data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id = ? #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part} #{query_4x4_group}",@plot,@anno]
-      @stat_list = format_data_filter(data)
-      if @subplot.blank?
-        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
       else
-        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
-      end
-      render :update do |page|
-        page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        @stat_list = format_data_filter(data)
+        if @subplot.blank?
+          @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+        else
+          @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
+        end
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
       end
     #se è un record su tutti i plot di tipo cops con uno o più filtri aggiunti
     elsif @survey == "cops" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1 || @specie.to_i == 1)
@@ -145,48 +199,78 @@ class Admin::StatisticsController < ApplicationController
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
       data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part},plot #{query_4x4_group}",@anno]
-      @stat_list = format_data_filter(data)
-      if @subplot.blank?
-        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
       else
-        @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
-      end
-      render :update do |page|
-        page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list]
+        @stat_list = format_data_filter(data)
+        if @subplot.blank?
+          @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,nil)
+        else
+          @file = cops_filter_file(@stat_list,@inout,@priest,@cod_strato,@specie,@subplot)
+        end
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
       end
     #se il tipo è copl ma senza l'aggiunta di altri filtri
     elsif @survey == "copl" && @plot != "all" && @inout.blank? && @priest.blank?
       data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     #se il tipo è copl ma senza l'aggiunta di altri filtri
     elsif @survey == "copl" && @plot == "all" && @inout.blank? && @priest.blank?
       data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      @stat_list = format_data(data)
-      @file = regular_file(@stat_list)
-      render :update do |page|
-        page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data(data)
+        @file = regular_file(@stat_list)
+        render :update do |page|
+          page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
       end
     #se è un record su un plot di tipo copl con uno o più filtri aggiunti
     elsif @survey == "copl" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1)
       query_part = build_group_by_copl!(@inout,@priest)
       data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part}",@plot,@anno]
-      @stat_list = format_data_filter_copl(data)
-      @file = copl_filter_file(@stat_list,@inout,@priest)
-      render :update do |page|
-        page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_copl(data)
+        @file = copl_filter_file(@stat_list,@inout,@priest)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
       end
     #se è un record su tutti i plot di tipo copl con uno o più filtri aggiunti
     elsif @survey == "copl" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1)
       query_part = build_group_by_copl!(@inout,@priest)
       data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part},plot ",@anno]
-      @stat_list = format_data_filter_copl(data)
-      @file = copl_filter_file(@stat_list,@inout,@priest)
-      render :update do |page|
-        page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list,@file]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_copl(data)
+        @file = copl_filter_file(@stat_list,@inout,@priest)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@inout,@priest,@cod_strato,@specie,@stat_list,@file]
+        end
       end
     end
   end
