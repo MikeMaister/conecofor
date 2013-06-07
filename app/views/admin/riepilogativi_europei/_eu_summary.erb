@@ -1,0 +1,15 @@
+<% for i in 0..@plot.size-1%>
+    <li><%= @plot.at(i).numero_plot %></li>
+<% end %>
+
+<% @result.each do |row| %>
+    <li><%= row[0] %></li>
+    <li><%= row[1] %></li>
+<% end %>
+
+
+<% @result.each_hash do |asd| %>
+    <li><%= asd["id_plot"] %></li>
+    <li><%= asd["n_su"] %></li>
+<% end %>
+
