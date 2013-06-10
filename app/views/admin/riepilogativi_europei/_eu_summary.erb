@@ -1,15 +1,42 @@
-<% for i in 0..@plot.size-1%>
-    <li><%= @plot.at(i).numero_plot %></li>
-<% end %>
 
-<% @result.each do |row| %>
-    <li><%= row[0] %></li>
-    <li><%= row[1] %></li>
-<% end %>
+<table>
+  <thead>
+  <tr>
+    <th>nplot</th>
+    <th>unità</th>
+    <th>niferb</th>
+    <th>nifleg</th>
+    <th>coperb</th>
+    <th>copbrio</th>
+    <th>coplich</th>
+    <th>copleg</th>
+    <th>nspecerb</th>
+    <th>nspecbrio</th>
+    <th>nspeclich</th>
+    <th>nspecleg</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% for i in 0..@eu_list.size-1 %>
+        <tr>
+          <td><%= @eu_list.at(i).nplot %></td>
+          <td><%= @eu_list.at(i).unita %></td>
+          <td><%= @eu_list.at(i).niferb %></td>
+          <td><%= @eu_list.at(i).nifleg %></td>
+          <td><%= @eu_list.at(i).coperb %></td>
+          <td><%= @eu_list.at(i).copbrio %></td>
+          <td><%= @eu_list.at(i).coplich %></td>
+          <td><%= @eu_list.at(i).copleg %></td>
+          <td><%= @eu_list.at(i).nspecerb %></td>
+          <td><%= @eu_list.at(i).nspecbrio %></td>
+          <td><%= @eu_list.at(i).nspeclich %></td>
+          <td><%= @eu_list.at(i).nspecleg %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
 
-
-<% @result.each_hash do |asd| %>
-    <li><%= asd["id_plot"] %></li>
-    <li><%= asd["n_su"] %></li>
-<% end %>
+<p>
+  <%= link_to "Download File", @file.relative_path %>
+</p>
 

@@ -1,61 +1,9 @@
-
 <table>
-  <thead>
-  <tr>
-    <th>Plot</th>
-    <% unless @subplot.blank? %>
-        <th>Subplot</th>
-    <% end %>
-    <% unless @inout.blank? %>
-        <th>In/Out</th>
-    <% end %>
-    <% unless @priest.blank? %>
-        <th>Pri/Est</th>
-    <% end %>
-    <% unless @cod_strato.blank? %>
-        <th>Codice Strato</th>
-    <% end %>
-    <% unless @specie.blank? %>
-        <th>Specie</th>
-    <% end %>
-    <th>Max</th>
-    <th>Min</th>
-    <th>Med</th>
-    <th>Std</th>
-    <th>Ste</th>
-    <th>Cov</th>
-    <th>N</th>
-    <th>Note</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for i in 0..@stat_list.size-1 %>
-      <tr>
-        <td><%= @stat_list.at(i).plot %></td>
-        <% unless @subplot.blank? %>
-            <td> <%= @stat_list.at(i).subplot %> </td>
-        <% end %>
-        <% unless @inout.blank? %>
-            <td><%= @stat_list.at(i).inout %></td>
-        <% end %>
-        <% unless @priest.blank? %>
-            <td><%= @stat_list.at(i).priest %></td>
-        <% end %>
-        <% unless @cod_strato.blank? %>
-            <td><%= @stat_list.at(i).cod_strato %></td>
-        <% end %>
-        <% unless @specie.blank? %>
-            <td><%= @stat_list.at(i).specie %></td>
-        <% end %>
-        <td><%= @stat_list.at(i).max %></td>
-        <td><%= @stat_list.at(i).min %></td>
-        <td><%= @stat_list.at(i).med %></td>
-        <td><%= @stat_list.at(i).std %></td>
-        <td><%= @stat_list.at(i).ste %></td>
-        <td><%= @stat_list.at(i).cov %></td>
-        <td><%= @stat_list.at(i).n %></td>
-        <td><%= @stat_list.at(i).note %></td>
-      </tr>
-  <% end %>
-  </tbody>
+<% @euflora.each do |p| %>
+   <tr>
+     <td><%= p.id %></td>
+     <td><%= p.codice_eu %></td>
+   </tr>
+
+<% end %>
 </table>
