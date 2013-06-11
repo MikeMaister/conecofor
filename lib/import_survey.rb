@@ -123,6 +123,7 @@ module Import_survey
     name = (file)['datafile'].original_filename
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
     directory = "#{RAILS_ROOT}/public/file_importati/#{survey}/#{Season.find(camp.season_id).nome}"
+    relative_path = "/file_importati/#{survey}/#{Season.find(camp.season_id).nome}/" + name
     #creo la cartella
     require 'ftools'
     File.makedirs directory
@@ -132,7 +133,7 @@ module Import_survey
     File.open(path, "wb") { |f| f.write(file['datafile'].read) }
     #traccio il file nel db
     new_file = ImportFile.new
-    new_file.fill_and_save(name,camp.id,path,survey,current_user.id,plot_number_from_file_name(name))
+    new_file.fill_and_save(name,camp.id,path,survey,current_user.id,plot_number_from_file_name(name),relative_path)
     #ora che il file è salvato il nome del file diventa variabile di sessione
     session[:file_id] = new_file.id
   end

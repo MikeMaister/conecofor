@@ -1,7 +1,7 @@
 class ImportFile < ActiveRecord::Base
   set_table_name "import_file"
 
-  def fill_and_save(file_name,campagne_id,file_path,survey_kind,user,plot_number)
+  def fill_and_save(file_name,campagne_id,file_path,survey_kind,user,plot_number,relative_path)
     self.file_name = file_name
     self.campagne_id = campagne_id
     self.path = file_path
@@ -10,6 +10,7 @@ class ImportFile < ActiveRecord::Base
     self.survey_kind = survey_kind
     self.user_id = user
     self.plot_number = plot_number
+    self.relative_path = relative_path
     self.deleted = false
     self.save
   end

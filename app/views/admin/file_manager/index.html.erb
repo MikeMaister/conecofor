@@ -1,0 +1,4 @@
+<h1>Admin::FileManager#index</h1>
+<% for i in 0..@import_file.size-1 %>
+    <li><%= link_to "#{@import_file.at(i).file_name}", @import_file.at(i).relative_path %></li>
+<% end %>
