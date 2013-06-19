@@ -12,7 +12,10 @@
    <% require 'calendar_date_select' %>
    <%= calendar_date_select_includes :style => 'silver'%>
 
-    <div id="container">
+    <div id="pre_head"></div>
+    <div id="wrap">
+      <div id="header"></div>
+      <div id="logo"></div>
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>
@@ -24,6 +27,11 @@
       <%- end -%>
 
       <%= yield %>
+      <div id="foot">
+        <p id="foot_message">©2013 Michele Balestrini All rigth reserved</p>
+      </div>
     </div>
+
+
   </body>
 </html>

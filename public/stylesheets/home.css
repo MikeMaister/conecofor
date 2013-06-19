@@ -1,0 +1,82 @@
+#login_border{
+    float:left;
+    padding: 1px;
+    width:202px;
+    border: solid 2px #B9D749;
+    border-radius: 27px;
+    background-color: #ffffff;
+    margin-top: 25px;
+    margin-left: 30px;
+}
+#login_box{
+    width:160px;
+    border: solid 1px #ffffff;
+    background-color: #E1FF71;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+p.log_line{
+    margin:0 0 15px 0;
+}
+
+p.log_line_last{
+    margin: 0;
+}
+
+#presentation{
+    clear: both;
+    margin:30px;
+    padding: 20px;
+    border: 2px solid #91AF21;
+    border-radius: 25px;
+    background-color: #adff2f;
+}
+
+h1{
+    color: #8b4513;
+    font-size: large;
+    margin: 0 0 7px 0;
+}
+
+h2{
+    color: #8b4513;
+    font-size: medium;
+    margin: 0 0 15px 0;
+}
+
+#float{
+    #border: solid 1px #000000;
+    width: 940px;
+    margin:5px 30px 30px 30px;
+    height: 250px;
+    float: left;
+}
+
+#image{
+    background-image: url('leaf logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin:0 40px 0 75px;
+    #border: solid 1px #000000;
+    width: 280px;
+    height:270px;
+    float: left;
+}
+
+#registration{
+    #border: solid 1px #000000;
+    padding: 10px;
+    width: 230px;
+    height:205px;
+    float: left;
+    margin-top: 25px;
+}
+
+p.reg_desc{
+    margin: 0 0 20px 0;
+}
+
+em{
+    color: #8b4513;
+}

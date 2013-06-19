@@ -1,15 +1,76 @@
-body {
-  background-color: #4B7399;
+
+
+html,body {
+  margin:0;padding:0;
+  background-image: url('conecofor.jpg');
+  background-size: cover;
+  background-repeat:no-repeat;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
+  height:100%;
+  color: #006400;
 }
+
+#pre_head{
+    width: 100%;
+    height: 10px;
+    background-color:#9DC209;
+    margin: 0;
+}
+
+#header{
+    width:1000px;
+    height: 25px;
+    background-color: #A1C935;
+    border: solid 1px #9DC209;
+    border-top:none;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+#logo{
+    width:980px;
+    height:150px;
+    #border: solid 1px #000000;
+    margin: 10px 10px 0 10px;
+    background-image: url('main logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#wrap {
+    position:relative;
+    min-height:100%;
+    width:1000px;
+    margin:0 auto;
+    background:transparent;
+    border: solid 0px transparent;
+    #border-left: dotted 1px #000000;
+    #border-right: dotted 1px black;
+}
+#wrap:after {
+    content:'';
+    height:50px;
+    display:block;
+}
+#foot {
+    position:absolute;
+    bottom:0;
+    height:50px;
+    width:1000px;
+    background-color: #9acd32;
+    border: solid 1px #adff2f;
+    border-top-left-radius:25px;
+    border-top-right-radius: 25px;
+}
+body:before,#wrap:before{content:'';float:left;height:100%;margin-top:-999em;} /* IE8/Opera ruin my pretty code - this is only fix I have found "yet" - body opera, wrap IE8 */
 
 a img {
   border: none;
 }
 
 a {
-  color: #0000FF;
+  color: #806517;
 }
 
 .clear {
@@ -18,18 +79,27 @@ a {
   overflow: hidden;
 }
 
+.null_margin{
+    margin: 0;
+}
+
 #container {
-  width: 75%;
-  margin: 0 auto;
-  background-color: #FFF;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+  #width: 75%;
+  #margin: 0 auto;
+  #background-color: #FFF;
+  #padding: 20px 40px;
+  #border: solid 1px black;
+    #border-radius:25px;
+}
+
+#foot_message{
+    text-align: center;
+    color: #006400;
 }
 
 #flash_notice, #flash_error {
   padding: 5px 8px;
-  margin: 10px 0;
+  margin: 15px 30px;
 }
 
 #flash_notice {

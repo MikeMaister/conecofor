@@ -1,8 +1,57 @@
-<h1>Home page</h1>
-
-<% if session[:user_id].blank? %>
-    <%= link_to "login", login_path %>
+<% content_for :title, "Home - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "home"%>
 <%end%>
+
+<% unless logged_in? %>
+    <div id="float">
+    <div id="login_border">
+        <div id="login_box">
+            <% form_tag sessions_path do %>
+                <p class ="log_line">
+                    <%= label_tag :login, "Email Address" %><br />
+                    <%= text_field_tag :login, params[:login] %>
+                </p>
+                <p class ="log_line">
+                    <%= label_tag :password %><br />
+                    <%= password_field_tag :password %>
+                </p>
+                <p class ="log_line">
+                    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+                    <%= label_tag :remember_me %>
+                </p>
+                <p class ="log_line_last"><%= submit_tag "Log in" %></p>
+            <% end %>
+        </div>
+    </div>
+    <div id="image">
+
+    </div>
+    <div id="registration">
+      <h2>Registrazione Rilevatori</h2>
+      <p class="reg_desc">
+        Se sei un rilevatore designato, clicca su
+        <strong>
+          <%= link_to "Registrati", signup_path %>
+        </strong>
+
+        per accedere allo strumento.
+      </p>
+      <p class="null_margin">
+        <strong>Attenzione</strong> <em>quest'area è riservata solamente ai membri facenti parte del team del progetto</em>.
+      </p>
+    </div>
+    </div>
+
+<div id="presentation">
+  <h1>Benvenuto in Conecofor!</h1>
+  <p class="null_margin">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+</div>
+
+<%end%>
+
 
 <% unless current_user.blank? || current_user.user_kind_id != 2%>
 
