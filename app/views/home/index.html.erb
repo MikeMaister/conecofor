@@ -1,9 +1,9 @@
-<% content_for :title, "Home - CONECOFOR" %>
-<% content_for :head do %>
-    <%= stylesheet_link_tag "home"%>
-<%end%>
-
 <% unless logged_in? %>
+    <% content_for :title, "Home - CONECOFOR" %>
+    <% content_for :head do %>
+        <%= stylesheet_link_tag "home"%>
+    <%end%>
+
     <div id="float">
     <div id="login_border">
         <div id="login_box">
@@ -35,7 +35,7 @@
           <%= link_to "Registrati", signup_path %>
         </strong>
 
-        per accedere allo strumento.
+        per poter in seguito accedere allo strumento.
       </p>
       <p class="null_margin">
         <strong>Attenzione</strong> <em>quest'area è riservata solamente ai membri facenti parte del team del progetto</em>.
@@ -54,14 +54,59 @@
 
 
 <% unless current_user.blank? || current_user.user_kind_id != 2%>
+    <% content_for :title, "Menu Rilevatore - CONECOFOR" %>
+    <% content_for :head do %>
+        <%= stylesheet_link_tag "rilevatore_menu"%>
+    <%end%>
 
-<ul>
-    <li><%= link_to "Import Cops", :controller => "import_cops" %></li>
-    <li><%= link_to "Import Copl", :controller => "import_copl" %></li>
-    <li><%= link_to "Import Legnose", :controller => "import_legnose" %></li>
-    <li><%= link_to "Import Erbacee", :controller => "import_erbacee" %></li>
-    <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
-</ul>
+    <p id="benvenuto">
+      Benvenuto <strong><%= current_user.full_name %></strong>!
+      <br /><br />
+      Segui le instruzioni per eseguire correttamente la procedura d'import relativa ai dati in tuo possesso.
+    </p>
+    <div id="rilev_menu">
+
+      <div id="import_scheda">
+        <h1>Passo - 1</h1>
+        <p class="fun_desc">
+          Prima di poter eseguire qualsiasi tipo di import,
+          è necessario caricare la propria scheda di rilevamento, cliccando su:
+        </p>
+        <ul>
+          <li>
+              <%= link_to "Carica Scheda di Rilevamento" %>
+          </li>
+        </ul>
+      </div>
+
+      <div id="import_survey">
+        <h2>Passo - 2</h2>
+        <p class="fun_desc">
+          Una volta eseguito il <em>"Passo - 1"</em> e ricevuta l'autorizzazione a procedere, importare il file .xls,
+          selezionando il tipo di rilevazione appropriato tra i seguenti:
+        </p>
+        <ul>
+          <li><%= link_to "Cops", :controller => "import_cops" %></li>
+          <li><%= link_to "Copl", :controller => "import_copl" %></li>
+          <li><%= link_to "Legnose", :controller => "import_legnose" %></li>
+          <li><%= link_to "Erbacee", :controller => "import_erbacee" %></li>
+        </ul>
+      </div>
+      <div id="data_review">
+        <h3>Passo - 3 (opzionale)</h3>
+        <p class="fun_desc">
+            Una volta eseguito il <em>"Passo - 2"</em> e ricevuta la conferma di approvazione dei dati importati, da parte di un amministratore,
+            è possibile visualizzare il proprio import ricercandolo all'interno dell'archivio globale, cliccando su:
+        </p>
+        <ul>
+          <li>
+              <%= link_to "Import View", :controller => "import_public_view" %>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
 
 <% end %>
 
@@ -92,6 +137,4 @@
 
 <% end %>
 
-<% if logged_in? %>
-    <%= link_to "log out", :controller => "sessions", :action => "destroy" %>
-<%end%>
+

@@ -16,9 +16,20 @@
     <div id="wrap">
       <div id="header"></div>
       <div id="logo"></div>
+      <% if logged_in? %>
+          <div id="banner_menu">
+            <p>
+              <%= link_to "Home", root_path %>
+              <%= link_to "Account" %>
+              <%= link_to "Contatti" %>
+              <%= link_to "Log Out", :controller => "sessions", :action => "destroy" %>
+            </p>
+          </div>
+      <% end %>
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>
+
       <div id= "remote_message" style="display:none;">
       </div>
 

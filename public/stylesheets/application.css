@@ -20,7 +20,8 @@ html,body {
 
 #header{
     width:1000px;
-    height: 25px;
+    height: 15px;
+    padding: 5px 0;
     background-color: #A1C935;
     border: solid 1px #9DC209;
     border-top:none;
@@ -45,8 +46,8 @@ html,body {
     margin:0 auto;
     background:transparent;
     border: solid 0px transparent;
-    #border-left: dotted 1px #000000;
-    #border-right: dotted 1px black;
+    border-left: dotted 1px #000000;
+    border-right: dotted 1px black;
 }
 #wrap:after {
     content:'';
@@ -64,6 +65,12 @@ html,body {
     border-top-right-radius: 25px;
 }
 body:before,#wrap:before{content:'';float:left;height:100%;margin-top:-999em;} /* IE8/Opera ruin my pretty code - this is only fix I have found "yet" - body opera, wrap IE8 */
+
+#banner_menu{
+    border: 1px solid #000000;
+    width: 940px;
+    margin: 30px 30px 0 30px;
+}
 
 a img {
   border: none;
