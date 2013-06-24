@@ -16,10 +16,17 @@ class UsersController < ApplicationController
     if @user.save
       #session[:user_id] = @user.id
       #session[:user_kind] = UserKind.find(@user.user_kind_id).identifier
-      flash[:notice] = "Thank you for signing up! You have to log in now"
-      redirect_to login_path
+      @user = User.new
+      @message_notice = "Ti è stata spedita una mail. Controlla la tua casella di posta e segui le istruzioni per portare a termine la richiesta di registrazione."
+      render :update do |page|
+        page.replace_html "form", :partial => "reg_form", :object => @user
+        page.replace_html "error", :partial => "layouts/remote_flash_message", :object => @message_notice
+      end
     else
-      render :action => 'new_rilevatore'
+      render :update do |page|
+        page.show "error"
+        page.replace_html "error", :partial => "input_errors", :object => @user
+      end
     end
   end
 

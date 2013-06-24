@@ -52,18 +52,18 @@
 
 <%end%>
 
-
 <% unless current_user.blank? || current_user.user_kind_id != 2%>
     <% content_for :title, "Menu Rilevatore - CONECOFOR" %>
     <% content_for :head do %>
         <%= stylesheet_link_tag "rilevatore_menu"%>
     <%end%>
-
-    <p id="benvenuto">
-      Benvenuto <strong><%= current_user.full_name %></strong>!
-      <br /><br />
-      Segui le instruzioni per eseguire correttamente la procedura d'import relativa ai dati in tuo possesso.
-    </p>
+    <div id="benvenuto_container">
+        <p id="benvenuto">
+            Benvenuto <strong><%= current_user.full_name %></strong>!
+            <br /><br />
+            Segui le instruzioni per eseguire correttamente la procedura d'import relativa ai dati in tuo possesso.
+        </p>
+    </div>
     <div id="rilev_menu">
 
       <div id="import_scheda">
@@ -83,7 +83,7 @@
         <h2>Passo - 2</h2>
         <p class="fun_desc">
           Una volta eseguito il <em>"Passo - 1"</em> e ricevuta l'autorizzazione a procedere, importare il file .xls,
-          selezionando il tipo di rilevazione appropriato tra i seguenti:
+          selezionando il tipo di rilevazione appropriato tra le seguenti:
         </p>
         <ul>
           <li><%= link_to "Cops", :controller => "import_cops" %></li>
@@ -100,7 +100,7 @@
         </p>
         <ul>
           <li>
-              <%= link_to "Import View", :controller => "import_public_view" %>
+              <%= link_to "Visualizza Dati", :controller => "import_public_view" %>
           </li>
         </ul>
       </div>

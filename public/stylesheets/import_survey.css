@@ -1,0 +1,38 @@
+#istruzioni{
+    float: left;
+    margin: 15px 30px 30px 30px;
+    width: 940px;
+    #border: 1px solid #000000;
+}
+
+h1{
+    margin: 0 0 15px 0;
+    font-size: large;
+    color: #8b4513;
+}
+
+p.desc{
+    margin: 0;
+}
+
+em{
+    font-weight: bold;
+}
+
+strong.subtitle{
+    color: #8b4513;
+}
+
+#import_mask{
+    clear: both;
+    width: 350px;
+    border: 1px solid orange;
+    border-radius:25px;
+    padding: 15px;
+    margin: 0 305px 30px 305px;
+    background-color: #FFFF8C;
+}
+
+p.mask{
+    margin: 0 0 7px 0;
+}

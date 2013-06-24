@@ -1,17 +1,25 @@
-<h1>Copl: Step 1 - File</h1>
+<% content_for :title, "Import Cops - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "import_survey"%>
+<%end%>
+
+<%= render :partial => "import_cops/instruction"%>
+
+<div id="import_mask">
 <% if @active_campaign.blank? %>
-    <p><strong>Campagna attiva:</strong> Nessuna</p>
+    <p class="mask"><strong>Campagna attiva:</strong> Nessuna</p>
 <% else %>
-    <p><strong>Campagna attiva:</strong> <%= @active_campaign.descrizione %></p>
-    <p><strong>Inizio:</strong> <%= @active_campaign.inizio %> <strong>Fine:</strong> <%= @active_campaign.fine %></p>
+    <p class="mask"><strong>Campagna attiva:</strong> <%= @active_campaign.descrizione %></p>
+    <p class="mask"><strong>Inizio:</strong> <%= @active_campaign.inizio %> <strong>Fine:</strong> <%= @active_campaign.fine %></p>
 <% end %>
-<p>Seleziona il file Copl da importare:</p>
+<p class="mask">Seleziona il file <strong class="subtitle">Copl</strong> da importare:</p>
 <% form_tag({:controller=>'import_copl', :action => 'import_procedure'},:multipart => true) do %>
-    <p>
+    <p class="mask">
       <%= file_field 'upload', 'datafile' %>
       <%= hidden_field_tag :survey, "copl" %>
     </p>
-    <p>
+    <p class="null_margin">
       <%= submit_tag 'Carica' %>
     </p>
 <% end %>
+</div>

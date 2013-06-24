@@ -18,14 +18,31 @@
       <div id="logo"></div>
       <% if logged_in? %>
           <div id="banner_menu">
-            <p>
-              <%= link_to "Home", root_path %>
-              <%= link_to "Account" %>
-              <%= link_to "Contatti" %>
-              <%= link_to "Log Out", :controller => "sessions", :action => "destroy" %>
-            </p>
+            <div class="button">
+              <p class="b_link">
+                <%= link_to "Home", root_path %>
+              </p>
+            </div>
+            <div class="button">
+              <p class="b_link">
+                <%= link_to "Account" %>
+              </p>
+            </div>
+            <div class="button">
+              <p class="b_link">
+                <%= link_to "Contatti" %>
+              </p>
+            </div>
+            <div class="button">
+              <p class="b_link">
+                <%= link_to "Log Out", :controller => "sessions", :action => "destroy" %>
+              </p>
+            </div>
           </div>
       <% end %>
+
+      <%= yield(:up_message) %>
+
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>

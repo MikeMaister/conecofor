@@ -1,0 +1,33 @@
+<div id="mod_border">
+  <div id="module">
+
+    <% remote_form_for @user, :url => { :action => "create_rilevatore" } do |f| %>
+        <p class="module">
+          <%= f.label :nome, "Nome" %><br />
+          <%= f.text_field :nome %>
+        </p>
+        <p class="module">
+          <%= f.label :cognome, "Cognome" %><br />
+          <%= f.text_field :cognome %>
+        </p>
+        <p class="module">
+          <%= f.label :codice_fiscale, "Codice Fiscale" %><br />
+          <%= f.text_field :codice_fiscale %>
+        </p>
+        <p class="module">
+          <%= f.label :email, "Email Address" %><br />
+          <%= f.text_field :email %>
+        </p>
+        <p class="module">
+          <%= f.label :password %><br />
+          <%= f.password_field :password %>
+        </p>
+        <p class="module">
+          <%= f.label :password_confirmation, "Confirm Password" %><br />
+          <%= f.password_field :password_confirmation %>
+        </p>
+        <p class="null_margin"><%= f.submit "Invia" %> *</p>
+    <% end %>
+
+  </div>
+</div>

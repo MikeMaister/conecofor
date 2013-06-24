@@ -1,9 +1,9 @@
 <% if @message_notice%>
-    <div>
-      <p><%= @message_notice %></p>
+    <div id="flash_notice">
+      <p class="null_margin"><%= @message_notice %></p>
     </div>
 <% elsif @message_error %>
-    <div>
-        <p><%= @message_error %></p>
+    <div id="flash_error">
+        <p class="null_margin"><%= @message_error %></p>
     </div>
 <% end %>

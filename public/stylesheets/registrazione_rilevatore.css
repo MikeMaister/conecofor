@@ -1,0 +1,96 @@
+#reg{
+    float: left;
+    width: 940px;
+    #border: 1px solid #000000;
+    margin: 20px 30px;
+}
+
+#module{
+    float: left;
+    width: 218px;
+    padding: 15px 25px;
+    border: 1px solid white;
+    border-radius:25px;
+    margin: 1px;
+    background-color:#A3D983;
+}
+
+#mod_border{
+    float: left;
+    width: 272px;
+    border: 2px solid #B2C248;
+    border-radius:25px;
+    margin-right: 45px;
+    margin-left: 10px;
+    background-color: white;
+}
+
+#desc{
+    float: left;
+    width: 600px;
+    #border: 1px solid #000000;
+    margin-bottom: 20px;
+}
+
+#disclaimer{
+    float: left;
+    width: 600px;
+    height: 145px;
+    border: 1px dotted #000000;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#disclaimer_alert{
+    float: left;
+    width: 600px;
+    margin: 0 0 3px 0;
+    #border: 1px solid #000000;
+}
+
+p.alert{
+    margin: 0;
+    font-size: xx-small;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#regular{
+    clear: both;
+    width: 940px;
+    margin: 30px;
+}
+
+h1{
+    font-size: large;
+    margin: 0 0 7px 0;
+    color:#8b4513;
+}
+
+strong.color{
+    color: #8b4513;
+}
+
+p.module{
+    margin: 0 0 7px 0;
+    font-weight: bold;
+    font-size: small;
+}
+
+#err_list{
+    float:left;
+    border: 1px dashed #F62217;
+    padding: 5px;
+    margin: 0 30px;
+    width: 930px;
+}
+
+ul,li{
+    margin: 0;
+}
+
+li{
+    margin-left: -15px;
+    padding-left: 3px;
+    color:#F62217;
+}
