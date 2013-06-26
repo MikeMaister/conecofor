@@ -2,3 +2,11 @@
   <%= label_tag :campo %><br />
   <%= select_tag :field,"<option value = "" >-Seleziona-</option>" + options_for_select({"Copertura" => "copertura","Altezza" => "altezza"}) %>
 </p>
+<table>
+  <tbody>
+  <tr>
+    <td><%= label_tag :specie %></td>
+    <td><%= check_box_tag :specie %></td>
+  </tr>
+  </tbody>
+</table>

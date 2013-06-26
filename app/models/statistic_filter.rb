@@ -20,4 +20,10 @@ class StatisticFilter < Statistic
     @priest = stats.priest unless stats.priest.blank?
   end
 
+  def set_specie_filter!(stats)
+    @specie = stats.specie unless stats.specie.blank?
+    @eucode = stats.eucode unless stats.specie.blank? || stats.eucode.blank?
+    @eudesc = stats.eudesc unless stats.specie.blank? || stats.eudesc.blank?
+  end
+
 end

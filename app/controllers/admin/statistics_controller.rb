@@ -54,7 +54,8 @@ class Admin::StatisticsController < ApplicationController
     @specie = params[:specie]
     @subplot = params[:subplot]
 
-    if @survey == "leg" && @plot != "all"
+    #se il tipo è legnose e non ci sono filtri, sul singolo plot
+    if @survey == "leg" && @plot != "all" && @specie.blank?
       data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
@@ -67,7 +68,8 @@ class Admin::StatisticsController < ApplicationController
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
         end
       end
-    elsif @survey == "leg" && @plot == "all"
+      #se il tipo è legnose e non ci sono filtri, su tutti i plot
+    elsif @survey == "leg" && @plot == "all" && @specie.blank?
       data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
@@ -78,6 +80,36 @@ class Admin::StatisticsController < ApplicationController
         @file = regular_file(@stat_list)
         render :update do |page|
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
+      end
+    #se il tipo è leg sul plot singolo con il filtro specie
+    elsif @survey == "leg" && @plot != "all" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY #{query_part}",@plot,@anno]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_leg_erb(data)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
+      end
+    #se il tipo è leg su tutti i plot con il filtro specie
+    elsif @survey == "leg" && @plot == "all" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY plot, #{query_part}",@anno]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_leg_erb(data)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
         end
       end
     elsif @survey == "erb" && @plot != "all" && @field != "nif"
@@ -310,6 +342,17 @@ class Admin::StatisticsController < ApplicationController
     return stat_list
   end
 
+  def format_data_filter_leg_erb(data)
+    stat_list = Array.new
+    for i in 0..data.size-1
+      stat = StatisticFilter.new
+      stat.set_it!(data.at(i))
+      stat.set_specie_filter!(data.at(i))
+      stat_list << stat
+    end
+    return stat_list
+  end
+
   def format_data_filter_copl(data)
     stat_list = Array.new
     for i in 0..data.size-1
@@ -537,6 +580,85 @@ class Admin::StatisticsController < ApplicationController
         j +=1
         sheet1[i+1,j] = content.at(i).cod_strato
       end
+      if specie.to_i  == 1
+        j +=1
+        sheet1[i+1,j] = content.at(i).eucode
+        j +=1
+        sheet1[i+1,j] = content.at(i).eudesc
+        j +=1
+        sheet1[i+1,j] = content.at(i).specie
+      end
+      j +=1
+      sheet1[i+1,j] = content.at(i).max
+      j +=1
+      sheet1[i+1,j] = content.at(i).min
+      j +=1
+      sheet1[i+1,j] = content.at(i).med
+      j +=1
+      sheet1[i+1,j] = content.at(i).std
+      j +=1
+      sheet1[i+1,j] = content.at(i).ste
+      j +=1
+      sheet1[i+1,j] = content.at(i).cov
+      j +=1
+      sheet1[i+1,j] = content.at(i).note
+    end
+
+    #formattazione file
+    bold = Spreadsheet::Format.new :weight => :bold
+    12.times do |x| sheet1.row(0).set_format(x, bold) end
+
+    #creo la directory
+    dir = "#{RAILS_ROOT}/public/Stat/"
+    #imposto il nome del file
+    file_name = "stats.xls"
+    #imposto il full_path e la relative_path
+    full_path = dir + file_name
+    relative_path = "/Stat/#{file_name}"
+    require 'ftools'
+    File.makedirs dir
+    #scrivo il file
+    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    #creo l'oggetto file
+    new_stat_file = OutputFile.new
+    new_stat_file.fill(file_name,full_path,relative_path,"Stats")
+    return new_stat_file
+  end
+
+  def leg_erb_filter_file(content,specie)
+    #creo il nuovo documento
+    stat_file = Spreadsheet::Workbook.new
+    #aggiungo un nuovo foglio di lavoro
+    sheet1 = stat_file.create_worksheet :name => 'Foglio di lavoro 1'
+    #nella prima riga metto le intestazioni
+    j=0
+    sheet1[0,j] = "Plot"
+    if specie.to_i == 1
+      j +=1
+      sheet1[0,j] = "EU Code"
+      j +=1
+      sheet1[0,j] = "EU Desc"
+      j +=1
+      sheet1[0,j] = "Specie"
+    end
+    j +=1
+    sheet1[0,j] = "Max"
+    j +=1
+    sheet1[0,j] = "Min"
+    j +=1
+    sheet1[0,j] = "Med"
+    j +=1
+    sheet1[0,j] = "Std"
+    j +=1
+    sheet1[0,j] = "Ste"
+    j +=1
+    sheet1[0,j] = "Cov"
+    j +=1
+    sheet1[0,j] = "Note"
+    #aggiungo tutti i dati
+    for i in 0..content.size-1
+      j = 0
+      sheet1[i+1,j] = content.at(i).plot
       if specie.to_i  == 1
         j +=1
         sheet1[i+1,j] = content.at(i).eucode
