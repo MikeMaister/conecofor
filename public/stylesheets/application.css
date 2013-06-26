@@ -126,13 +126,15 @@ a {
 }
 
 #flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
+  #background-color: #CFC;
+  border: dashed 1px #38B003;
+  color:#38B003;
 }
 
 #flash_error {
-  background-color: #FCC;
-  border: solid 1px #C66;
+  #background-color: #FCC;
+  border: dashed 1px #F62217;
+  color:#F62217;
 }
 
 .fieldWithErrors {
