@@ -100,4 +100,58 @@ class Admin::PlotController < ApplicationController
     end
   end
 
+  def accessory_info
+    @plot = Plot.find(:all,:conditions => "deleted = false", :order => "id_plot")
+  end
+
+  def attach_file
+    if params[:plot].blank? || params[:upload].blank?
+      flash[:error] = "Nessun file o plot selezionato."
+      redirect_to :controller => "admin/plot",:action => "accessory_info"
+    else
+      import_file(params[:upload],params[:desc],params[:plot])
+      plot = Plot.find(params[:plot])
+      flash[:notice] = "Nuovo file aggiunto per il plot #{plot.id_plot}."
+      redirect_to :controller => "admin/plot",:action => "accessory_info"
+    end
+  end
+
+  def search_file
+    @file_list = PlotFile.find(:all,:conditions => ["plot_id = ?",params[:plot]])
+    if @file_list.blank?
+      @message_error = "Nessun file presente."
+      render :update do |page|
+        page.show "error"
+        page.replace_html "error", :partial => "layouts/remote_flash_message", :object => @message_error
+        page.replace_html "file_list", ""
+      end
+    else
+      render :update do |page|
+        page.hide "error"
+        page.replace_html "file_list", :partial => "file_list", :object => @file_list
+      end
+    end
+  end
+
+
+  private
+
+  def import_file(file,desc,plot)
+    name = (file)['datafile'].original_filename
+    id_plot = Plot.find(plot).id_plot
+    #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
+    directory = "#{RAILS_ROOT}/public/file_accessori_plot/#{id_plot}"
+    relative_path = "/file_accessori_plot/#{id_plot}/" + name
+    #creo la cartella
+    require 'ftools'
+    File.makedirs directory
+    #create the file path
+    path = File.join(directory, name)
+    #write the file
+    File.open(path, "wb") { |f| f.write(file['datafile'].read) }
+    #traccio il file nel db
+    new_file = PlotFile.new
+    new_file.fill_and_save!(name,path,relative_path,desc,plot)
+  end
+
 end

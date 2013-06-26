@@ -1,0 +1,40 @@
+
+<h1>Accessory Info</h1>
+<h2>Caricamento File</h2>
+<% form_tag({:controller=>'admin/plot', :action => 'attach_file'},:multipart => true) do %>
+    <p>
+      <%= label_tag "Seleziona il plot:" %><br />
+      <%= select_tag "plot","<option value=''>-Seleziona-</option>" + options_from_collection_for_select(@plot,:id,:id_plot) %>
+    </p>
+    <p>
+      <%= label_tag "Scegli il file da collegare:" %><br />
+      <%= file_field 'upload', 'datafile' %>
+    </p>
+    <p>
+      <%= label_tag "Descrizione File" %><br />
+      <%= text_field_tag :desc %>
+    </p>
+    <p>
+      <%= submit_tag 'Carica' %>
+    </p>
+<% end %>
+
+<h3>Archivio file accessori</h3>
+<div id="error" style="display:none;"></div>
+
+<% form_remote_tag(:url => {:controller=>'admin/plot', :action => 'search_file'}) do %>
+    <p>
+      <%= label_tag "Seleziona il plot:" %><br />
+      <%= select_tag "plot","<option value=''>-Seleziona-</option>" + options_from_collection_for_select(@plot,:id,:id_plot) %>
+    </p>
+    <p>
+      <%= submit_tag 'Cerca' %>
+    </p>
+<% end %>
+
+<div id="file_list">
+</div>
+
+<p>
+  <%= link_to "Plot",:controller => "admin/plot" %>
+</p>
