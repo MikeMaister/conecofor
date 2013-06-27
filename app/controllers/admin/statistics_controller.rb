@@ -112,7 +112,8 @@ class Admin::StatisticsController < ApplicationController
           page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
         end
       end
-    elsif @survey == "erb" && @plot != "all" && @field != "nif"
+      #se il tipo di rilevazione è erb sul signolo plot e attributo diverso da nif senza filtro
+    elsif @survey == "erb" && @plot != "all" && @field != "nif" && @specie.blank?
       data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
@@ -125,7 +126,23 @@ class Admin::StatisticsController < ApplicationController
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
         end
       end
-    elsif @survey == "erb" && @plot == "all" && @field != "nif"
+      #se il tipo di rilevazione è erb sul signolo plot e attributo diverso da nif con il filtro
+    elsif @survey == "erb" && @plot != "all" && @field != "nif" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY #{query_part}",@plot,@anno]
+      if data.at(0).n.to_i == 0
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_leg_erb(data)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
+      end
+    #se il tipo di rilevazione è erb su tutti i plot con attributo diverso da nif e senza filtro
+    elsif @survey == "erb" && @plot == "all" && @field != "nif" && @specie.blank?
       data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
@@ -138,11 +155,27 @@ class Admin::StatisticsController < ApplicationController
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
         end
       end
-    elsif @survey == "erb" && @plot != "all" && @field == "nif"
+    #se il tipo di rilevazione è erb su tutti i plot con attributo diverso da nif e con filtro
+    elsif @survey == "erb" && @plot == "all" && @field != "nif" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part}",@anno]
+      if data.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_filter_leg_erb(data)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
+      end
+     #se il tipo di rilevazione è erb su singolo plot con attributo = nif e senza filtro
+    elsif @survey == "erb" && @plot != "all" && @field == "nif" && @specie.blank?
       data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      if data1.at(0).n.to_i == 0 && data2.at(0).n.to_i == 0 && data3.at(0).n.to_i == 0
+      if pop_camp_null?(data1) == true && pop_camp_null?(data2) == true && pop_camp_null?(data3) == true
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
         end
@@ -153,7 +186,25 @@ class Admin::StatisticsController < ApplicationController
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
         end
       end
-    elsif @survey == "erb" && @plot == "all" && @field == "nif"
+    #se il tipo di rilevazione è erb su singolo plot con attributo = nif e con filtro
+    elsif @survey == "erb" && @plot != "all" && @field == "nif" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
+      if data1.blank? && data2.blank? && data3.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_nif_filtered(data1,data2,data3)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
+        end
+      end
+    #se il tipo di rilevazione è erb su singolo plot con attributo = nif e senza filtro
+    elsif @survey == "erb" && @plot == "all" && @field == "nif" && @specie.blank?
       data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
@@ -166,6 +217,23 @@ class Admin::StatisticsController < ApplicationController
         @file = regular_file(@stat_list)
         render :update do |page|
           page.replace_html "stat", :partial => "simple_stats", :object => [@stat_list,@file]
+        end
+      end
+    #se il tipo di rilevazione è erb su singolo plot con attributo = nif e con filtro
+    elsif @survey == "erb" && @plot == "all" && @field == "nif" && @specie.to_i == 1
+      query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
+      if data1.blank? && data2.blank? && data3.blank?
+        render :update do |page|
+          page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
+        end
+      else
+        @stat_list = format_data_nif_filtered(data1,data2,data3)
+        @file = leg_erb_filter_file(@stat_list,@specie)
+        render :update do |page|
+          page.replace_html "stat", :partial => "filter_stats", :object => [@subplot,@inout,@priest,@cod_strato,@specie,@stat_list]
         end
       end
     #se il tipo è cops ma senza l'aggiunta di altri filtri
@@ -309,6 +377,15 @@ class Admin::StatisticsController < ApplicationController
 
   private
 
+  #def pop_camp_null?(data)
+    #n = 0
+    #for i in 0..data.size-1
+      #n += data.at(i).n.to_i
+    #end
+    #return true if n == 0
+  #end
+
+
   def format_data(data)
     stat_list = Array.new
     for i in 0..data.size-1
@@ -324,6 +401,17 @@ class Admin::StatisticsController < ApplicationController
     for i in 0..data_cespi.size-1
       stat = Statistic.new
       stat.set_nif!(data_cespi.at(i),data_stoloni.at(i),data_getti.at(i))
+      stat_list << stat
+    end
+    return stat_list
+  end
+
+  def format_data_nif_filtered(data_cespi,data_stoloni,data_getti)
+    stat_list = Array.new
+    for i in 0..data_cespi.size-1
+      stat = StatisticFilter.new
+      stat.set_nif!(data_cespi.at(i),data_stoloni.at(i),data_getti.at(i))
+      stat.set_specie_filter!(data_cespi.at(i))
       stat_list << stat
     end
     return stat_list
