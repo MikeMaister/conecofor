@@ -1,0 +1,13 @@
+<h1>SurveySheet#index</h1>
+
+<% form_tag({:controller=>'survey_sheet', :action => 'import_file'},:multipart => true) do %>
+    <p>
+      <%= file_field 'upload', 'datafile' %>
+    </p>
+    <p>
+      <%= select_tag :survey,"<option value = "" >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Copl" => "copl","Cops" =>"cops"}) %>
+    </p>
+    <p>
+      <%= submit_tag 'Carica' %>
+    </p>
+<% end %>
