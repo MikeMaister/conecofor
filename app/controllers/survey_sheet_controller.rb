@@ -2,6 +2,7 @@ class SurveySheetController < ApplicationController
   include Import_survey
   before_filter :login_required
   before_filter :rilevatore_authorization_required
+  before_filter :rilevatore_approvato
   before_filter :campaign_active?
   before_filter :file? , :only => :import_file
   before_filter :pdf_file?, :only => :import_file

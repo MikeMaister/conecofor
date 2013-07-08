@@ -31,8 +31,23 @@ module Authentication
 
   def login_required
     unless logged_in?
-      flash[:error] = "Devi essere registrato e loggato per poter accedere alla pagina richiesta."
+      flash[:error] = "Deve essere un utente registrato e loggato per poter accedere alla pagina richiesta."
       store_target_location
+      redirect_to root_url
+    end
+  end
+
+  def logout_required
+    unless logged_in?.blank?
+      flash[:error] = "Deve effettuare il logout per poter accedere alla pagina richiesta."
+      store_target_location
+      redirect_to root_url
+    end
+  end
+
+  def rilevatore_approvato
+    unless (current_user.user_kind_id == UserKind.find_by_kind("Rilevatore").identifier) && (User.find(:first, :conditions => ["id = ? AND approved = true", current_user.id]))
+      flash[:error] = "La sua richiesta di registrazione non è stata ancora approvata."
       redirect_to root_url
     end
   end
@@ -40,12 +55,7 @@ module Authentication
   def rilevatore_authorization_required
     if current_user.user_kind_id != UserKind.find_by_kind("Rilevatore").identifier
       flash[:error] = "You don't have the authorization to access the requested page."
-      redirect_to :controller => "home" , :action => "index"
-    else
-      unless (current_user.user_kind_id == UserKind.find_by_kind("Rilevatore").identifier) && (User.find(:first, :conditions => ["id = ? AND approved = true", current_user.id]))
-        flash[:error] = "We are processing your request for cooperation, please be patient. You will be notified as soon as we have made a decision about it."
-        redirect_to :controller => "home" , :action => "index"
-      end
+      redirect_to root_url
     end
   end
 

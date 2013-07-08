@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :logout_required
 
   def new_rilevatore
     @user = User.new
