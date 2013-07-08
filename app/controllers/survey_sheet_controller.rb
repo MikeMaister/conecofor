@@ -1,20 +1,20 @@
 class SurveySheetController < ApplicationController
   include Import_survey
+  before_filter :login_required
+  before_filter :rilevatore_authorization_required
   before_filter :campaign_active?
   before_filter :file? , :only => :import_file
   before_filter :pdf_file?, :only => :import_file
   before_filter :survey_blank?, :only => :import_file
 
   def index
+    @active_campaign = current_active_campaign
+    @loaded_file = SheetFile.find(:all,:conditions => ["rilevatore_id = ? AND year = ?",current_user.id,@active_campaign.anno])
   end
 
   def import_file
     #carico il file nella directory e lo traccio nel db
     upload_save_file!(params[:upload],params[:survey])
-    #assegno i permessi di import per quel file
-    permits = ImportPermits.new
-    year = Campagne.find(:first,:conditions => "active = true").anno
-    permits.fill_and_save!(current_user.id,year,params[:survey])
     flash[:notice] = "Caricamento effettuato con successo."
     redirect_to :action => "index"
   end

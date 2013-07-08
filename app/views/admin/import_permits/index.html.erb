@@ -1,0 +1,16 @@
+<h1>Admin::ImportPermits#index</h1>
+<% form_remote_tag(:url => {:action => "show_file"}) do %>
+<p>
+  <%= label_tag :anno %><br />
+  <%= select_tag :year,"<option>-Seleziona-</option>" + options_from_collection_for_select(@year,:anno,:anno) %>
+</p>
+<p>
+  <%= label_tag :rilevatore %><br />
+  <%= select_tag :rilevatore, "<option>-Seleziona-</option>" + options_from_collection_for_select(@rilevatore,:id,:full_name)  %>
+</p>
+<p>
+  <%= submit_tag "Mostra Schede" %>
+</p>
+<% end %>
+
+<div id="file_list" style="display: none;" ></div>

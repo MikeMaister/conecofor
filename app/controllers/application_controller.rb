@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
+  def current_active_campaign
+    return active_campaign = Campagne.find(:first, :conditions => ["active = true"])
+  end
+
 end

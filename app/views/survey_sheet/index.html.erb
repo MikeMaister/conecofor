@@ -11,3 +11,12 @@
       <%= submit_tag 'Carica' %>
     </p>
 <% end %>
+
+<% unless @loaded_file.blank? %>
+    <h2>Schede di rilevamento caricate per: <%= @active_campaign.descrizione %></h2>
+    <ul>
+      <% @loaded_file.each do |lf| %>
+        <li><%= lf.survey %>: <%= lf.name %> </li>
+      <% end %>
+    </ul>
+<% end %>

@@ -1,0 +1,5 @@
+<ul>
+  <% for i in 0..@file.size-1 %>
+    <li><%= @file.at(i).survey %>: <%= link_to "#{@file.at(i).name}", :action => "download_file",:id => @file.at(i).id %> <% if @file.at(i).permits? == true %> <%= button_to_remote "Disattiva", :url =>{:action => "delete_permit", :file_id => @file.at(i).id } %> <%else%> <%= button_to_remote "Attiva", :url =>{:action => "create_permit", :file_id => @file.at(i).id } %> <%= button_to_remote("Elimina File",{:url =>{:action => "delete_file", :file_id => @file.at(i).id },:confirm => "Eliminare il file? Questo comporterà un nuovo upload del file da parte del rilevatore."}) %> <% end %></li>
+  <% end %>
+</ul>
