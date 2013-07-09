@@ -41,6 +41,47 @@
   </tbody>
 </table>
 
+
+<% unless @sr_warning.blank? %>
+    <% form_tag({:action => "force_warning"}) do %>
+    <h3>Warnings</h3>
+    <table>
+      <tbody>
+      <tr>
+        <th colspan="2">
+          <%= @file.file_name %>
+        </th>
+      </tr>
+      <tr>
+        <th>Error</th>
+        <th>Specie</th>
+        <th>Giustifica</th>
+      </tr>
+      <% for i in 0..@sr_warning.size-1%>
+          <tr>
+            <td><%= @sr_warning.at(i).error %></td>
+            <td><%= @sr_warning.at(i).specie %></td>
+            <td>
+              <% if session[:sr_error] == false && session[:sr_warning] == true  %>
+                <input id="<%= "giustifica" + i.to_s %>" name="giustifica[]" type="text" />
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <td>
+          <% if session[:sr_error] == false && session[:sr_warning] == true  %>
+              <%= submit_tag "Forza e Procedi" %>
+          <% end %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <% end %>
+<% end %>
+
+
+
 <p>
   <%= button_to_function("Print this Page", "javascript:print()") %>
 </p>

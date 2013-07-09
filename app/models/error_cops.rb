@@ -1,6 +1,18 @@
 class ErrorCops < ActiveRecord::Base
   set_table_name "error_cops"
 
+  def warnings_fill_and_save(record,error,file)
+    self.created_at = Time.now
+    self.error_kind = "Warning"
+    self.error = error
+    self.file_name_id = file.id
+    self.import_num = file.import_num
+    self.specie = Specie.find(record.specie_id).descrizione unless record.specie_id.blank?
+    self.deleted = false
+    self.cops_id = record.id
+    self.save
+  end
+
   def global_error_fill_and_save(error,file)
     self.created_at = Time.now
     self.error_kind = "Global Error"

@@ -516,4 +516,22 @@ module Erb_checks
     end
   end
 
+  #SR CHECK N3: verifica che le specie importate siano abituali o meno del plot
+  def habitual_species(record)
+    #carico il file
+    file = ImportFile.find(session[:file_id])
+    #estrapolo tutte le specie abituali del plot
+    habitual = Erbacee.find_by_sql ["select distinct specie_id as specie from erbacee where plot_id = ? and temp = false and approved = true and deleted = false",record.plot_id]
+    trovato = false
+    #scorro tutte le specie abituali
+    for i in 0..habitual.size-1
+      if record.specie_id == habitual.at(i).specie
+        trovato = true
+        break
+      end
+    end
+    #genero il warning se trovato == false
+    warning_error(record,"habitual species",file) if trovato == false
+  end
+
 end

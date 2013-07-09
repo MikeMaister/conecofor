@@ -43,4 +43,9 @@ class Erbacee < ActiveRecord::Base
     self.save
   end
 
+  def set_habitual_note(giustifica)
+    self.habitual_specie_note = giustifica
+    self.save
+  end
+
 end

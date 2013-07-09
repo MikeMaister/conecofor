@@ -236,6 +236,7 @@ module Import_survey
     session[:row_error] = nil
     session[:file_error] = nil
     session[:sr_error] = nil
+    session[:sr_warning] = nil
     session[:mp_error] = nil
     session[:mp_warning] = nil
     session[:mask_name] = nil

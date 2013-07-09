@@ -54,6 +54,8 @@ class ImportLegnoseController < ApplicationController
     @file = ImportFile.find(session[:file_id])
     #carico gli errori
     @sr_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Simplerange' ",session[:file_id],@file.import_num])
+    #carico gli errori di tipo warning
+    @sr_warning = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
   end
 
   def mp_error_summary
@@ -84,6 +86,42 @@ class ImportLegnoseController < ApplicationController
     end
   end
 
+  def force_warning
+    if session[:sr_error] == false && session[:sr_warning] == true
+      #carico tutte le giustifiche
+      @giustifiche = params[:giustifica]
+      if all_giustifiche?(@giustifiche) == true
+        #carico il file
+        @file = ImportFile.find(session[:file_id])
+        #carico gli errori di tipo warning
+        @sr_warning = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
+        #per ogni errore carico il corrispondente record in cops
+        for i in 0..@sr_warning.size-1
+          leg_record = Legnose.find(@sr_warning.at(i).legnose_id)
+          leg_record.set_habitual_note(@giustifiche.at(i))
+          #forzo l'errore
+          @sr_warning.at(i).force_it!
+        end
+        #continuo il controllo con gli mp_check
+        result = multiple_parameter_check
+        #reindirizzo in base al risultato della procedura
+        case result
+          when 0
+            set_permanent_data!("leg")
+            flash[:notice] = "Complimenti nessun errore."
+            redirect_to :action => "finish"
+          when 3 #MULTIPLE PARAMETER
+            #faccio il redirect verso il riepilogo errori
+            flash[:error]= "Controlla il report."
+            redirect_to :action => "mp_error_summary"
+        end
+      else
+        flash[:error] = "Compila tutte le giustifiche prima di procedere."
+        redirect_to :action => "sr_error_summary"
+      end
+    end
+  end
+
   def finish
     if session[:file_id].blank?
       redirect_to :controller => "import_legnose"
@@ -94,6 +132,21 @@ class ImportLegnoseController < ApplicationController
   end
 
   private
+
+  def all_giustifiche?(giustifiche)
+    vuota = false
+    for i in 0..giustifiche.size-1
+      if giustifiche.at(i).blank?
+        vuota = true
+        break
+      end
+    end
+    if vuota == false
+      return true
+      eslif vuota == true
+      return false
+    end
+  end
 
   def compliance_check
     #rintraccio il file da importare
@@ -192,9 +245,11 @@ class ImportLegnoseController < ApplicationController
         data_range(rows.at(i))
         #applico i src
         do_src_on_rows(rows.at(i),file.campagne_id)
+        #SR Check 2
+        habitual_species(rows.at(i)) unless rows.at(i).specie_id.blank?
       end
       #controllo se ci sono errori simple range
-      if session[:sr_error] == true
+      if session[:sr_error] == true || session[:sr_warning] == true
         result = 2
       elsif session[:sr_error] == false
         result = 0
@@ -264,4 +319,11 @@ class ImportLegnoseController < ApplicationController
     #segnalo che c'è stato un errore
     session[:mp_warning] = true
   end
+
+  def warning_error(record,error,file)
+    warning = ErrorLegnose.new
+    warning.warnings_fill_and_save(record,error,file)
+    session[:sr_warning] = true
+  end
+
 end

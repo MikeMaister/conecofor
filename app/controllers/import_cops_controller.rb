@@ -54,6 +54,8 @@ class ImportCopsController < ApplicationController
     @file = ImportFile.find(session[:file_id])
     #carico gli errori
     @sr_err = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Simplerange' ",session[:file_id],@file.import_num])
+    #carico gli errori di tipo warning
+    @sr_warning = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
   end
 
   def mp_error_summary
@@ -83,6 +85,42 @@ class ImportCopsController < ApplicationController
     end
   end
 
+  def force_warning
+    if session[:sr_error] == false && session[:sr_warning] == true
+      #carico tutte le giustifiche
+      @giustifiche = params[:giustifica]
+      if all_giustifiche?(@giustifiche) == true
+        #carico il file
+        @file = ImportFile.find(session[:file_id])
+        #carico gli errori di tipo warning
+        @sr_warning = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
+        #per ogni errore carico il corrispondente record in cops
+        for i in 0..@sr_warning.size-1
+          cops_record = Cops.find(@sr_warning.at(i).cops_id)
+          cops_record.set_habitual_note(@giustifiche.at(i))
+          #forzo l'errore
+          @sr_warning.at(i).force_it!
+        end
+        #continuo il controllo con gli mp_check
+        result = multiple_parameter_check
+        #reindirizzo in base al risultato della procedura
+        case result
+          when 0
+            set_permanent_data!("cops")
+            flash[:notice] = "Complimenti nessun errore."
+            redirect_to :action => "finish"
+          when 3 #MULTIPLE PARAMETER
+            #faccio il redirect verso il riepilogo errori
+            flash[:error]= "Controlla il report."
+            redirect_to :action => "mp_error_summary"
+        end
+      else
+        flash[:error] = "Compila tutte le giustifiche prima di procedere."
+        redirect_to :action => "sr_error_summary"
+      end
+    end
+  end
+
   def finish
     if session[:file_id].blank?
       redirect_to :controller => "import_cops"
@@ -93,6 +131,21 @@ class ImportCopsController < ApplicationController
   end
 
   private
+
+  def all_giustifiche?(giustifiche)
+    vuota = false
+    for i in 0..giustifiche.size-1
+      if giustifiche.at(i).blank?
+        vuota = true
+        break
+      end
+    end
+    if vuota == false
+      return true
+    eslif vuota == true
+      return false
+    end
+  end
 
   def compliance_check
     #rintraccio il file da importare
@@ -191,9 +244,11 @@ class ImportCopsController < ApplicationController
       for i in (0..rows.size-1)
         #SR Check 1
         data_range(rows.at(i))
+        #SR Check 2
+        habitual_species(rows.at(i)) unless rows.at(i).specie_id.blank?
       end
       #controllo se ci sono errori simple range
-      if session[:sr_error] == true
+      if session[:sr_error] == true || session[:sr_warning]
         result = 2
       elsif session[:sr_error] == false
         result = 0
@@ -253,6 +308,12 @@ class ImportCopsController < ApplicationController
     #compilo l'errore
     @mp_error.fill_and_save_from_db(record,"Multipleparameter",error,session[:file_id])
     session[:mp_error] = true
+  end
+
+  def warning_error(record,error,file)
+    warning = ErrorCops.new
+    warning.warnings_fill_and_save(record,error,file)
+    session[:sr_warning] = true
   end
 
 end

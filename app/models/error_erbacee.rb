@@ -1,6 +1,18 @@
 class ErrorErbacee < ActiveRecord::Base
  set_table_name "error_erbacee"
 
+ def warnings_fill_and_save(record,error,file)
+   self.created_at = Time.now
+   self.error_kind = "Warning"
+   self.error = error
+   self.file_name_id = file.id
+   self.import_num = file.import_num
+   self.specie = Specie.find(record.specie_id).descrizione unless record.specie_id.blank?
+   self.deleted = false
+   self.erbacee_id = record.id
+   self.save
+ end
+
   def fill_and_save_from_file(record,error_kind,error,row,file_id)
     self.created_at = Time.now
     self.error_kind = error_kind
