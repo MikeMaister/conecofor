@@ -72,6 +72,11 @@ class Admin::EufloraController < ApplicationController
 
   def save_edit
     @new_euflora = Euflora.find(params[:id])
+    #prima di salvare la specie con i nuovi dati, effettuo il track della stessa
+    track_it(@new_euflora)
+    #fix per paginazione
+    #(necessario se non si cambia mai pagina prima di effettuare una modifica)
+    params[:page] = 1 if params[:page].blank?
     if @new_euflora.update_eu(params[:codice_eu],params[:descrizione],params[:famiglia],params[:specie],params[:specie_vs_id])
       @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."
@@ -99,5 +104,29 @@ class Admin::EufloraController < ApplicationController
       page.replace_html "euflora_list", :partial => "eu_list", :object => [@euflora,@message]
     end
   end
+
+  private
+
+  def track_it(euflora)
+    #istanzio un nuovo oggetto track specie
+    track = TrackEuflora.new
+    #se non ha specie vs
+    if euflora.specie_vs_id.blank?
+      #salvo senza i parametri specie_vs e listspe
+      track.no_vs_fill_and_save!(euflora)
+    else
+      #carico i dati specie_vs
+      specie_vs = SpecieVs.find(euflora.specie_vs_id)
+      if specie_vs.deleted == true
+        #salvo senza i parametri specie_vs e listspe
+        track.no_vs_fill_and_save!(euflora)
+      else
+        #salvo con i parametri specie_vs e listspe
+        list_spe = Listspe.find(specie_vs.listspe_id)
+        track.fill_and_save!(euflora,specie_vs,list_spe)
+      end
+    end
+  end
+
 
 end
