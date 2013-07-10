@@ -72,6 +72,12 @@ class Admin::PignattiController < ApplicationController
 
   def save_edit
     @new_specie = Specie.find(params[:id])
+    #prima di salvare la specie con i nuovi dati, effettuo il track della stessa
+    track_it(@new_specie)
+    #fix per paginazione
+    #(necessario se non si cambia mai pagina prima di effettuare una modifica)
+    params[:page] = 1 if params[:page].blank?
+    #proseguo con l'aggiornamento
     if @new_specie.update_specie(params[:descrizione],params[:euflora_id])
       @pignatti = Specie.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."
@@ -97,6 +103,23 @@ class Admin::PignattiController < ApplicationController
       page.hide "new_specie"
       page.hide "display_input_errors"
       page.replace_html "pignatti_list", :partial => "specie_list", :object => [@pignatti,@message]
+    end
+  end
+
+  private
+
+  def track_it(pignatti)
+    #istanzio un nuovo oggetto track specie
+    track = TrackSpecie.new
+    #cerco i corrispettivi dati europei
+    euflora = Euflora.find(pignatti.euflora_id)
+    #se non esistono
+    if euflora.blank? || euflora.deleted == true
+      #salvo i dati senza i corrispettivi europei
+      track.no_eu_fill_and_save!(pignatti)
+    elsif !euflora.blank? && euflora.deleted == false
+      #salvo i dati con i corrispettivi europei
+      track.fill_and_save!(pignatti,euflora)
     end
   end
 
