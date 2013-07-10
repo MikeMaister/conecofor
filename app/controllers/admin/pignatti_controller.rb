@@ -111,15 +111,20 @@ class Admin::PignattiController < ApplicationController
   def track_it(pignatti)
     #istanzio un nuovo oggetto track specie
     track = TrackSpecie.new
-    #cerco i corrispettivi dati europei
-    euflora = Euflora.find(pignatti.euflora_id)
+    #i corrispettivi dati europei
     #se non esistono
-    if euflora.blank? || euflora.deleted == true
+    if pignatti.euflora_id.blank?
       #salvo i dati senza i corrispettivi europei
       track.no_eu_fill_and_save!(pignatti)
-    elsif !euflora.blank? && euflora.deleted == false
-      #salvo i dati con i corrispettivi europei
-      track.fill_and_save!(pignatti,euflora)
+    else
+      euflora = Euflora.find(pignatti.euflora_id)
+      if euflora.deleted == false
+        #salvo i dati con i corrispettivi europei
+        track.fill_and_save!(pignatti,euflora)
+      else
+        #salvo i dati senza i corrispettivi europei
+        track.no_eu_fill_and_save!(pignatti)
+      end
     end
   end
 
