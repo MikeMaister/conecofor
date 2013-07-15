@@ -1,0 +1,20 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag "evoluzione_specie"%>
+<%end%>
+
+<h1>Admin::EvoluzioneSpecie#index</h1>
+<table>
+  <tr>
+    <td colspan="2">Filtro</td>
+  </tr>
+  <tr>
+    <td><%= button_to_remote "Rilevazione", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_psc"} %></td>
+    <td><%= button_to_remote "Completo", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_all"} %></td>
+  </tr>
+</table>
+
+
+
+<div id="input_mask" style="display: none;"></div>
+
+<div id="result" style="display: none;"></div>
