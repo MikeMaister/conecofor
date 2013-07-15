@@ -9,6 +9,7 @@ class TrackSpecie < ActiveRecord::Base
     self.eu_desc = euflora.descrizione
     self.eu_spe = euflora.specie
     self.specie_id = pignatti.id
+    self.euflora_id = euflora.id
     self.save
   end
 
@@ -20,6 +21,7 @@ class TrackSpecie < ActiveRecord::Base
     self.eu_desc = nil
     self.eu_spe = nil
     self.specie_id = pignatti.id
+    self.euflora_id = nil
     self.save
   end
 
