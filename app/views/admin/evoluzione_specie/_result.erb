@@ -52,9 +52,12 @@
       <% unless @eu_evolution.at(i).at(1).blank? %>
           <% for j in 0..@eu_evolution.at(i).at(1).size-1 %>
               <div class="evolution">
-                <p><strong>Stato <%= @eu_evolution.at(i).at(1).size - j %></strong>
-                  <%= @eu_evolution.at(i).at(1).at(j).descrizione %>
-                  <%= @eu_evolution.at(i).at(1).at(j).data %>
+                <p><strong>Stato <%= @eu_evolution.at(i).at(1).size - j %></strong><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).data %><br /><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).codice_eu %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).descrizione %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).famiglia %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).specie %><br />
                 </p>
               </div>
           <% end %>
