@@ -40,13 +40,149 @@ class Admin::EvoluzioneSpecieController < ApplicationController
         #carico i dati dell'evoluzione
         @evolution,@eu_evolution = get_evolution(specie)
     end
+    #creazione file .xls
+    @file = create_xls(@evolution,@eu_evolution)
     render :update do |page|
       page.show "result"
-      page.replace_html "result", :partial => "result", :object => [@evolution,@eu_evolution]
+      page.replace_html "result", :partial => "result", :object => [@evolution,@eu_evolution,@file]
     end
   end
 
+  def download_file
+    @file = OutputFile.find(params[:file])
+    send_file(@file.path, :filename => "#{@file.file_name}")
+  end
+
+
   private
+
+  def create_xls(pignatti,euflora)
+    #creo il nuovo documento
+    stat_file = Spreadsheet::Workbook.new
+
+    #SCHEDA PIGNATTI
+
+    #aggiungo un nuovo foglio di lavoro
+    sheet1 = stat_file.create_worksheet :name => 'Pignatti'
+    #nella prima riga metto le intestazioni
+    #imposto un contatore di posizione
+    posizione_y = 0
+    posizione_x = 0
+    #scorro tutte le righe
+    for i in 0..pignatti.size-1
+      sheet1[posizione_y,posizione_x+1] = "Stato Attuale"
+      sheet1[posizione_y+1,posizione_x+1] = "Pignatti"
+      sheet1[posizione_y+2,posizione_x] = "Descrizione"
+      sheet1[posizione_y+2,posizione_x+1] = pignatti.at(i).at(0).descrizione
+      sheet1[posizione_y+3,posizione_x+1] = "Euflora"
+      sheet1[posizione_y+4,posizione_x] = "Codice Europeo"
+      sheet1[posizione_y+4,posizione_x+1] = Euflora.find(pignatti.at(i).at(0).euflora_id).codice_eu
+      sheet1[posizione_y+5,posizione_x] = "Famiglia"
+      sheet1[posizione_y+5,posizione_x+1] = Euflora.find(pignatti.at(i).at(0).euflora_id).famiglia
+      sheet1[posizione_y+6,posizione_x] = "Descrizione"
+      sheet1[posizione_y+6,posizione_x+1] = Euflora.find(pignatti.at(i).at(0).euflora_id).descrizione
+      sheet1[posizione_y+7,posizione_x] = "Specie"
+      sheet1[posizione_y+7,posizione_x+1] = Euflora.find(pignatti.at(i).at(0).euflora_id).specie
+      #scorro gli stati
+      for j in 0..pignatti.at(i).at(1).size-1
+        unless pignatti.at(i).at(1).at(j).blank?
+          sheet1[posizione_y,posizione_x+2] = "Stato #{pignatti.at(i).at(1).size - j}"
+          sheet1[posizione_y+1,posizione_x+2] = "Pignatti"
+          sheet1[posizione_y+2,posizione_x+2] = pignatti.at(i).at(1).at(j).spe_desc
+          sheet1[posizione_y+3,posizione_x+2] = "Euflora"
+          sheet1[posizione_y+4,posizione_x+2] = pignatti.at(i).at(1).at(j).codice_eu
+          sheet1[posizione_y+5,posizione_x+2] = pignatti.at(i).at(1).at(j).eu_fam
+          sheet1[posizione_y+6,posizione_x+2] = pignatti.at(i).at(1).at(j).eu_desc
+          sheet1[posizione_y+7,posizione_x+2] = pignatti.at(i).at(1).at(j).eu_spe
+          posizione_x += 1
+        end
+      end
+      #posizione x torna al punto di partenza
+      posizione_x = 0
+      #formattazione file (deve stare qua in mezzo)
+      #TODO Impostare i colori
+      bold = Spreadsheet::Format.new :weight => :bold
+      sheet1.row(posizione_y).default_format = bold
+      sheet1.row(posizione_y+1).default_format = bold
+      sheet1.column(posizione_x).default_format = bold
+      sheet1.row(posizione_y+3).default_format = bold
+      #salta di 3 in più delle righe impostate
+      posizione_y += 10
+    end
+
+    #SCHEDA EUFLORA
+
+
+    #aggiungo un nuovo foglio di lavoro
+    sheet2 = stat_file.create_worksheet :name => 'Euflora'
+    #nella prima riga metto le intestazioni
+    #imposto un contatore di posizione
+    posizione_y = 0
+    posizione_x = 0
+    #scorro tutte le righe
+    for i in 0..euflora.size-1
+      sheet2[posizione_y,posizione_x+1] = "Stato Attuale"
+      sheet2[posizione_y+1,posizione_x+1] = "Euflora"
+      sheet2[posizione_y+2,posizione_x] = "Codice Europeo"
+      sheet2[posizione_y+2,posizione_x+1] = euflora.at(i).at(0).codice_eu
+      sheet2[posizione_y+3,posizione_x] = "Famiglia"
+      sheet2[posizione_y+3,posizione_x+1] = euflora.at(i).at(0).famiglia
+      sheet2[posizione_y+4,posizione_x] = "Descrizione"
+      sheet2[posizione_y+4,posizione_x+1] = euflora.at(i).at(0).descrizione
+      sheet2[posizione_y+5,posizione_x] = "Specie"
+      sheet2[posizione_y+5,posizione_x+1] = euflora.at(i).at(0).specie
+      sheet2[posizione_y+6,posizione_x+1] = "Specie VS"
+      sheet2[posizione_y+7,posizione_x] = "Species"
+      sheet2[posizione_y+7,posizione_x+1] = SpecieVs.find(euflora.at(i).at(0).specie_vs_id).species unless euflora.at(i).at(0).specie_vs_id.blank?
+      sheet2[posizione_y+8,posizione_x] = "Listspe"
+      sheet2[posizione_y+8,posizione_x+1] = SpecieVs.find(euflora.at(i).at(0).specie_vs_id).listspe unless euflora.at(i).at(0).specie_vs_id.blank?
+      sheet2[posizione_y+9,posizione_x] = "Descrizione"
+      sheet2[posizione_y+9,posizione_x+1] = SpecieVs.find(euflora.at(i).at(0).specie_vs_id).descrizione unless euflora.at(i).at(0).specie_vs_id.blank?
+      #scorro gli stati
+      for j in 0..euflora.at(i).at(1).size-1
+        unless euflora.at(i).at(1).at(j).blank?
+          sheet2[posizione_y,posizione_x+2] = "Stato #{euflora.at(i).at(1).size - j}"
+          sheet2[posizione_y+1,posizione_x+2] = "Euflora"
+          sheet2[posizione_y+2,posizione_x+2] = euflora.at(i).at(1).at(j).codice_eu
+          sheet2[posizione_y+3,posizione_x+2] = euflora.at(i).at(1).at(j).famiglia
+          sheet2[posizione_y+4,posizione_x+2] = euflora.at(i).at(1).at(j).descrizione
+          sheet2[posizione_y+5,posizione_x+2] = euflora.at(i).at(1).at(j).specie
+          sheet2[posizione_y+6,posizione_x+2] = "Specie VS"
+          sheet2[posizione_y+7,posizione_x+2] = euflora.at(i).at(1).at(j).vs_species
+          sheet2[posizione_y+8,posizione_x+2] = euflora.at(i).at(1).at(j).vs_listspe
+          sheet2[posizione_y+9,posizione_x+2] = euflora.at(i).at(1).at(j).vs_descrizione
+          posizione_x += 1
+        end
+      end
+      #posizione x torna al punto di partenza
+      posizione_x = 0
+      #formattazione file (deve stare qua in mezzo)
+      #TODO Impostare i colori
+      bold = Spreadsheet::Format.new :weight => :bold
+      sheet2.row(posizione_y).default_format = bold
+      sheet2.row(posizione_y+1).default_format = bold
+      sheet2.column(posizione_x).default_format = bold
+      sheet2.row(posizione_y+6).default_format = bold
+      #salta di 9
+      posizione_y += 12
+    end
+
+    #creo la directory
+    dir = "#{RAILS_ROOT}/public/Evoluzione Specie Plot/"
+    #imposto il nome del file
+    file_name = "tracking specie.xls"
+    #imposto il full_path e la relative_path
+    full_path = dir + file_name
+    relative_path = "/Evoluzione Specie Plot/#{file_name}"
+    require 'ftools'
+    File.makedirs dir
+    #scrivo il file
+    stat_file.write "#{RAILS_ROOT}/public/Evoluzione Specie Plot/#{file_name}"
+    #creo l'oggetto file
+    new_stat_file = OutputFile.new
+    new_stat_file.fill_and_save(file_name,full_path,relative_path,"Tracking Specie")
+    return new_stat_file
+  end
 
   def get_evolution(data)
     #lista evoluzione completa

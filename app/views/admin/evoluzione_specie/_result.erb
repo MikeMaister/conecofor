@@ -3,7 +3,7 @@
   <% for i in 0..@evolution.size-1 %>
     <div class="row">
       <div class="p_attuale">
-        <p><strong>Stato Attuale:</strong><br /><br />
+        <p><strong class="block_state">Stato Attuale</strong><br /><br />
           <strong>Pignatti</strong><br />
           <%= @evolution.at(i).at(0).descrizione %><br /><br />
           <% unless @evolution.at(i).at(0).euflora_id.blank? %>
@@ -18,7 +18,7 @@
         <% unless @evolution.at(i).at(1).blank? %>
             <% for j in 0..@evolution.at(i).at(1).size-1 %>
               <div class="evolution">
-                <p><strong>Stato <%= @evolution.at(i).at(1).size - j %></strong><br />
+                <p><strong class="block_state">Stato <%= @evolution.at(i).at(1).size - j %></strong><br />
                   <%= @evolution.at(i).at(1).at(j).data %><br /><br />
 
                   <strong>Pignatti</strong><br />
@@ -42,22 +42,32 @@
   <% for i in 0..@eu_evolution.size-1 %>
     <div class="row">
       <div class="e_attuale">
-      <p> <strong>Stato Attuale:</strong><br /><br />
+      <p> <strong class="block_state">Stato Attuale</strong><br /><br />
         <%= @eu_evolution.at(i).at(0).codice_eu %><br />
         <%= @eu_evolution.at(i).at(0).descrizione %><br />
         <%= @eu_evolution.at(i).at(0).famiglia %><br />
-        <%= @eu_evolution.at(i).at(0).specie %><br />
+        <%= @eu_evolution.at(i).at(0).specie %><br /><br />
+        <strong class="block_state">Specie VS</strong><br /><br />
+        <% unless @eu_evolution.at(i).at(0).specie_vs_id.blank?  %>
+            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).species %><br />
+            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).listspe %><br />
+            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).descrizione %><br />
+        <% end %>
       </p>
       </div>
       <% unless @eu_evolution.at(i).at(1).blank? %>
           <% for j in 0..@eu_evolution.at(i).at(1).size-1 %>
               <div class="evolution">
-                <p><strong>Stato <%= @eu_evolution.at(i).at(1).size - j %></strong><br />
+                <p><strong class="block_state">Stato <%= @eu_evolution.at(i).at(1).size - j %></strong><br />
                   <%= @eu_evolution.at(i).at(1).at(j).data %><br /><br />
                   <%= @eu_evolution.at(i).at(1).at(j).codice_eu %><br />
                   <%= @eu_evolution.at(i).at(1).at(j).descrizione %><br />
                   <%= @eu_evolution.at(i).at(1).at(j).famiglia %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).specie %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).specie %><br /><br />
+                  <strong class="block_state">Specie VS</strong><br /><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).vs_species %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).vs_listspe %><br />
+                  <%= @eu_evolution.at(i).at(1).at(j).vs_descrizione %><br />
                 </p>
               </div>
           <% end %>
@@ -65,6 +75,10 @@
     </div>
   <% end %>
 </div>
+
+<p>
+  <%= link_to "Download File", :action => "download_file", :file => @file.id %>
+</p>
 
 
 <div id="a_porco" ></div>
