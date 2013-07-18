@@ -5,6 +5,17 @@ class Cops < ActiveRecord::Base
     #pre-carico quello che mi serve evitando di fallo svariate volte
     file = ImportFile.find(file_id)
     plot = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false", record.cod_plot])
+    pignatti = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]) unless record.specie.blank?
+    unless pignatti.blank?
+      unless pignatti.euflora_id.blank?
+        euflora = Euflora.find(pignatti.euflora_id)
+        unless euflora.blank?
+          unless euflora.specie_vs_id.blank?
+            specie_vs = SpecieVs.find(euflora.specie_vs_id)
+          end
+        end
+      end
+    end
 
     self.id_plot = plot.id_plot
     self.subplot = record.subplot
@@ -15,7 +26,7 @@ class Cops < ActiveRecord::Base
     self.note = record.note
     self.data = record.data
     self.campagne_id = file.campagne_id
-    self.specie_id = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id unless record.specie.blank?
+    self.specie_id = pignatti.id #Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id unless record.specie.blank?
     self.plot_id = plot.id
     self.numero_plot = record.cod_plot
     self.temp = true
@@ -26,6 +37,11 @@ class Cops < ActiveRecord::Base
     self.substrate_type_id = SubstrateType.find(:first, :conditions => ["code = ?",record.substrate]).id if !record.substrate.blank?
     self.certainty_species_determination_id = CertaintySpeciesDetermination.find(:first, :conditions => ["code = ?",record.certainty_species_determination]).id if !record.certainty_species_determination.blank?
     self.deleted = false
+    self.descrizione_pignatti = pignatti.descrizione unless pignatti.blank?
+    self.codice_europeo = euflora.codice_eu unless euflora.blank?
+    self.descrizione_europea = euflora.descrizione unless euflora.blank?
+    self.specie_vs = specie_vs.species unless specie_vs.blank?
+    self.listspe = specie_vs.listspe unless specie_vs.blank?
     self.save
   end
 
