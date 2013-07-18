@@ -26,7 +26,7 @@ class Cops < ActiveRecord::Base
     self.note = record.note
     self.data = record.data
     self.campagne_id = file.campagne_id
-    self.specie_id = pignatti.id #Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id unless record.specie.blank?
+    self.specie_id = pignatti.id unless pignatti.blank? #Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]).id unless record.specie.blank?
     self.plot_id = plot.id
     self.numero_plot = record.cod_plot
     self.temp = true

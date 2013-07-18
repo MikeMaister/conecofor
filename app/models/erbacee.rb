@@ -3,8 +3,19 @@ class Erbacee < ActiveRecord::Base
 
   def fill_temp(record,file_id,row)
     plot = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false", record.cod_plot])
-    specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]) unless record.specie.blank?
+    #specie = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]) unless record.specie.blank?
     file = ImportFile.find(file_id)
+    pignatti = Specie.find(:first, :conditions => ["descrizione = ? AND deleted = false", record.specie]) unless record.specie.blank?
+    unless pignatti.blank?
+      unless pignatti.euflora_id.blank?
+        euflora = Euflora.find(pignatti.euflora_id)
+        unless euflora.blank?
+          unless euflora.specie_vs_id.blank?
+            specie_vs = SpecieVs.find(euflora.specie_vs_id)
+          end
+        end
+      end
+    end
 
     self.id_plot = plot.id_plot
     self.subplot = record.subplot
@@ -21,7 +32,7 @@ class Erbacee < ActiveRecord::Base
     self.note = record.note
     self.data = record.data
     self.campagne_id = file.campagne_id
-    self.specie_id = specie.id unless specie.blank?
+    self.specie_id = pignatti.id unless pignatti.blank? #specie.id unless specie.blank?
     self.plot_id = plot.id
     self.numero_plot = plot.numero_plot
     self.temp = true
@@ -30,6 +41,11 @@ class Erbacee < ActiveRecord::Base
     self.import_num = file.import_num
     self.approved = false
     self.deleted = false
+    self.descrizione_pignatti = pignatti.descrizione unless pignatti.blank?
+    self.codice_europeo = euflora.codice_eu unless euflora.blank?
+    self.descrizione_europea = euflora.descrizione unless euflora.blank?
+    self.specie_vs = specie_vs.species unless specie_vs.blank?
+    self.listspe = specie_vs.listspe unless specie_vs.blank?
     self.save
   end
 
