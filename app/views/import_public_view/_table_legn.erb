@@ -20,8 +20,8 @@
             <td><%= @import_data.at(i).id_plot %></td>
             <td><%= @import_data.at(i).subplot %></td>
             <td>
-              <% unless @import_data.at(i).specie_id.blank? %>
-                  <%= Specie.find(@import_data.at(i).specie_id).descrizione %>
+              <% unless @import_data.at(i).descrizione_pignatti.blank? %>
+                  <%= @import_data.at(i).descrizione_pignatti %>
               <% end %>
             </td>
             <td><%= @import_data.at(i).copertura %></td>
