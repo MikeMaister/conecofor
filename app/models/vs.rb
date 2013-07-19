@@ -4,7 +4,7 @@ class Vs #< ActiveRecord::Base
                 :class,:param,:parlist,:value,:unit,:flagqua,:flagsta
 
   def initialize(record)
-    vs_spec = get_specie_vs(record)
+    #vs_spec = get_specie_vs(record)
 
     @subprog = "VS"
     @area = Plot.find(record.plot_id).im
@@ -16,8 +16,8 @@ class Vs #< ActiveRecord::Base
     @yyyymm = record.data.strftime("%Y%m")
     @spool = record.subplot
     @pflag = nil
-    @species = vs_spec.species if vs_spec
-    @listspe = vs_spec.listspe if vs_spec
+    @species = record.specie_vs #vs_spec.species if vs_spec
+    @listspe = record.listspe #vs_spec.listspe if vs_spec
     @class = nil
     @param = get_param(record.codice_strato)
     @parlist = "IM"
