@@ -11,7 +11,7 @@ class Vem #< ActiveRecord::Base
     #1,2,3 o 4 a seconda di stagione e in/out
     @survey_number = set_survey_number(record)
     #codice eu della specie
-    @species_code = Euflora.find(Specie.find(record.specie_id).euflora_id).codice_eu
+    @species_code = record.codice_europeo #Euflora.find(Specie.find(record.specie_id).euflora_id).codice_eu
     #codice_strato
     @layer = record.codice_strato
     #substrate
@@ -27,7 +27,7 @@ class Vem #< ActiveRecord::Base
   private
 
   def set_note(record,area)
-    note = Cops.find(:all, :conditions => ["campagne_id = ? and plot_id = ? and in_out = ? and priest = ? and specie_id = ? and codice_strato = ? and approved = true and deleted = false and temp = false",record.campagne_id,record.plot_id,record.in_out,record.priest,record.specie_id,record.codice_strato])
+    note = Cops.find(:all, :conditions => ["campagne_id = ? and plot_id = ? and in_out = ? and priest = ? and descrizione_pignatti = ? and codice_strato = ? and approved = true and deleted = false and temp = false",record.campagne_id,record.plot_id,record.in_out,record.priest,record.descrizione_pignatti,record.codice_strato])
     note_list = "[#{area}]"
     for i in 0..note.size-1
       note_list = note_list + " #{i+1})#{note.at(i).note}" unless note.at(i).note.blank?
