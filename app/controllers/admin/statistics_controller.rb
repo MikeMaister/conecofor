@@ -56,7 +56,7 @@ class Admin::StatisticsController < ApplicationController
 
     #se il tipo è legnose e non ci sono filtri, sul singolo plot
     if @survey == "leg" && @plot != "all" && @specie.blank?
-      data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -70,7 +70,7 @@ class Admin::StatisticsController < ApplicationController
       end
       #se il tipo è legnose e non ci sono filtri, su tutti i plot
     elsif @survey == "leg" && @plot == "all" && @specie.blank?
-      data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -85,7 +85,7 @@ class Admin::StatisticsController < ApplicationController
     #se il tipo è leg sul plot singolo con il filtro specie
     elsif @survey == "leg" && @plot != "all" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Legnose.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY #{query_part}",@plot,@anno]
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode, descrizione_europea as eudesc, descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY #{query_part}",@plot,@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -100,7 +100,7 @@ class Admin::StatisticsController < ApplicationController
     #se il tipo è leg su tutti i plot con il filtro specie
     elsif @survey == "leg" && @plot == "all" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Legnose.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY plot, #{query_part}",@anno]
+      data = Legnose.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM legnose WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND legnose.deleted = false GROUP BY plot, #{query_part}",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -114,7 +114,7 @@ class Admin::StatisticsController < ApplicationController
       end
       #se il tipo di rilevazione è erb sul signolo plot e attributo diverso da nif senza filtro
     elsif @survey == "erb" && @plot != "all" && @field != "nif" && @specie.blank?
-      data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -129,7 +129,7 @@ class Admin::StatisticsController < ApplicationController
       #se il tipo di rilevazione è erb sul signolo plot e attributo diverso da nif con il filtro
     elsif @survey == "erb" && @plot != "all" && @field != "nif" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY #{query_part}",@plot,@anno]
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE  id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY #{query_part}",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -143,7 +143,7 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo di rilevazione è erb su tutti i plot con attributo diverso da nif e senza filtro
     elsif @survey == "erb" && @plot == "all" && @field != "nif" && @specie.blank?
-      data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -158,7 +158,7 @@ class Admin::StatisticsController < ApplicationController
     #se il tipo di rilevazione è erb su tutti i plot con attributo diverso da nif e con filtro
     elsif @survey == "erb" && @plot == "all" && @field != "nif" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part}",@anno]
+      data = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part}",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -172,9 +172,9 @@ class Admin::StatisticsController < ApplicationController
       end
      #se il tipo di rilevazione è erb su singolo plot con attributo = nif e senza filtro
     elsif @survey == "erb" && @plot != "all" && @field == "nif" && @specie.blank?
-      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
-      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if pop_camp_null?(data1) == true && pop_camp_null?(data2) == true && pop_camp_null?(data3) == true
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -189,9 +189,9 @@ class Admin::StatisticsController < ApplicationController
     #se il tipo di rilevazione è erb su singolo plot con attributo = nif e con filtro
     elsif @survey == "erb" && @plot != "all" && @field == "nif" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
-      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
-      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY specie_id",@plot,@anno]
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY descrizione_pignatti",@plot,@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY descrizione_pignatti",@plot,@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY descrizione_pignatti",@plot,@anno]
       if data1.blank? && data2.blank? && data3.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -205,9 +205,9 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo di rilevazione è erb su singolo plot con attributo = nif e senza filtro
     elsif @survey == "erb" && @plot == "all" && @field == "nif" && @specie.blank?
-      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
-      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data1.blank? && data2.blank? && data3.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -222,9 +222,9 @@ class Admin::StatisticsController < ApplicationController
     #se il tipo di rilevazione è erb su singolo plot con attributo = nif e con filtro
     elsif @survey == "erb" && @plot == "all" && @field == "nif" && @specie.to_i == 1
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
-      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
-      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,specie_id,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee,euflora,specie WHERE euflora_id = euflora.id AND specie_id = specie.id AND plot_id IN (select id from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,specie_id",@anno]
+      data1 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_cespi) AS max, MIN(numero_cespi) AS min,AVG(numero_cespi) as med, STDDEV(numero_cespi) as std, COUNT(numero_cespi) as n FROM erbacee WHERE id_plot IN (select id_plot from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,descrizione_pignatti",@anno]
+      data2 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_stoloni) AS max, MIN(numero_stoloni) AS min,AVG(numero_stoloni) as med, STDDEV(numero_stoloni) as std, COUNT(numero_stoloni) as n FROM erbacee WHERE id_plot IN (select id_plot from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,descrizione_pignatti",@anno]
+      data3 = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(numero_getti) AS max, MIN(numero_getti) AS min,AVG(numero_getti) as med, STDDEV(numero_getti) as std, COUNT(numero_getti) as n FROM erbacee WHERE id_plot IN (select id_plot from plot where deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY plot,#{query_part} ORDER BY plot,descrizione_pignatti",@anno]
       if data1.blank? && data2.blank? && data3.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -238,7 +238,7 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo è cops ma senza l'aggiunta di altri filtri
     elsif @survey == "cops" && @plot != "all" && @inout.blank? && @priest.blank? && @cod_strato.blank? && @specie.blank?
-      data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -252,7 +252,7 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo è cops ma senza l'aggiunta di altri filtri
     elsif @survey == "cops" && @plot == "all" && @inout.blank? && @priest.blank? && @cod_strato.blank? && @specie.blank?
-      data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -273,7 +273,7 @@ class Admin::StatisticsController < ApplicationController
       end
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id = ? #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part} #{query_4x4_group}",@plot,@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND id_plot = ? #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part} #{query_4x4_group}",@plot,@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -298,7 +298,7 @@ class Admin::StatisticsController < ApplicationController
       end
       query_4x4_select = ",subplot"
       query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
-      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica,specie,euflora WHERE euflora_id = euflora.id AND specie_id = specie.id AND copertura_specifica.id = copertura_specifica_id AND plot_id IN (SELECT id FROM plot WHERE deleted = false) #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part},plot #{query_4x4_group}",@anno]
+      data = Cops.find_by_sql ["SELECT id_plot as plot #{query_4x4_select} ,in_out,priest,codice_strato as cod_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM cops,copertura_specifica WHERE copertura_specifica.id = copertura_specifica_id AND id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) #{query_4x4_where} AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND cops.deleted = false GROUP BY #{query_part},plot #{query_4x4_group}",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -316,7 +316,7 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo è copl ma senza l'aggiunta di altri filtri
     elsif @survey == "copl" && @plot != "all" && @inout.blank? && @priest.blank?
-      data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
+      data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false",@plot,@anno]
       if data.at(0).n.to_i == 0
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -330,7 +330,7 @@ class Admin::StatisticsController < ApplicationController
       end
     #se il tipo è copl ma senza l'aggiunta di altri filtri
     elsif @survey == "copl" && @plot == "all" && @inout.blank? && @priest.blank?
-      data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
+      data = Copl.find_by_sql ["SELECT id_plot as plot,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY plot",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -345,7 +345,7 @@ class Admin::StatisticsController < ApplicationController
     #se è un record su un plot di tipo copl con uno o più filtri aggiunti
     elsif @survey == "copl" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1)
       query_part = build_group_by_copl!(@inout,@priest)
-      data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part}",@plot,@anno]
+      data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part}",@plot,@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -360,7 +360,7 @@ class Admin::StatisticsController < ApplicationController
     #se è un record su tutti i plot di tipo copl con uno o più filtri aggiunti
     elsif @survey == "copl" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1)
       query_part = build_group_by_copl!(@inout,@priest)
-      data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE plot_id IN (SELECT id FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part},plot ",@anno]
+      data = Copl.find_by_sql ["SELECT id_plot as plot,in_out,priest,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM copl WHERE id_plot IN (SELECT id_plot FROM plot WHERE deleted = false) AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND deleted = false GROUP BY #{query_part},plot ",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "stat", "Nessun dato presente su cui effettuare la statistica"
@@ -377,13 +377,13 @@ class Admin::StatisticsController < ApplicationController
 
   private
 
-  #def pop_camp_null?(data)
-    #n = 0
-    #for i in 0..data.size-1
-      #n += data.at(i).n.to_i
-    #end
-    #return true if n == 0
-  #end
+  def pop_camp_null?(data)
+    n = 0
+    for i in 0..data.size-1
+      n += data.at(i).n.to_i
+    end
+    return true if n == 0
+  end
 
 
   def format_data(data)
@@ -457,12 +457,12 @@ class Admin::StatisticsController < ApplicationController
     string = string + "in_out" if inout.to_i == 1 && string == ""
     string = string + "priest" if priest.to_i == 1 && string == ""
     string = string + "codice_strato" if cod_stra.to_i == 1 && string == ""
-    string = string + "specie_id" if spe.to_i == 1 && string == ""
+    string = string + "descrizione_pignatti" if spe.to_i == 1 && string == ""
 
     string = string + ",in_out" if inout.to_i == 1 && string != ""
     string = string + ",priest" if priest.to_i == 1 && string != ""
     string = string + ",codice_strato" if cod_stra.to_i == 1 && string != ""
-    string = string + ",specie_id" if spe.to_i == 1 && string != ""
+    string = string + ",descrizione_pignatti" if spe.to_i == 1 && string != ""
     return string
   end
 

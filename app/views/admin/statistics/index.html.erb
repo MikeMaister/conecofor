@@ -17,7 +17,7 @@
     </p>
     <p>
       <%= label_tag :plot %><br />
-      <%= select_tag :plot , "<option value= "" >-Seleziona-</option><option value='all' >Tutti</option>" + options_from_collection_for_select(@plot,:id,:id_plot)  %>
+      <%= select_tag :plot , "<option value= "" >-Seleziona-</option><option value='all' >Tutti</option>" + options_from_collection_for_select(@plot,:id_plot,:id_plot)  %>
     </p>
     <%= submit_tag "Calcola" %>
 <% end %>
