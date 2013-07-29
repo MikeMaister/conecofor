@@ -28,7 +28,7 @@ class Admin::SuStatController < ApplicationController
     @cod_strato = params[:cod_strato]
 
     if @survey == "erb" && @plot == "all"
-      data = Erbacee.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(copertura) as copertura,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee,specie,euflora where euflora_id = euflora.id and specie_id = specie.id and erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id in (select id from plot where deleted = false) group by plot,subplot,specie having specie_id",@anno]
+      data = Erbacee.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(copertura) as copertura,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,subplot,specie",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -41,7 +41,7 @@ class Admin::SuStatController < ApplicationController
         end
       end
     elsif @survey == "erb" && @plot != "all"
-      data = Erbacee.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(copertura) as copertura,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee,specie,euflora where euflora_id = euflora.id and specie_id = specie.id and erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id = ? group by plot,subplot,specie having specie_id",@anno,@plot]
+      data = Erbacee.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(copertura) as copertura,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,subplot,specie",@anno,@plot]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -54,7 +54,7 @@ class Admin::SuStatController < ApplicationController
         end
       end
     elsif @survey == "leg" && @plot == "all"
-      data = Legnose.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(copertura) as copertura,count(specie_id) as individui from legnose,specie,euflora where euflora_id = euflora.id and specie_id = specie.id and legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id in (select id from plot where deleted = false) group by plot,subplot,specie having specie_id",@anno]
+      data = Legnose.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(copertura) as copertura,count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,subplot,specie",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -67,7 +67,7 @@ class Admin::SuStatController < ApplicationController
         end
       end
     elsif @survey == "leg" && @plot != "all"
-      data = Legnose.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(copertura) as copertura,count(specie_id) as individui from legnose,specie,euflora where euflora_id = euflora.id and specie_id = specie.id and legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id = ? group by plot,subplot,specie having specie_id",@anno,@plot]
+      data = Legnose.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(copertura) as copertura,count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,subplot,specie",@anno,@plot]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -80,7 +80,7 @@ class Admin::SuStatController < ApplicationController
         end
       end
     elsif @survey == "cops" && @plot == "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
-      data = Cops.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(value) as copertura,count(specie_id) as individui from cops,specie,euflora,copertura_specifica where copertura_specifica_id = copertura_specifica.id and euflora_id = euflora.id and specie_id = specie.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id in (select id from plot where deleted = false) group by plot,subplot,specie having specie_id",@anno]
+      data = Cops.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(value) as copertura,count(descrizione_pignatti) as individui from cops,copertura_specifica where copertura_specifica_id = copertura_specifica.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,subplot,specie",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -93,7 +93,7 @@ class Admin::SuStatController < ApplicationController
         end
       end
     elsif @survey == "cops" && @plot != "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
-      data = Cops.find_by_sql ["select id_plot as plot,subplot,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(value) as copertura,count(specie_id) as individui from cops,specie,euflora,copertura_specifica where copertura_specifica_id = copertura_specifica.id and euflora_id = euflora.id and specie_id = specie.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id = ? group by plot,subplot,specie having specie_id",@anno,@plot]
+      data = Cops.find_by_sql ["select id_plot as plot,subplot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(value) as copertura,count(descrizione_pignatti) as individui from cops,copertura_specifica where copertura_specifica_id = copertura_specifica.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,subplot,specie",@anno,@plot]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -107,7 +107,7 @@ class Admin::SuStatController < ApplicationController
       end
     elsif @survey == "cops" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
       query_part = build_group_by!(@inout,@priest,@cod_strato)
-      data = Cops.find_by_sql ["select id_plot as plot,subplot,in_out,priest,codice_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(value) as copertura, count(specie_id) as individui from cops,specie,euflora,copertura_specifica where copertura_specifica_id = copertura_specifica.id and euflora_id = euflora.id and specie_id = specie.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id in (select id from plot where deleted = false) group by plot,subplot #{query_part},specie  having specie_id",@anno]
+      data = Cops.find_by_sql ["select id_plot as plot,subplot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc, descrizione_pignatti as specie,sum(value) as copertura, count(descrizione_pignatti) as individui from cops,copertura_specifica where copertura_specifica_id = copertura_specifica.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,subplot #{query_part},specie",@anno]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
@@ -121,7 +121,7 @@ class Admin::SuStatController < ApplicationController
       end
     elsif @survey == "cops" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
       query_part = build_group_by!(@inout,@priest,@cod_strato)
-      data = Cops.find_by_sql ["select id_plot as plot,subplot,in_out,priest,codice_strato,codice_eu as eucode,euflora.descrizione as eudesc,specie.descrizione as specie,specie_id,sum(value) as copertura, count(specie_id) as individui from cops,specie,euflora,copertura_specifica where copertura_specifica_id = copertura_specifica.id and euflora_id = euflora.id and specie_id = specie.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and plot_id = ? group by plot,subplot #{query_part},specie  having specie_id",@anno,@plot]
+      data = Cops.find_by_sql ["select id_plot as plot,subplot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(value) as copertura, count(descrizione_pignatti) as individui from cops,copertura_specifica where copertura_specifica_id = copertura_specifica.id and cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,subplot #{query_part},specie",@anno,@plot]
       if data.blank?
         render :update do |page|
           page.replace_html "su_stat", "Nessun dato presente su cui effettuare la statistica"
