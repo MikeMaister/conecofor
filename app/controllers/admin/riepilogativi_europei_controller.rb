@@ -7,18 +7,18 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
   def result
     @anno = params[:anno]
 
-    plot = Plot.find_by_sql ["select numero_plot from plot where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno]
+    plot = Plot.find_by_sql ["select numero_plot from plot where deleted = false and id_plot in (select id_plot from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id_plot in (select id_plot from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno]
 
     #DA TENERE
     unita = Plot.find_by_sql ["select numero_plot,plot.id_plot,n_su
     from plot left join (select id_plot,count(subplot) as n_su from
     (
-      select id_plot,subplot from erbacee where specie_id is not null
+      select id_plot,subplot from erbacee where descrizione_pignatti is not null
       and temp = false and approved = true and deleted = false and campagne_id IN
         (select id from campagne where anno = #{@anno} and deleted = false)
       group by id_plot,subplot
     union
-      select id_plot ,subplot  from legnose where specie_id is not null
+      select id_plot ,subplot  from legnose where descrizione_pignatti is not null
       and temp = false and approved = true and deleted = false and campagne_id IN
         (select id from campagne where anno = #{@anno} and deleted = false)
       group by id_plot,subplot
@@ -26,69 +26,69 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
       as temp group by id_plot order by id_plot) as temp1
     on plot.id_plot = temp1.id_plot
     where deleted = false and
-	    id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = #{@anno} and deleted = false))
-	    or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = #{@anno} and deleted = false))
+	    id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = #{@anno} and deleted = false))
+	    or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = #{@anno} and deleted = false))
     order by id_plot"]
 
     #DA TENERE
     niferb = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,niferb
-    from plot left join (select id_plot,(coalesce(sum(numero_cespi),0) + coalesce(sum(numero_stoloni),0) + coalesce(sum(numero_getti),0)) as niferb from erbacee where specie_id is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot,(coalesce(sum(numero_cespi),0) + coalesce(sum(numero_stoloni),0) + coalesce(sum(numero_getti),0)) as niferb from erbacee where descrizione_pignatti is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
       on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     nifleg = Legnose.find_by_sql ["select numero_plot,plot.id_plot,nifleg
-    from plot left join (select id_plot, count(specie_id) as nifleg from legnose where deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, count(descrizione_pignatti) as nifleg from legnose where deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
       on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     coperb = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,coperb
-    from plot left join (select id_plot, sum(copertura) as coperb from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^0' or codice_eu regexp '^1' or codice_eu regexp '^2') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, sum(copertura) as coperb from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^0' or codice_europeo regexp '^1' or codice_europeo regexp '^2') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
       on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     copbrio = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,copbrio
-    from plot left join (select id_plot, sum(copertura) as copbrio from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^3' or codice_eu regexp '^4') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, sum(copertura) as copbrio from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^3' or codice_europeo regexp '^4') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     coplich = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,coplich
-    from plot left join (select id_plot, sum(copertura) as coplich from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^5' or codice_eu regexp '^6' or codice_eu regexp '^7') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, sum(copertura) as coplich from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^5' or codice_europeo regexp '^6' or codice_europeo regexp '^7') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     copleg = Legnose.find_by_sql ["select numero_plot,plot.id_plot,copleg
-    from plot left join (select id_plot,sum(copertura) as copleg from legnose where specie_id is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot,sum(copertura) as copleg from legnose where descrizione_pignatti is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     nspecerb = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,nspecerb
-    from plot left join (select id_plot, count(distinct specie_id) as nspecerb from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^0' or codice_eu regexp '^1' or codice_eu regexp '^2') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, count(distinct descrizione_pignatti) as nspecerb from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^0' or codice_europeo regexp '^1' or codice_europeo regexp '^2') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     nspecbrio = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,nspecbrio
-    from plot left join (select id_plot, count(distinct specie_id) as nspecbrio from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^3' or codice_eu regexp '^4') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, count(distinct descrizione_pignatti) as nspecbrio from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^3' or codice_europeo regexp '^4') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     nspeclich = Erbacee.find_by_sql ["select numero_plot,plot.id_plot,nspeclich
-    from plot left join (select id_plot, count(distinct specie_id) as nspeclich from erbacee,specie,euflora where specie_id is not null and specie_id = specie.id and euflora_id = euflora.id and (codice_eu regexp '^5' or codice_eu regexp '^6' or codice_eu regexp '^7') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot, count(distinct descrizione_pignatti) as nspeclich from erbacee where descrizione_pignatti is not null and (codice_europeo regexp '^5' or codice_europeo regexp '^6' or codice_europeo regexp '^7') and erbacee.deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     #DA TENERE
     nspecleg = Legnose.find_by_sql ["select numero_plot,plot.id_plot,nspecleg
-    from plot left join (select id_plot,count(distinct specie_id) as nspecleg from legnose where specie_id is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
+    from plot left join (select id_plot,count(distinct descrizione_pignatti) as nspecleg from legnose where descrizione_pignatti is not null and deleted = false and temp = false and approved = true and campagne_id in (select id from campagne where deleted = false and anno = ?) group by id_plot order by id_plot) as temp
 	    on plot.id_plot = temp.id_plot
-    where deleted = false and id in (select plot_id from erbacee where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where specie_id is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
+    where deleted = false and id in (select plot_id from erbacee where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) or id  in (select plot_id from legnose where descrizione_pignatti is not null and deleted = false and approved = true and temp = false and campagne_id in (select id from campagne where anno = ? and deleted = false)) order by id_plot",@anno,@anno,@anno]
 
     if plot.blank?
       render :update do |page|
