@@ -29,8 +29,6 @@ class Admin::PresenzaSpecieController < ApplicationController
       #scorro tutti gli anni
       for j in 0..year.size-1
         #carico i dati di presenza specie per il plot i anno j
-        #data = Erbacee.find_by_sql ["select distinct erb.descrizione_pignatti as specie,presenza from erbacee as erb  left join (select distinct descrizione_pignatti as presenza from erbacee where year(data) = ? and id_plot = ? and temp = false and approved = true and deleted = false) as temp on erb.descrizione_pignatti = temp.presenza
-#where erb.descrizione_pignatti is not null and temp = false and approved = true and deleted = false order by erb.descrizione_pignatti",year.at(j).anno,plot.at(i).id_plot]
         data = Erbacee.find_by_sql ["select ps.specie ,pp.presenza,pp.habitual_note from
                                       (select distinct descrizione_pignatti as specie from erbacee where descrizione_pignatti is not null and temp = false and approved = true and deleted = false
                                         union
@@ -40,7 +38,6 @@ class Admin::PresenzaSpecieController < ApplicationController
                                         union
                                       select distinct descrizione_pignatti as presenza, habitual_specie_note as habitual_note from legnose where year(data) = ? and id_plot = ? and temp = false and approved = true and deleted = false)
                                       as pp on ps.specie = pp.presenza",year.at(j).anno,plot.at(i).id_plot,year.at(j).anno,plot.at(i).id_plot]
-
         #inizializzo una nuova presenza
         p = Presenza.new(data,year.at(j))
         row.presenza_list_column << p
