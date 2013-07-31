@@ -518,8 +518,8 @@ module Erb_checks
 
   #SR CHECK N3: verifica che le specie importate siano abituali o meno del plot
   def habitual_species(record)
-    #se non ci sono dati approvati, vuol dire che è il primo import
-    dati_approvati = Erbacee.find(:all,:conditions => "approved = true and temp = false and deleted = false")
+    #se non ci sono dati approvati, vuol dire che è il primo import per quel plot
+    dati_approvati = Erbacee.find(:all,:conditions => ["approved = true and temp = false and deleted = false and plot_id = ?",record.plot_id])
     unless dati_approvati.blank?
       #carico il file
       file = ImportFile.find(session[:file_id])
