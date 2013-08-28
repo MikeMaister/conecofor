@@ -17,6 +17,19 @@
 
 <%= link_to "Download File", @file.relative_path %>
 
+<p>
+</p>
+
+<% @view_10x10.at(3).specie_est_out.each do |b| %>
+    <li>
+      <%= b.specie %>
+    </li>
+<% end %>
+
+<p>
+  <%= @prova  %>
+</p>
+
 
 
 

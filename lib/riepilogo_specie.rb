@@ -19,7 +19,7 @@ module Riepilogo_specie
 
   class TenXTen
     attr_accessor :plot_column,:specie_pri_in,:pres_list_col_pi,
-                  :specie_est_out,:pres_list_col_po,
+                  :specie_pri_out,:pres_list_col_po,
                   :specie_est_in,:pres_list_col_ei,
                   :specie_est_out,:pres_list_col_eo
     def initialize(plot,spi,spo,sei,seo)
@@ -33,6 +33,7 @@ module Riepilogo_specie
       @specie_est_out = seo
       @pres_list_col_eo = Array.new
     end
+
   end
 
 end
