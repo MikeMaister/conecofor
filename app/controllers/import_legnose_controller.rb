@@ -55,7 +55,7 @@ class ImportLegnoseController < ApplicationController
     #carico gli errori
     @sr_err = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Simplerange' ",session[:file_id],@file.import_num])
     #carico gli errori di tipo warning
-    @sr_warning = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
+    @sr_warning = ErrorLegnose.find(:all,:select =>"DISTINCT specie,error",:conditions => ["file_name_id = ? AND import_num = ? AND error_kind = 'Warning' ",session[:file_id],@file.import_num])
   end
 
   def mp_error_summary
@@ -90,6 +90,7 @@ class ImportLegnoseController < ApplicationController
     if session[:sr_error] == false && session[:sr_warning] == true
       #carico tutte le giustifiche
       @giustifiche = params[:giustifica]
+      @speci = params[:specie]
       if all_giustifiche?(@giustifiche) == true
         #carico il file
         @file = ImportFile.find(session[:file_id])
@@ -98,7 +99,10 @@ class ImportLegnoseController < ApplicationController
         #per ogni errore carico il corrispondente record in cops
         for i in 0..@sr_warning.size-1
           leg_record = Legnose.find(@sr_warning.at(i).legnose_id)
-          leg_record.set_habitual_note(@giustifiche.at(i))
+          #salvo la stessa giustifica per tutti i record aventi la stessa specie
+          for n in 0..@speci.size-1
+            leg_record.set_habitual_note(@giustifiche.at(n)) if @speci.at(n) == leg_record.descrizione_pignatti
+          end
           #forzo l'errore
           @sr_warning.at(i).force_it!
         end

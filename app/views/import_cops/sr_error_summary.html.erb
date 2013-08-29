@@ -63,7 +63,8 @@
             <td><%= @sr_warning.at(i).specie %></td>
             <td>
               <% if session[:sr_error] == false && session[:sr_warning] == true  %>
-                <input id="<%= "giustifica" + i.to_s %>" name="giustifica[]" type="text" />
+                  <%= hidden_field_tag("specie[]",@sr_warning.at(i).specie,:id => i) %>
+                  <input id="<%= "giustifica" + i.to_s %>" name="giustifica[]" type="text" />
               <% end %>
             </td>
           </tr>
