@@ -1,22 +1,48 @@
-<h1>SurveySheet#index</h1>
+<% content_for :title, "Scheda di rilevamento" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "survey_sheet"%>
+<%end%>
 
+<div id="instruction">
+  <h2>Caricamento scheda di rilevamento</h2>
+  <p id="description">
+    Prima di poter procedere con qualsiasi tipo di import,<strong> è necessario eseguire l'upload della
+    corrispettiva scheda di rilevamento in formato <em>file.pdf</em>, inerente alla campagna corrente.</strong><br />
+    Schegliere quindi il file ed indicare di che tipo di rilevazione si tratta, scegliendo dal menu a tendina.<br />
+    Eseguire l'upload cliccando sul bottone carica.<br />
+    Una volta compiuta quest'operazione,<strong> prima di poter eseguire l'import dei dati, è necessario attendere che un amministratore approvi il caricamento.</strong><br />
+    Verrete avvertiti tramite e-mail del risultato dell'operazione.
+  </p>
+</div>
+
+<div id="float_container">
+<div id="comand_panel">
 <% form_tag({:controller=>'survey_sheet', :action => 'import_file'},:multipart => true) do %>
-    <p>
+    <p class="comand">
+      <%= label_tag "Scheda di rilevamento" %><br />
       <%= file_field 'upload', 'datafile' %>
     </p>
-    <p>
-      <%= select_tag :survey,"<option value = "" >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Copl" => "copl","Cops" =>"cops"}) %>
+    <p class="comand">
+      <%= label_tag "Tipo di rilevazione" %><br />
+      <%= select_tag :survey,"<option value = ' ' >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Copl" => "copl","Cops" =>"cops"}) %>
     </p>
-    <p>
+    <p class="null_margin null_padding">
       <%= submit_tag 'Carica' %>
     </p>
 <% end %>
+</div>
 
-<% unless @loaded_file.blank? %>
-    <h2>Schede di rilevamento caricate per: <%= @active_campaign.descrizione %></h2>
-    <ul>
-      <% @loaded_file.each do |lf| %>
-        <li><%= lf.survey %>: <%= lf.name %> </li>
+<div id="caricamenti">
+  <h3>Caricamenti: <em><%= @active_campaign.descrizione %></em></h3>
+    <div id="loaded_file">
+      <% unless @loaded_file.blank? %>
+        <ul id="ul_list">
+        <% @loaded_file.each do |lf| %>
+            <li class ="list"><strong><%= lf.survey.capitalize %>:</strong> <%= lf.name %> </li>
+        <% end %>
+        </ul>
       <% end %>
-    </ul>
-<% end %>
+    </div>
+</div>
+
+</div>
