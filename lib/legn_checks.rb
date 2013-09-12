@@ -103,7 +103,7 @@ module Legn_checks
     end
     #FACOLTATIVI
     if mandatory?(session[:mask_name],"Legnose","eta_strutturale")
-      if record.eta_strutturale.nil?
+      if record.eta_strutturale.nil? && !record.specie.nil? && record.radicanti == 1
         #registro l'errore
         save_error(record,"Violazione not null - Età strutturale",row)
         #segnalo che c'è stato un errore sulla riga
@@ -113,7 +113,7 @@ module Legn_checks
       end
     end
     if mandatory?(session[:mask_name],"Legnose","danni_meccanici")
-      if record.danni_meccanici.nil?
+      if record.danni_meccanici.nil? && !record.specie.nil? && record.radicanti == 1
         #registro l'errore
         save_error(record,"Violazione not null - Danni Meccanici",row)
         #segnalo che c'è stato un errore sulla riga
@@ -123,7 +123,7 @@ module Legn_checks
       end
     end
     if mandatory?(session[:mask_name],"Legnose","altezza")
-      if record.altezza.nil?
+      if record.altezza.nil? && !record.specie.nil?
         #registro l'errore
         save_error(record,"Violazione not null - Altezza",row)
         #segnalo che c'è stato un errore sulla riga
@@ -133,7 +133,7 @@ module Legn_checks
       end
     end
     if mandatory?(session[:mask_name],"Legnose","danni_parassitari")
-      if record.danni_parassitari.nil?
+      if record.danni_parassitari.nil? && !record.specie.nil? && record.radicanti == 1
         #registro l'errore
         save_error(record,"Violazione not null - Danni Parassitari",row)
         #segnalo che c'è stato un errore sulla riga
@@ -143,7 +143,13 @@ module Legn_checks
       end
     end
     if mandatory?(session[:mask_name],"Legnose","copertura")
-      if record.copertura.nil?
+      #se per la stessa specie in quel subplot è già presente un record con la copertura presente,
+      # allora il null è ammesso sulla copertura
+      plot_id = Plot.find(:first,:conditions => ["numero_plot = ? AND deleted = false",record.cod_plot]).id
+      active_campaign_id = Campagne.find(:first,:conditions => ["active = true"]).id
+      file = ImportFile.find(session[:file_id])
+      pres_spe_cop = Legnose.find(:first,:conditions => ["campagne_id = ? and plot_id = ? and file_name_id = ? and import_num = ? and subplot = ? and descrizione_pignatti = ? and copertura is not null and copertura != 0 and temp = true and approved = false",active_campaign_id,plot_id,file.id,file.import_num,record.subplot,record.specie])
+      if record.copertura.nil? && !record.specie.nil? && pres_spe_cop.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Copertura",row)
         #segnalo che c'è stato un errore sulla riga
@@ -153,7 +159,7 @@ module Legn_checks
       end
     end
     if mandatory?(session[:mask_name],"Legnose","radicanti_esterni")
-      if record.radicanti.nil?
+      if record.radicanti.nil? && !record.specie.nil?
         #registro l'errore
         save_error(record,"Violazione not null - Radicanti Esterni",row)
         #segnalo che c'è stato un errore sulla riga

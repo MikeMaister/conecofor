@@ -156,7 +156,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","altezza_media")
-      if record.altezza_media.nil?
+      if record.altezza_media.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Altezza Media",row)
         #segnalo che c'è stato un errore sulla riga
@@ -166,7 +166,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","numero_cespi")
-      if record.numero_cespi.nil?
+      if record.numero_cespi.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Numero Cespi",row)
         #segnalo che c'è stato un errore sulla riga
@@ -176,7 +176,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","numero_stoloni")
-      if record.numero_stoloni.nil?
+      if record.numero_stoloni.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Numero Stoloni",row)
         #segnalo che c'è stato un errore sulla riga
@@ -186,7 +186,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","numero_stoloni_radicanti")
-      if record.numero_stoloni_radicanti.nil?
+      if record.numero_stoloni_radicanti.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Numero Stoloni Radicanti",row)
         #segnalo che c'è stato un errore sulla riga
@@ -196,7 +196,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","numero_foglie")
-      if record.numero_foglie.nil?
+      if record.numero_foglie.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Numero Foglie",row)
         #segnalo che c'è stato un errore sulla riga
@@ -206,7 +206,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","numero_getti")
-      if record.numero_getti.nil?
+      if record.numero_getti.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Numero Getti",row)
         #segnalo che c'è stato un errore sulla riga
@@ -216,7 +216,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","danni_meccanici")
-      if record.danni_meccanici.nil?
+      if record.danni_meccanici.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Danni Meccanici",row)
         #segnalo che c'è stato un errore sulla riga
@@ -226,7 +226,7 @@ module Erb_checks
       end
     end
     if mandatory?(session[:mask_name],"Erbacee","danni_parassitari")
-      if record.danni_parassitari.nil?
+      if record.danni_parassitari.nil? && !record.specie.blank?
         #registro l'errore
         save_error(record,"Violazione not null - Danni Parassitari",row)
         #segnalo che c'è stato un errore sulla riga
@@ -508,7 +508,7 @@ module Erb_checks
       #cerco la specie Hedera helix
       hedera_helix = Specie.find(:first,:conditions => ["descrizione = 'Hedera helix' AND deleted = false"])
       if row.specie_id == hedera_helix.id
-        unless !row.copertura.nil? && !row.copertura_esterna.nil? && row.altezza_media.nil? && row.numero_cespi.nil? && row.numero_stoloni.nil? && row.numero_stoloni_radicanti.nil? && row.numero_foglie.nil? && row.numero_getti.nil?
+        unless !row.copertura.nil? && row.altezza_media.nil? && row.numero_cespi.nil? && row.numero_stoloni.nil? && row.numero_stoloni_radicanti.nil? && row.numero_foglie.nil? && row.numero_getti.nil?
           #segnalo l'errore
           multiple_parameter_error(row,"Hedera Helix check")
         end

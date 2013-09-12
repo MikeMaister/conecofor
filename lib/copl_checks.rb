@@ -235,7 +235,7 @@ module Copl_checks
       end
     end
     if mandatory?(session[:mask_name],"Copl","altezza_arboreo")
-      if record.alt_arbo.nil?
+      if record.alt_arbo.nil? && record.cop_arbo != 0 && record.cop_arbo != nil
         #registro l'errore
         save_error(record,"Violazione not null - Altezza Arboreo",row)
         #segnalo che c'è stato un errore sulla riga
@@ -245,7 +245,7 @@ module Copl_checks
       end
     end
     if mandatory?(session[:mask_name],"Copl","altezza_arbustivo")
-      if record.alt_arbu.nil?
+      if record.alt_arbu.nil? && record.cop_arbu != 0 && record.cop_arbu != nil
         #registro l'errore
         save_error(record,"Violazione not null - Altezza Arbustivo",row)
         #segnalo che c'è stato un errore sulla riga
@@ -255,7 +255,7 @@ module Copl_checks
       end
     end
     if mandatory?(session[:mask_name],"Copl","altezza_erbaceo")
-      if record.alt_erb.nil?
+      if record.alt_erb.nil? && record.cop_erb != 0 && record.cop_erb != nil
         #registro l'errore
         save_error(record,"Violazione not null - Altezza Erbaceo",row)
         #segnalo che c'è stato un errore sulla riga
