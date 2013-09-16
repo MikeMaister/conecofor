@@ -1,5 +1,8 @@
 class Cops < ActiveRecord::Base
   set_table_name "cops"
+  belongs_to "substrate_type",:foreign_key => "substrate_type_id"
+  belongs_to "certainty_species_determination",:foreign_key => "certainty_species_determination_id"
+  belongs_to "copertura_specifica", :foreign_key => "copertura_specifica_id"
 
   def fill_temp(record,file_id,row)
     #pre-carico quello che mi serve evitando di fallo svariate volte

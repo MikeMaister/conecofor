@@ -1,0 +1,97 @@
+#info{
+    float: left;
+    margin: 20px 70px 10px 35px;
+    /*border: 1px solid;*/
+    width: 400px;
+}
+
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+}
+
+#comand_panel{
+    float: left;
+    border: 1px solid orange;
+    background-color: #FFFF8C;
+    padding: 15px;
+    border-radius: 25px;
+    margin: 15px 35px 25px 0;
+}
+
+#flo_com1{
+    float: left;
+    /*border: 1px solid;*/
+}
+
+#flo_com2{
+    float: left;
+    margin-left: 25px;
+    /*border: 1px solid;*/
+}
+
+#button{
+    margin-top: 18px;
+}
+
+.comand{
+    margin-top: 0;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+#result{
+    width: 940px;
+    /*border: 1px solid;*/
+    margin: 35px 30px 25px 30px ;
+    clear: both;
+}
+
+#scroller{
+    width: 1496px;
+    height: 350px;
+    overflow-x: hidden ;
+    overflow-y: scroll;
+    /*border: 1px solid;*/
+}
+
+th,td{
+    width: 55px;
+    font-size:xx-small;
+    text-align: center;
+}
+
+th.spe,td.spe{
+    width: 120px;
+}
+
+th.note,td.note{
+    width: 200px;
+}
+
+table#head,table#body{
+   width: 1480px;
+   /*border: 1px solid;*/
+   border-collapse: collapse;
+}
+
+table#head{
+    border-bottom: 3px solid #9acd32;
+}
+
+#oriz_scroll{
+    /*border: 1px solid;*/
+    overflow-x: scroll;
+}
+
+tr.body:hover {
+    background-color: #deb887;
+}
+
+tr.head{
+    background-color:#B8FB01;
+}

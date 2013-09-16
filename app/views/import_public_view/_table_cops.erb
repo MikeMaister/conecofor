@@ -1,44 +1,54 @@
 <% unless @import_data.blank?%>
-    <table>
+    <div id="oriz_scroll">
+    <table id="head">
       <thead>
-        <th>ID plot</th>
-        <th>Subplot</th>
-        <th>In/Out</th>
-        <th>Pri/Est</th>
-        <th>Strato</th>
-        <th>Copertura Specifica</th>
-        <th>Note</th>
-        <th>Data</th>
-        <th>Specie</th>
-        <th>Numero Plot</th>
-        <th>Substrate</th>
-        <th>Certainty Species Determination</th>
+        <tr class="head">
+            <th>Data</th>
+            <th>Subplot</th>
+            <th>In/Out</th>
+            <th>Pri/Est</th>
+            <th>Strato</th>
+            <th class="spe">Specie</th>
+            <th>Copertura Specifica</th>
+            <th class="note">Note Rilevamento</th>
+            <th class="note">Note Specie Abituale</th>
+            <th class="note">Substrate</th>
+            <th class="note">Certainty Species Determination</th>
+        </tr>
       </thead>
+    </table>
+    <div id="scroller">
+    <table id="body">
       <tbody>
       <% for i in 0..@import_data.size-1 %>
-        <tr>
-            <td><%= @import_data.at(i).id_plot %></td>
+        <tr class="body">
+            <td><%= @import_data.at(i).data %></td>
             <td><%= @import_data.at(i).subplot %></td>
             <td><%= @import_data.at(i).in_out %></td>
             <td><%= @import_data.at(i).priest %></td>
             <td><%= @import_data.at(i).codice_strato %></td>
-            <td><%= CoperturaSpecifica.find(@import_data.at(i).copertura_specifica_id).identifier %></td>
-            <td><%= @import_data.at(i).note %></td>
-            <td><%= @import_data.at(i).data %></td>
-            <td><%= @import_data.at(i).descrizione_pignatti %></td>
-            <td><%= @import_data.at(i).numero_plot %></td>
-            <td>
-                <% unless @import_data.at(i).substrate_type_id.blank? %>
-                    <%= SubstrateType.find(@import_data.at(i).substrate_type_id).code %>
+            <td class="spe"><%= @import_data.at(i).descrizione_pignatti %></td>
+            <td><%= @import_data.at(i).copertura_specifica.identifier %></td>
+            <td class="note"><%= convert_nil(@import_data.at(i).note) %></td>
+            <td class="note"><%= convert_nil(@import_data.at(i).habitual_specie_note) %></td>
+            <td class="note">
+                <% if @import_data.at(i).substrate_type_id.blank? %>
+                  <%= convert_nil(@import_data.at(i).substrate_type) %>
+                <% else %>
+                    <%= @import_data.at(i).substrate_type.code %>
                 <% end %>
             </td>
-            <td>
-                <% unless @import_data.at(i).certainty_species_determination_id.blank? %>
-                    <%= CertaintySpeciesDetermination.find(@import_data.at(i).certainty_species_determination_id).code %>
+            <td class="note">
+                <% if @import_data.at(i).certainty_species_determination_id.blank? %>
+                    <%= convert_nil(@import_data.at(i).certainty_species_determination) %>
+                <% else %>
+                    <%= @import_data.at(i).certainty_species_determination.code %>
                 <% end %>
             </td>
         </tr>
       <% end %>
       </tbody>
     </table>
+    </div>
+    </div>
 <% end %>

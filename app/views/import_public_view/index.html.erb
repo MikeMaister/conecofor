@@ -1,26 +1,38 @@
-<h1>Import Public View</h1>
-<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
+<% content_for :title, "Archivio Globale" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "import_public_view" %>
+<%end%>
 
+<div id="info">
+    <h2>Archivio Globale</h2>
     <p>
-      Seleziona la campagna:
+        Tramite l'archivio globale potrai visualizzare tutti i dati approvati dagli amministratori.<br />
+        Utilizza la maschera di comando per cercare e visualizzare i dati.
     </p>
-    <p>
+</div>
+
+<div id="comand_panel">
+<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
+  <div id="flo_com1">
+    <p class="comand bold">
+      <%= label_tag "Campagna" %><br />
       <%= select_tag "campaign", options_from_collection_for_select(@campaign, "id", "descrizione") %>
     </p>
-    <p>
-      Seleziona il plot:
-    </p>
-    <p>
+    <p class="null_margin bold">
+      <%= label_tag "Plot" %><br />
       <%= select_tag "plot", options_from_collection_for_select(@plot, "id", "id_plot") %>
     </p>
-    <p>
-      Seleziona il tipo di rilevazione:
-    </p>
-    <p>
+  </div>
+  <div id="flo_com2">
+    <p class="comand bold">
+      <%= label_tag "Rilevazione" %><br />
       <%= select_tag "survey", "<option>Erb</option><option>Legn</option><option>Copl</option><option>Cops</option>".html_safe%>
     </p>
-    <%= submit_tag "Ok" %>
+        <%= submit_tag "Cerca",{:id => "button"} %>
+  </div>
 <% end %>
+</div>
+
 
 <div id="result" style="display:none;">
 </div>
