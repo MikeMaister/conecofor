@@ -1,48 +1,63 @@
-<h1>Compliance Error</h1>
-<table>
-  <tbody>
-    <tr>
-      <th colspan="13">
-        <%= @file.file_name %>
+<% content_for :title, "Riepilogo Errori" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "compliance_error" %>
+    <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
+<%end%>
+
+<%= render :partial => "import_erbacee/instr" %>
+
+<div id="oriz_scroll">
+<table id="head">
+  <thead>
+    <tr class="head zero">
+      <th colspan="13" id="file">
+        <%= @file.file_name %> - <%= @comp_err.first.import_num %>
       </th>
     </tr>
-    <tr>
+    <tr class="head">
       <th>Row</th>
-      <th>Error</th>
+      <th class="bigger">Error</th>
       <th>Data</th>
       <th>Plot</th>
       <th>Subplot</th>
       <th>In/Out</th>
       <th>Pri/Est</th>
       <th>Strato</th>
-      <th>Specie</th>
+      <th class="big">Specie</th>
       <th>Copertura</th>
-      <th>Note</th>
-      <th>Substrate</th>
-      <th>Certainty Species Determination</th>
+      <th class="bigger">Note</th>
+      <th class="big">Substrate</th>
+      <th class="bigger">Certainty Species Determination</th>
     </tr>
+    </thead>
+  </table>
+  <div id="ver_scroll">
+  <table id="body">
+    </tbody>
     <% for i in 0..@comp_err.size-1%>
-    <tr>
+    <tr class="body">
       <td><%= @comp_err.at(i).row %></td>
-      <td><%= @comp_err.at(i).error %></td>
-      <td><%= @comp_err.at(i).data %></td>
-      <td><%= @comp_err.at(i).plot %></td>
-      <td><%= @comp_err.at(i).subplot %></td>
-      <td><%= @comp_err.at(i).in_out %></td>
-      <td><%= @comp_err.at(i).priest %></td>
-      <td><%= @comp_err.at(i).codice_strato %></td>
-      <td><%= @comp_err.at(i).specie %></td>
-      <td><%= @comp_err.at(i).copertura %></td>
-      <td><%= @comp_err.at(i).note %></td>
-      <td><%= @comp_err.at(i).substrate_code %></td>
-      <td><%= @comp_err.at(i).certainty_species_determination_code %></td>
+      <td class="bigger"><%= @comp_err.at(i).error %></td>
+      <td><%= convert_nil(@comp_err.at(i).data) %></td>
+      <td><%= convert_nil(@comp_err.at(i).plot) %></td>
+      <td><%= convert_nil(@comp_err.at(i).subplot) %></td>
+      <td><%= convert_nil(@comp_err.at(i).in_out) %></td>
+      <td><%= convert_nil(@comp_err.at(i).priest) %></td>
+      <td><%= convert_nil(@comp_err.at(i).codice_strato) %></td>
+      <td class="big"><%= convert_nil(@comp_err.at(i).specie) %></td>
+      <td><%= convert_nil(@comp_err.at(i).copertura) %></td>
+      <td class="bigger"><%= convert_nil(@comp_err.at(i).note) %></td>
+      <td class="big"><%= convert_nil(@comp_err.at(i).substrate_code) %></td>
+      <td class="bigger"><%= convert_nil(@comp_err.at(i).certainty_species_determination_code) %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+  </div>
+</div>
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
+<p id="stamp">
+  <%= button_to_function("Stampa il Report", "javascript:print()") %>
 </p>
 
 

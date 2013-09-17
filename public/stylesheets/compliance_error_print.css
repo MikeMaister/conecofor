@@ -1,0 +1,57 @@
+h2{
+    display: none;
+}
+
+p#instr{
+    display: none;
+}
+
+
+th,td{
+    font-size: small;
+    text-align: center;
+    width: 55px;
+    color: #000000;
+}
+
+th{
+    padding: 5px 0;
+}
+
+table#body{
+    height: 350px;
+}
+
+table#body,table#head{
+    width: 1280px;
+}
+
+.big{
+    width: 100px;
+}
+
+.bigger{
+    width: 150px;
+}
+
+th#file{
+    font-size: large;
+    color: #000000;
+}
+
+table#head{
+    border-bottom: 1px solid #000000;
+}
+
+
+p#stamp{
+   display: none;
+}
+
+div#foot{
+    display: none;
+}
+
+div#banner_menu{
+    display: none;
+}

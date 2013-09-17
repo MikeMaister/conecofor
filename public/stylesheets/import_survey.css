@@ -36,3 +36,14 @@ strong.subtitle{
 p.mask{
     margin: 0 0 7px 0;
 }
+
+h2{
+    margin: 0 35px 25px 35px;
+    font-size: large;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+p#instr{
+    margin: 25px 35px;
+}
