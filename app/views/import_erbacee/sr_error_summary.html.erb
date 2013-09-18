@@ -1,102 +1,131 @@
-<h1>Simple Range Error</h1>
-<table>
-  <tbody>
-  <tr>
-    <th colspan="11">
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Row</th>
-    <th>Error</th>
-    <th>Data</th>
-    <th>Plot</th>
-    <th>Subplot</th>
-    <th>Specie</th>
-    <th>Copertura</th>
-    <th>Copertura Esterna</th>
-    <th>Altezza Media</th>
-    <th>N.Cespi</th>
-    <th>N.Stoloni</th>
-    <th>N.Stoloni Radicanti</th>
-    <th>N.Foglie</th>
-    <th>N.Getti</th>
-    <th>Danni Meccanici</th>
-    <th>Danni Parassitari</th>
-    <th>Note</th>
-  </tr>
-  <% for i in 0..@sr_err.size-1%>
-      <tr>
-        <td><%= @sr_err.at(i).row %></td>
-        <td><%= @sr_err.at(i).error %></td>
-        <td><%= @sr_err.at(i).data %></td>
-        <td><%= @sr_err.at(i).plot %></td>
-        <td><%= @sr_err.at(i).subplot %></td>
+<% content_for :title, "Riepilogo Errori" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "compliance_error" %>
+    <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
+    <%= stylesheet_link_tag "sr_error" %>
+    <%= stylesheet_link_tag "sr_error_print", :media => :print %>
+<%end%>
 
-        <td>
-          <% unless @sr_err.at(i).specie.blank? %>
-            <%= @sr_err.at(i).specie %>
-          <% end %>
-        </td>
-        <td><%= @sr_err.at(i).copertura %></td>
-        <td><%= @sr_err.at(i).copertura_esterna%></td>
-        <td><%= @sr_err.at(i).altezza_media %></td>
-        <td><%= @sr_err.at(i).numero_cespi %></td>
-        <td><%= @sr_err.at(i).numero_stoloni %></td>
-        <td><%= @sr_err.at(i).numero_stoloni_radicanti %></td>
-        <td><%= @sr_err.at(i).numero_foglie %></td>
-        <td><%= @sr_err.at(i).numero_getti %></td>
-        <td><%= @sr_err.at(i).danni_meccanici %></td>
-        <td><%= @sr_err.at(i).danni_parassitari %></td>
+<% if session[:sr_error] == true %>
 
-        <td><%= @sr_err.at(i).note %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<h2>Errori di tipo 1</h2>
 
+<%= render :partial => "import_erbacee/instr" %>
 
+<div id="oriz_scroll">
+  <table id="head">
+    <tbody>
+    <tr class="head zero">
+      <th colspan="17" id="file">
+        <%= @file.file_name %> - <%= @file.import_num%>
+      </th>
+    </tr>
+    <tr class="head">
+      <th>Row</th>
+      <th class="bigger">Error</th>
+      <th>Data</th>
+      <th>Plot</th>
+      <th>Subplot</th>
+      <th class="big">Specie</th>
+      <th>Copertura</th>
+      <th>Copertura Esterna</th>
+      <th>Altezza Media</th>
+      <th>N.Cespi</th>
+      <th>N.Stoloni</th>
+      <th>N.Stoloni Radicanti</th>
+      <th>N.Foglie</th>
+      <th>N.Getti</th>
+      <th>Danni Meccanici</th>
+      <th>Danni Parassitari</th>
+      <th class="bigger">Note</th>
+    </tr>
+    </tbody>
+  </table>
+  <div id="ver_scroll">
+    <table id="body">
+      <tbody>
+      <% for i in 0..@sr_err.size-1%>
+          <tr class="body">
+            <td><%= @sr_err.at(i).row %></td>
+            <td class="bigger"><%= @sr_err.at(i).error %></td>
+            <td><%= @sr_err.at(i).data %></td>
+            <td><%= convert_nil(@sr_err.at(i).plot) %></td>
+            <td><%= convert_nil(@sr_err.at(i).subplot) %></td>
+            <td class="big"><%= convert_nil(@sr_err.at(i).specie) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_esterna) %></td>
+            <td><%= convert_nil(@sr_err.at(i).altezza_media) %></td>
+            <td><%= convert_nil(@sr_err.at(i).numero_cespi) %></td>
+            <td><%= convert_nil(@sr_err.at(i).numero_stoloni) %></td>
+            <td><%= convert_nil(@sr_err.at(i).numero_stoloni_radicanti) %></td>
+            <td><%= convert_nil(@sr_err.at(i).numero_foglie) %></td>
+            <td><%= convert_nil(@sr_err.at(i).numero_getti) %></td>
+            <td><%= convert_nil(@sr_err.at(i).danni_meccanici) %></td>
+            <td><%= convert_nil(@sr_err.at(i).danni_parassitari) %></td>
+            <td class="bigger"><%= convert_nil(@sr_err.at(i).note) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
+<% end %>
 <% unless @sr_warning.blank? %>
     <% form_tag({:action => "force_warning"}) do %>
         <h3>Warnings</h3>
-        <table>
+
+        <%= render :partial => "import_erbacee/warn_instr" %>
+
+
+        <table id="war_head">
           <tbody>
-          <tr>
-            <th colspan="2">
-              <%= @file.file_name %>
+          <tr class="head zero">
+            <th colspan="3" class="file">
+              <%= @file.file_name %> - <%= @file.import_num %>
             </th>
           </tr>
-          <tr>
-            <th>Error</th>
-            <th>Specie</th>
-            <th>Giustifica</th>
-          </tr>
-          <% for i in 0..@sr_warning.size-1%>
-              <tr>
-                <td><%= @sr_warning.at(i).error %></td>
-                <td><%= @sr_warning.at(i).specie %></td>
-                <td>
-                  <% if session[:sr_error] == false && session[:sr_warning] == true  %>
-                      <%= hidden_field_tag("specie[]",@sr_warning.at(i).specie,:id => i) %>
-                      <input id="<%= "giustifica" + i.to_s %>" name="giustifica[]" type="text" />
-                  <% end %>
-                </td>
-              </tr>
-          <% end %>
-          <tr>
-            <td>
-              <% if session[:sr_error] == false && session[:sr_warning] == true  %>
-                  <%= submit_tag "Forza e Procedi" %>
-              <% end %>
-            </td>
+          <tr class="head">
+            <th class="bigger">Warning</th>
+            <th class="bigger">Specie</th>
+            <th class="bigger">Giustifica</th>
           </tr>
           </tbody>
         </table>
+
+        <div id="ver_scroll_war">
+          <table id="war_body">
+            <tbody>
+            <% for i in 0..@sr_warning.size-1%>
+                <tr class="body">
+                  <td class="bigger"><%= @sr_warning.at(i).error %></td>
+                  <td class="bigger"><%= @sr_warning.at(i).specie %></td>
+                  <td class="bigger">
+                    <% if session[:sr_error] == false && session[:sr_warning] == true  %>
+                        <%= hidden_field_tag("specie[]",@sr_warning.at(i).specie,:id => "sp" +i.to_s) %>
+                        <input id="<%= "giustifica" + i.to_s %>" name="giustifica[]" type="text" />
+                    <% else %>
+                        Impossibile giustificare il warning, in quanto sono stati rilevati anche errori nel file.
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            <tr class="button">
+              <td></td>
+              <td></td>
+              <td>
+                <% if session[:sr_error] == false && session[:sr_warning] == true  %>
+                    <%= submit_tag "Forza e Procedi" %>
+                <% end %>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
     <% end %>
 <% end %>
 
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
+<p id="stamp">
+  <%= button_to_function("Stampa il Report", "javascript:print()") %>
 </p>

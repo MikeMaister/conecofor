@@ -1,56 +1,73 @@
-<h1>Simplerange Errors</h1>
-<table>
-  <tbody>
-  <tr>
-    <th colspan="11">
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Row</th>
-    <th>Error</th>
-    <th>Data</th>
-    <th>Plot</th>
-    <th>Subplot</th>
-    <th>In/Out</th>
-    <th>Pri/Est</th>
-    <th>Copertura Complessiva</th>
-    <th>Altezza Arboreo</th>
-    <th>Copertura Arboreo</th>
-    <th>Altezza Arbustivo</th>
-    <th>Copertura Arbustivo</th>
-    <th>Altezza Erbaceo</th>
-    <th>Copertura Erbaceo</th>
-    <th>Copertura Muscinale</th>
-    <th>Copertura Lettiera</th>
-    <th>Copertura Suolo Nudo</th>
-    <th>Note</th>
-  </tr>
-  <% for i in 0..@sr_err.size-1%>
-      <tr>
-        <td><%= @sr_err.at(i).row %></td>
-        <td><%= @sr_err.at(i).error %></td>
-        <td><%= @sr_err.at(i).data %></td>
-        <td><%= @sr_err.at(i).plot %></td>
-        <td><%= @sr_err.at(i).subplot %></td>
-        <td><%= @sr_err.at(i).in_out %></td>
-        <td><%= @sr_err.at(i).priest %></td>
-        <td><%= @sr_err.at(i).copertura_complessiva %></td>
-        <td><%= @sr_err.at(i).altezza_arboreo %></td>
-        <td><%= @sr_err.at(i).copertura_arboreo %></td>
-        <td><%= @sr_err.at(i).altezza_arbustivo %></td>
-        <td><%= @sr_err.at(i).copertura_arbustivo %></td>
-        <td><%= @sr_err.at(i).altezza_erbaceo %></td>
-        <td><%= @sr_err.at(i).copertura_erbaceo %></td>
-        <td><%= @sr_err.at(i).copertura_muscinale %></td>
-        <td><%= @sr_err.at(i).copertura_lettiera %></td>
-        <td><%= @sr_err.at(i).copertura_suolo %></td>
-        <td><%= @sr_err.at(i).note %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% content_for :title, "Riepilogo Errori" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "compliance_error" %>
+    <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
+<%end%>
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
+<h2>Errori di tipo 2</h2>
+
+<%= render :partial => "import_erbacee/instr" %>
+
+<div id="oriz_scroll">
+  <table id="head">
+    <tbody>
+    <tr class="head zero">
+      <th colspan="18" id="file">
+        <%= @file.file_name %> - <%= @file.import_num %>
+      </th>
+    </tr>
+    <tr class="head">
+      <th>Row</th>
+      <th class="bigger">Error</th>
+      <th>Data</th>
+      <th>Plot</th>
+      <th>Subplot</th>
+      <th>In/Out</th>
+      <th>Pri/Est</th>
+      <th>Copertura Complessiva</th>
+      <th>Altezza Arboreo</th>
+      <th>Copertura Arboreo</th>
+      <th>Altezza Arbustivo</th>
+      <th>Copertura Arbustivo</th>
+      <th>Altezza Erbaceo</th>
+      <th>Copertura Erbaceo</th>
+      <th>Copertura Muscinale</th>
+      <th>Copertura Lettiera</th>
+      <th>Copertura Suolo Nudo</th>
+      <th class="bigger">Note</th>
+    </tr>
+    </tbody>
+  </table>
+  <div id="ver_scroll">
+    <table id="body">
+      <tbody>
+      <% for i in 0..@sr_err.size-1%>
+          <tr class="body">
+            <td><%= @sr_err.at(i).row %></td>
+            <td class="bigger"><%= @sr_err.at(i).error %></td>
+            <td><%= convert_nil(@sr_err.at(i).data) %></td>
+            <td><%= convert_nil(@sr_err.at(i).plot) %></td>
+            <td><%= convert_nil(@sr_err.at(i).subplot) %></td>
+            <td><%= convert_nil(@sr_err.at(i).in_out) %></td>
+            <td><%= convert_nil(@sr_err.at(i).priest) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_complessiva) %></td>
+            <td><%= convert_nil(@sr_err.at(i).altezza_arboreo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_arboreo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).altezza_arbustivo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_arbustivo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).altezza_erbaceo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_erbaceo) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_muscinale) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_lettiera) %></td>
+            <td><%= convert_nil(@sr_err.at(i).copertura_suolo) %></td>
+            <td class="bigger"><%= convert_nil(@sr_err.at(i).note) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p id="stamp">
+  <%= button_to_function("Stampa il Report", "javascript:print()") %>
 </p>

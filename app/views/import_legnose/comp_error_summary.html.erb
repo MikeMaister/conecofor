@@ -4,11 +4,13 @@
     <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
 <%end%>
 
+<h2>Errori di tipo 1</h2>
+
 <%= render :partial => "import_erbacee/instr" %>
 
 <div id="oriz_scroll">
 <table id="head">
-  <thead>
+  <tbody>
     <tr class="head zero">
       <th colspan="13" id="file">
         <%= @file.file_name %> - <%= @comp_err.first.import_num %>
@@ -29,10 +31,11 @@
       <th>Radicanti Esterni</th>
       <th class="bigger">Note</th>
     </tr>
-    </thead>
+    </tbody>
   </table>
   <div id="ver_scroll">
   <table id="body">
+    <tbody>
     <% for i in 0..@comp_err.size-1%>
     <tr class="body">
       <td><%= @comp_err.at(i).row %></td>
