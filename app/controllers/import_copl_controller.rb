@@ -77,7 +77,7 @@ class ImportCoplController < ApplicationController
         gbe.force_it!
       end
       set_permanent_data!("copl")
-      flash[:notice] = "Warning Forzati."
+      flash[:notice] = "Dati Forzati."
       redirect_to :action => "finish"
     else
       flash[:error] = "Qualcosa è andato storto, riprova."

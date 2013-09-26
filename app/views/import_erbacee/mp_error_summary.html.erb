@@ -1,88 +1,121 @@
-<h1>Multipleparameter Errors</h1>
-<table>
-  <tbody>
-  <tr>
-    <th colspan="11">
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Row</th>
-    <th>Error</th>
-    <th>Data</th>
-    <th>Plot</th>
-    <th>Subplot</th>
-    <th>Specie</th>
-    <th>Copertura</th>
-    <th>Copertura Esterna</th>
-    <th>Altezza Media</th>
-    <th>N.Cespi</th>
-    <th>N.Stoloni</th>
-    <th>N.Stoloni Radicanti</th>
-    <th>N.Foglie</th>
-    <th>N.Getti</th>
-    <th>Danni Meccanici</th>
-    <th>Danni Parassitari</th>
-    <th>Note</th>
-  </tr>
-  <% for i in 0..@mp_err.size-1%>
-      <tr>
-        <td><%= @mp_err.at(i).row %></td>
-        <td><%= @mp_err.at(i).error %></td>
-        <td><%= @mp_err.at(i).data %></td>
-        <td><%= @mp_err.at(i).plot %></td>
-        <td><%= @mp_err.at(i).subplot %></td>
+<% content_for :title, "Riepilogo Errori" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "compliance_error" %>
+    <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
+    <%= stylesheet_link_tag "mp_error" %>
+    <%= stylesheet_link_tag "sr_error_print", :media => :print%>
+<%end%>
 
-        <td>
-          <% unless @mp_err.at(i).specie.blank? %>
-              <%= @mp_err.at(i).specie %>
+
+<% unless session[:mp_error] == false %>
+
+    <h2>Errori di tipo 3</h2>
+
+    <%= render :partial => "import_erbacee/instr" %>
+
+    <div id="oriz_scroll">
+      <table id="head">
+        <tbody>
+        <tr class="head zero">
+          <th colspan="17" id="file">
+            <%= @file.file_name %> - <%= @file.import_num%>
+          </th>
+        </tr>
+        <tr class="head">
+          <th>Row</th>
+          <th class="bigger">Error</th>
+          <th>Data</th>
+          <th>Plot</th>
+          <th>Subplot</th>
+          <th class="big">Specie</th>
+          <th>Copertura</th>
+          <th>Copertura Esterna</th>
+          <th>Altezza Media</th>
+          <th>N.Cespi</th>
+          <th>N.Stoloni</th>
+          <th>N.Stoloni Radicanti</th>
+          <th>N.Foglie</th>
+          <th>N.Getti</th>
+          <th>Danni Meccanici</th>
+          <th>Danni Parassitari</th>
+          <th class="bigger">Note</th>
+        </tr>
+        </tbody>
+      </table>
+      <div id="ver_scroll">
+        <table id="body">
+          <tbody>
+          <% for i in 0..@mp_err.size-1%>
+              <tr class="body">
+                <td><%= @mp_err.at(i).row %></td>
+                <td class="bigger"><%= @mp_err.at(i).error %></td>
+                <td><%= @mp_err.at(i).data %></td>
+                <td><%= convert_nil(@mp_err.at(i).plot) %></td>
+                <td><%= convert_nil(@mp_err.at(i).subplot) %></td>
+                <td class="big"><%= convert_nil(@mp_err.at(i).specie) %></td>
+                <td><%= convert_nil(@mp_err.at(i).copertura) %></td>
+                <td><%= convert_nil(@mp_err.at(i).copertura_esterna) %></td>
+                <td><%= convert_nil(@mp_err.at(i).altezza_media) %></td>
+                <td><%= convert_nil(@mp_err.at(i).numero_cespi) %></td>
+                <td><%= convert_nil(@mp_err.at(i).numero_stoloni) %></td>
+                <td><%= convert_nil(@mp_err.at(i).numero_stoloni_radicanti) %></td>
+                <td><%= convert_nil(@mp_err.at(i).numero_foglie) %></td>
+                <td><%= convert_nil(@mp_err.at(i).numero_getti) %></td>
+                <td><%= convert_nil(@mp_err.at(i).danni_meccanici) %></td>
+                <td><%= convert_nil(@mp_err.at(i).danni_parassitari) %></td>
+                <td class="bigger"><%= convert_nil(@mp_err.at(i).note) %></td>
+              </tr>
           <% end %>
-        </td>
-        <td><%= @mp_err.at(i).copertura %></td>
-        <td><%= @mp_err.at(i).copertura_esterna%></td>
-        <td><%= @mp_err.at(i).altezza_media %></td>
-        <td><%= @mp_err.at(i).numero_cespi %></td>
-        <td><%= @mp_err.at(i).numero_stoloni %></td>
-        <td><%= @mp_err.at(i).numero_stoloni_radicanti %></td>
-        <td><%= @mp_err.at(i).numero_foglie %></td>
-        <td><%= @mp_err.at(i).numero_getti %></td>
-        <td><%= @mp_err.at(i).danni_meccanici %></td>
-        <td><%= @mp_err.at(i).danni_parassitari %></td>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-        <td><%= @mp_err.at(i).note %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% end %>
+
 
 <% unless @mp_gbe.blank? %>
-    <h2>Global Errors</h2>
-    <table>
+
+    <h3>Global Errors</h3>
+
+    <%= render :partial => "import_erbacee/global_instr" %>
+
+
+    <table id="war_head">
       <tbody>
-      <tr>
-        <th>
-          <%= @file.file_name %>
+      <tr class="head zero">
+        <th colspan="2" class="file">
+          <%= @file.file_name %> - <%= @file.import_num %>
         </th>
       </tr>
-      <tr>
-        <th>Error</th>
-      </tr>
-      <% for i in 0..@mp_gbe.size-1%>
-          <tr>
-            <td><%= @mp_gbe.at(i).error %></td>
-          </tr>
-      <% end %>
-      <tr>
-        <td>
-          <% if session[:mp_error] == false && session[:mp_warning] == true %>
-            <%= button_to "Forza dati", :action => "force_input" %>
-          <% end %>
-        </td>
+      <tr class="head">
+        <th class="bigger">Error</th>
       </tr>
       </tbody>
     </table>
+
+    <div id="ver_scroll_war">
+      <table id="war_body">
+        <tbody>
+        <% for i in 0..@mp_gbe.size-1%>
+            <tr class="body">
+              <td class="bigger"><%= @mp_gbe.at(i).error %></td>
+            </tr>
+        <% end %>
+        <tr class="body button">
+          <td class="bigger">
+            <% if session[:mp_error] == false && session[:mp_warning] == true  %>
+                <%= button_to "Forza dati", :action => "force_input" %>
+            <% else %>
+                Impossibile forzare il Global Error, in quanto sono stati rilevati errori di tipo 3 nel file.
+            <% end %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 <% end %>
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
+<p id="stamp">
+  <%= button_to_function("Stampa il Report", "javascript:print()") %>
 </p>

@@ -1,74 +1,111 @@
-<h1>Multipleparameter Errors</h1>
-<table>
-  <tbody>
-  <tr>
-    <th colspan="13">
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Row</th>
-    <th>Error</th>
-    <th>Data</th>
-    <th>Plot</th>
-    <th>Subplot</th>
-    <th>In/Out</th>
-    <th>Pri/Est</th>
-    <th>Strato</th>
-    <th>Specie</th>
-    <th>Copertura</th>
-    <th>Note</th>
-    <th>Substrate</th>
-    <th>Certainty Species Determination</th>
-  </tr>
-  <% for i in 0..@mp_err.size-1%>
-      <tr>
-        <td><%= @mp_err.at(i).row %></td>
-        <td><%= @mp_err.at(i).error %></td>
-        <td><%= @mp_err.at(i).data %></td>
-        <td><%= @mp_err.at(i).plot %></td>
-        <td><%= @mp_err.at(i).subplot %></td>
-        <td><%= @mp_err.at(i).in_out %></td>
-        <td><%= @mp_err.at(i).priest %></td>
-        <td><%= @mp_err.at(i).codice_strato %></td>
-        <td><%= @mp_err.at(i).specie %></td>
-        <td><%= @mp_err.at(i).copertura %></td>
-        <td><%= @mp_err.at(i).note %></td>
-        <td><%= @mp_err.at(i).substrate_code %></td>
-        <td><%= @mp_err.at(i).certainty_species_determination_code %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% content_for :title, "Riepilogo Errori" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "compliance_error" %>
+    <%= stylesheet_link_tag "compliance_error_print" , :media => :print %>
+    <%= stylesheet_link_tag "mp_error" %>
+    <%= stylesheet_link_tag "sr_error_print", :media => :print%>
+<%end%>
 
-<% unless @mp_gbe.blank? %>
-<h2>Global Errors</h2>
-<table>
-  <tbody>
-  <tr>
-    <th>
-      <%= @file.file_name %>
-    </th>
-  </tr>
-  <tr>
-    <th>Error</th>
-  </tr>
-  <% for i in 0..@mp_gbe.size-1%>
-      <tr>
-        <td><%= @mp_gbe.at(i).error %></td>
-      </tr>
-  <% end %>
-  <tr>
-    <td>
-      <% if session[:mp_error] == false && session[:mp_warning] == true  %>
-        <%= button_to "Forza dati", :action => "force_input" %>
+
+
+<% unless session[:mp_error] == false %>
+    <h2>Errori di tipo 3</h2>
+<%= render :partial => "import_erbacee/instr" %>
+
+<div id="oriz_scroll">
+  <table id="head">
+    <tbody>
+    <tr class="head zero">
+      <th colspan="13" id="file">
+        <%= @file.file_name %> - <%= @file.import_num %>
+      </th>
+    </tr>
+    <tr class="head">
+      <th>Row</th>
+      <th class="bigger">Error</th>
+      <th>Data</th>
+      <th>Plot</th>
+      <th>Subplot</th>
+      <th>In/Out</th>
+      <th>Pri/Est</th>
+      <th>Strato</th>
+      <th class="big">Specie</th>
+      <th>Copertura</th>
+      <th class="bigger">Note</th>
+      <th class="big">Substrate</th>
+      <th class="bigger">Certainty Species Determination</th>
+    </tr>
+    </tbody>
+  </table>
+  <div id="ver_scroll">
+    <table id="body">
+      <tbody>
+      <% for i in 0..@mp_err.size-1%>
+          <tr class="body">
+            <td><%= @mp_err.at(i).row %></td>
+            <td class="bigger"><%= @mp_err.at(i).error %></td>
+            <td><%= convert_nil(@mp_err.at(i).data) %></td>
+            <td><%= convert_nil(@mp_err.at(i).plot) %></td>
+            <td><%= convert_nil(@mp_err.at(i).subplot) %></td>
+            <td><%= convert_nil(@mp_err.at(i).in_out) %></td>
+            <td><%= convert_nil(@mp_err.at(i).priest) %></td>
+            <td><%= convert_nil(@mp_err.at(i).codice_strato) %></td>
+            <td class="big"><%= convert_nil(@mp_err.at(i).specie) %></td>
+            <td><%= convert_nil(@mp_err.at(i).copertura) %></td>
+            <td class="bigger"><%= convert_nil(@mp_err.at(i).note) %></td>
+            <td class="big"><%= convert_nil(@mp_err.at(i).substrate_code) %></td>
+            <td class="bigger"><%= convert_nil(@mp_err.at(i).certainty_species_determination_code) %></td>
+          </tr>
       <% end %>
-    </td>
-  </tr>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <% end %>
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
+<% unless @mp_gbe.blank? %>
+
+    <h3>Global Errors</h3>
+
+    <%= render :partial => "import_erbacee/global_instr" %>
+
+
+    <table id="war_head">
+      <tbody>
+      <tr class="head zero">
+        <th colspan="2" class="file">
+          <%= @file.file_name %> - <%= @file.import_num %>
+        </th>
+      </tr>
+      <tr class="head">
+        <th class="bigger">Error</th>
+      </tr>
+      </tbody>
+    </table>
+
+    <div id="ver_scroll_war">
+      <table id="war_body">
+        <tbody>
+        <% for i in 0..@mp_gbe.size-1%>
+            <tr class="body">
+              <td class="bigger"><%= @mp_gbe.at(i).error %></td>
+            </tr>
+        <% end %>
+        <tr class="body button">
+          <td class="bigger">
+            <% if session[:mp_error] == false && session[:mp_warning] == true  %>
+                <%= button_to "Forza dati", :action => "force_input" %>
+            <% else %>
+                Impossibile forzare il Global Error, in quanto sono stati rilevati errori di tipo 3 nel file.
+            <% end %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+<% end %>
+
+<p id="stamp">
+  <%= button_to_function("Stampa il Report", "javascript:print()") %>
 </p>

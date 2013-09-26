@@ -1,0 +1,47 @@
+h3{
+    margin:15px 35px;
+    font-size: large;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+p#w_instr{
+    margin: 15px 35px;
+}
+
+#ver_scroll_war{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100px;
+    width:167px;
+    margin: 0 416px;
+    background-color:#F6F9C9 ;
+}
+
+#war_head{
+    margin: 25px 416px 0 416px;
+    border-bottom: 2px solid #8b4513 ;
+}
+
+#war_body,#war_head{
+    border-collapse: collapse;
+}
+
+#war_body{
+    min-height: 100px;
+}
+
+th.file{
+    font-size: small;
+    color: #b22222;
+}
+
+tr.button{
+    background-color: #fad849;
+}
+
+tr.button:hover{
+    background-color: #fad849;
+}
+
+
