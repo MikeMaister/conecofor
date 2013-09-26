@@ -111,33 +111,72 @@
 <% end %>
 
 <% unless current_user.blank? || current_user.user_kind_id != 1%>
+    <% content_for :title, "Home - CONECOFOR" %>
+    <% content_for :head do %>
+        <%= stylesheet_link_tag "home_admin"%>
+    <%end%>
+    <div id="page">
+    <div class="box_menu" id="ril">
+        <h2>Rilevamenti</h2>
+        <p class="desc">
+            In questa sezione sono presenti tutti gli strumenti necessari per avviare una nuova campagna, monitorarla, gestirla e portarla a conclusione.
+        </p>
+        <ul>
+            <li><%= link_to "Campagne", :controller => "admin/campagne" %></li>
+            <li> <%= link_to "Approva Import", :controller => "admin/import_quick_view" %> </li>
+            <li><%= link_to "Visualizza errori di import", :controller => "admin/error_summary" %></li>
+            <li><%= link_to "Nuovo modello src", :controller => "admin/simple_range_model" %></li>
+            <li><%= link_to "Nuova Maschera d'obbligatorietà" ,:controller => "admin/mandatory_mask" %></li>
+            <li><%= link_to "Permessi Import", :controller => "admin/import_permits" %></li>
+        </ul>
+    </div>
 
-    <ul>
-      <li><%= link_to "Campagne", :controller => "admin/campagne" %></li>
-      <li><%= link_to "Plot", :controller => "admin/plot" %></li>
-      <li> <%= link_to "Approva Import", :controller => "admin/import_quick_view" %> </li>
-      <li><%= link_to "Controlla Specie", :controller => "admin/check_species" %></li>
-      <li><%= link_to "Visualizza errori di import", :controller => "admin/error_summary" %></li>
-      <li><%= link_to "Nuovo modello src", :controller => "admin/simple_range_model" %></li>
-      <li><%= link_to "Nuova Maschera d'obbligatorietà" ,:controller => "admin/mandatory_mask" %></li>
-      <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
-      <li><%= link_to "VEM", :controller => "admin/vem" %></li>
-      <li><%= link_to "PLV", :controller => "admin/plv" %></li>
-      <li><%= link_to "VS", :controller => "admin/vs" %></li>
-      <li><%= link_to "Pignatti", :controller => "admin/pignatti" %></li>
-      <li><%= link_to "Euflora", :controller => "admin/euflora" %></li>
-      <li><%= link_to "Specie VS", :controller => "admin/specie_vs" %></li>
-      <li><%= link_to "Listspe", :controller => "admin/listspe" %></li>
-      <li><%= link_to "Statistiche", :controller => "admin/statistics" %></li>
-      <li><%= link_to "Statistiche Specie", :controller => "admin/spe_stat" %></li>
-      <li><%= link_to "Statistiche SU", :controller => "admin/su_stat" %></li>
-      <li><%= link_to "Riepilogativi Europei", :controller => "admin/riepilogativi_europei" %></li>
-      <li><%= link_to "File Manager", :controller => "admin/file_manager" %></li>
-      <li><%= link_to "Permessi Import", :controller => "admin/import_permits" %></li>
-      <li><%= link_to "Evoluzione Specie", :controller => "admin/evoluzione_specie" %></li>
-      <li><%= link_to "Presenza Specie", :controller => "admin/presenza_specie", :action => "result" %></li>
-    </ul>
+    <div class="box_menu" id="tab">
+        <h3>Tabelle</h3>
+        <p class="desc">
+            In questa sezione sono presenti gli strumenti necessari per gestire tutte le tabelle utilizzabili da un amministratore.
+        </p>
+        <ul>
+            <li><%= link_to "Campagne", :controller => "admin/campagne" %></li>
+            <li><%= link_to "Plot", :controller => "admin/plot" %></li>
+            <li><%= link_to "Pignatti", :controller => "admin/pignatti" %></li>
+            <li><%= link_to "Euflora", :controller => "admin/euflora" %></li>
+            <li><%= link_to "Specie VS", :controller => "admin/specie_vs" %></li>
+            <li><%= link_to "Listspe", :controller => "admin/listspe" %></li>
+        </ul>
+    </div>
 
+    <div class="box_menu" id="elab">
+        <h4>Elaborazioni</h4>
+        <p class="desc">
+            In questa sezione sono presenti tutti gli strumenti per elaborare i dati immessi dai rilevatori ed approvati dall'amministratore.
+        </p>
+        <ul>
+            <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
+            <li><%= link_to "VEM", :controller => "admin/vem" %></li>
+            <li><%= link_to "PLV", :controller => "admin/plv" %></li>
+            <li><%= link_to "VS", :controller => "admin/vs" %></li>
+            <li><%= link_to "Evoluzione Specie", :controller => "admin/evoluzione_specie" %></li>
+            <li><%= link_to "Presenza Specie", :controller => "admin/presenza_specie", :action => "result" %></li>
+            <li><%= link_to "Statistiche", :controller => "admin/statistics" %></li>
+            <li><%= link_to "Statistiche Specie", :controller => "admin/spe_stat" %></li>
+            <li><%= link_to "Statistiche SU", :controller => "admin/su_stat" %></li>
+            <li><%= link_to "Riepilogativi Europei", :controller => "admin/riepilogativi_europei" %></li>
+        </ul>
+    </div>
+
+    <div class="box_menu"  id="str">
+        <h5>Strumenti</h5>
+        <p class="desc">
+            In questa sezione sono presenti tutti gli strumenti generici necessari all'amministratore.
+        </p>
+        <ul>
+            <li><%= link_to "Controlla Specie", :controller => "admin/check_species" %></li>
+            <li><%= link_to "File Manager", :controller => "admin/file_manager" %></li>
+        </ul>
+    </div>
+
+    </div>
 <% end %>
 
 

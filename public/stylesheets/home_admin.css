@@ -1,0 +1,55 @@
+h2,h3,h4,h5{
+    color: #8b4513;
+    font-size: large;
+    margin: 0 0 7px 0;
+}
+
+div.box_menu{
+    padding: 15px;
+    border: 1px solid #000000;
+    border-radius: 25px;
+    width: 40%;
+    margin: 2.5% 0 1% 0;
+}
+
+div#ril,div#elab{
+    float: left;
+    margin-left: 5%;
+}
+
+div#tab,div#str{
+    float: right;
+    margin-right: 5%;
+}
+
+div#ril,div#tab{
+    min-height: 220px;
+}
+
+div#ril{
+    background-color: #d0ff72;
+    border: 1px solid #006400;
+}
+
+div#tab{
+    background-color: rgba(192, 198, 1, 0.60);
+    border: 1px solid #006400;
+}
+
+div#elab{
+    background-color: #fff573;
+    border: 1px solid #006400;
+}
+
+div#str{
+    background-color: #eaff6a;
+    border: 1px solid #006400;
+}
+
+div#page{
+    border: 1px solid #000000;
+    min-height: 740px;
+}
+
+
+
