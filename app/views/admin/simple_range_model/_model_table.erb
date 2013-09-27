@@ -1,28 +1,30 @@
 <% unless @srm.blank? %>
-<table>
+<table class="view head">
   <thead>
   <tr>
-    <th>Tabella</th>
-    <th>Attributo</th>
-    <th>Min</th>
-    <th>Max</th>
+    <th class="nh1">Tabella</th>
+    <th class="nh2">Attributo</th>
+    <th class="nh3">Min</th>
+    <th class="nh4">Max</th>
   </tr>
   </thead>
+</table>
+<div class="ver_scroll">
+<table class="view">
   <tbody>
   <% for i in 0..@srm.size-1 %>
-      <tr>
-        <td><%= @srm.at(i).reference_table %></td>
-        <td><%= @srm.at(i).attr %></td>
-        <td><%= @srm.at(i).min %></td>
-        <td><%= @srm.at(i).max %></td>
+      <tr class="body">
+        <td class="nh1"><%= @srm.at(i).reference_table %></td>
+        <td class="nh2"><%= @srm.at(i).attr %></td>
+        <td class="nh3"><%= @srm.at(i).min %></td>
+        <td class="nh4"><%= @srm.at(i).max %></td>
       </tr>
   <%end%>
   </tbody>
 </table>
+</div>
 
  <% unless @srm.at(0).nome == "Standard" %>
-   <p>
-     <%= button_to "Elimina Modello", :controller => "admin/simple_range_model", :action => "delete_srm", :nome => @srm.at(0).nome %>
-   </p>
+     <%= button_to("Elimina Modello", {:controller => "admin/simple_range_model", :action => "delete_srm", :nome => @srm.at(0).nome},{:confirm => "Eliminare il modello?",:class => "del_button"}) %>
  <% end %>
 <% end %>

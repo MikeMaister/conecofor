@@ -1,23 +1,31 @@
-<h1>Admin::SimpleRangeModel</h1>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "modelli_src" %>
+<% end %>
+<h2>Modelli Simple Range Check</h2>
 
+<p class="desc">
+  I Modelli Simple Range Check, permettono di stabilire i valori limite degli attributi, inerenti alle rilevazioni,
+  per i quali sono applicati i check di Tipo 2. E' possibile creare diversi modelli, ognuno dei quali può essere associato
+  ad una o più Campagne. Al momento della creazione della Campagna, verrà richiesto il modello Simple Range Check da associare.
+</p>
 
-    <p>
-      Seleziona il modello da visualizzare:
-    </p>
-    <p>
+ <div id="mask_view">
+    <p class="comand view">
+      Visualizza:
       <%= select_tag "model", "<option>-Seleziona-</option>" + options_from_collection_for_select(@model, "nome", "nome") %>
 
       <%= observe_field "model", :url => {:controller=>"admin/simple_range_model", :action=>"show_model",:update => "model_view"},:with =>"model" %>
     </p>
 
+   <div id="model_view" style="display:none;"></div>
+ </div>
 
-<div id="model_view" style="display:none;">
+<div id="mask_new">
+    <p class="comand button"> <%= button_to_remote "Crea Modello", :url => { :controller =>"admin/simple_range_model",:action => "new", :update => "new_model"} %></p>
+    <div id="new_model" style="display:none;"></div>
 </div>
 
-<p> <%= button_to_remote "Nuovo Modello", :url => { :controller =>"admin/simple_range_model",:action => "new", :update => "new_model"} %></p>
-
-<div id="new_model" style="display:none;">
-</div>
+<div id="stop"></div>
 
 
 
