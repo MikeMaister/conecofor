@@ -9,7 +9,7 @@ div.box_menu{
     border: 1px solid #000000;
     border-radius: 25px;
     width: 40%;
-    margin: 2.5% 0 1% 0;
+    margin: 2.5% 0 0 0;
 }
 
 div#ril,div#elab{
@@ -47,8 +47,20 @@ div#str{
 }
 
 div#page{
-    border: 1px solid #000000;
-    min-height: 740px;
+    /*border: 1px solid #000000;*/
+    min-height: 650px;
+}
+
+p#benvenuto {
+    margin: 7px 0 0 0;
+    font-size: medium;
+}
+
+div#benvenuto_container{
+    clear: both;
+    width: 940px;
+    margin:0 30px;
+    border: 1px solid transparent;
 }
 
 

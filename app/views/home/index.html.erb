@@ -59,7 +59,7 @@
     <%end%>
     <div id="benvenuto_container">
         <p id="benvenuto">
-            Benvenuto <strong><%= current_user.full_name %></strong>!
+            Benvenuto utente <strong><%= current_user.full_name %></strong>!
             <br /><br />
             Segui le instruzioni per eseguire correttamente la procedura d'import relativa ai dati in tuo possesso.
         </p>
@@ -115,6 +115,11 @@
     <% content_for :head do %>
         <%= stylesheet_link_tag "home_admin"%>
     <%end%>
+    <div id="benvenuto_container">
+      <p id="benvenuto">
+        Benvenuto utente <strong><%= current_user.full_name %></strong>!
+      </p>
+    </div>
     <div id="page">
     <div class="box_menu" id="ril">
         <h2>Rilevamenti</h2>
@@ -122,12 +127,12 @@
             In questa sezione sono presenti tutti gli strumenti necessari per avviare una nuova campagna, monitorarla, gestirla e portarla a conclusione.
         </p>
         <ul>
+            <li><%= link_to "Modelli Simple Range Check", :controller => "admin/simple_range_model" %></li>
+            <li><%= link_to "Maschere d'obbligatorietà" ,:controller => "admin/mandatory_mask" %></li>
             <li><%= link_to "Campagne", :controller => "admin/campagne" %></li>
-            <li> <%= link_to "Approva Import", :controller => "admin/import_quick_view" %> </li>
-            <li><%= link_to "Visualizza errori di import", :controller => "admin/error_summary" %></li>
-            <li><%= link_to "Nuovo modello src", :controller => "admin/simple_range_model" %></li>
-            <li><%= link_to "Nuova Maschera d'obbligatorietà" ,:controller => "admin/mandatory_mask" %></li>
             <li><%= link_to "Permessi Import", :controller => "admin/import_permits" %></li>
+            <li><%= link_to "Errori d'import", :controller => "admin/error_summary" %></li>
+            <li><%= link_to "Approva import", :controller => "admin/import_quick_view" %> </li>
         </ul>
     </div>
 
@@ -152,12 +157,12 @@
             In questa sezione sono presenti tutti gli strumenti per elaborare i dati immessi dai rilevatori ed approvati dall'amministratore.
         </p>
         <ul>
-            <li> <%= link_to "Import View", :controller => "import_public_view" %> </li>
+            <li> <%= link_to "Dati Definitivi", :controller => "import_public_view" %> </li>
             <li><%= link_to "VEM", :controller => "admin/vem" %></li>
             <li><%= link_to "PLV", :controller => "admin/plv" %></li>
             <li><%= link_to "VS", :controller => "admin/vs" %></li>
-            <li><%= link_to "Evoluzione Specie", :controller => "admin/evoluzione_specie" %></li>
-            <li><%= link_to "Presenza Specie", :controller => "admin/presenza_specie", :action => "result" %></li>
+            <li><%= link_to "Evoluzione Specie-Plot", :controller => "admin/evoluzione_specie" %></li>
+            <li><%= link_to "Presenza Specie-Plot", :controller => "admin/presenza_specie", :action => "result" %></li>
             <li><%= link_to "Statistiche", :controller => "admin/statistics" %></li>
             <li><%= link_to "Statistiche Specie", :controller => "admin/spe_stat" %></li>
             <li><%= link_to "Statistiche SU", :controller => "admin/su_stat" %></li>
