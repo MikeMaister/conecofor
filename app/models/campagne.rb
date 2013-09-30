@@ -43,7 +43,7 @@ class Campagne < ActiveRecord::Base
     self.note_stagione = note_stagione
     self.descrizione = set_descrizione(self.season_id,self.inizio)
     self.deleted = false
-    self.anno = self.inizio.year
+    self.anno = self.inizio.year unless self.inizio.blank?
   end
 
   #attiva campagna
