@@ -2,7 +2,7 @@ class Admin::CampagneController < ApplicationController
   layout "application"
 
   def index
-    @campagne = Campagne.find(:all,:conditions => ["deleted = false"])
+    @campagne = Campagne.find(:all,:conditions => ["deleted = false"],:order => "descrizione desc")
     @campagna_attiva = Campagne.find(:first, :conditions => ["active = true"])
   end
 
