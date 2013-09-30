@@ -1,24 +1,24 @@
 <% if @new_camp.errors.any? %>
-    <ul>
+    <ul class="err">
     <% @new_camp.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="error"><%= message %></li>
     <% end %>
     </ul>
 <% end %>
 
 <% if @new_model_assoc.errors.any? %>
-    <ul>
+    <ul class="err">
       <% @new_model_assoc.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li class="error"><%= message %></li>
       <% end %>
     </ul>
 <% end %>
 
 
 <% if @new_mask_assoc.errors.any? %>
-    <ul>
+    <ul class="err">
       <% @new_mask_assoc.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li class="error"><%= message %></li>
       <% end %>
     </ul>
 <% end %>

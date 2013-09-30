@@ -8,3 +8,5 @@ en:
     attributes:
       plot:
         id_plot: "Identificativo"
+      campagne:
+        note_stagione: "Giustifica stagione"

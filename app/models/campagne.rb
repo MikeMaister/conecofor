@@ -29,7 +29,7 @@ class Campagne < ActiveRecord::Base
     stagione = Season.find(season_id)
     unless (inizio.month > stagione.inizio.month && fine.month < stagione.fine.month) || (inizio.month == stagione.inizio.month && inizio.day >= stagione.inizio.day) || (fine.month == stagione.fine.month && fine.day <= stagione.fine.day)
       if note_stagione.blank?
-        errors.add(:note_stagione, "deve essere compilato, in quanto la stagione dichiarata non corrisponde alla stagione effettiva corrispondente, alla data selezionata.")
+        errors.add(:note_stagione, "deve essere compilata, in quanto la stagione dichiarata non corrisponde alla stagione effettiva corrispondente, alla data selezionata.")
       end
     end
   end

@@ -1,34 +1,39 @@
 
 <% if !@campagne.blank? %>
-<table>
-  <thead>
+<table id="c_head">
+  <tbody>
   <tr>
-    <th>Campagna</th>
-    <th>Inizio</th>
-    <th>Fine</th>
-    <th>Note di Stagione</th>
-    <th>Note</th>
-    <th> Simple Range Model</th>
-    <th>Mandatory Mask</th>
-    <th colspan="2">Opzioni</th>
+    <th class="col1">Campagna</th>
+    <th class="col2">Inizio</th>
+    <th class="col3">Fine</th>
+    <th class="col4">Note di Stagione</th>
+    <th class="col5">Note</th>
+    <th class="col6"> Modello SRC</th>
+    <th class="col7">Maschera Obbl.</th>
+    <th class="col8">Opzioni</th>
   </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="c_body">
   <tbody>
   <% for i in 0..@campagne.size-1 %>
-      <tr>
-        <td><%= @campagne.at(i).descrizione %></td>
-        <td><%= @campagne.at(i).inizio %></td>
-        <td><%= @campagne.at(i).fine %></td>
-        <td><%= @campagne.at(i).note_stagione %></td>
-        <td><%= @campagne.at(i).note %></td>
-        <td><%= SimpleRangeModel.find(SimpleRangeAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).simple_range_model_id).nome %></td>
-        <td><%= MandatoryMask.find(MandatoryMaskAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).mandatory_mask_id).mask_name %></td>
+      <tr class="ct_body">
+        <td class="col1"><%= @campagne.at(i).descrizione %></td>
+        <td class="col2"><%= @campagne.at(i).inizio %></td>
+        <td class="col3"><%= @campagne.at(i).fine %></td>
+        <td class="col4"><%= @campagne.at(i).note_stagione %></td>
+        <td class="col5"><%= @campagne.at(i).note %></td>
+        <td class="col6"><%= SimpleRangeModel.find(SimpleRangeAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).simple_range_model_id).nome %></td>
+        <td class="col7"><%= MandatoryMask.find(MandatoryMaskAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).mandatory_mask_id).mask_name %></td>
 
         <% if @campagne.at(i).active == true %>
-            <td><%= button_to_remote("Disattiva",:url=>{ :controller => "admin/campagne", :action => "disattiva_campagna"}) %></td>
+            <td class="col8"><%= button_to_remote("Disattiva",:url=>{ :controller => "admin/campagne", :action => "disattiva_campagna"}) %></td>
         <% elsif @campagne.at(i).active == false %>
-            <td><%= button_to_remote("Attiva", :url => { :controller =>"admin/campagne",:action => "attiva_campagna", :n => @campagne.at(i).id}) %></td>
-            <td><%= button_to_remote("Elimina",:url =>{:controller =>"admin/campagne",:action=>"elimina_campagna",:n => @campagne.at(i).id},:confirm => "Eliminando la campagna selezionata invaliderai tutti i dati ad essa collegati. Vuoi proseguire?")%></td>
+            <td class="col8">
+              <%= button_to_remote("Attiva", :url => { :controller =>"admin/campagne",:action => "attiva_campagna", :n => @campagne.at(i).id}) %>
+              <%= button_to_remote("Elimina",:url =>{:controller =>"admin/campagne",:action=>"elimina_campagna",:n => @campagne.at(i).id},:confirm => "Eliminando la campagna selezionata invaliderai tutti i dati ad essa collegati. Vuoi proseguire?")%>
+            </td>
         <%end%>
 
 
@@ -36,4 +41,5 @@
   <% end %>
   </tbody>
 </table>
+</div>
 <% end %>

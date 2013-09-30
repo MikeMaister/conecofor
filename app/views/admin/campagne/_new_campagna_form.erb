@@ -1,6 +1,7 @@
 <div id = "display_input_errors" style="display:none;"></div>
 
-<p><strong>Inserisci una nuova campagna</strong></p>
+<div id="input_camp">
+<p class="new_c"><strong>Inserisci una nuova campagna</strong></p>
 <% form_remote_tag(:url =>{:controller => 'admin/campagne',:action => 'remote_save'}) do -%>
     <p>
       <strong>Stagione:<br /></strong>
@@ -19,8 +20,8 @@
     </p>
     <p>
       <strong><%= label_tag "Giustifica stagione" %><br /></strong>
-      (Compilare solamente per giustificare la non corrispondenza tra le date e la stagione scelta.)<br />
-      <%= link_to_function ("Compila"),remote_function(:url => {:controller =>"admin/campagne", :action=>"show_season_note", :update =>"season_note"}) %>
+      <%= link_to_function ("Compila"),remote_function(:url => {:controller =>"admin/campagne", :action=>"show_season_note", :update =>"season_note"}),:class=>"little" %>
+      <em>(Solamente per giustificare la non corrispondenza tra date e stagione scelta)</em>
     </p>
     <div id="season_note" style="display:none;" >
       <p>
@@ -32,24 +33,22 @@
       <%= text_area_tag :note,'', :size => "30x5" %>
     </p>
     <p>
-      <%= label_tag "Seleziona il modello di Simple Range Check da associare:" %>
+      <%= label_tag "Seleziona il Modello Simple Range Check:" %>
       <%= select_tag "model", "<option>-Seleziona-</option>" + options_from_collection_for_select(@model, "nome", "nome") %>
       <%= observe_field "model", :url => {:controller=>"admin/campagne", :action=>"show_model",:update => "model_view"},:with =>"model" %>
     </p>
 
-    <div id="model_view" style="display:none;">
-    </div>
-
     <p>
-      <%= label_tag "Seleziona la maschera d'obbligatorietà da associare:" %>
+      <%= label_tag "Seleziona la Maschera d'obbligatorietà:" %>
       <%= select_tag "mask", "<option>-Seleziona-</option>" + options_from_collection_for_select(@mask, "mask_name", "mask_name") %>
       <%= observe_field "mask", :url => {:controller=>"admin/campagne", :action=>"show_mask",:update => "mask_view"},:with =>"mask" %>
     </p>
 
-    <div id="mask_view" style="display:none;">
-    </div>
-
-    <p>
-      <%= submit_tag ("Salva")%><%= button_to_function "Annulla","new_campagna.hide()"%>
-    </p>
+      <%= submit_tag "Crea" ,:class => "end_button"%><%= button_to_function "Annulla","new_campagna.hide()",:class=>"end_button"%>
 <% end %>
+
+</div>
+
+<div id="model_view"></div>
+
+<div id="mask_view"></div>

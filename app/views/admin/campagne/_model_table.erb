@@ -1,7 +1,7 @@
 <% unless @srm.blank? %>
-<table>
+<table id="msrc">
   <thead>
-  <tr>
+  <tr class="msrc_head">
     <th>Tabella</th>
     <th>Attributo</th>
     <th>Min</th>
@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <% for i in 0..@srm.size-1 %>
-      <tr>
+      <tr class="msrc">
         <td><%= @srm.at(i).reference_table %></td>
         <td><%= @srm.at(i).attr %></td>
         <td><%= @srm.at(i).min %></td>
@@ -19,5 +19,4 @@
   <%end%>
   </tbody>
 </table>
-
 <% end %>

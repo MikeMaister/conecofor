@@ -1,0 +1,177 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+p.subtitle{
+    margin: 0 30%;
+    color: #8b4513;
+}
+
+div#active_camp{
+    margin: 15px 35px;
+    padding: 10px;
+    border: 1px solid #fa8500;
+    border-radius: 25px;
+    background-color: #fff77e;
+}
+
+td{
+    text-align: center;
+}
+
+.col1{
+    width: 100px;
+}
+
+.col2,.col3{
+    width: 60px;
+}
+
+.col4,.col5{
+    width: 200px;
+}
+
+.col6,.col7{
+    width: 95px;
+}
+
+.col8{
+    width: 150px;
+}
+
+div#ver_scroll{
+    height: 250px;
+    width: 994px;
+    /*border: 1px solid #000000;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+table#c_head,table#c_body{
+    font-size: small;
+    border-collapse: collapse;
+}
+
+div#ver_scroll{
+    background-color: rgba(244, 197, 37, 0.55);
+}
+
+tr.ct_body:hover{
+    background-color: rgba(255, 69, 0, 0.36);
+}
+
+table#c_head,div#ver_scroll{
+    margin-left: 3px ;
+}
+
+table#c_head{
+    background-color: rgba(194, 198, 2, 0.70);
+}
+
+.add_button{
+    margin-bottom:15px ;
+}
+
+div#new_campagna{
+    border: 1px dotted #006f00;
+    background-color: rgba(173, 255, 47, 0.61);
+    padding: 25px 25px;
+    width: 950px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+div#display_input_errors{
+    border: 1px dashed #F62217;
+    width: 935px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+ul.err{
+    margin: 0;
+}
+
+li.error{
+    color: #F62217;
+}
+
+p.new_c{
+    margin-top: 0;
+}
+
+.end_button{
+    margin-bottom: 0;
+}
+
+.little{
+    font-size: smaller;
+}
+
+em{
+    font-size: x-small;
+}
+
+div#input_camp{
+    width: 500px;
+    float: left;
+}
+
+div#model_view{
+    border: 1px dotted #006f00;
+    background-color: #d8ff63;
+    float: right;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+div#mask_view{
+    border: 1px dotted #4e6f05;
+    background-color: rgba(168, 229, 43, 0.60);
+    float: right;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 20px;
+}
+
+div#mask_view,div#model_view{
+    height: 220px;
+    width: 420px;
+}
+
+div.stop{
+    clear: both;
+    width: 1000px;
+}
+
+table#msrc{
+    margin-left: 35px;
+    border-collapse: collapse;
+}
+
+tr.msrc_head{
+   color: #8b4513;
+}
+
+tr.msrc:hover{
+    background-color: #fff451;
+}
+
+p.elenc{
+    margin-left: 27%;
+    color: #8b4513;
+}
+
+ul.mask{
+    margin-left: 27%;
+}
+
+p.elenc.null{
+    margin-top: 23%;
+}

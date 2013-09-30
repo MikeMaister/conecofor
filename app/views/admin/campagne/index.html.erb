@@ -1,4 +1,18 @@
-<h1>Admin::Campagne</h1>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "campagne" %>
+<% end %>
+
+<h2>Campagne</h2>
+<p class="desc">
+    Tramite quest'interfaccia è possibile visualizzare, creare, cancellare, attivare e disattivare le Campagne.<br />
+    Per la <strong>creazione</strong> di una nuova <strong>campagna</strong> verranno <strong>richiesti:</strong> un <strong>Modello Simple Range Check e</strong> una <strong>Maschera d'obbligatorietà</strong>
+    da associare, quindi <strong>è possibile definire tali maschere e modelli dal menu, presente nella propria Home.</strong><br />
+    Una volta <strong>creata una nuova campagna, è necessario renderla attiva per far si che i rilevatori possano associare i propri dati
+    ad essa.</strong><br />
+    Può essere <strong>attiva una sola campagna per volta.</strong><br />
+    <strong>Disattivando una campagna,</strong> la si renderà <strong>invisibile ai rilevatori.</strong><br />
+    <strong>Eliminando una campagna si invalideranno e elimineranno tutti i dati associati ad essa.</strong>
+</p>
 
 <div id="active_camp">
   <%= render :partial => "active_campagna", :object => @campagna_attiva %>
@@ -11,8 +25,12 @@
   <%= render :partial => "campagne_list", :object => @campagne %>
 </div>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/campagne",:action => "new_camp", :update => "new_campagna"} %></p>
+<%= button_to_remote("+",{:url =>{ :controller =>"admin/campagne",:action => "new_camp", :update => "new_campagna"}},{:class =>"add_button"}) %>
 
+<div class="stop"></div>
 
 <div id="new_campagna" style="display:none;">
 </div>
+
+
+<div class="stop"></div>
