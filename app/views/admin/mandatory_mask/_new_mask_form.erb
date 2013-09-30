@@ -104,7 +104,7 @@
 </div>
     <p class="nome">
       <strong><%= label_tag "Nome Maschera:" %></strong>
-      <%= text_field_tag :nome %>
+      <%= text_field_tag :nome ,{},:class=>"form_nome"%>
     </p>
 
      <%= submit_tag "Salva", :class => "butt_new"%> <%= button_to_function "Annulla","new_mask.hide()",:class =>"butt_new" %>

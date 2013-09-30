@@ -16,8 +16,6 @@ div#m_view{
     padding: 15px;
     background-color: #eaff6a;
     width: 415px;
-    clear: right;
-    display: inline-block;
 }
 
 p.comand{
@@ -77,5 +75,9 @@ div.ver_scroll{
 .butt_new{
     margin-top: 7px;
     float: left;
+}
+
+.form_nome{
+    width: 125px;
 }
 
