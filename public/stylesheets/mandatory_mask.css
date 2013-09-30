@@ -1,0 +1,81 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+div#m_view{
+    margin: 15px 35px;
+    float: left;
+    border: 1px solid #c2c602;
+    border-radius: 25px;
+    padding: 15px;
+    background-color: #eaff6a;
+    width: 415px;
+    clear: right;
+    display: inline-block;
+}
+
+p.comand{
+    margin: 0 0 7px 0;
+}
+
+p.comand.view,p.comand.button{
+    margin-bottom: 0;
+}
+
+div#mask_view{
+    float: left;
+    margin: 0;
+}
+
+div#mask_new{
+    margin: 15px 35px 15px 0;
+    float: right;
+    border: 1px solid #fa8500;
+    border-radius: 25px;
+    padding: 15px;
+    background-color: #f9faa1;
+    width: 415px;
+}
+
+div#stop{
+    clear: both;
+    width: 900px;
+    height: 2px;
+    margin-bottom:10px ;
+}
+
+p.subtitle{
+    color: #8b4513;
+    font-size: small;
+}
+
+div.ver_scroll{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height:250px;
+    width: 400px;
+    /*border: 1px solid #000000;*/
+    margin: 15px 5px 10px 5px;
+}
+
+.del_button{
+    margin: 0;
+    margin-top: 10px;
+}
+
+.nome{
+    float: left;
+    margin: 5px 7px 0 0;
+}
+
+.butt_new{
+    margin-top: 7px;
+    float: left;
+}
+

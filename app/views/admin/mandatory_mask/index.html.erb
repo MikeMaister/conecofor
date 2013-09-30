@@ -1,19 +1,30 @@
-<h1>Admin::MandatoryMask</h1>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "mandatory_mask" %>
+<% end %>
 
-<p>
-  Seleziona il modello da visualizzare:
+<h2>Maschere d'obbligatorietà</h2>
+<p class="desc">
+  Le Maschere d'obbligatorietà permettono ad un amministratore di stabilire quali attributi il rilevatore è obbligato a rilevare.
+  In caso di mancata presenza di uno di essi, il sistema genererà un errore di tipo 1.
+  E' possibile creare diverse maschere, ognuna delle quali può essere associata ad una o più Campagne.
+  Al momento della creazione della Campagna, verrà richiesta la Maschera d'obbligatorietà da associare.
 </p>
-<p>
-  <%= select_tag "mask", "<option>-Seleziona-</option>" + options_from_collection_for_select(@mask, "mask_name", "mask_name") %>
 
-  <%= observe_field "mask", :url => {:controller=>"admin/mandatory_mask", :action=>"show_model",:update => "mask_view"},:with =>"mask" %>
-</p>
-
-
-<div id="mask_view" style="display:none;">
+<div id="m_view">
+    <p class="comand view">
+        Visualizza:
+        <%= select_tag "mask", "<option>-Seleziona-</option>" + options_from_collection_for_select(@mask, "mask_name", "mask_name") %>
+        <%= observe_field "mask", :url => {:controller=>"admin/mandatory_mask", :action=>"show_model",:update => "mask_view"},:with =>"mask" %>
+    </p>
+  <div id="mask_view" style="display:none;"></div>
 </div>
 
-<p> <%= button_to_remote "Nuova Maschera", :url => { :controller =>"admin/mandatory_mask",:action => "new", :update => "new_mask"} %></p>
 
-<div id="new_mask" style="display:none;">
+<div id="mask_new">
+  <p class="comand button"> <%= button_to_remote "Nuova Maschera", :url => { :controller =>"admin/mandatory_mask",:action => "new", :update => "new_mask"} %></p>
+
+  <div id="new_mask" style="display:none;">
+  </div>
 </div>
+
+<div id="stop"></div>

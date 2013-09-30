@@ -1,11 +1,8 @@
 <% form_tag :controller => "admin/mandatory_mask", :action => "create" do %>
 
-    <p>
-     <strong><%= label_tag "Nome Maschera:" %></strong>
-      <%= text_field_tag :nome %>
-    </p>
+<div class="ver_scroll">
 
-    <p><strong>Cops:</strong></p>
+    <p class="subtitle"><strong>Cops:</strong></p>
     <ul>
       <li>
         <%= check_box_tag("copertura_specifica","mandatory") %> <%= label_tag "Copertura Specifica" %>
@@ -18,7 +15,7 @@
       </li>
     </ul>
 
-    <p><strong>Copl:</strong></p>
+    <p class="subtitle"><strong>Copl:</strong></p>
     <ul>
       <li>
         <%= check_box_tag("copertura_arboreo","mandatory") %> <%= label_tag "Copertura Arboreo" %>
@@ -49,7 +46,7 @@
       </li>
     </ul>
 
-    <p><strong>Erbacee:</strong></p>
+    <p class="subtitle"><strong>Erbacee:</strong></p>
     <ul>
       <li>
         <%= check_box_tag("copertura","mandatory") %> <%= label_tag "Copertura" %>
@@ -83,7 +80,7 @@
       </li>
     </ul>
 
-    <p><strong>Legnose:</strong></p>
+    <p class="subtitle"><strong>Legnose:</strong></p>
     <ul>
       <li>
         <%= check_box_tag("copertura_legn","mandatory") %> <%= label_tag "Copertura" %>
@@ -104,9 +101,13 @@
         <%= check_box_tag("radicanti_esterni","mandatory") %> <%= label_tag "Radicanti Esterni" %>
       </li>
     </ul>
+</div>
+    <p class="nome">
+      <strong><%= label_tag "Nome Maschera:" %></strong>
+      <%= text_field_tag :nome %>
+    </p>
 
-   <p>
-     <%= submit_tag "Salva"%> <%= button_to_function "Annulla","new_mask.hide()"%>
-   </p>
+     <%= submit_tag "Salva", :class => "butt_new"%> <%= button_to_function "Annulla","new_mask.hide()",:class =>"butt_new" %>
+
 
 <% end %>
