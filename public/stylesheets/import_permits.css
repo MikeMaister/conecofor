@@ -1,0 +1,44 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+div#view_mask{
+    border-radius: 25px;
+    padding: 15px;
+    float: left;
+    margin: 15px 35px;
+    border: 1px solid orange;
+    background-color: #FFFF8C;
+}
+
+p.input{
+    margin: 0 0 10px 0;
+}
+
+div#file_list{
+    float: left;
+    border: 1px solid #72801e;
+    background-color: #e3ff9e;
+    margin-top: 15px;
+    padding: 10px;
+    height: 150px;
+    min-width: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+ul.list_f{
+    margin: 0;
+    padding-left: 20px;
+}
+
+p.last{
+    margin-bottom: 0;
+}
