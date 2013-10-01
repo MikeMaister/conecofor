@@ -13,31 +13,36 @@ class ImportCoplController < ApplicationController
   end
 
   def import_procedure
-    result = compliance_check
-    result = simple_range_check if result == 0
-    result = multiple_parameter_check if result == 0
-    #reindirizzo in base al risultato della procedura
-    case result
-      when 0
-        set_permanent_data!("copl")
-        flash[:notice] = "Complimenti nessun errore."
-        redirect_to :action => "finish"
-      when 1  #COMPLIANCE
-        delete_temp_compliance!("copl")
-        #faccio il redirect verso il riepilogo degli errori trovati
-        flash[:error] = "Controlla il report."
-        redirect_to :action => "comp_error_summary"
-      when 2 #SIMPLE RANGE
-        #faccio il redirect verso il riepilogo errori
-        flash[:error]= " Controlla il report."
-        redirect_to :action => "sr_error_summary"
-      when 3 #MULTIPLE PARAMETER
-        #faccio il redirect verso il riepilogo errori
-        flash[:error]= "Controlla il report."
-        redirect_to :action => "mp_error_summary"
-      when 10
-        flash[:error] = "Il file non contiene nessun dato."
-        redirect_to :controller => "import_copl"
+    begin
+      result = compliance_check
+      result = simple_range_check if result == 0
+      result = multiple_parameter_check if result == 0
+      #reindirizzo in base al risultato della procedura
+      case result
+        when 0
+          set_permanent_data!("copl")
+          flash[:notice] = "Complimenti nessun errore."
+          redirect_to :action => "finish"
+        when 1  #COMPLIANCE
+          delete_temp_compliance!("copl")
+          #faccio il redirect verso il riepilogo degli errori trovati
+          flash[:error] = "Controlla il report."
+          redirect_to :action => "comp_error_summary"
+        when 2 #SIMPLE RANGE
+          #faccio il redirect verso il riepilogo errori
+          flash[:error]= " Controlla il report."
+          redirect_to :action => "sr_error_summary"
+        when 3 #MULTIPLE PARAMETER
+          #faccio il redirect verso il riepilogo errori
+          flash[:error]= "Controlla il report."
+          redirect_to :action => "mp_error_summary"
+        when 10
+          flash[:error] = "Il file non contiene nessun dato."
+          redirect_to :controller => "import_copl"
+      end
+    rescue
+      flash[:error] = "Si è riscontrato un problema con il file. Aprire il file e salvarlo in formato .xls"
+      redirect_to :controller => "import_copl"
     end
   end
 
