@@ -27,7 +27,7 @@ class Admin::CampagneController < ApplicationController
     #segnalo l'attivazione
     @message_notice = "Campagna #{@campagna_attiva.descrizione} attivata."
     #ricarico tutte le campagne
-    @campagne = Campagne.find(:all,:conditions => ["deleted = false"])
+    @campagne = Campagne.find(:all,:conditions => ["deleted = false"],:order => "descrizione desc")
     render :update do |page|
       page.show "remote_message"
       page.replace_html "remote_message" ,:partial => "layouts/remote_flash_message", :object =>@message_notice
@@ -44,7 +44,7 @@ class Admin::CampagneController < ApplicationController
     #segnalo l'attivazione
     @message_notice = "Campagna #{@campagna_attiva.descrizione} disattivata"
     #ricarico tutte le campagne
-    @campagne = Campagne.find(:all,:conditions => ["deleted = false"])
+    @campagne = Campagne.find(:all,:conditions => ["deleted = false"], :order => "descrizione desc")
     #azzero la campagna per la corretta visualizzazione nel partial
     @campagna_attiva = nil
     render :update do |page|
@@ -63,7 +63,7 @@ class Admin::CampagneController < ApplicationController
       #segnalo la cancellazione
       @message_notice = "Campagna #{@campagna_to_delete.descrizione} eliminata"
       #ricarico tutte le campagne
-      @campagne = Campagne.find(:all,:conditions => ["deleted = false"])
+      @campagne = Campagne.find(:all,:conditions => ["deleted = false"],:order => "descrizione desc")
       render :update do |page|
         page.show "remote_message"
         page.replace_html "remote_message" ,:partial => "layouts/remote_flash_message", :object =>@message_notice
@@ -124,7 +124,7 @@ class Admin::CampagneController < ApplicationController
       #associo la maschera d'obbligatorietà alla campagna
       camp_join_all_mm_row(@new_camp.id,@mask)
       #ricarico tutte le campagne
-      @campagne = Campagne.find(:all,:conditions => ["deleted = false"])
+      @campagne = Campagne.find(:all,:conditions => ["deleted = false"], :order => "descrizione desc")
       #avverto del nuovo inserimento
       @message_notice = "Campagna #{@new_camp.descrizione} inserita."
       render :update do |page|
