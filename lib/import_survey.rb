@@ -2,6 +2,41 @@ module Import_survey
 
   private
 
+  def import_permit_erb?
+    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"erb"])
+    if permit.blank?
+      flash[:error] = "Non hai il permesso per eseguire un import di tipo Erbacee. Controlla di aver caricato l'apposita scheda di rilevamento."
+      redirect_to root_path
+    end
+  end
+
+  def import_permit_leg?
+    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"leg"])
+    if permit.blank?
+      flash[:error] = "Non hai il permesso per eseguire un import di tipo Legnose. Controlla di aver caricato l'apposita scheda di rilevamento."
+      redirect_to root_path
+    end
+  end
+
+
+  def import_permit_copl?
+    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"copl"])
+    if permit.blank?
+      flash[:error] = "Non hai il permesso per eseguire un import di tipo Copl. Controlla di aver caricato l'apposita scheda di rilevamento."
+      redirect_to root_path
+    end
+  end
+
+
+  def import_permit_cops?
+    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"cops"])
+    if permit.blank?
+      flash[:error] = "Non hai il permesso per eseguire un import di tipo Cops. Controlla di aver caricato l'apposita scheda di rilevamento."
+      redirect_to root_path
+    end
+  end
+
+
   #controlla che ci sia almeno una campagna attiva
   def campaign_active?
     #cerco la campagna attiva

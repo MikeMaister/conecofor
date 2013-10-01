@@ -2,6 +2,7 @@ class ImportCopsController < ApplicationController
   include Cops_checks,Import_survey
 
   before_filter :campaign_active?, :only => "index"
+  before_filter :import_permit_cops?
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,
                  :set_file,:delete_old_record_cache!],
                 :only => "import_procedure"
