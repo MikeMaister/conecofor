@@ -181,4 +181,9 @@ a {
   list-style: disc;
 }
 
+#stop_float{
+    clear: both;
+    width: 1000px;
+}
+
 

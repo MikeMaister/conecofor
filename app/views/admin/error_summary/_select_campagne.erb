@@ -1,7 +1,6 @@
-<p>
-  Seleziona la campagna:
-</p>
-<p>
+
+<p class="in_comand">
+  <strong>Campagna:</strong><br />
   <%= select_tag "campagna","<option>-Seleziona-</option>".html_safe + options_from_collection_for_select(@camp, "id", "descrizione") %>
   <%= observe_field "campagna", :url => {:controller=>"admin/error_summary", :action=>"update_plot",:update => "select_plot"},:with =>"campagna_selezionata" %>
 </p>

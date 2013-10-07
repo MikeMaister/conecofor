@@ -1,0 +1,49 @@
+
+<% if !cops_error.blank? %>
+    <table class="cops">
+      <tbody>
+      <tr>
+        <th class="minimal">Riga</th>
+        <th>Errore</th>
+        <th>N.Import</th>
+        <th>Data</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>In/Out</th>
+        <th>Pri/Est</th>
+        <th>Codice Strato</th>
+        <th>Specie</th>
+        <th>Copertura Complessiva</th>
+        <th>Note</th>
+        <th>Substrate</th>
+        <th>Certainty Species Determination</th>
+      </tr>
+      </tbody>
+    </table>
+    <div id="ver_scroll" class="cops">
+    <table id="body" class="cops">
+      <tbody>
+      <% for i in 0..cops_error.size-1 %>
+          <tr>
+            <td class="minimal"><%= cops_error.at(i).row %></td>
+            <td><%= cops_error.at(i).error %></td>
+            <td><%= cops_error.at(i).import_num %></td>
+            <td><%= cops_error.at(i).data %></td>
+            <td><%= cops_error.at(i).plot %></td>
+            <td><%= cops_error.at(i).subplot %></td>
+            <td><%= cops_error.at(i).in_out %></td>
+            <td><%= cops_error.at(i).priest %></td>
+            <td><%= cops_error.at(i).codice_strato %></td>
+            <td><%= cops_error.at(i).specie %></td>
+            <td><%= cops_error.at(i).copertura %></td>
+            <td><%= cops_error.at(i).note %></td>
+            <td><%= cops_error.at(i).substrate_code %></td>
+            <td><%= cops_error.at(i).certainty_species_determination_code %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+<% else %>
+    <%= render :partial => "empty_error" %>
+<% end %>

@@ -1,13 +1,10 @@
+
 <% if !@comp.blank? %>
     <table>
       <thead>
       <tr>
-        <th>Compliance</th>
-      </tr>
-      <tr>
         <th>Riga</th>
         <th>Errore</th>
-        <th>Creato il</th>
         <th>N.Import</th>
         <th>Plot</th>
         <th>Subplot</th>
@@ -27,7 +24,6 @@
           <tr>
             <td><%= @comp.at(i).row %></td>
             <td><%= @comp.at(i).error %></td>
-            <td><%= @comp.at(i).created_at %></td>
             <td><%= @comp.at(i).import_num %></td>
             <td><%= @comp.at(i).plot %></td>
             <td><%= @comp.at(i).subplot %></td>
@@ -46,7 +42,5 @@
     </table>
 
 <% else %>
-    <p>
-      Nessun errore di tipo compliance presente.
-    </p>
+   <%= render :partial => "empty_error" %>
 <% end %>

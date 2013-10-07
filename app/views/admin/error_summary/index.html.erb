@@ -1,9 +1,22 @@
-<h1>Admin: ErrorSummary</h1>
+<% content_for :title, "Import Errors - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "import_errors" %>
+<% end %>
+
+<h2>Errori d'import</h2>
+<p class="desc">
+    Quest'interfaccia permette di visualizzare tutti gli errori commessi dai rilevatori durante la procedura d'import di un file.<br />
+    Per visualizzare gli errori è necessario selezionare il rilevatore, la relativa campagna ed il plot e premere il tasto visualizza file.<br />
+    Una volta comparsa la lista dei file caricati dal rilevatore per quella campagne in quel plot, è possibile cliccare su un file specifico
+    e visionare i diversi tipi d'errore ad esso associati.
+</p>
+
+<div id="input_mask">
+
 <% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
-    <p>
-        Seleziona il rilevatore:
-    </p>
-    <p>
+
+    <p class="in_comand">
+      <strong>Rilevatore:</strong><br />
       <%= select_tag "rilevatore","<option>-Seleziona-</option>".html_safe + options_from_collection_for_select(@rilevatore, "id", "full_name") %>
       <%= observe_field "rilevatore", :url => {:controller=>"admin/error_summary", :action=>"update_campagne",:update => "select_camp"},:with =>"rilevatore_selezionato" %>
     </p>
@@ -14,25 +27,34 @@
     <div id="select_plot" style="display:none;">
     </div>
 
+      <%= button_to_function("Stampa Errori", "javascript:print()",:class => "sub_vis") %>
 
-    <%= submit_tag "Cerca" %>
+      <%= submit_tag "Visualizza File",:class=>"sub_vis" %>
+
 <% end %>
-
-<div id="result" style="display:none;">
 </div>
 
-<div id="compliance" style="display:none;">
+<div id="showall" style="display: none;">
+
+<div id="result">
 </div>
 
-<div id="sre" style="display:none;">
+<h3>Errors - Tipo 1</h3>
+<div id="compliance">
 </div>
 
-<div id="mpe" style="display:none;">
+<h4>Errors - Tipo 2</h4>
+<div id="sre">
 </div>
 
-<div id="ge" style="display:none;">
+<h5>Errors - Tipo 3</h5>
+<div id="mpe">
 </div>
 
-<p>
-  <%= button_to_function("Print this Page", "javascript:print()") %>
-</p>
+<h6>Errors - Global</h6>
+<div id="ge">
+</div>
+
+</div>
+
+<div id="stop_float"></div>

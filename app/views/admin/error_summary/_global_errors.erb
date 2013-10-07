@@ -1,29 +1,24 @@
 <% if !@ge.blank? %>
-    <table>
+    <table class="tgb">
       <thead>
       <tr>
-        <th>Global</th>
-      </tr>
-      <tr>
-
-        <th>Errore</th>
-        <th>Creato il</th>
-        <th>N.Import</th>
+        <th class="gb">Errore</th>
+        <th class="gb">N.Import</th>
       </tr>
       </thead>
-      <tbody>
+    </table>
+    <div id="ver_scroll_gb">
+    <table class="tgb">
+      <tbody id="gb_body">
       <% for i in 0..@ge.size-1 %>
           <tr>
-            <td><%= @ge.at(i).error %></td>
-            <td><%= @ge.at(i).created_at %></td>
-            <td><%= @ge.at(i).import_num %></td>
+            <td class="gb"><%= @ge.at(i).error %></td>
+            <td class="gb"><%= @ge.at(i).import_num %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
-
+    </div>
 <% else %>
-    <p>
-      Nessun errore di tipo globale presente.
-    </p>
+    <%= render :partial => "empty_error" %>
 <% end %>

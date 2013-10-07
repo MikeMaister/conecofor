@@ -8,7 +8,6 @@ class Admin::ErrorSummaryController < ApplicationController
   end
 
   def search
-
     id_rilevatore = params[:rilevatore]
     id_campagna = params[:campagna]
     id_plot = params[:plot]
@@ -17,10 +16,11 @@ class Admin::ErrorSummaryController < ApplicationController
 
     render :update do |page|
       #nascondo i dettagli degli errori precedentemente selezionati
-      page.hide "compliance"
-      page.hide "sre"
-      page.hide "mpe"
-      page.hide "ge"
+      page.show "showall"
+      #page.hide "compliance"
+      #page.hide "sre"
+      #page.hide "mpe"
+      #page.hide "ge"
       #mostro la nuova ricerca
       page.show "result"
       page.replace_html "result", :partial => "file_list", :object => @file
@@ -29,10 +29,10 @@ class Admin::ErrorSummaryController < ApplicationController
 
   def show_error
 
-    survey = params[:survey_kind]
+    @survey = params[:survey_kind]
     file_id = params[:file_id]
 
-    case survey
+    case @survey
       when "Copl"
         @comp = ErrorCopl.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Compliance'",file_id])
         @sre = ErrorCopl.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Simplerange'",file_id])
@@ -58,11 +58,14 @@ class Admin::ErrorSummaryController < ApplicationController
 
         render :update do |page|
           page.show "compliance"
-          page.replace_html "compliance", :partial => "cops_compliance_errors", :object => @comp
+          #page.replace_html "compliance", :partial => "cops_compliance_errors", :object => @comp
+          page.replace_html "compliance", :partial => "cops_error", :object => @comp
           page.show "sre"
-          page.replace_html "sre", :partial => "cops_sre_errors", :object => @sre
+          #page.replace_html "sre", :partial => "cops_sre_errors", :object => @sre
+          page.replace_html "sre", :partial => "cops_error", :object => @sre
           page.show "mpe"
-          page.replace_html "mpe", :partial => "cops_mpe_errors", :object => @mpe
+          #page.replace_html "mpe", :partial => "cops_mpe_errors", :object => @mpe
+          page.replace_html "mpe", :partial => "cops_error", :object => @mpe
           page.show "ge"
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
