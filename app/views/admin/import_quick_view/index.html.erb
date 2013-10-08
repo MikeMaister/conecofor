@@ -1,26 +1,35 @@
-<h1>Admin: Import Quick view</h1>
-<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
-
-    <p>
-        Seleziona la campagna:
-    </p>
-    <p>
-      <%= select_tag "campaign", options_from_collection_for_select(@campaign, "id", "descrizione") %>
-    </p>
-    <p>
-        Seleziona il plot:
-    </p>
-    <p>
-      <%= select_tag "plot", options_from_collection_for_select(@plot, "id", "id_plot") %>
-    </p>
-    <p>
-        Seleziona il tipo di rilevazione:
-    </p>
-    <p>
-      <%= select_tag "survey", "<option>Erb</option><option>Legn</option><option>Copl</option><option>Cops</option>".html_safe%>
-    </p>
-    <%= submit_tag "Ok" %>
+<% content_for :title, "Approva Import - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "import_approve" %>
 <% end %>
 
-<div id="result" style="display:none;">
+<h2>Approva Import</h2>
+<p class="desc">
+  Quest'interfaccia permette di visionare, approvare ed eliminare i dati che hanno
+  oltrepassato i check, importati dai rilevatori. In caso di cancellazione dei dati,
+  è necessaria la reintroduzione degli stessi da parte dei rilevatori.
+</p>
+
+<div id="input_mask">
+<% form_remote_tag :url => { :action => 'search', :update => 'result'} do %>
+    <p class="select">
+      Campagna:<br />
+      <%= select_tag "campaign", options_from_collection_for_select(@campaign, "id", "descrizione") %>
+    </p>
+    <p class="select">
+      Plot:<br />
+      <%= select_tag "plot", options_from_collection_for_select(@plot, "id", "id_plot") %>
+    </p>
+    <p class="select">
+      Rilevazione:<br />
+      <%= select_tag "survey", "<option>Erb</option><option>Legn</option><option>Copl</option><option>Cops</option>".html_safe%>
+    </p>
+    <p class="button_go">
+      <%= submit_tag "Visualizza Dati" %>
+    </p>
+<% end %>
 </div>
+
+<div id="result"></div>
+
+<div id="stop_float"></div>

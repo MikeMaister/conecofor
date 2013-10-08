@@ -1,0 +1,76 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+#input_mask{
+    float: left;
+    border: 1px solid #8b5e3a;
+    background-color: #c6a55a;
+    padding: 10px 10px;
+    width: 908px;
+    margin-left: 35px;
+}
+
+.select{
+    float: left;
+    margin: 0 70px 0 0;
+    font-weight: bold;
+}
+
+.button_go{
+    float: right;
+    margin: 7px 0 0 0;
+}
+
+#result{
+    float: left;
+    margin: 20px 0 15px 0;
+    width: 998px;
+    min-height: 200px;
+}
+
+#wrap_result{
+    float: left;
+    border: 1px solid #f8d000;
+    width: 998px;
+    height: 198px;
+    background-color: #f4dc43;
+    margin-top: 7px ;
+}
+
+.overx{
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.no_data{
+    font-weight: bold;
+    margin: 8% 40%;
+}
+
+#approved{
+    float: left;
+    margin: 0 15px 0 0;
+    border: 1px solid #a8e52b;
+    background-color: #e3ff9e;
+    border-radius: 25px;
+    padding: 5px 10px;
+}
+
+.approved{
+    margin: 0;
+    font-weight: bold;
+}
+
+.app_delete{
+    float: left;
+    margin-right: 10px;
+}
+

@@ -5,7 +5,6 @@ class Admin::ImportQuickViewController < ApplicationController
   end
 
   def search
-
     campagna = params[:campaign]
     plot = params[:plot]
     survey = params[:survey]

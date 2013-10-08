@@ -1,4 +1,9 @@
-<% unless @import_data.blank?%>
+<% if @import_data.blank?%>
+    <%= render :partial => "no_data" %>
+<% else %>
+    <%= render :partial => "approve_delete" %>
+
+    <div id="wrap_result" class="overx">
     <table>
       <thead>
         <th>ID plot</th>
@@ -41,16 +46,7 @@
       <% end %>
       </tbody>
     </table>
+    </div>
 <% end %>
 
-<% if @import_data.at(0).approved == false %>
-    <p>
-      <%= button_to "Approva", :controller => "admin/import_quick_view", :action => "approve", :records => @import_data, :class => @import_data.at(0).class %>
-      <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete",:records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori."} %>
-    </p>
-<% else %>
-    <p>Record Approvati</p>
-    <p>
-      <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete", :records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori."}%>
-    </p>
-<% end %>
+

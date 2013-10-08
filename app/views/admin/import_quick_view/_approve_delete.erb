@@ -1,0 +1,12 @@
+
+<% if @import_data.at(0).approved == false %>
+
+      <%= button_to "Approva", {:controller => "admin/import_quick_view", :action => "approve", :records => @import_data, :class => @import_data.at(0).class},:class => "app_delete" %>
+      <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete",:records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori.",:class=>"app_delete"} %>
+
+<% else %>
+    <div id="approved">
+      <p class="approved">Record Approvati</p>
+    </div>
+      <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete", :records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori.", :class => "app_delete"}%>
+<% end %>
