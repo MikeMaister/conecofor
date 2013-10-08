@@ -1,6 +1,7 @@
 <% content_for :title, "Import Errors - CONECOFOR" %>
 <% content_for :head do %>
     <%= stylesheet_link_tag "import_errors" %>
+    <%= stylesheet_link_tag "pr_errors", :media => :print %>
 <% end %>
 
 <h2>Errori d'import</h2>
@@ -26,11 +27,11 @@
 
     <div id="select_plot" style="display:none;">
     </div>
-
+      <p class="button_float">
       <%= button_to_function("Stampa Errori", "javascript:print()",:class => "sub_vis") %>
 
       <%= submit_tag "Visualizza File",:class=>"sub_vis" %>
-
+      </p>
 <% end %>
 </div>
 

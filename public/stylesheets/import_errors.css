@@ -50,6 +50,14 @@ div#result{
 
 ul#file_list{
     margin: 2px;
+    float: left;
+}
+
+p#fn{
+    float: left;
+    font-weight:bold;
+    font-size: large;
+    margin: 6% 0 0 12% ;
 }
 
 #compliance,#sre,#mpe,#ge{
@@ -58,7 +66,7 @@ ul#file_list{
     width: 998px;
     overflow-x: scroll;
     overflow-y: hidden;
-    background-color: rgba(244, 158, 21, 0.82);
+    background-color: rgba(244, 220, 67, 0.81);
 }
 
 #compliance,#sre,#mpe,#ge{
@@ -84,12 +92,16 @@ th,td{
     position:relative;
 }
 
-#ver_scroll.cops{
+#ver_scroll.cops,#ver_scroll.copl,#ver_scroll.erb,#ver_scroll.leg{
    width: 2016px;
    background-color: #fafad2;
 }
 
-table.cops{
+p.button_float{
+    margin: 0;
+}
+
+table.cops,table.copl,table.erb,table.leg{
     border-collapse: collapse;
     width: 2000px;
 }
@@ -131,6 +143,11 @@ table#body tr:hover{
 
 #gb_body tr:hover{
     background-color: #f4da49;
+}
+
+.no_error{
+    margin: 7% 40%;
+    font-weight: bold;
 }
 
 

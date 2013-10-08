@@ -1,0 +1,48 @@
+<% if !leg_error.blank? %>
+    <table class="leg">
+      <tbody>
+      <tr>
+        <th class="minimal">Riga</th>
+        <th>Errore</th>
+        <th>N.Import</th>
+        <th>Data</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>Specie</th>
+        <th>Copertura</th>
+        <th>Altezza</th>
+        <th>Età Strutturale</th>
+        <th>Danni Meccanici</th>
+        <th>Danni Parassitari</th>
+        <th>Radicanti Esterni</th>
+        <th>Note</th>
+      </tr>
+      </tbody>
+      </table>
+      <div id="ver_scroll" class="leg">
+      <table id="body" class="leg">
+      <tbody>
+      <% for i in 0..leg_error.size-1 %>
+          <tr>
+            <td class="minimal"><%= leg_error.at(i).row %></td>
+            <td><%= leg_error.at(i).error %></td>
+            <td><%= leg_error.at(i).import_num %></td>
+            <td><%= leg_error.at(i).data %></td>
+            <td><%= leg_error.at(i).plot %></td>
+            <td><%= leg_error.at(i).subplot %></td>
+            <td><%= leg_error.at(i).specie%></td>
+            <td><%= leg_error.at(i).copertura %></td>
+            <td><%= leg_error.at(i).altezza %></td>
+            <td><%= leg_error.at(i).eta_strutturale %></td>
+            <td><%= leg_error.at(i).danni_meccanici %></td>
+            <td><%= leg_error.at(i).danni_parassitari %></td>
+            <td><%= leg_error.at(i).radicanti_esterni %></td>
+            <td><%= leg_error.at(i).note %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+<% else %>
+    <%= render :partial => "empty_error" %>
+<% end %>

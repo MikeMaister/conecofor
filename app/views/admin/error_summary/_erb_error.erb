@@ -1,0 +1,56 @@
+<% if !erb_error.blank? %>
+    <table class="erb">
+      <tbody>
+      <tr>
+        <th class="minimal">Riga</th>
+        <th>Errore</th>
+        <th>N.Import</th>
+        <th>Data</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>Specie</th>
+        <th>Copertura</th>
+        <th>Copertura Esterna</th>
+        <th>Altezza Media</th>
+        <th>N.Cespi</th>
+        <th>N.Stoloni</th>
+        <th>N.Stoloni Esterni</th>
+        <th>N.Foglie</th>
+        <th>N.Getti</th>
+        <th>Danni Meccanici</th>
+        <th>Danni Parassitari</th>
+        <th>Note</th>
+      </tr>
+      </tbody>
+    </table>
+      <div id="ver_scroll" class="erb">
+        <table id="body" class="erb">
+      <tbody>
+      <% for i in 0..erb_error.size-1 %>
+          <tr>
+            <td class="minimal"><%= erb_error.at(i).row %></td>
+            <td><%= erb_error.at(i).error %></td>
+            <td><%= erb_error.at(i).import_num %></td>
+            <td><%= erb_error.at(i).data %></td>
+            <td><%= erb_error.at(i).plot %></td>
+            <td><%= erb_error.at(i).subplot %></td>
+            <td><%= erb_error.at(i).specie %></td>
+            <td><%= erb_error.at(i).copertura %></td>
+            <td><%= erb_error.at(i).copertura_esterna %></td>
+            <td><%= erb_error.at(i).altezza_media %></td>
+            <td><%= erb_error.at(i).numero_cespi %></td>
+            <td><%= erb_error.at(i).numero_stoloni %></td>
+            <td><%= erb_error.at(i).numero_stoloni_radicanti %></td>
+            <td><%= erb_error.at(i).numero_foglie %></td>
+            <td><%= erb_error.at(i).numero_getti %></td>
+            <td><%= erb_error.at(i).danni_meccanici %></td>
+            <td><%= erb_error.at(i).danni_parassitari %></td>
+            <td><%= erb_error.at(i).note %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+<% else %>
+    <%= render :partial => "empty_error" %>
+<% end %>

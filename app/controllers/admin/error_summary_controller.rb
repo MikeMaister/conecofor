@@ -31,6 +31,7 @@ class Admin::ErrorSummaryController < ApplicationController
 
     @survey = params[:survey_kind]
     file_id = params[:file_id]
+    @file_name = ImportFile.find(file_id).file_name
 
     case @survey
       when "Copl"
@@ -40,12 +41,17 @@ class Admin::ErrorSummaryController < ApplicationController
         @ge = ErrorCopl.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Global Error'",file_id])
 
         render :update do |page|
+          page.show "current_file"
+          page.replace_html "current_file", :partial => "file_name", :object => @file_name
           page.show "compliance"
-          page.replace_html "compliance", :partial => "copl_compliance_errors", :object => @comp
+          #page.replace_html "compliance", :partial => "copl_compliance_errors", :object => @comp
+          page.replace_html "compliance", :partial => "copl_error", :object => @comp
           page.show "sre"
-          page.replace_html "sre", :partial => "copl_sre_errors", :object => @sre
+          #page.replace_html "sre", :partial => "copl_sre_errors", :object => @sre
+          page.replace_html "sre", :partial => "copl_error", :object => @sre
           page.show "mpe"
-          page.replace_html "mpe", :partial => "copl_mpe_errors", :object => @mpe
+          #page.replace_html "mpe", :partial => "copl_mpe_errors", :object => @mpe
+          page.replace_html "mpe", :partial => "copl_error", :object => @mpe
           page.show "ge"
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
@@ -57,6 +63,8 @@ class Admin::ErrorSummaryController < ApplicationController
         @ge = ErrorCops.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Global Error'",file_id])
 
         render :update do |page|
+          page.show "current_file"
+          page.replace_html "current_file", :partial => "file_name", :object => @file_name
           page.show "compliance"
           #page.replace_html "compliance", :partial => "cops_compliance_errors", :object => @comp
           page.replace_html "compliance", :partial => "cops_error", :object => @comp
@@ -77,12 +85,17 @@ class Admin::ErrorSummaryController < ApplicationController
         @ge = ErrorLegnose.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Global Error'",file_id])
 
         render :update do |page|
+          page.show "current_file"
+          page.replace_html "current_file", :partial => "file_name", :object => @file_name
           page.show "compliance"
-          page.replace_html "compliance", :partial => "legnose_compliance_errors", :object => @comp
+          #page.replace_html "compliance", :partial => "legnose_compliance_errors", :object => @comp
+          page.replace_html "compliance", :partial => "leg_error", :object => @comp
           page.show "sre"
-          page.replace_html "sre", :partial => "legnose_sre_errors", :object => @sre
+          #page.replace_html "sre", :partial => "legnose_sre_errors", :object => @sre
+          page.replace_html "sre", :partial => "leg_error", :object => @sre
           page.show "mpe"
-          page.replace_html "mpe", :partial => "legnose_mpe_errors", :object => @mpe
+          #page.replace_html "mpe", :partial => "legnose_mpe_errors", :object => @mpe
+          page.replace_html "mpe", :partial => "leg_error", :object => @mpe
           page.show "ge"
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
@@ -94,16 +107,23 @@ class Admin::ErrorSummaryController < ApplicationController
         @ge = ErrorErbacee.find(:all,:conditions => ["file_name_id = ? AND error_kind = 'Global Error'",file_id])
 
         render :update do |page|
+          page.show "current_file"
+          page.replace_html "current_file", :partial => "file_name", :object => @file_name
           page.show "compliance"
-          page.replace_html "compliance", :partial => "erbacee_compliance_errors", :object => @comp
+          #page.replace_html "compliance", :partial => "erbacee_compliance_errors", :object => @comp
+          page.replace_html "compliance", :partial => "erb_error", :object => @comp
           page.show "sre"
-          page.replace_html "sre", :partial => "erbacee_sre_errors", :object => @sre
+          #page.replace_html "sre", :partial => "erbacee_sre_errors", :object => @sre
+          page.replace_html "sre", :partial => "erb_error", :object => @sre
           page.show "mpe"
-          page.replace_html "mpe", :partial => "erbacee_mpe_errors", :object => @mpe
+          #page.replace_html "mpe", :partial => "erbacee_mpe_errors", :object => @mpe
+          page.replace_html "mpe", :partial => "erb_error", :object => @mpe
           page.show "ge"
           page.replace_html "ge", :partial => "global_errors", :object => @ge
         end
     end
+
+
 
 
   end

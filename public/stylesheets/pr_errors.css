@@ -1,0 +1,106 @@
+#banner_menu{
+    display: none;
+}
+
+
+h3,h4,h5,h6{
+    float: left;
+    color: #000000;
+    font-size: medium;
+    font-weight: bold;
+    margin: 15px 15px;
+}
+
+p.in_comand{
+    float: left;
+    margin: 0 60px 0 0;
+    color: #000000;
+}
+
+p.desc{
+    display: none;
+}
+
+.sub_vis{
+    display: none;
+}
+
+#foot_message{
+    display: none;
+}
+
+div#input_mask{
+    float: left;
+    margin: 5px 0;
+    width: 600px;
+    padding: 5px 10px;
+}
+
+div#result{
+    width: 300px;
+}
+
+ul#file_list{
+    display: none;
+}
+
+p#fn{
+    font-weight:bold;
+    font-size: large;
+}
+
+#compliance,#sre,#mpe,#ge{
+    clear: both;
+    border: 1px solid #000000;
+    width: 998px;
+}
+
+#ge{
+    margin-bottom: 15px;
+}
+
+th,td{
+    font-size: xx-small;
+    text-align: center;
+    width: 60px;
+}
+
+#ver_scroll{
+    /*border: 1px solid #000000;*/
+    display: block;
+    position:relative;
+}
+
+table.cops{
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+.minimal{
+    width: 50px;
+}
+
+th{
+    font-weight: bold;
+}
+
+#showall{
+    margin-top: 5px;
+    float: left;
+    width: 1000px;
+}
+
+.gb{
+    width: 150px;
+}
+
+.tgb{
+    border-collapse: collapse;
+}
+
+.no_error{
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+

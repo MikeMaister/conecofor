@@ -1,0 +1,58 @@
+<% if !copl_error.blank? %>
+    <table class="copl">
+      <tbody>
+      <tr>
+        <th class="minimal">Riga</th>
+        <th>Errore</th>
+        <th>N.Import</th>
+        <th>Data</th>
+        <th>Plot</th>
+        <th>Subplot</th>
+        <th>In/Out</th>
+        <th>Pri/Est</th>
+        <th>Copertura Complessiva</th>
+        <th>Altezza Arboreo</th>
+        <th>Copertura Arboreo</th>
+        <th>Altezza Arbustivo</th>
+        <th>Copertura Arbustivo</th>
+        <th>Altezza Erbaceo</th>
+        <th>Copertura Erbaceo</th>
+        <th>Copertura Muscinale</th>
+        <th>Copertura Lettiera</th>
+        <th>Copertura Suolo Nudo</th>
+        <th>Note</th>
+      </tr>
+      </tbody>
+    </table>
+    <div id="ver_scroll" class="copl">
+     <table id="body" class="copl">
+      <tbody>
+      <% for i in 0..copl_error.size-1 %>
+          <tr>
+            <td class="minimal"><%= copl_error.at(i).row %></td>
+            <td><%= copl_error.at(i).error %></td>
+            <td><%= copl_error.at(i).import_num %></td>
+            <td><%= copl_error.at(i).data %></td>
+            <td><%= copl_error.at(i).plot %></td>
+            <td><%= copl_error.at(i).subplot %></td>
+            <td><%= copl_error.at(i).in_out %></td>
+            <td><%= copl_error.at(i).priest %></td>
+            <td><%= copl_error.at(i).copertura_complessiva %></td>
+            <td><%= copl_error.at(i).altezza_arboreo %></td>
+            <td><%= copl_error.at(i).copertura_arboreo %></td>
+            <td><%= copl_error.at(i).altezza_arbustivo %></td>
+            <td><%= copl_error.at(i).copertura_arbustivo %></td>
+            <td><%= copl_error.at(i).altezza_erbaceo %></td>
+            <td><%= copl_error.at(i).copertura_erbaceo %></td>
+            <td><%= copl_error.at(i).copertura_muscinale %></td>
+            <td><%= copl_error.at(i).copertura_lettiera %></td>
+            <td><%= copl_error.at(i).copertura_suolo %></td>
+            <td><%= copl_error.at(i).note %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+<% else %>
+    <%= render :partial => "empty_error" %>
+<% end %>
