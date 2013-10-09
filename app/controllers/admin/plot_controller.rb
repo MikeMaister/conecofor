@@ -117,7 +117,7 @@ class Admin::PlotController < ApplicationController
   end
 
   def search_file
-    @file_list = PlotFile.find(:all,:conditions => ["plot_id = ?",params[:plot]])
+    @file_list = PlotFile.find(:all,:conditions => ["plot_id = ?",params[:plot_file]])
     if @file_list.blank?
       @message_error = "Nessun file presente."
       render :update do |page|

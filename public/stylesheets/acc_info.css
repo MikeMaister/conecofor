@@ -1,0 +1,84 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+h3,h4{
+    color: #8b4513;
+    font-size: medium;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+#load_mask{
+    border: 1px solid #a2ee2e;
+    background-color: rgba(173, 255, 47, 0.49);
+    padding: 10px 15px;
+    margin: 15px 35px;
+    float: left;
+    width: 905px;
+    border-radius: 25px;
+}
+
+.load{
+    margin:0;
+    margin-right: 70px ;
+    font-weight: bold;
+    float: left;
+}
+
+.load_button{
+    float:right;
+    margin: 0;
+    margin-top: 1%;
+}
+
+#find_wrap{
+    float: left;
+    border: 1px solid #74511d;
+    background-color: rgba(176, 121, 44, 0.79);
+    border-radius: 25px;
+    padding: 15px;
+    margin: 15px 0 20px 35px;
+}
+
+.find{
+    margin: 0;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.find_button{
+    margin: 0;
+}
+
+.plot_list{
+    float: right;
+    margin: 0 35px;
+}
+
+#file_list{
+    float: left;
+    margin: 15px 50px 20px 50px;
+    border: 1px solid #f68705;
+    background-color: rgba(255, 231, 70, 0.87);
+    min-height: 80px;
+    max-height: 80px;
+    min-width: 230px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+ul.file_list{
+    margin: 0;
+    padding-left: 25px;
+}
+
+
