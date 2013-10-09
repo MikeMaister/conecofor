@@ -1,12 +1,17 @@
-<% unless @import_data.blank?%>
+<% if @import_data.blank?%>
+    <%= render :partial => "no_data" %>
+<% else %>
+    <%= render :partial => "approve_delete" %>
+
+<div id="wrap_result" class="overx">
     <table>
-      <thead>
+      <tbody>
+      <th>Data</th>
       <th>ID plot</th>
       <th>Subplot</th>
       <th>In/Out</th>
       <th>Pri/Est</th>
       <th>Note</th>
-      <th>Data</th>
       <th>Numero Plot</th>
       <th>Copertura Complessiva</th>
       <th>Altezza Arboreo</th>
@@ -18,16 +23,19 @@
       <th>Copertura Muscinale</th>
       <th>Copertura Lettiera</th>
       <th>Copertura Suolo Nudo</th>
-      </thead>
+      </tbody>
+    </table>
+    <div id="ver_scroll">
+    <table id="body">
       <tbody>
       <% for i in 0..@import_data.size-1 %>
           <tr>
+            <td><%= @import_data.at(i).data %></td>
             <td><%= @import_data.at(i).id_plot %></td>
             <td><%= @import_data.at(i).subplot %></td>
             <td><%= @import_data.at(i).in_out %></td>
             <td><%= @import_data.at(i).priest %></td>
             <td><%= @import_data.at(i).note %></td>
-            <td><%= @import_data.at(i).data %></td>
             <td><%= @import_data.at(i).numero_plot %></td>
             <td><%= @import_data.at(i).copertura_complessiva %></td>
             <td><%= @import_data.at(i).altezza_arboreo %></td>
@@ -43,16 +51,6 @@
       <% end %>
       </tbody>
     </table>
-<% end %>
-
-<% if @import_data.at(0).approved == false %>
-<p>
-  <%= button_to "Approva", :controller => "admin/import_quick_view", :action => "approve", :records => @import_data, :class => @import_data.at(0).class %>
-  <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete", :records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori."}%>
-</p>
-<% else %>
-    <p>Record Approvati</p>
-    <p>
-      <%= button_to "Elimina", {:controller => "admin/import_quick_view" , :action => "delete", :records => @import_data, :class => @import_data.at(0).class}, {:confirm => "Eliminare i dati visualizzati? Questo comporterà un nuovo import da parte dei rilevatori."}%>
-    </p>
+    </div>
+</div>
 <% end %>
