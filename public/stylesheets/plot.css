@@ -1,0 +1,117 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px;
+}
+
+th,td{
+    width: 100px;
+    font-size: x-small;
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    margin-left:15px;
+}
+
+.bigger{
+    width: 150px;
+}
+
+th{
+    color: #8b4513;
+}
+
+table#head{
+    background-color: #f4a460;
+}
+
+table#body{
+    background-color: #e2ffa0;
+}
+
+#ver_scroll{
+    height: 250px;
+    overflow-y: scroll;
+}
+
+table#body tr:hover{
+    background-color: #cdea8f;
+}
+
+#message{
+    margin: 5px 15px;
+    border: dashed 1px #38B003;
+    padding: 5px 5px;
+}
+
+.advice{
+    margin: 0;
+    color:#38B003;
+}
+
+#add_button{
+    margin: 3px 15px;
+    float: left;
+}
+
+.new_form_plot{
+    float: left;
+    /*border: 1px solid black;*/
+    margin: 5px 35px 15px 35px;
+    width: 937px;
+}
+
+.new_plot_float_f{
+    float: left;
+    border: 1px solid #f8d000;
+    border-right: none;
+}
+
+.new_plot_float_s{
+    float: left;
+    border: 1px solid #f8d000;
+    border-left:none;
+}
+
+.new_plot_float_f,.new_plot_float_s{
+    min-height: 172px;
+    padding: 5px;
+    background-color: rgba(226, 255, 94, 0.83);
+}
+
+.input_p{
+    margin: 0;
+    font-weight: bold;
+}
+
+.new_plot_button{
+    margin: 15px 0 0 0;
+}
+
+#add_info{
+    float: right;
+    margin: 5px 35px 10px 0;
+}
+
+#display_input_errors{
+    border: dashed 1px #F62217;
+    color:#F62217;
+    margin: 0 35px;
+    float: left;
+    width: 927px;
+    padding: 5px;
+}
+
+.error_list{
+    margin: 0;
+    padding-left: 25px;
+}
+
+

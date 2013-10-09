@@ -1,16 +1,32 @@
-<h1>Admin::Plot</h1>
+<% content_for :title, "Plot - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "plot" %>
+<% end %>
+
+
+<h2>Plot</h2>
+
+<p class="desc">
+    Tramite quest'interfaccia è possibile creare, editare ed eliminare plot.
+    Eliminare un plot utilizzato in una o più campagne, invaliderà tutti i dati ad esso associati.
+</p>
+
 <div id="plot_list">
   <%= render :partial => "plot_list"%>
 </div>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/plot",:action => "new", :update => "new_plot"} %></p>
+<%= button_to_remote "+",{:url => { :controller =>"admin/plot",:action => "new", :update => "new_plot"}},{:id => "add_button"} %>
 
+<p id="add_info">
+  <%= link_to "Informazioni Accessorie", :controller => "admin/plot", :action => "accessory_info" %>
+</p>
 
 <div id="display_input_errors" style="display:none;">
 </div>
 
-<div id="new_plot" style="display:none;">
+<div id="new_plot" class="new_form_plot" style="display:none;"></div>
 
-</div>
 
-<%= link_to "Informazioni Accessorie", :controller => "admin/plot", :action => "accessory_info" %>
+
+
+<div id="stop_float"></div>

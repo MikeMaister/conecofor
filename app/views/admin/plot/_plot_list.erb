@@ -1,15 +1,14 @@
 
 
 <% if !@plot.blank? %>
+  <% if @message %>
+   <div id="message">
+    <p class="advice"><%= @message %></p>
+   </div>
+  <% end %>
 
-    <p><%= @message if @message %></p>
-
-
-    <table>
-      <thead>
-      <tr>
-        <th colspan="7">Plot</th>
-      </tr>
+    <table id="head">
+      <tbody>
       <tr>
         <th>Identificativo</th>
         <th>Descrizione</th>
@@ -19,9 +18,12 @@
         <th>Altitudine</th>
         <th>IM</th>
         <th>Note</th>
-        <th>Opzioni</th>
+        <th class="bigger">Opzioni</th>
       </tr>
-      </thead>
+      </tbody>
+    </table>
+    <div id="ver_scroll">
+    <table id="body">
       <tbody>
       <% for i in 0..@plot.size-1 %>
           <tr>
@@ -33,7 +35,7 @@
             <td><%= @plot.at(i).altitudine %></td>
             <td><%= @plot.at(i).im %></td>
             <td><%= @plot.at(i).note %></td>
-            <td>
+            <td class="bigger">
               <%= button_to_remote "Modifica", :url => { :controller =>"admin/plot",:action => "edit", :id =>@plot.at(i).id, :i => i} %>
               <%= button_to_remote "Elimina", :url => { :controller =>"admin/plot",:action => "delete", :id =>@plot.at(i).id}, :confirm => "Eliminando questo plot cancellerai tutti i dati ad esso legati. Vuoi davvero eliminare questo plot?" %>
             </td>
@@ -41,10 +43,10 @@
       <% end %>
       </tbody>
     </table>
-
+    </div>
 
 <% else %>
 
-    <p>Nessun plot presente</p>
+    <p class="desc"><strong>Nessun plot presente</strong></p>
 
 <% end %>

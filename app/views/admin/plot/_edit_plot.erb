@@ -1,9 +1,6 @@
 <% form_remote_tag :url => { :controller => "admin/plot", :action => "save_edit", :update => "plot_list"} do %>
-    <table>
-  <thead>
-  <tr>
-    <th colspan="7">Plot</th>
-  </tr>
+<table id="head">
+  <tbody>
   <tr>
     <th>Identificativo</th>
     <th>Descrizione</th>
@@ -13,9 +10,12 @@
     <th>Altitudine</th>
     <th>IM</th>
     <th>Note</th>
-    <th>Opzioni</th>
+    <th class="bigger">Opzioni</th>
   </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
   <tbody>
   <% for i in 0..@plot.size-1 %>
     <% if @i.to_i == i.to_i %>
@@ -27,7 +27,8 @@
             <td><%= @plot.at(i).descrizione %></td>
             <td><%= @plot.at(i).numero_plot %></td>
             <td>
-              <%= text_field_tag :latitudine, @plot.at(i).latitudine, :size => 4 %>
+              <%= text_field_tag :latitudine, @plot.at(i).latitudine, :size => 4, :autofocus => true %>
+              <%= javascript_tag "$('latitudine').focus()" %>
             </td>
             <td>
               <%= text_field_tag :longitudine, @plot.at(i).longitudine, :size => 4 %>
@@ -37,7 +38,7 @@
             </td>
             <td><%= @plot.at(i).im %></td>
             <td><%= @plot.at(i).note %></td>
-            <td>
+            <td class="bigger">
               <%= submit_tag "Salva" %>
               <%= button_to_remote "Annulla", :url => { :controller =>"admin/plot",:action => "close_edit" } %>
             </td>
@@ -58,4 +59,5 @@
   <% end %>
   </tbody>
 </table>
+</div>
 <% end %>
