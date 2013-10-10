@@ -1,13 +1,18 @@
-<p><%= @message if @message %></p>
-
-<table>
-  <thead>
+<% if @message %>
+<p class="edit_message"><%= @message %></p>
+<% end %>
+<div id="t_wrapper">
+<table id="head">
+  <tbody>
     <tr>
       <th>Descrizione</th>
       <th>Euflora</th>
       <th>Opzioni</th>
     </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
   <tbody>
     <% for i in 0..@pignatti.size-1 %>
     <tr>
@@ -23,3 +28,6 @@
     <% end %>
   </tbody>
 </table>
+</div>
+  <%= will_paginate @pignatti %>
+</div>

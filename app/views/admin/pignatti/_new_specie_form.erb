@@ -1,14 +1,16 @@
 
 <% remote_form_for(@new_specie, :url => {:controller => "admin/pignatti", :action => "save_specie" }) do |f| %>
-    <p>
+   <div id="input_mask">
+    <p class="input_pi">
       <%= f.label "Descrizione" %><br/>
       <%= f.text_field :descrizione %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Euflora" %><br/>
       <%= f.select :euflora_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@euflora,:id,:descrizione) %>
     </p>
-    <p>
+    <p class="sub_pi">
       <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/pignatti",:action => "close_new_specie"} %>
     </p>
+   </div>
 <% end %>

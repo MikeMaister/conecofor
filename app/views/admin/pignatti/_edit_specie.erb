@@ -1,12 +1,16 @@
 <% form_remote_tag :url => { :controller => "admin/pignatti", :action => "save_edit", :update => "pignatti_list"} do %>
-<table>
-  <thead>
+<div id="t_wrapper">
+<table id="head">
+  <tbody>
   <tr>
     <th>Descrizione</th>
     <th>Euflora</th>
     <th>Opzioni</th>
   </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
   <tbody>
   <% for i in 0..@pignatti.size-1 %>
       <% if i.to_i == @i.to_i  %>
@@ -15,6 +19,7 @@
               <%= hidden_field_tag :id ,@pignatti.at(i).id %>
               <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :descrizione, @pignatti.at(i).descrizione %>
+              <%= javascript_tag "$('descrizione').focus()" %>
             </td>
             <td><%= select_tag :euflora_id,"<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@euflora,:id,:descrizione,@pignatti.at(i).euflora_id) %></td>
             <td>
@@ -34,4 +39,7 @@
   <% end %>
   </tbody>
 </table>
+</div>
+  <%= will_paginate @pignatti %>
+</div>
 <% end %>

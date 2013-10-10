@@ -1,15 +1,19 @@
-<h1>Admin::Pignatti#index</h1>
+<% content_for :title, "Pignatti - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "pignatti" %>
+<% end %>
+
+<h2>Pignatti</h2>
+<p class="desc">
+  Quest'interfaccia permette di creare nuove specie Pignatti, modificarle ed eliminarle.<br />
+  Da qui è possibile effettuare i collegamenti verso la flora Europea.
+</p>
 
 <div id="pignatti_list" >
   <%= render :partial => "specie_list"%>
 </div>
+<%= button_to_remote "+",{ :url => { :controller =>"admin/pignatti",:action => "new",:page =>params[:page], :update => "new_specie"}},{:class => "add_button"} %>
 
-<p><%= will_paginate @pignatti %></p>
+<div id="display_input_errors" style="display:none;"></div>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/pignatti",:action => "new",:page =>params[:page], :update => "new_specie"} %></p>
-
-<div id="display_input_errors" style="display:none;">
-</div>
-
-<div id="new_specie" style="display:none;">
-</div>
+<div id="new_specie" style="display:none;"></div>
