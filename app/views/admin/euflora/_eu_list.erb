@@ -1,7 +1,9 @@
-<%= @message if @message%>
-
-<table>
-  <thead>
+<% if @message %>
+    <p class="edit_message"><%= @message %></p>
+<% end %>
+<div id="t_wrapper">
+  <table id="head">
+  <tbody>
     <tr>
       <th>Codice Europeo</th>
       <th>Descrizione</th>
@@ -10,7 +12,10 @@
       <th>Specie VS</th>
       <th>Opzioni</th>
     </tr>
-  </thead>
+  </tbody>
+ </table>
+  <div id="ver_scroll">
+  <table id="body">
   <tbody>
     <% for i in 0..@euflora.size-1 %>
         <tr>
@@ -27,4 +32,6 @@
     <% end %>
   </tbody>
 </table>
-
+  </div>
+  <%= will_paginate @euflora %>
+</div>

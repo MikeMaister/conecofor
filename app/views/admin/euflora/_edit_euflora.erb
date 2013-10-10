@@ -1,6 +1,7 @@
 <% form_remote_tag :url => { :controller => "admin/euflora", :action => "save_edit", :update => "euflora_list"} do %>
-<table>
-  <thead>
+    <div id="t_wrapper">
+<table id="head">
+  <tbody>
   <tr>
     <th>Codice Europeo</th>
     <th>Descrizione</th>
@@ -9,7 +10,10 @@
     <th>Specie VS</th>
     <th>Opzioni</th>
   </tr>
-  </thead>
+  </tbody>
+ </table>
+    <div id="ver_scroll">
+ <table id="body">
   <tbody>
     <% for i in 0..@euflora.size-1 %>
       <% if @i.to_i == i.to_i %>
@@ -18,6 +22,7 @@
               <%= hidden_field_tag :id ,@euflora.at(i).id %>
               <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :codice_eu, @euflora.at(i).codice_eu %>
+              <%= javascript_tag "$('codice_eu').focus()" %>
             </td>
             <td>
               <%= text_field_tag :descrizione, @euflora.at(i).descrizione %>
@@ -29,7 +34,7 @@
               <%= text_field_tag :specie, @euflora.at(i).specie %>
             </td>
             <td>
-              <%= select_tag :specie_vs_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@spe_vs,:id,:get_vs,@euflora.at(i).specie_vs_id) %>
+              <%= select_tag :specie_vs_id, "<option value =''>-Seleziona-</option>" + options_from_collection_for_select(@spe_vs,:id,:get_vs,@euflora.at(i).specie_vs_id) %>
             </td>
             <td>
               <%= submit_tag "Salva" %>
@@ -48,5 +53,8 @@
     <% end %>
   </tbody>
 </table>
+    </div>
+      <%= will_paginate @euflora %>
+    </div>
 <% end %>
 

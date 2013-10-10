@@ -1,26 +1,28 @@
 
 <% remote_form_for(@new_euflora, :url => {:controller => "admin/euflora", :action => "save_eu" }) do |f| %>
-    <p>
+<div id="input_mask">
+    <p class="input_pi">
       <%= f.label "Codice Europeo" %><br/>
       <%= f.text_field :codice_eu %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Descrizione" %><br/>
       <%= f.text_field :descrizione %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Famiglia" %><br/>
       <%= f.text_field :famiglia %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Specie" %><br/>
       <%= f.text_field :specie %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Specie VS" %><br/>
       <%= f.select :specie_vs_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@spe_vs,:id,:get_vs) %>
     </p>
-    <p>
+    <p class="sub_pi">
       <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/euflora",:action => "close_new_euflora"} %>
     </p>
+</div>
 <% end %>

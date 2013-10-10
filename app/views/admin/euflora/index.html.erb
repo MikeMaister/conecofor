@@ -1,12 +1,19 @@
-<h1>Admin::Euflora#index</h1>
+<% content_for :title, "Euflora - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "euflora" %>
+<% end %>
+
+<h2>Euflora</h2>
+<p class="desc">
+    Quest'interfaccia permette di visualizzare, creare ed editare le speci Europee denominate Euflora.<br />
+    E' anche possibile agganciare una specie Euflora ad una Specie VS.
+</p>
 
 <div id="euflora_list" >
   <%= render :partial => "eu_list"%>
 </div>
 
-<p><%= will_paginate @euflora %></p>
-
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/euflora",:action => "new",:page =>params[:page], :update => "new_euflora"} %></p>
+<%= button_to_remote "+",{:url => { :controller =>"admin/euflora",:action => "new",:page =>params[:page], :update => "new_euflora"}},{:class=>"add_button"} %>
 
 <div id="display_input_errors" style="display:none;">
 </div>

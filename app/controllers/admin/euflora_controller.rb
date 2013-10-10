@@ -74,10 +74,16 @@ class Admin::EufloraController < ApplicationController
     @new_euflora = Euflora.find(params[:id])
     #prima di salvare la specie con i nuovi dati, effettuo il track della stessa
     track_it(@new_euflora)
+    #fix edit
+    if params[:specie_vs_id].blank?
+      specie_vs_id = nil
+    else
+      specie_vs_id = params[:specie_vs_id]
+    end
     #fix per paginazione
     #(necessario se non si cambia mai pagina prima di effettuare una modifica)
     params[:page] = 1 if params[:page].blank?
-    if @new_euflora.update_eu(params[:codice_eu],params[:descrizione],params[:famiglia],params[:specie],params[:specie_vs_id])
+    if @new_euflora.update_eu(params[:codice_eu],params[:descrizione],params[:famiglia],params[:specie],specie_vs_id)
       @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."
       render :update do |page|

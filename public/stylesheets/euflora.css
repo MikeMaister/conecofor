@@ -1,0 +1,96 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px 25px 35px;
+}
+
+#euflora_list{
+    /*border: 1px solid #000000;*/
+    margin: 0;
+}
+
+table{
+    border-collapse: collapse ;
+}
+
+th,td{
+    width: 161px;
+    text-align: center;
+    font-size: x-small;
+}
+
+#ver_scroll{
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #e2ffa0;
+    border-top: 1px solid #6dda00;
+    width: 998px;
+}
+
+div.pagination{
+    padding: 5px;
+    border-top: 1px solid #6dda00;
+    background-color: #9fcc12;
+    font-size: x-small;
+}
+
+.prev_page{
+    margin-left: 35%;
+}
+
+table#body tr:hover{
+    background-color: #a7dd39;
+}
+
+#t_wrapper{
+    border: 1px solid #6dda00;
+    background-color: #9fcc12;
+    width: 998px;
+}
+
+.edit_message{
+    border: dashed 1px #38B003;
+    color:#38B003;
+    padding: 5px;
+}
+
+.add_button{
+    margin: 5px 0 15px 0;
+}
+
+#display_input_errors{
+    padding: 5px;
+    margin: 0 0 10px 0;
+    border: dashed 1px #F62217;
+    color:#F62217;
+}
+
+.error_list{
+    margin: 0;
+    padding-left: 25px;
+}
+
+#input_mask{
+    margin: 0 0 15px 0;
+    border: 1px solid #fba101;
+    background-color: #feffa8;
+    padding: 10px;
+    width: 280px;
+}
+
+.input_pi{
+    margin:0;
+    margin-bottom:7px;
+    font-weight: bold;
+    font-size: x-small;
+}
+
+.sub_pi{
+    margin: 0;
+}
