@@ -1,0 +1,94 @@
+h2,h3{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+h2{
+    margin-top: 0;
+}
+
+p.desc{
+    margin: 15px 35px 25px 35px;
+}
+
+#input_mask{
+    margin: 0 35px 15px 35px;
+    border: 1px solid #fba101;
+    background-color: #feffa8;
+    padding: 10px;
+    width: 180px;
+    border-radius:25px;
+}
+
+.input_pi{
+    margin:0;
+    margin-bottom:7px;
+    font-weight: bold;
+}
+
+.sub_pi{
+    margin: 0;
+}
+
+#archivio{
+    margin:10px 35px;
+    padding: 10px;
+    border: 1px solid #9fcc12;
+    width: 500px;
+    height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: rgba(154, 205, 50, 0.43);
+}
+
+.file_list{
+    margin: 0;
+    padding-left: 25px;
+}
+
+#vem_wrap{
+    float: left;
+    /*border: 1px solid #000000;*/
+    margin-right: 15px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th,td{
+    text-align: center;
+    width: 90px;
+    font-size: xx-small;
+    color: #145c14;
+}
+
+table#head{
+    margin: 15px 35px 0 35px;
+    background-color: rgba(139, 69, 19, 0.67);
+}
+
+table#body tr:hover{
+    background-color: rgba(139, 69, 19, 0.55);
+}
+
+#ver_scroll{
+    margin-left:35px;
+    width: 937px;
+    height: 230px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: rgba(139, 69, 19, 0.43);
+}
+
+.link_file{
+    float: left;
+    margin-left: 35px;
+}
+
+.back{
+    float: right;
+    margin-right: 35px;
+}

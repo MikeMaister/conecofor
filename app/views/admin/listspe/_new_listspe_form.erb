@@ -1,11 +1,13 @@
 
 <% remote_form_for(@new_listspe, :url => {:controller => "admin/listspe", :action => "save_listspe" }) do |f| %>
-    <p>
+   <div id="input_mask">
+    <p class="input_pi">
       <%= f.label "Listspe" %><br/>
       <%= f.text_field :listspe %>
     </p>
-    <p>
+    <p class="sub_pi">
       <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/listspe",:action => "close_new_listspe"} %>
     </p>
+   </div>
 <% end %>
 

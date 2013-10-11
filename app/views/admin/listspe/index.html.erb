@@ -1,14 +1,22 @@
-<h1>Admin::Listspe</h1>
+<% content_for :title, "Listspe - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "listspe" %>
+<% end %>
+
+<h2>Listspe</h2>
+<p class="desc">
+  Quest'interfaccia permette di visualizzare, creare ed editare le Listspe.
+</p>
+
 <div id="listspe_list">
   <%= render :partial => "listspe_list"%>
 </div>
 
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/listspe",:action => "new", :update => "new_listspe"} %></p>
+<%= button_to_remote "+", {:url => { :controller =>"admin/listspe",:action => "new", :update => "new_listspe"}},{:class=>"add_button"} %>
 
 
 <div id="display_input_errors" style="display:none;">
 </div>
 
 <div id="new_listspe" style="display:none;">
-
 </div>

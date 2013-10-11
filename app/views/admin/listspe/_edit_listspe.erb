@@ -1,11 +1,15 @@
 <% form_remote_tag :url => { :controller => "admin/listspe", :action => "save_edit", :update => "listsoe_list"} do %>
-    <table>
-      <thead>
+    <div id="t_wrapper">
+      <table id="head">
+      <tbody>
       <tr>
         <th>Listspe</th>
         <th>Opzioni</th>
       </tr>
-      </thead>
+      </tbody>
+      </table>
+      <div id="ver_scroll">
+      <table id="body">
       <tbody>
       <% for i in 0..@listspe.size-1 %>
           <% if i.to_i == @i.to_i  %>
@@ -13,6 +17,7 @@
                 <td>
                   <%= hidden_field_tag :id ,@listspe.at(i).id %>
                   <%= text_field_tag :listspe,@listspe.at(i).listspe %>
+                  <%= focus_on("listspe") %>
                 </td>
                 <td>
                   <%= submit_tag "Salva" %>
@@ -30,4 +35,6 @@
       <% end %>
       </tbody>
     </table>
+   </div>
+ </div>
 <% end %>

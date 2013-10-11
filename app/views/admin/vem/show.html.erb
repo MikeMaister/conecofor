@@ -1,5 +1,11 @@
-<h1><%= @new_vem_file.file_name %></h1>
-<table>
+<% content_for :title, "VEM - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "vem" %>
+<% end %>
+
+<h2>VEM: <%= @new_vem_file.file_name %></h2>
+<table id="head">
+  <tbody>
   <tr>
     <th>Sequenze number of plots</th>
     <th>Plot Number</th>
@@ -12,6 +18,11 @@
     <th>Certainty of species determination</th>
     <th>Other Observation</th>
   </tr>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
+  <tbody>
 <% for i in 0..@vem_list.size-1 %>
       <tr>
         <td><%= @vem_list.at(i).plot_sequenze_number %></td>
@@ -26,8 +37,12 @@
         <td><%= @vem_list.at(i).other_observations %></td>
       </tr>
 <% end %>
+  </tbody>
 </table>
-
-<p>
+</div>
+<p class="link_file">
   <%= link_to "Download File", @new_vem_file.relative_path %>
+</p>
+<p class="back">
+  <%= link_to "VEM", :controller => "admin/vem" %>
 </p>
