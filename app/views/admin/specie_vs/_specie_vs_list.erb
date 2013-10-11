@@ -1,16 +1,19 @@
-
-
 <% if !@specie_vs.blank? %>
-
-    <p><%= @message if @message %></p>
-    <table>
-      <thead>
+<% if @message %>
+    <p class="edit_message"><%= @message %></p>
+<% end %>
+<div id="t_wrapper">
+  <table id="head">
+      <tbody>
         <tr>
           <th>Species</th>
           <th>Listspe</th>
           <th>Opzioni</th>
         </tr>
-      </thead>
+      </tbody>
+  </table>
+  <div id="ver_scroll">
+  <table id="body">
       <tbody>
         <% for i in 0..@specie_vs.size-1 %>
             <tr>
@@ -24,8 +27,9 @@
         <% end %>
       </tbody>
     </table>
-
-
+   </div>
+  <%= will_paginate @specie_vs %>
+</div>
 <% else %>
 
     <p>Nessun plot presente</p>

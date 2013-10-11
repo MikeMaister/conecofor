@@ -1,15 +1,17 @@
 
 <% remote_form_for(@new_specie_vs, :url => {:controller => "admin/specie_vs", :action => "save_specie_vs" }) do |f| %>
-    <p>
+<div id="input_mask">
+    <p class="input_pi">
       <%= f.label "Species" %><br/>
       <%= f.text_field :species %>
     </p>
-    <p>
+    <p class="input_pi">
       <%= f.label "Listspe" %><br/>
       <%= f.select :listspe_id, "<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@listspe,:id,:listspe) %>
     </p>
-    <p>
+    <p class="sub_pi">
       <%= submit_tag ("Salva")%><%= button_to_remote "Annulla", :url => { :controller =>"admin/specie_vs",:action => "close_new_specie_vs"} %>
     </p>
+</div>
 <% end %>
 

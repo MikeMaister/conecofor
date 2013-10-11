@@ -73,6 +73,9 @@ class Admin::SpecieVsController < ApplicationController
 
   def save_edit
     @new_specie_vs = SpecieVs.find(params[:id])
+    #fix per paginazione
+    #(necessario se non si cambia mai pagina prima di effettuare una modifica)
+    params[:page] = 1 if params[:page].blank?
     if @new_specie_vs.update_specie_vs(params[:species],params[:listspe_id])
       @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
       @message = "Modifica salvata."

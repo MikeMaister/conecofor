@@ -1,5 +1,5 @@
 <% if @new_specie_vs.errors.any? %>
-    <ul>
+    <ul class="error_list">
     <% @new_specie_vs.errors.full_messages.each do |message| %>
         <li><%= message %></li>
     <% end %>

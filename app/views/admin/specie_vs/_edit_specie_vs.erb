@@ -1,12 +1,16 @@
 <% form_remote_tag :url => { :controller => "admin/specie_vs", :action => "save_edit", :update => "vs_spe_list"} do %>
-<table>
-  <thead>
+    <div id="t_wrapper">
+      <table id="head">
+  <tbody>
   <tr>
     <th>Species</th>
     <th>Listspe</th>
     <th>Opzioni</th>
   </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
   <tbody>
   <% for i in 0..@specie_vs.size-1 %>
       <% if i.to_i == @i.to_i  %>
@@ -15,6 +19,7 @@
               <%= hidden_field_tag :id ,@specie_vs.at(i).id %>
               <%= hidden_field_tag :page, params[:page] %>
               <%= text_field_tag :species, @specie_vs.at(i).species %>
+              <%= focus_on("species") %>
             </td>
             <td>
               <%= select_tag :listspe_id,"<option value ="">-Seleziona-</option>" + options_from_collection_for_select(@listspe,:id,:listspe,@specie_vs.at(i).listspe_id) %>
@@ -36,4 +41,7 @@
   <% end %>
   </tbody>
 </table>
+</div>
+      <%= will_paginate @specie_vs %>
+</div>
 <% end %>

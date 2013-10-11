@@ -9,4 +9,9 @@ module ApplicationHelper
       return param
     end
   end
+
+  #setta il focus su un DOM specifico
+  def focus_on(id)
+    javascript_tag "$('#{id}').focus()"
+  end
 end

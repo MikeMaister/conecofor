@@ -1,11 +1,19 @@
-<h1>Admin::SpecieVS</h1>
+<% content_for :title, "Specie VS - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "specie_vs" %>
+<% end %>
+
+<h2>Specie VS</h2>
+<p class="desc">
+  Quest'interfaccia permette di visualizzare, creare ed editare le Speci VS.<br />
+  E' anche possibile agganciare una Listspe ad una Specie VS.
+</p>
+
 <div id="vs_spe_list">
   <%= render :partial => "specie_vs_list"%>
 </div>
 
-<p><%= will_paginate @specie_vs %></p>
-
-<p> <%= button_to_remote "+", :url => { :controller =>"admin/specie_vs",:action => "new",:page =>params[:page], :update => "new_specie_vs"} %></p>
+<%= button_to_remote "+",{:url => { :controller =>"admin/specie_vs",:action => "new",:page =>params[:page], :update => "new_specie_vs"}},{:class=>"add_button"} %>
 
 
 <div id="display_input_errors" style="display:none;">
