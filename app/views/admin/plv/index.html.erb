@@ -1,19 +1,30 @@
-<h1>Admin::Plv#index</h1>
-<p>Seleziona l'anno per cui vuoi generare il VEM:</p>
+<% content_for :title, "PLV - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "vem" %>
+<% end %>
+<div id="vem_wrap">
+<h2>PLV</h2>
+<p class="desc">Seleziona l'anno per cui vuoi generare il PLV:</p>
+
 <% form_tag({:controller=>'admin/plv', :action => 'show'}) do %>
-    <p>
+    <div id="input_mask">
+    <p class="input_pi">
       <%= select_tag "anno","<option value ='0'>-Seleziona-</option>" + options_for_select(@anno.collect{|y| [y.anno,y.anno]}) %>
     </p>
-    <p>
+    <p class="sub_pi">
       <%= submit_tag 'Genera' %>
     </p>
+    </div>
 <% end %>
+</div>
 
-<h2>Archivio File PLV:</h2>
-<ul>
+<h3>Archivio File PLV:</h3>
+<div id="archivio">
+<ul class="file_list">
   <% for i in 0..@plv_file.size-1 %>
       <li>
         <%= link_to @plv_file.at(i).file_name,@plv_file.at(i).relative_path %>
       </li>
   <% end %>
 </ul>
+</div>

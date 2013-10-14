@@ -1,5 +1,13 @@
+<% content_for :title, "PLV - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "vem" %>
+    <%= stylesheet_link_tag "plv" %>
+<% end %>
 
-<table>
+<h2>PLV: <%= @new_plv_file.file_name %></h2>
+<div id="plv_wrap">
+<table id="head" class="plv">
+  <tbody>
   <tr>
     <th>Sequence number of plots</th>
     <th>Country Code</th>
@@ -25,7 +33,12 @@
     <th>Litter cover</th>
     <th>Other observations</th>
   </tr>
-  <% for i in 0..@plv_list.size-1 %>
+  </tbody>
+ </table>
+<div id="ver_scroll">
+ <table id="body" class="plv">
+   <tbody>
+   <% for i in 0..@plv_list.size-1 %>
     <tr>
         <td><%= @plv_list.at(i).plot_seq_number %></td>
         <td><%= @plv_list.at(i).country_code %></td>
@@ -52,8 +65,13 @@
       <td><%= @plv_list.at(i).other_observations %></td>
     </tr>
   <% end %>
+   </tbody>
 </table>
-
-<p>
+</div>
+</div>
+<p class="link_file">
   <%= link_to "Download File", @new_plv_file.relative_path %>
+</p>
+<p class="back">
+  <%= link_to "PLV", :controller => "admin/plv" %>
 </p>
