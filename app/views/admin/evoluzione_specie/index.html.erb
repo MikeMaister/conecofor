@@ -1,18 +1,19 @@
+<% content_for :title, "Evoluzione Specie-Plot - CONECOFOR" %>
 <% content_for :head do %>
     <%= stylesheet_link_tag "evoluzione_specie"%>
 <%end%>
 
-<h1>Admin::EvoluzioneSpecie#index</h1>
-<table>
-  <tr>
-    <td colspan="2">Filtro</td>
-  </tr>
-  <tr>
-    <td><%= button_to_remote "Rilevazione", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_psc"} %></td>
-    <td><%= button_to_remote "Completo", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_all"} %></td>
-  </tr>
-</table>
-
+<h2>Evoluzione Specie-Plot</h2>
+<p class="desc">
+    Tramite quest'interfaccia è possibile ricostruire il cambiamento dei dati di specie nel tempo rispetto un plot.<br />
+    E' possibile ottenere i dati rispetto un singolo plot oppure nel complesso.<br />
+    Lo stato temporale mostrato è regresso, dai dati più recenti a quelli più vecchi.
+</p>
+<p class="desc">
+    <strong>Seleziona l'output desiderato:</strong>
+<%= button_to_remote "Singolo Plot", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_psc"} %>
+<%= button_to_remote "Complesso", :url=>{:controller=>"admin/evoluzione_specie", :action => "input_mask_all"} %>
+</p>
 
 
 <div id="input_mask" style="display: none;"></div>

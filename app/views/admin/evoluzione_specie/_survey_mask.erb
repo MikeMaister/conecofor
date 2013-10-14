@@ -1,17 +1,17 @@
 <% form_remote_tag :url => { :action => "survey_result", :update => "result"} do %>
-    <p>
-      <%= label_tag :plot %>
+    <p class="input_sp">
+      <strong><%= label_tag :plot %></strong>
       <%= select_tag :plot, options_from_collection_for_select(@plot,:id,:id_plot) %>
     </p>
-    <p>
-      <%= label_tag :anno %>
+    <p class="input_sp">
+      <strong><%= label_tag :anno %></strong>
       <%= select_tag :anno, options_from_collection_for_select(@campagne,:anno,:anno) %>
     </p>
-    <p>
-      <%= label_tag :rilevazione %>
+    <p class="input_sp">
+      <strong><%= label_tag :rilevazione %></strong>
       <%= select_tag :survey, "<option>Erb</option><option>Leg</option><option>Cops</option>" %>
     </p>
-    <p>
+    <p class="sub_sp">
       <%= submit_tag "Mostra" %>
     </p>
 <% end %>

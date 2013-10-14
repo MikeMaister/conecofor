@@ -1,5 +1,6 @@
-<p>
-  La creazione del file potrebbe richiedere alcuni minuti.
+<p class="input_comp">
+  <strong>La creazione del file potrebbe richiedere alcuni minuti:</strong>
 </p>
+<%= button_to_remote "Crea",{:url=>{:controller=>"admin/evoluzione_specie", :action => "create_complete_xls"}},{:class=>"sub_sp"} %>
 
-<td><%= button_to_remote "Crea File", :url=>{:controller=>"admin/evoluzione_specie", :action => "create_complete_xls"} %></td>
+

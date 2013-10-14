@@ -1,85 +1,83 @@
-<h1>Pignatti</h1>
+<h3>Pignatti</h3>
 <div id="pignatti">
   <% for i in 0..@evolution.size-1 %>
-    <div class="row">
-      <div class="p_attuale">
-        <p><strong class="block_state">Stato Attuale</strong><br /><br />
-          <strong>Pignatti</strong><br />
-          <%= @evolution.at(i).at(0).descrizione %><br /><br />
+        <div class="p_attuale">
+        <p class="info"><strong class="block_state">Stato Attuale</strong><br /><br />
+          <strong class="main">Pignatti</strong><br />
+          <strong>Descrizione:</strong> <%= @evolution.at(i).at(0).descrizione %><br /><br />
           <% unless @evolution.at(i).at(0).euflora_id.blank? %>
-            <strong>Euflora</strong><br />
-              <%= Euflora.find(@evolution.at(i).at(0).euflora_id).codice_eu %><br />
-              <%= Euflora.find(@evolution.at(i).at(0).euflora_id).descrizione %><br />
-              <%= Euflora.find(@evolution.at(i).at(0).euflora_id).famiglia %><br />
-              <%= Euflora.find(@evolution.at(i).at(0).euflora_id).specie %><br />
+            <strong class="main">Euflora</strong><br />
+              <strong>Codice Europeo:</strong> <%= Euflora.find(@evolution.at(i).at(0).euflora_id).codice_eu %><br />
+              <strong>Descrizione:</strong> <%= Euflora.find(@evolution.at(i).at(0).euflora_id).descrizione %><br />
+              <strong>Famiglia:</strong> <%= Euflora.find(@evolution.at(i).at(0).euflora_id).famiglia %><br />
+              <strong>Specie:</strong> <%= Euflora.find(@evolution.at(i).at(0).euflora_id).specie %><br />
         <% end %>
         </p>
       </div>
         <% unless @evolution.at(i).at(1).blank? %>
             <% for j in 0..@evolution.at(i).at(1).size-1 %>
               <div class="evolution">
-                <p><strong class="block_state">Stato <%= @evolution.at(i).at(1).size - j %></strong><br />
-                  <%= @evolution.at(i).at(1).at(j).data %><br /><br />
+                <p class="info"><strong class="block_state">Stato <%= @evolution.at(i).at(1).size - j %></strong> (<%= @evolution.at(i).at(1).at(j).data.strftime('%d-%m-%Y') %>)<br /><br />
 
-                  <strong>Pignatti</strong><br />
-                  <%= @evolution.at(i).at(1).at(j).spe_desc %><br /><br />
+                  <strong class="main">Pignatti</strong><br />
+                  <strong>Descrizione:</strong> <%= @evolution.at(i).at(1).at(j).spe_desc %><br /><br />
 
-                  <strong>Euflora</strong><br />
-                  <%= @evolution.at(i).at(1).at(j).codice_eu %><br />
-                  <%= @evolution.at(i).at(1).at(j).eu_desc %><br />
-                  <%= @evolution.at(i).at(1).at(j).eu_fam %><br />
-                  <%= @evolution.at(i).at(1).at(j).eu_spe %><br />
+                  <strong class="main">Euflora</strong><br />
+                  <strong>Codice Europeo:</strong> <%= @evolution.at(i).at(1).at(j).codice_eu %><br />
+                  <strong>Descrizione:</strong> <%= @evolution.at(i).at(1).at(j).eu_desc %><br />
+                  <strong>Famiglia:</strong> <%= @evolution.at(i).at(1).at(j).eu_fam %><br />
+                  <strong>Specie:</strong> <%= @evolution.at(i).at(1).at(j).eu_spe %><br />
                 </p>
               </div>
             <% end %>
         <% end %>
-    </div>
+   <br />
   <% end %>
 </div>
 
-<h2>Euflora</h2>
+<h4>Euflora</h4>
 <div id="euflora">
   <% for i in 0..@eu_evolution.size-1 %>
-    <div class="row">
       <div class="e_attuale">
-      <p> <strong class="block_state">Stato Attuale</strong><br /><br />
-        <%= @eu_evolution.at(i).at(0).codice_eu %><br />
-        <%= @eu_evolution.at(i).at(0).descrizione %><br />
-        <%= @eu_evolution.at(i).at(0).famiglia %><br />
-        <%= @eu_evolution.at(i).at(0).specie %><br /><br />
-        <strong class="block_state">Specie VS</strong><br /><br />
+      <p class="info"><strong class="block_state">Stato Attuale</strong><br /><br />
+        <strong class="main">Euflora</strong><br />
+        <strong>Codice Europeo:</strong> <%= @eu_evolution.at(i).at(0).codice_eu %><br />
+        <strong>Descrizione:</strong> <%= @eu_evolution.at(i).at(0).descrizione %><br />
+        <strong>Famiglia:</strong> <%= @eu_evolution.at(i).at(0).famiglia %><br />
+        <strong>Specie:</strong> <%= @eu_evolution.at(i).at(0).specie %><br /><br />
+        <strong class="block_state main">Specie VS</strong><br />
         <% unless @eu_evolution.at(i).at(0).specie_vs_id.blank?  %>
-            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).species %><br />
-            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).listspe %><br />
-            <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).descrizione %><br />
+           <strong>Species:</strong> <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).species %><br />
+           <strong>Listspe:</strong> <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).listspe %><br />
+           <strong>Descrizione:</strong> <%= SpecieVs.find(@eu_evolution.at(i).at(0).specie_vs_id).descrizione %><br />
         <% end %>
       </p>
       </div>
       <% unless @eu_evolution.at(i).at(1).blank? %>
           <% for j in 0..@eu_evolution.at(i).at(1).size-1 %>
-              <div class="evolution">
-                <p><strong class="block_state">Stato <%= @eu_evolution.at(i).at(1).size - j %></strong><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).data %><br /><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).codice_eu %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).descrizione %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).famiglia %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).specie %><br /><br />
-                  <strong class="block_state">Specie VS</strong><br /><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).vs_species %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).vs_listspe %><br />
-                  <%= @eu_evolution.at(i).at(1).at(j).vs_descrizione %><br />
+              <div class="evolution eu">
+                <p class="info"><strong class="block_state">Stato <%= @eu_evolution.at(i).at(1).size - j %></strong> (<%= @eu_evolution.at(i).at(1).at(j).data.strftime('%d-%m-%Y') %>)<br /><br />
+                  <strong class="main">Euflora</strong><br />
+                  <strong>Codice Europeo:</strong> <%= @eu_evolution.at(i).at(1).at(j).codice_eu %><br />
+                  <strong>Descrizione:</strong> <%= @eu_evolution.at(i).at(1).at(j).descrizione %><br />
+                  <strong>Famiglia:</strong> <%= @eu_evolution.at(i).at(1).at(j).famiglia %><br />
+                  <strong>Specie:</strong> <%= @eu_evolution.at(i).at(1).at(j).specie %><br /><br />
+                  <strong class="block_state main">Specie VS</strong><br />
+                  <strong>Species:</strong> <%= @eu_evolution.at(i).at(1).at(j).vs_species %><br />
+                  <strong>Listspe:</strong> <%= @eu_evolution.at(i).at(1).at(j).vs_listspe %><br />
+                  <strong>Descrizione:</strong> <%= @eu_evolution.at(i).at(1).at(j).vs_descrizione %><br />
                 </p>
               </div>
           <% end %>
       <% end %>
-    </div>
+    <br />
   <% end %>
 </div>
 
-<p>
+<p id="download_file">
   <%= link_to "Download File", :action => "download_file", :file => @file.id %>
 </p>
 
 
-<div id="a_porco" ></div>
+<div id="stop_pr" ></div>
 
