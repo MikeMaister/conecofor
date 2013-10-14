@@ -1,19 +1,30 @@
-<h1>Admin::Vs#index</h1>
-<p>Seleziona l'anno per cui vuoi generare il VS:</p>
-<% form_tag({:controller=>'admin/vs', :action => 'show'}) do %>
-    <p>
-      <%= select_tag "anno","<option value ='0'>-Seleziona-</option>" + options_for_select(@anno.collect{|y| [y.anno,y.anno]}) %>
-    </p>
-    <p>
-      <%= submit_tag 'Genera' %>
-    </p>
+<% content_for :title, "VEM - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "vem" %>
 <% end %>
 
-<h2>Archivio File PLV:</h2>
-<ul>
+<div id="vem_wrap">
+<h2>VS</h2>
+<p class="desc">Seleziona l'anno per cui vuoi generare il VS:</p>
+<% form_tag({:controller=>'admin/vs', :action => 'show'}) do %>
+ <div id="input_mask">
+    <p class="input_pi">
+      <%= select_tag "anno","<option value ='0'>-Seleziona-</option>" + options_for_select(@anno.collect{|y| [y.anno,y.anno]}) %>
+    </p>
+    <p class="sub_pi">
+      <%= submit_tag 'Genera' %>
+    </p>
+ </div>
+<% end %>
+</div>
+
+<h3>Archivio VS:</h3>
+<div id="archivio">
+<ul class="file_list">
   <% for i in 0..@vs_file.size-1 %>
       <li>
         <%= link_to @vs_file.at(i).file_name,@vs_file.at(i).relative_path %>
       </li>
   <% end %>
 </ul>
+</div>

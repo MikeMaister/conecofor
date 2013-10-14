@@ -12,19 +12,22 @@ class Admin::VsController < ApplicationController
 
     #carico tutti i dati corrispondenti all'anno selezionato secondo i criteri stabiliti
     data = Cops.find(:all, :conditions => ["temp = false AND approved = true AND deleted = false AND in_out = 1 AND priest = 2 AND campagne_id IN (SELECT id FROM campagne WHERE deleted = false AND anno = ?) AND plot_id IN (SELECT id FROM plot WHERE im IS NOT NULL)",anno])
+    if data.blank?
+      flash[:notice] = "Nessun dato presente con cui generare il VS."
+      redirect_to :action => :index
+    else
+      #qua memorizzo tutti i record vs
+      @vs_list = Array.new
 
-    #qua memorizzo tutti i record vs
-    @vs_list = Array.new
+      #genero il vs
+      for i in 0..data.size-1
+        temp_vs = Vs.new(data.at(i))
+        @vs_list << temp_vs
+      end
 
-    #genero il vs
-    for i in 0..data.size-1
-      temp_vs = Vs.new(data.at(i))
-      @vs_list << temp_vs
+      #genero il file vs.xls
+      generate_vs_xls(@vs_list,anno)
     end
-
-    #genero il file vs.xls
-    generate_vs_xls(@vs_list,anno)
-
   end
 
   private

@@ -1,0 +1,18 @@
+#vs_wrap{
+    /*border: 1px solid #000000;*/
+    overflow-x: scroll;
+    margin: 15px 35px 0 35px;
+}
+
+table{
+    width: 2500px;
+}
+
+table#head.vs{
+    margin: 0;
+}
+
+#ver_scroll{
+    width: 2517px;
+    margin:0;
+}

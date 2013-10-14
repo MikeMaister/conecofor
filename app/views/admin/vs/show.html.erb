@@ -1,9 +1,13 @@
-<% if @vs_list.blank? %>
-    <p>Nessun dato su cui costruire il VS.</p>
-<% else %>
+<% content_for :title, "VS - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "vem" %>
+    <%= stylesheet_link_tag "vs" %>
+<% end %>
 
-<table>
-  <thead>
+<h2>PLV: <%= @new_vs_file.file_name %></h2>
+<div id="vs_wrap">
+<table id="head" class="vs">
+  <tbody>
     <tr>
         <th>Subprog</th>
         <th>Area</th>
@@ -25,7 +29,10 @@
         <th>Flagqua</th>
         <th>Flagsta</th>
      </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
   <tbody>
   <% for i in 0..@vs_list.size-1 %>
     <tr>
@@ -52,10 +59,13 @@
   <% end %>
   </tbody>
 </table>
+</div>
+</div>
 
-    <p>
-      <%= link_to "Download File", @new_vs_file.relative_path %>
-    </p>
+<p class="link_file">
+  <%= link_to "Download File", @new_vs_file.relative_path %>
+</p>
+<p class="back">
+  <%= link_to "VS", :controller => "admin/vs" %>
+</p>
 
-
-<% end %>
