@@ -1,2 +1,15 @@
-<h1>Admin::PresenzaSpecie#index</h1>
-<p>Find me in app/views/admin/presenza_specie/index.html.erb</p>
+<% content_for :title, "Presenza Specie-Plot - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "presenza_specie"%>
+<%end%>
+
+<h2>Presenza Specie-Plot</h2>
+<p class="desc">
+  Tramite quest'interfaccia è possibile visionare la presenza delle speci nei vari plot durante il trascorrere degli anni.<br />
+  Il processo di creazione potrebbe richiedere alcuni minuti.
+</p>
+<p id="button_tag">
+   Clicca per creare il file riassuntivo:
+</p>
+
+<%= button_to "Crea", {:controller => "admin/presenza_specie", :action => "result"},:id=>"create_button" %>

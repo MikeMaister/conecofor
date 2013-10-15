@@ -1,34 +1,16 @@
-<h1>Admin::PresenzaSpecie#result</h1>
-<p>50x50</p>
+<% content_for :title, "Presenza Specie-Plot - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "presenza_specie"%>
+<%end%>
 
-<%= @view_50x50.at(3).plot_column.id_plot %>
-<%= @view_50x50.at(3).specie_column.at(0).specie %>
-<%= @view_50x50.at(3).presenza_list_column.at(1).anno.anno %>
-<%= @view_50x50.at(3).presenza_list_column.at(1).presenza_column.at(0).presenza%>
-<%= @view_50x50.at(3).presenza_list_column.at(1).presenza_column.at(0).habitual_note%>
-
-<p>10x10</p>
-
-<%= @view_10x10.at(3).plot_column.id_plot %>
-<%= @view_10x10.at(3).specie_est_in.at(0).specie %>
-<%= @view_10x10.at(3).pres_list_col_ei.at(1).anno.anno %>
-<%= @view_10x10.at(3).pres_list_col_ei.at(1).presenza_column.at(0).presenza%>
-<%= @view_10x10.at(3).pres_list_col_ei.at(1).presenza_column.at(0).habitual_note%>
-
-<%= link_to "Download File", @file.relative_path %>
-
-<p>
+<h2>Presenza Specie-Plot</h2>
+<p class="desc">
+  Tramite quest'interfaccia è possibile visionare la presenza delle speci nei vari plot durante il trascorrere degli anni.<br />
+</p>
+<p id="button_tag">
+  Clicca per scaricare il file riassuntivo: <%= link_to "Download File", @file.relative_path %>
 </p>
 
-<% @view_10x10.at(3).specie_est_out.each do |b| %>
-    <li>
-      <%= b.specie %>
-    </li>
-<% end %>
-
-<p>
-  <%= @prova  %>
-</p>
 
 
 

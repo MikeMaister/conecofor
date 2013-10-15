@@ -1,0 +1,20 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px 25px 35px;
+}
+
+#button_tag{
+    float: left;
+    margin: 10px 0 0 35px;
+    font-weight: bold;
+}
+
+#create_button{
+    margin: 7px 0 0 15px;
+}
