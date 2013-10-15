@@ -92,7 +92,7 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
 
     if plot.blank?
       render :update do |page|
-        page.replace_html "eu", "Nessun dato con cui effettuare la statistica."
+        page.replace_html "eu", :partial => "no_data"
       end
     else
       @eu_list = format_data(plot,unita,niferb,nifleg,coperb,copbrio,coplich,copleg,nspecerb,nspecbrio,nspeclich,nspecleg)
