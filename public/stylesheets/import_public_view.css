@@ -95,3 +95,8 @@ tr.body:hover {
 tr.head{
     background-color:#B8FB01;
 }
+
+p#download{
+    margin: 0;
+    margin-top: 15px;
+}
