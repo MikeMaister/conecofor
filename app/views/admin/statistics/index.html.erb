@@ -20,7 +20,7 @@
       <%= select_tag :plot , "<option value= '0' >-Seleziona-</option><option value='all' >Tutti</option>" + options_from_collection_for_select(@plot,:id_plot,:id_plot)  %>
     </p>
     <p class="filter last">
-      <%= label_tag :Rilevazione %><br />
+      <%= label_tag :rilevamento %><br />
       <%= select_tag :survey,"<option value= '0' >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Cops" => "cops","Copl" =>"copl"}) %>
       <%= observe_field :survey, :url => {:controller=>"admin/statistics", :action=>"update_field",:update => "select_field"},:with =>"selected_survey" %>
     </p>
