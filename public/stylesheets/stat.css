@@ -87,7 +87,7 @@ table.simple_stat.head{
    overflow-y: scroll;
    overflow-x: hidden;
    height: 150px;
-    background-color: #e0f59d;
+   background-color: #e0f59d;
 }
 
 table.simple_stat.body tr:hover{

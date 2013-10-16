@@ -27,142 +27,148 @@ class Admin::SpeStatController < ApplicationController
     @priest = params[:priest]
     @cod_strato = params[:cod_strato]
 
-    if @survey == "erb" && @plot == "all"
-      data = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
-        end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat",:partial => "species_stats", :object => [@stat_list,@file]
-        end
+    if @survey == "0" || @anno == "0" || @plot == "0"
+      render :update do |page|
+        page.replace_html "spe_stat", :partial => "no_data"
       end
-    elsif @survey == "erb" && @plot != "all"
-      data = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
+    else
+      if @survey == "erb" && @plot == "all"
+        data = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat",:partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+      elsif @survey == "erb" && @plot != "all"
+        data = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      end
-    elsif @survey == "leg" && @plot == "all"
-      data = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
+      elsif @survey == "leg" && @plot == "all"
+        data = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+      elsif @survey == "leg" && @plot != "all"
+        data = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      end
-    elsif @survey == "leg" && @plot != "all"
-      data = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
+      elsif @survey == "erbleg" && @plot == "all"
+        erb = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
+        leg = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
+        if erb.blank? && leg.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          erb_list = format_data(erb,"erb")
+          leg_list = format_data(leg,"leg")
+          @stat_list = combine_data(erb_list,leg_list)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+      elsif @survey == "erbleg" && @plot != "all"
+        erb = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
+        leg = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
+        if erb.blank? && leg.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          erb_list = format_data(erb,"erb")
+          leg_list = format_data(leg,"leg")
+          @stat_list = combine_data(erb_list,leg_list)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      end
-    elsif @survey == "erbleg" && @plot == "all"
-      erb = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
-      leg = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
-      if erb.blank? && leg.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
+      elsif @survey == "cops" && @plot == "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
+        data = Cops.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      else
-        erb_list = format_data(erb,"erb")
-        leg_list = format_data(leg,"leg")
-        @stat_list = combine_data(erb_list,leg_list)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+      elsif @survey == "cops" && @plot != "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
+        data = Cops.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data(data,@survey)
+          @file = regular_file(@stat_list)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
+          end
         end
-      end
-    elsif @survey == "erbleg" && @plot != "all"
-      erb = Erbacee.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,sum(numero_cespi) as n_c,sum(numero_stoloni) as n_s,sum(numero_getti) as n_g from erbacee where erbacee.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
-      leg = Legnose.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from legnose where legnose.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
-      if erb.blank? && leg.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
+      elsif @survey == "cops" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
+        query_part = build_group_by!(@inout,@priest,@cod_strato)
+        data = Cops.find_by_sql ["select id_plot as plot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot #{query_part},specie",@anno]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data_filter(data)
+          @file = filter_file(@stat_list,@inout,@priest,@cod_strato)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "specie_stats_filtered", :object => [@inout,@priest,@cod_strato,@stat_list,@file]
+          end
         end
-      else
-        erb_list = format_data(erb,"erb")
-        leg_list = format_data(leg,"leg")
-        @stat_list = combine_data(erb_list,leg_list)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
-        end
-      end
-    elsif @survey == "cops" && @plot == "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
-      data = Cops.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot,specie",@anno]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
-        end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
-        end
-      end
-    elsif @survey == "cops" && @plot != "all" && (@inout.blank? && @priest.blank? && @cod_strato.blank?)
-      data = Cops.find_by_sql ["select id_plot as plot,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot,specie",@anno,@plot]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
-        end
-      else
-        @stat_list = format_data(data,@survey)
-        @file = regular_file(@stat_list)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "species_stats", :object => [@stat_list,@file]
-        end
-      end
-    elsif @survey == "cops" && @plot == "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
-      query_part = build_group_by!(@inout,@priest,@cod_strato)
-      data = Cops.find_by_sql ["select id_plot as plot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot in (select id_plot from plot where deleted = false) and descrizione_pignatti is not null group by plot #{query_part},specie",@anno]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
-        end
-      else
-        @stat_list = format_data_filter(data)
-        @file = filter_file(@stat_list,@inout,@priest,@cod_strato)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "specie_stats_filtered", :object => [@inout,@priest,@cod_strato,@stat_list,@file]
-        end
-      end
-    elsif @survey == "cops" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
-      query_part = build_group_by!(@inout,@priest,@cod_strato)
-      data = Cops.find_by_sql ["select id_plot as plot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot #{query_part},specie",@anno,@plot]
-      if data.blank?
-        render :update do |page|
-          page.replace_html "spe_stat", "Nessun dato presente su cui effettuare la statistica"
-        end
-      else
-        @stat_list = format_data_filter(data)
-        @file = filter_file(@stat_list,@inout,@priest,@cod_strato)
-        render :update do |page|
-          page.replace_html "spe_stat", :partial => "specie_stats_filtered", :object => [@inout,@priest,@cod_strato,@stat_list,@file]
+      elsif @survey == "cops" && @plot != "all" && (@inout.to_i == 1 || @priest.to_i == 1 || @cod_strato.to_i == 1)
+        query_part = build_group_by!(@inout,@priest,@cod_strato)
+        data = Cops.find_by_sql ["select id_plot as plot,in_out,priest,codice_strato,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie, count(descrizione_pignatti) as individui from cops where cops.deleted = false and temp = false and approved = true and campagne_id IN (select id from campagne where anno = ?) and id_plot = ? and descrizione_pignatti is not null group by plot #{query_part},specie",@anno,@plot]
+        if data.blank?
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "no_data"
+          end
+        else
+          @stat_list = format_data_filter(data)
+          @file = filter_file(@stat_list,@inout,@priest,@cod_strato)
+          render :update do |page|
+            page.replace_html "spe_stat", :partial => "specie_stats_filtered", :object => [@inout,@priest,@cod_strato,@stat_list,@file]
+          end
         end
       end
     end

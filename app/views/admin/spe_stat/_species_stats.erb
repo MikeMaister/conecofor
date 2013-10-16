@@ -1,26 +1,30 @@
-<table>
-  <thead>
+<table class="simple head">
+  <tbody>
     <tr>
       <th>Plot</th>
-      <th>Eucode</th>
-      <th>Eudesc</th>
-      <th>Specie</th>
+      <th class="bigger">Eucode</th>
+      <th class="bigger">Eudesc</th>
+      <th class="bigger">Specie</th>
       <th>Individui</th>
     </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table class="simple body">
   <tbody>
   <% for i in 0..@stat_list.size-1 %>
     <tr>
       <td><%= @stat_list.at(i).plot %></td>
-      <td><%= @stat_list.at(i).eucode %></td>
-      <td><%= @stat_list.at(i).eudesc %></td>
-      <td><%= @stat_list.at(i).specie %></td>
+      <td class="bigger"><%= @stat_list.at(i).eucode %></td>
+      <td class="bigger"><%= @stat_list.at(i).eudesc %></td>
+      <td class="bigger"><%= @stat_list.at(i).specie %></td>
       <td><%= @stat_list.at(i).individui %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+</div>
 
-<p>
+<p id="download">
   <%= link_to "Download File", @file.relative_path %>
 </p>
