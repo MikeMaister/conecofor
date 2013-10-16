@@ -1,0 +1,129 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px 25px 35px;
+}
+
+div#input_mask{
+    float: left;
+    border: 1px solid #8b4513;
+    background-color: #bd8d53;
+    padding: 10px;
+    margin: 0 0 25px 368px;
+}
+
+div#more_filter{
+    float: left;
+    width: 140px;
+}
+
+div#basic_filter{
+    float: left;
+}
+
+p.comand{
+    margin: 0;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+p.button_command{
+    margin: 0;
+}
+
+#su_stat{
+    clear: both;
+}
+
+p#download{
+    margin: 15px 35px;
+}
+
+
+table.simple{
+    border-collapse: collapse;
+}
+
+table.simple.body td,table.simple.head th{
+    width: 60px;
+    text-align: center;
+    font-size: xx-small;
+}
+
+table.simple td.big,table.simple th.big{
+    width: 80px;
+}
+
+table.simple td.bigger,table.simple th.bigger{
+    width: 100px;
+}
+
+table.simple.head{
+    background-color: #92be12;
+    width: 982px;
+}
+
+table.simple.body{
+    width: 982px;
+}
+
+div#ver_scroll{
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #e0f59d;
+}
+
+table.simple.body tr:hover{
+    background-color: #b6c980;
+}
+
+
+table.comp{
+    border-collapse: collapse;
+}
+
+table.comp td,table.comp th{
+    width: 65px;
+    text-align: center;
+    font-size: x-small;
+}
+
+table.comp td.big,table.comp th.big{
+    width: 80px;
+}
+
+table.comp td.bigger,table.comp th.bigger{
+    width: 130px;
+}
+
+table.comp.head{
+    background-color: #92be12;
+    width: 982px;
+}
+
+table.comp.body{
+    width: 982px;
+}
+
+div#ver_scroll_comp{
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 998px;
+    background-color: #e0f59d;
+}
+
+table.comp.body tr:hover{
+    background-color: #b6c980;
+}
+
+p#no_data{
+    margin-left: 32%;
+}

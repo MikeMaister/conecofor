@@ -1,21 +1,38 @@
-<h1>Admin::SuStat#index</h1>
+<% content_for :title, "Statistiche SU - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "su_stat"%>
+<%end%>
+
+<h2>Statistiche SU</h2>
+<p class="desc">
+  Tramite quest'interfaccia è possibile effettuare statistiche sui dati raccolti ed approvati distinti per SU.<br />
+  Attraverso l'utilizzo di una serie di filtri è possibile generare il tipo di statistiche desiderate, visionarle e scaricarle in versione file.
+</p>
+
+<div id="input_mask">
 <% form_remote_tag :url => { :action => 'result', :update => 'su_stat'} do %>
-    <p>
-      <%= label_tag :survey %><br />
-      <%= select_tag :survey,"<option value= "" >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Cops" => "cops"}) %>
+  <div id="more_filter">
+    <p class="comand">
+      <%= label_tag :rilevamento %><br />
+      <%= select_tag :survey,"<option value= '0' >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Cops" => "cops"}) %>
       <%= observe_field :survey, :url => {:controller=>"admin/su_stat", :action=>"show_filter",:update => "filter"},:with =>"selected_survey" %>
     </p>
     <div id="filter" style="display:none;"></div>
-    <p>
+  </div>
+  <div id="basic_filter">
+    <p class="comand">
       <%= label_tag :anno %><br />
-      <%= select_tag :anno , "<option value= "" >-Seleziona-</option>" + options_from_collection_for_select(@anno,:anno,:anno)  %>
+      <%= select_tag :anno , "<option value= '0' >-Seleziona-</option>" + options_from_collection_for_select(@anno,:anno,:anno)  %>
     </p>
-    <p>
+    <p class="comand">
       <%= label_tag :plot %><br />
-      <%= select_tag :plot , "<option value= "" >-Seleziona-</option><option value='all' >Tutti</option>" + options_from_collection_for_select(@plot,:id_plot,:id_plot)  %>
+      <%= select_tag :plot , "<option value= '0' >-Seleziona-</option><option value='all' >Tutti</option>" + options_from_collection_for_select(@plot,:id_plot,:id_plot)  %>
     </p>
-    <%= submit_tag "Calcola" %>
+    <p class="button_command">
+      <%= submit_tag "Calcola" %>
+    </p>
+  </div>
 <% end %>
-
-<div id="su_stat">
 </div>
+
+<div id="su_stat"></div>
