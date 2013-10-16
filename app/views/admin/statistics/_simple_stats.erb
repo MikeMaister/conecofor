@@ -1,7 +1,7 @@
-<table>
-  <thead>
+<table class="simple_stat head">
+  <tbody>
     <tr>
-      <th>Plot</th>
+      <th class="big">Plot</th>
       <th>Max</th>
       <th>Min</th>
       <th>Med</th>
@@ -9,13 +9,16 @@
       <th>Ste</th>
       <th>Cov</th>
       <th>N</th>
-      <th>Note</th>
+      <th class="bigger">Note</th>
     </tr>
-  </thead>
+  </tbody>
+</table>
+<div id="simple_ver_scroll">
+<table class="simple_stat body">
   <tbody>
     <% for i in 0..@stat_list.size-1 %>
           <tr>
-            <td><%= @stat_list.at(i).plot %></td>
+            <td class="big"><%= @stat_list.at(i).plot %></td>
             <td><%= @stat_list.at(i).max %></td>
             <td><%= @stat_list.at(i).min %></td>
             <td><%= @stat_list.at(i).med %></td>
@@ -23,12 +26,13 @@
             <td><%= @stat_list.at(i).ste %></td>
             <td><%= @stat_list.at(i).cov %></td>
             <td><%= @stat_list.at(i).n %></td>
-            <td><%= @stat_list.at(i).note %></td>
+            <td class="bigger"><%= @stat_list.at(i).note %></td>
           </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<p>
+<p id="download">
   <%= link_to "Download File", @file.relative_path  %>
 </p>

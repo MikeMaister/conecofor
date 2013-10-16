@@ -1,6 +1,6 @@
-<p>
+<p class="filter">
   <%= label_tag :campo %><br />
-  <%= select_tag :field,"<option value = "" >-Seleziona-</option>" + options_for_select({"Copertura Complessiva" => "copertura_complessiva",
+  <%= select_tag :field,"<option value = '0' >-Seleziona-</option>" + options_for_select({"Copertura Complessiva" => "copertura_complessiva",
                                                                                          "Altezza Arboreo" =>"altezza_arboreo",
                                                                                         "Copertura Arboreo" => "copertura_arboreo",
                                                                                         "Altezza Arbustivo" => "altezza_arbustivo",
@@ -11,6 +11,7 @@
                                                                                         "Copertura Lettiera" => "copertura_lettiera",
                                                                                         "Copertura Suolo Nudo" => "copertura_suolo_nudo"}) %>
 </p>
+
 <table>
   <tbody>
   <tr>

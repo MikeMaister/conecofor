@@ -1,7 +1,8 @@
-<p>
+<p class="filter">
   <%= label_tag :campo %><br />
-  <%= select_tag :field,"<option value = "" >-Seleziona-</option>" + options_for_select({"Copertura" => "copertura","Altezza" => "altezza"}) %>
+  <%= select_tag :field,"<option value = '0' >-Seleziona-</option>" + options_for_select({"Copertura" => "copertura","Altezza" => "altezza"}) %>
 </p>
+
 <table>
   <tbody>
   <tr>

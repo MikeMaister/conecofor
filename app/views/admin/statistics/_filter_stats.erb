@@ -1,6 +1,7 @@
-
-<table>
-  <thead>
+<div id="orz_scroll">
+<div id="head_wrap">
+<table class = "comp head">
+  <tbody>
   <tr>
     <th>Plot</th>
     <% unless @subplot.blank? %>
@@ -16,9 +17,9 @@
         <th>Codice Strato</th>
     <% end %>
     <% unless @specie.blank? %>
-        <th>EU Code</th>
-        <th>EU Descrizione</th>
-        <th>Specie</th>
+        <th class="bigger">EU Code</th>
+        <th class="bigger">EU Descrizione</th>
+        <th class="bigger">Specie</th>
     <% end %>
     <th>Max</th>
     <th>Min</th>
@@ -27,9 +28,14 @@
     <th>Ste</th>
     <th>Cov</th>
     <th>N</th>
-    <th>Note</th>
+    <th class="bigger">Note</th>
   </tr>
-  </thead>
+  </tbody>
+</table>
+</div>
+  <br />
+<div id="comp_ver_scroll">
+<table class="comp body">
   <tbody>
   <% for i in 0..@stat_list.size-1 %>
       <tr>
@@ -47,9 +53,9 @@
             <td><%= @stat_list.at(i).cod_strato %></td>
         <% end %>
         <% unless @specie.blank? %>
-            <td><%= @stat_list.at(i).eucode %></td>
-            <td><%= @stat_list.at(i).eudesc %></td>
-            <td><%= @stat_list.at(i).specie %></td>
+            <td class="bigger"><%= @stat_list.at(i).eucode %></td>
+            <td class="bigger"><%= @stat_list.at(i).eudesc %></td>
+            <td class="bigger"><%= @stat_list.at(i).specie %></td>
         <% end %>
         <td><%= @stat_list.at(i).max %></td>
         <td><%= @stat_list.at(i).min %></td>
@@ -58,12 +64,14 @@
         <td><%= @stat_list.at(i).ste %></td>
         <td><%= @stat_list.at(i).cov %></td>
         <td><%= @stat_list.at(i).n %></td>
-        <td><%= @stat_list.at(i).note %></td>
+        <td class="bigger"><%= @stat_list.at(i).note %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
+</div>
+</div>
 
-<p>
+<p id="download">
   <%= link_to "Download File", @file.relative_path  %>
 </p>

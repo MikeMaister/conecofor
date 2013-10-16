@@ -1,0 +1,151 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.desc{
+    margin: 15px 35px 25px 35px;
+}
+
+div#input_mask{
+    border: 1px solid #8b4513;
+    background-color: #bd8d53;
+    padding: 10px;
+    margin: 0 0 35px 255px;
+    float: left;
+}
+
+p.filter{
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+p.filter.last{
+    margin:0;
+}
+
+div#base_filter{
+    float: left;
+    /*border: 1px solid #000000;*/
+    margin-right: 50px;
+}
+
+div#select_field{
+    float: left;
+    /*border: 1px solid #000000;*/
+    margin: 0;
+    margin-right: 10px;
+    min-width: 250px;
+}
+
+p#sub_butt{
+    float: right;
+    margin: 0;
+}
+
+table#more_filter{
+    float: left;
+    margin-right: 25px;
+}
+
+table#sub_filter{
+    float: left;
+}
+
+table.simple_stat{
+    clear: both;
+    border-collapse: collapse;
+}
+
+
+table.simple_stat th,table.simple_stat td{
+    text-align: center;
+    font-size: small;
+    width: 90px;
+}
+
+table.simple_stat th.big,table.simple_stat td.big{
+    width: 120px;
+}
+
+table.simple_stat th.bigger,table.simple_stat td.bigger{
+    width: 215px;
+}
+
+#stat{
+    clear: both;
+}
+
+table.simple_stat.head{
+    background-color: #92be12;
+}
+
+#simple_ver_scroll{
+   overflow-y: scroll;
+   overflow-x: hidden;
+   height: 150px;
+    background-color: #e0f59d;
+}
+
+table.simple_stat.body tr:hover{
+    background-color: #b6c980;
+}
+
+p#download{
+    margin: 15px 35px;
+}
+
+p#no_data{
+    margin: 0 32%;
+}
+
+div#orz_scroll{
+    width: 998px;
+    /*border: 1px solid #000000;*/
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    background-color: #92be12;
+}
+
+div#comp_ver_scroll{
+    height: 250px;
+    /*border: 1px solid #bb8bff;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    background-color: #e0f59d;
+}
+
+div#head_wrap{
+    white-space: nowrap;
+    overflow-x: hidden;
+    /*border: 1px solid #87cefa;*/
+    display: inline-block;
+}
+
+table.comp.head th,table.comp.body td{
+    display: inline-block;
+}
+
+table.comp.body tr:hover{
+    background-color: #b6c980;
+}
+
+table.comp{
+    border-collapse:collapse;
+}
+
+table.comp td,table.comp th{
+    font-size: xx-small;
+    text-align: center;
+    width: 90px;
+}
+
+table.comp.body td.bigger,table.comp.head th.bigger{
+    width: 200px;
+}
