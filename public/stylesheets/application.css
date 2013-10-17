@@ -80,6 +80,7 @@ body:before,#wrap:before{content:'';float:left;height:100%;margin-top:-999em;} /
     margin: 30px 30px 15px 30px;
     float:left;
     background-color: #FFEA35;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 div.button{
@@ -100,6 +101,10 @@ a img {
 
 a {
   color: #806517;
+}
+
+a:hover{
+    color: #a17f1f;
 }
 
 .clear {

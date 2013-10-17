@@ -15,11 +15,13 @@ div.box_menu{
 div#ril,div#elab{
     float: left;
     margin-left: 5%;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 div#tab,div#str{
     float: right;
     margin-right: 5%;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 div#ril,div#tab{

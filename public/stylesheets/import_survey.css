@@ -31,6 +31,7 @@ strong.subtitle{
     padding: 15px;
     margin: 0 305px 30px 305px;
     background-color: #FFFF8C;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.mask{

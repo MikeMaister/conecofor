@@ -24,6 +24,7 @@ div#input_mask{
     margin: 5px 35px;
     width: 915px;
     padding: 5px 10px;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.in_comand{
@@ -45,7 +46,6 @@ div#result{
     min-width: 400px;
     min-height: 50px;
     background-color: #B9D749;
-
 }
 
 ul#file_list{
@@ -62,7 +62,7 @@ p#fn{
 
 #compliance,#sre,#mpe,#ge{
     clear: both;
-    border: 1px solid #8b4513;
+    border: 1px solid rgba(242, 105, 22, 0.77);
     width: 998px;
     overflow-x: scroll;
     overflow-y: hidden;

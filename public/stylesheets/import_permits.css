@@ -16,6 +16,7 @@ div#view_mask{
     margin: 15px 35px;
     border: 1px solid orange;
     background-color: #FFFF8C;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.input{
@@ -32,6 +33,7 @@ div#file_list{
     min-width: 400px;
     overflow-x: hidden;
     overflow-y: scroll;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 ul.list_f{

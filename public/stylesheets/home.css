@@ -7,6 +7,7 @@
     background-color: #ffffff;
     margin-top: 25px;
     margin-left: 30px;
+    box-shadow: 0 0px 15px  #888888;
 }
 #login_box{
     width:160px;
@@ -30,7 +31,8 @@ p.log_line_last{
     padding: 20px;
     border: 2px solid #91AF21;
     border-radius: 25px;
-    background-color: #adff2f;
+    background-color: rgba(173, 255, 47, 0.76);
+    box-shadow: 0 0px 10px  #888888;
 }
 
 h1{

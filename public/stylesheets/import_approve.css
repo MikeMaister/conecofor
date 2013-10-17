@@ -16,12 +16,14 @@ p.desc{
     padding: 10px 10px;
     width: 908px;
     margin-left: 35px;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 .select{
     float: left;
     margin: 0 70px 0 0;
     font-weight: bold;
+    color: #8b4513;
 }
 
 .button_go{

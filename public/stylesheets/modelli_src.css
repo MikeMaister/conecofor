@@ -18,6 +18,7 @@ div#mask_view{
     width: 415px;
     clear: right;
     display: inline-block;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 div#model_view{
@@ -33,6 +34,7 @@ div#mask_new{
     padding: 15px;
     background-color: #f9faa1;
     width: 415px;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.comand{

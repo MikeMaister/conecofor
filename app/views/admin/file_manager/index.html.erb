@@ -1,4 +1,16 @@
-<h1>Admin::FileManager#index</h1>
-<% for i in 0..@import_file.size-1 %>
-    <li><%= link_to "#{@import_file.at(i).file_name}", @import_file.at(i).relative_path %></li>
-<% end %>
+<div id="view_mask">
+  <% form_tag(:url => {:action => "show_file"}) do -%>
+      <p class="input">
+        <strong>Anno Campagna</strong><br />
+        <%= select_tag :year,"<option>-Seleziona-</option>"%>
+      </p>
+      <p class="input">
+        <strong><%= label_tag :rilevatore %></strong><br />
+        <%= select_tag :rilevatore, "<option>-Seleziona-</option>"%>
+      </p>
+      <p class="last">
+        <%= submit_tag "Mostra File" %>
+      </p>
+
+  <% end %>
+</div>

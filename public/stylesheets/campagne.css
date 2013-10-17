@@ -19,6 +19,7 @@ div#active_camp{
     border: 1px solid #fa8500;
     border-radius: 25px;
     background-color: #fff77e;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 td{
