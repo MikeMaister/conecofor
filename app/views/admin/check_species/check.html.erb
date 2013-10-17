@@ -1,33 +1,44 @@
-<h1>Risultati analisi del file per le specie</h1>
-<h2>Colonna numero: <%= @column %></h2>
+<% content_for :title, "Controlla Specie - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "check_specie"%>
+<%end%>
 
+<h2>Risultati analisi del file per le specie</h2>
+<h3>Colonna numero: <%= @column %></h3>
 <% if @error_list.blank? %>
-    <p>
+    <p class="desc">
       Tutte le speci presenti nel file corrispondono a quelle memorizzate nel database.
     </p>
 <% else %>
-    <table>
-      <thead>
+    <table id="head">
+      <tbody>
         <tr>
           <th>Riga file</th>
           <th>Specie</th>
-          <th>Errore</th>
+          <th class="bigger">Errore</th>
         </tr>
-      </thead>
+      </tbody>
+    </table>
+    <div id="ver_scroll">
+    <table id="body">
       <tbody>
       <% for i in 0..@error_list.size-1%>
         <tr>
           <td><%= @error_list.at(i).at(0)%></td>
           <td><%= @error_list.at(i).at(1)%></td>
-          <td>Riferimento a specie mancante</td>
+          <td class="bigger">Riferimento a specie mancante</td>
         </tr>
       <% end %>
       </tbody>
     </table>
+    </div>
 
-    <p>
-      <%= button_to_function("Stampa report", "javascript:print()") %>
-    </p>
+    <%= button_to_function("Stampa report", "javascript:print()",{:class =>"print"}) %>
+
 
 <% end %>
+
+<p class="desc">
+  <%= link_to "Controlla Specie", :controller => "admin/check_species" %>
+</p>
 
