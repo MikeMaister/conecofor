@@ -20,6 +20,7 @@ p.desc{
     padding: 10px;
     width: 180px;
     border-radius:25px;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 .input_pi{
@@ -41,6 +42,8 @@ p.desc{
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: rgba(154, 205, 50, 0.43);
+    box-shadow: 0 0px 15px  #888888;
+
 }
 
 .file_list{

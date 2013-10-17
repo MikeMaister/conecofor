@@ -15,6 +15,7 @@ div#input_mask{
     padding: 10px;
     margin: 0 0 35px 255px;
     float: left;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.filter{

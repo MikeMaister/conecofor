@@ -28,13 +28,11 @@ th,td{
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #e2ffa0;
-    border-top: 1px solid #6dda00;
     width: 624px;
 }
 
 div.pagination{
     padding: 5px;
-    border-top: 1px solid #6dda00;
     background-color: #9fcc12;
 }
 
@@ -47,7 +45,6 @@ table#body tr:hover{
 }
 
 #t_wrapper{
-    border: 1px solid #6dda00;
     background-color: #9fcc12;
     width: 624px;
 }

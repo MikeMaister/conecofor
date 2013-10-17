@@ -24,6 +24,7 @@ p.desc{
     padding: 10px;
     width: 915px;
     background-color: #a7dd39;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 .input_sp{

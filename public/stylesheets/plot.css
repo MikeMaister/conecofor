@@ -89,6 +89,8 @@ table#body tr:hover{
 .input_p{
     margin: 0;
     font-weight: bold;
+    font-size: small;
+    color: #c6871d;
 }
 
 .new_plot_button{

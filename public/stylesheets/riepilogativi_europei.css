@@ -16,6 +16,7 @@ div#input_mask{
     margin: 0 0 25px 330px;
     background-color: #bd8d53;
     float: left;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p#input_comand{

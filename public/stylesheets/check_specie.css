@@ -21,6 +21,7 @@ div#input_mask{
     width: 300px;
     background-color: #bd8d53;
     border-radius: 25px;
+    box-shadow: 0 0px 15px  #888888;
 }
 
 p.command{
