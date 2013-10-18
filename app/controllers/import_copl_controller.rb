@@ -180,7 +180,7 @@ class ImportCoplController < ApplicationController
 
   def save_error(record,error,row)
     @error = ErrorCopl.new
-    @error.fill_and_save_from_file(record,"Compliance",error,session[:file_id],row)
+    @error.fill_and_save_from_file(record,"Compliance",error,session[:file_id],row+1)
   end
 
   def simple_range_check

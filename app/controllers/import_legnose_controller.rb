@@ -234,7 +234,7 @@ class ImportLegnoseController < ApplicationController
 
   def save_error(record,error,row)
     @error = ErrorLegnose.new
-    @error.fill_and_save_from_file(record,"Compliance",error,row,session[:file_id])
+    @error.fill_and_save_from_file(record,"Compliance",error,row+1,session[:file_id])
   end
 
   def simple_range_check
