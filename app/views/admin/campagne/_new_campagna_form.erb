@@ -12,11 +12,11 @@
     </p>
     <p>
       <strong><%= label_tag "Inizio" %><br /></strong>
-      <%= calendar_date_select_tag :inizio, "" , :popup => "force" %>
+      <%= calendar_date_select_tag :inizio, "",:year_range =>14.years.ago..0.years.from_now , :popup => "force" %>
     </p>
     <p>
       <strong><%= label_tag "Fine" %><br /></strong>
-      <%= calendar_date_select_tag :fine, "" , :popup => "force" %>
+      <%= calendar_date_select_tag :fine, "" ,:year_range =>14.years.ago..0.years.from_now , :popup => "force" %>
     </p>
     <p>
       <strong><%= label_tag "Giustifica stagione" %><br /></strong>
