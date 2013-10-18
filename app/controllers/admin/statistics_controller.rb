@@ -135,7 +135,7 @@ class Admin::StatisticsController < ApplicationController
       elsif @survey == "erb" && @plot != "all" && @field != "nif" && @specie.to_i == 1
         query_part = build_group_by!(@inout,@priest,@cod_strato,@specie)
         data = Erbacee.find_by_sql ["SELECT id_plot as plot,descrizione_pignatti,codice_europeo as eucode,descrizione_europea as eudesc,descrizione_pignatti as specie,MAX(#{@field}) AS max, MIN(#{@field}) AS min,AVG(#{@field}) as med, STDDEV(#{@field}) as std, COUNT(#{@field}) as n FROM erbacee WHERE  id_plot = ? AND campagne_id IN (SELECT id FROM campagne WHERE anno = ? AND deleted = false) AND temp = false AND approved = true AND erbacee.deleted = false GROUP BY #{query_part}",@plot,@anno]
-        if data.at(0).n.to_i == 0
+        if data.blank? #data.at(0).n.to_i == 0
           render :update do |page|
             page.replace_html "stat",  :partial => "no_data"
           end
