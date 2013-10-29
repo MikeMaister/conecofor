@@ -4,6 +4,9 @@ ActionController::Routing::Routes.draw do |map|
   map.signup_admin 'signup_admin', :controller => 'users', :action => 'new_admin'
   map.logout 'logout', :controller => 'sessions', :action => 'destroy'
   map.login 'login', :controller => 'sessions', :action => 'new'
+
+  map.contacts 'contacts', :controller => 'home', :action => 'contacts'
+
   map.resources :sessions
 
   map.resources :users
