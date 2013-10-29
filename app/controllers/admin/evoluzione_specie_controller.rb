@@ -89,12 +89,15 @@ class Admin::EvoluzioneSpecieController < ApplicationController
           track << mod.at(j)
         end
       end
-      #lista evoluzione singola specie
-      evolution = Array.new
-      evolution << data.at(i)
-      evolution << track
-      #pusho tutto nel risultato
-      evolution_list << evolution
+      #prendo solamente le speci che hanno subito modifiche VELOCIZZA LA PROCEDURA FIX 29/10/2013
+      unless track.blank?
+        #lista evoluzione singola specie
+        evolution = Array.new
+        evolution << data.at(i)
+        evolution << track
+        #pusho tutto nel risultato
+        evolution_list << evolution
+      end
     end
     return evolution_list
   end
