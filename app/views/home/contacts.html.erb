@@ -3,8 +3,35 @@
     <%= stylesheet_link_tag "contatti"%>
 <%end%>
 
+<% if logged_in? %>
+
 <h2>Responsabile Progetto</h2>
 <p class="line">resp.proj@dominio.com</p>
 
 <h3>Responsabile IT</h3>
 <p class="line">resp.it@dominio.com</p>
+
+<% else %>
+
+    <% content_for :up_message do %>
+        <div id="banner_menu">
+          <div class="button">
+            <p class="b_link">
+              <%= link_to "Home", root_path %>
+            </p>
+          </div>
+          <div class="button">
+            <p class="b_link">
+              <%= link_to "Contatti", contacts_path%>
+            </p>
+          </div>
+        </div>
+    <% end %>
+
+    <h2>Responsabile Progetto</h2>
+    <p class="line">resp.proj@dominio.com</p>
+
+    <h3>Responsabile IT</h3>
+    <p class="line">resp.it@dominio.com</p>
+
+<% end %>
