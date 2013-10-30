@@ -15,3 +15,17 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+
+#impostazione email
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+    :address => "michele.balestrini@gmail.com",
+    :port => 26,
+    :user_name => 'michele.balestrini@gmail.com',#'admin+stock-signals-db.net',
+    :password => 'gfrosty87', #'%MH(==i;?_Sn',
+    :authentication =>'plain',
+    :enable_starttls_auto => false }
+
+config.action_mailer.default_url_options = { :host => "localhost:3000" }

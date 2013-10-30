@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       #session[:user_id] = @user.id
       #session[:user_kind] = UserKind.find(@user.user_kind_id).identifier
       @user = User.new
+      #Notifier.deliver_activation_instructions(@user)
       @message_notice = "Ti è stata spedita una mail. Controlla la tua casella di posta e segui le istruzioni per portare a termine la richiesta di registrazione."
       render :update do |page|
         page.replace_html "form", :partial => "reg_form", :object => @user
