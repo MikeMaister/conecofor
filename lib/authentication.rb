@@ -32,8 +32,9 @@ module Authentication
   def login_required
     unless logged_in?
       flash[:error] = "Deve essere un utente registrato e loggato per poter accedere alla pagina richiesta."
-      store_target_location
-      redirect_to root_url
+      #store_target_location
+      #redirect_to root_url
+      redirect_to root_path
     end
   end
 

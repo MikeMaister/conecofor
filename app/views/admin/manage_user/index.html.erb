@@ -1,0 +1,38 @@
+<% content_for :title, "Home - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "gestione_user"%>
+<%end%>
+
+<h2>Gestione Rilevatori</h2>
+
+<p class="desc">
+  Tramite quest'interfaccia è possibile abilitare e disabilitare gli account dei rilevatori,
+  e ignorare le richieste di account da parte degli utenti indesiderati.
+</p>
+
+<table id="head">
+  <tbody>
+    <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th class="bigger">Codice Fiscale</th>
+        <th class="bigger">E-mail</th>
+        <th>Opzioni</th>
+    </tr>
+  </tbody>
+</table>
+<div id="ver_scroll">
+<table id="body">
+  <tbody>
+    <% @user.each do |ril| %>
+        <tr>
+          <td><%= ril.nome %></td>
+          <td><%= ril.cognome %></td>
+          <td class="bigger"><%= ril.codice_fiscale %></td>
+          <td class="bigger"><%= ril.email %></td>
+          <td><%= active_deactive(ril) %><%= button_to "Ignora",{:action => "archive_request", :user => ril.id}, :confirm => "Ignorando il rilevatore, non potrai più in nessun modo interagire con lui. Procedere?" %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

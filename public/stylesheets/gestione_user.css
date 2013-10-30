@@ -1,0 +1,42 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    margin: 15px 35px 0 35px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table#head{
+    margin: 15px 35px 0 35px;
+    background-color: #adff2f;
+}
+
+th,td{
+    text-align: center;
+    width: 120px;
+    font-size: small;
+}
+
+th.bigger,td.bigger{
+    width: 280px;
+}
+
+#ver_scroll{
+    margin: 0 0 25px 35px;
+    height: 200px;
+    width: 947px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #e0f59d;
+}
+
+table#body tr:hover{
+    background-color: #c9dd8a;
+}
+
+p.desc{
+    margin: 15px 35px 0 35px;
+}
+

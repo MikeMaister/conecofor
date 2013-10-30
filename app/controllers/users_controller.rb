@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.user_kind_id = UserKind.find_by_kind("Rilevatore").id
     @user.approved = false
+    @user.invisible = false
 
     if @user.save
       #session[:user_id] = @user.id
