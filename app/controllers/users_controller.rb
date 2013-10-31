@@ -16,13 +16,13 @@ class UsersController < ApplicationController
     @user.invisible = false
 
     if @user.save
-      #session[:user_id] = @user.id
-      #session[:user_kind] = UserKind.find(@user.user_kind_id).identifier
+      @user.generate_perishable_token
+      Notifier.deliver_activation_instructions(@user)
       @user = User.new
-      #Notifier.deliver_activation_instructions(@user)
       @message_notice = "Ti è stata spedita una mail. Controlla la tua casella di posta e segui le istruzioni per portare a termine la richiesta di registrazione."
       render :update do |page|
         page.replace_html "form", :partial => "reg_form", :object => @user
+        page.show "error"
         page.replace_html "error", :partial => "layouts/remote_flash_message", :object => @message_notice
       end
     else
@@ -44,6 +44,19 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       render :action => 'new_admin'
+    end
+  end
+
+  def validate_user
+    @user = User.find_by_perishable_token(params[:activation_code])
+    if @user != nil && @user.token_expired? == false
+      @user.update_attributes(:validate => 1)
+      @user.reset_perishable_token
+      flash[:notice] = "La tua e-mail è stata validata."
+      redirect_to root_path
+    else
+      flash[:error] = "Qualcosa è andato storto. Per risolvere il problema, contattare il webmaster."
+      redirect_to root_path
     end
   end
 

@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => 'sessions', :action => 'destroy'
   map.login 'login', :controller => 'sessions', :action => 'new'
 
+  map.validate_user '/validate_user/:activation_code', :controller => 'users', :action => 'validate_user'
+
   map.contacts 'contacts', :controller => 'home', :action => 'contacts'
 
   map.resources :sessions

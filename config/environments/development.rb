@@ -17,16 +17,18 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 
+
+#SOSTITUIRE LA CONFIGURAZIONE MAIL CON QUELLA DEL SERVER
+
 #impostazione email
 config.action_mailer.delivery_method = :smtp
 
 config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
+    :address => "mail.stock-signals-db.net",
     :port => 26,
-    :domain => "gmail.com",
-    :user_name => 'michele.balestrini@gmail.com',#'admin+stock-signals-db.net',
-    :password => 'gfrosty87', #'%MH(==i;?_Sn',
+    :user_name => 'admin+stock-signals-db.net',
+    :password => '%MH(==i;?_Sn',
     :authentication =>'plain',
     :enable_starttls_auto => false }
 
-#config.action_mailer.default_url_options = { :host => "localhost:3000" }
+config.action_mailer.default_url_options = { :host => "www.stock-signals-db.net" }

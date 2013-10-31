@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # new columns need to be added here to be writable through mass assignment
-  attr_accessible :email, :password, :password_confirmation,:nome,:cognome,:codice_fiscale,:user_kind_id,:approved,:remember_token,:invisible
+  attr_accessible :email, :password, :password_confirmation,:nome,:cognome,:codice_fiscale,:user_kind_id,:approved,:remember_token,:invisible,:validate #,:perishable_token,:perishable_token_set
 
   attr_accessor :password
   before_save :prepare_password
@@ -30,6 +30,23 @@ class User < ActiveRecord::Base
     #genero un nuovo token
     self.remember_token = Digest::SHA1.hexdigest([Time.now, self.email].join)
     save
+  end
+
+  def generate_perishable_token
+    reset_perishable_token
+    self.perishable_token = Digest::SHA1.hexdigest([Time.now, self.email].join)
+    self.perishable_token_set = Time.current
+    save
+  end
+
+  def reset_perishable_token
+    self.perishable_token = nil
+    self.perishable_token_set = nil
+    save
+  end
+
+  def token_expired?
+    self.perishable_token_set < 15.minutes.ago
   end
 
   def full_name
