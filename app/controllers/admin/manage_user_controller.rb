@@ -7,6 +7,7 @@ class Admin::ManageUserController < ApplicationController
   def deactivate
     user = User.find(params[:user])
     user.update_attribute(:approved,"false")
+    Notifier.deliver_user_disactivate(user)
     flash[:notice] = "Account rilevatore #{user.email} disattivato."
     redirect_to :action => :index
   end
@@ -14,6 +15,7 @@ class Admin::ManageUserController < ApplicationController
   def activate
     user = User.find(params[:user])
     user.update_attribute(:approved,"true")
+    Notifier.deliver_user_active(user)
     flash[:notice] = "Account rilevatore #{user.email} attivato."
     redirect_to :action => :index
   end

@@ -21,6 +21,8 @@ class ImportCoplController < ApplicationController
       case result
         when 0
           set_permanent_data!("copl")
+          #mando la mail di notifica
+          Notifier.deliver_user_import_complete(current_user,"copl")
           flash[:notice] = "Complimenti nessun errore."
           redirect_to :action => "finish"
         when 1  #COMPLIANCE

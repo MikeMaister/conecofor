@@ -21,36 +21,45 @@ class Notifier < ActionMailer::Base
     @content_type = "text/html"
   end
 
-  def q_nuvst(user,data)
+  def user_active(user)
     @user = user
-    @url = "www.stock-signals-db.net"
-    @from = "admin@stock-signals-db.net"
-    @subject = "SSDB - Unusual Volume Simple Trend"
+    @url = "www.conecofor.net"
+    @from = "admin@conecofor.net"
+    @subject = "Attivazione account"
     @sent_on = Time.now
     @recipients = user.email
-    @query_result = data
     @content_type = "text/html"
   end
 
-  def q_nuvct(user,data)
+  def user_disactivate(user)
     @user = user
-    @url = "www.stock-signals-db.net"
-    @from = "admin@stock-signals-db.net"
-    @subject = "SSDB - Unusual Volume Complex Trend"
+    @url = "www.conecofor.net"
+    @from = "admin@conecofor.net"
+    @subject = "Disattivazione account"
     @sent_on = Time.now
     @recipients = user.email
-    @query_result = data
     @content_type = "text/html"
   end
 
-  def q_fint(user,data)
+  def user_survey_sheet(user,surveysheet)
     @user = user
-    @url = "www.stock-signals-db.net"
-    @from = "admin@stock-signals-db.net"
-    @subject = "SSDB - Finviz Trend"
+    @surveysheet = surveysheet
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Scheda di rilevamento"
     @sent_on = Time.now
-    @recipients = user.email
-    @query_result = data
+    @recipients = "admin@conecofor.com"
+    @content_type = "text/html"
+  end
+
+  def user_import_complete(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Scheda di rilevamento"
+    @sent_on = Time.now
+    @recipients = "admin@conecofor.com"
     @content_type = "text/html"
   end
 

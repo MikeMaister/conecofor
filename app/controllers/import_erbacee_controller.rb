@@ -21,6 +21,8 @@ class ImportErbaceeController < ApplicationController
       case result
         when 0
           set_permanent_data!("erb")
+          #mando la mail di notifica
+          Notifier.deliver_user_import_complete(current_user,"erb")
           flash[:notice] = "Complimenti nessun errore."
           redirect_to :action => "finish"
         when 1  #COMPLIANCE

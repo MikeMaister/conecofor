@@ -16,6 +16,8 @@ class SurveySheetController < ApplicationController
   def import_file
     #carico il file nella directory e lo traccio nel db
     upload_save_file!(params[:upload],params[:survey])
+    #spedisco la mail di notifica
+    Notifier.deliver_user_survey_sheet(current_user,params[:survey])
     flash[:notice] = "Caricamento effettuato con successo."
     redirect_to :action => "index"
   end

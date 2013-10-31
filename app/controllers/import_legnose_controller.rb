@@ -20,6 +20,8 @@ class ImportLegnoseController < ApplicationController
       case result
         when 0
           set_permanent_data!("leg")
+          #mando la mail di notifica
+          Notifier.deliver_user_import_complete(current_user,"leg")
           flash[:notice] = "Complimenti nessun errore."
           redirect_to :action => "finish"
         when 1  #COMPLIANCE
