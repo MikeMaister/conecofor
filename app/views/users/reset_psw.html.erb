@@ -1,0 +1,29 @@
+<% content_for :title, "Password Reset - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "pass_reset"%>
+<%end%>
+
+<%= render :partial => "logout_banner" %>
+
+<%= render :partial => "users/input_errors" %>
+
+<div id="instruction_form">
+  <p class="line">
+    <strong>Attenzione:</strong> Salvando le nuove informazioni, la vecchia password verrà definitivamente eliminata.
+  </p>
+
+ <% form_tag(set_psw_path,:method => :put) do %>
+  <p class="line">
+    <%= hidden_field_tag :uid, @user.id  if @user%>
+    Nuova password:<br />
+    <%= password_field_tag "new_psw" %>
+  </p>
+  <p class="line">
+    Conferma password:<br />
+    <%= password_field_tag "confirm" %>
+  </p>
+  <p class="sub_but">
+    <%= submit_tag "Salva" %>
+  </p>
+ <% end %>
+</div>

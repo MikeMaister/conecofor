@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_format_of :nome,:cognome ,:with => /^[A-Za-z\s]+$/,:message => "formato non valido.", :allow_blank => true
   validates_format_of :codice_fiscale, :with => /^[-a-z0-9]+$/i,:allow_blank => true,:on => :create, :message => "formato non valido."
   validates_confirmation_of :password, :on => :create
-  validates_length_of :password, :minimum => 6, :allow_blank => true ,:message => "deve contenere minimo 6 caratteri.",:on => :create
+  validates_length_of :password, :minimum => 6, :allow_blank => true ,:message => "deve contenere minimo 6 caratteri."#,:on => :create
   validates_length_of :codice_fiscale, :is => 16 ,:allow_blank => true,:message => "non valido.",:on => :create
 
   # login can be either username or email address
@@ -47,6 +47,23 @@ class User < ActiveRecord::Base
 
   def token_expired?
     self.perishable_token_set < 15.minutes.ago
+  end
+
+  def generate_psw_per_token
+    reset_psw_per_token
+    self.psw_per_token = Digest::SHA1.hexdigest([Time.now, self.email].join)
+    self.psw_per_token_set = Time.current
+    save
+  end
+
+  def reset_psw_per_token
+    self.psw_per_token = nil
+    self.psw_per_token_set = nil
+    save
+  end
+
+  def psw_token_expired?
+    self.psw_per_token_set < 10.minutes.ago
   end
 
   def full_name

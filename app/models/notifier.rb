@@ -12,11 +12,11 @@ class Notifier < ActionMailer::Base
 
   def psw_reset_instructions(user)
     @user = user
-    @url = "www.stock-signals-db.net"
-    @from = "admin@stock-signals-db.net"
-    @subject = "SSDB - Password Reset"
+    @url = "www.conecofor.com"
+    @from = "admin-web@gmail.net"
+    @subject = "Password Reset Instruction"
     @sent_on = Time.now
-    @recipients = user.email
+    @recipients = "michele.balestrini@gmail.com" #user.email
     @psw_reset_url = reset_psw_url(@user.psw_per_token)
     @content_type = "text/html"
   end

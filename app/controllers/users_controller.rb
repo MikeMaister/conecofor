@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :logout_required
+  before_filter :valid_psw_token , :only => "reset_psw"
 
   def new_rilevatore
     @user = User.new
@@ -56,6 +57,60 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "Qualcosa è andato storto. Per risolvere il problema, contattare il webmaster."
+      redirect_to root_path
+    end
+  end
+
+  def pass_res_edit
+  end
+
+  def send_psw_reset
+    user = User.find_by_email(params[:email])
+    if user.blank?
+      flash[:error] = "E-mail inserita non valida."
+      redirect_to pass_res_edit_path
+    else
+      #spedisco la mail con le istruzioni
+      user.generate_psw_per_token
+      Notifier.deliver_psw_reset_instructions(user)
+      flash[:notice] = "Controllare la propria casella di posta elettronica, e seguire le istruzioni presenti nella e-mail di Password Reset."
+      redirect_to root_path
+    end
+  end
+
+  def reset_psw
+    @user = User.find_by_psw_per_token(params[:psw_reset])
+  end
+
+  def set_psw
+    if params[:uid]
+      @user = User.find(params[:uid])
+      if @user && params[:new_psw] == params[:confirm] && !params[:confirm].blank?
+        #@user.update_attributes(:password => params[:new_psw])
+        @user.password = params[:new_psw]
+        if @user.save
+          @user.reset_psw_per_token
+          flash[:notice] = "Password aggiornata. Prova ad effettuare il login per favore."
+          redirect_to root_path
+        else
+          render :action => "reset_psw"
+        end
+      else
+        flash.now[:error] = "Errore, prova di nuovo."
+        render :action => "reset_psw"
+      end
+    else
+      flash[:error] = "Critical Error."
+      redirect_to root_path
+    end
+  end
+
+  private
+
+  def valid_psw_token
+    @user = User.find_by_psw_per_token(params[:psw_reset])
+    if @user.blank?
+      flash[:error] = "Invalid Token."
       redirect_to root_path
     end
   end

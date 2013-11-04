@@ -1,0 +1,24 @@
+<% content_for :title, "Password Help - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "pass_reset"%>
+<%end%>
+
+<%= render :partial => "logout_banner" %>
+
+<div id="instruction_form">
+  <p class="line">
+    Utilizzando quest'interfaccia, si inizierà la procedura relativa al password reset.<br />
+    Verrà inviata una e-mail contenente le istruzioni da seguire per portare a termine la procedura.<br />
+    Inserire l'e-mail relativa al proprio account, per il quale si desidera resettare la password.<br />
+  </p>
+    <% form_tag(send_psw_reset_path) do %>
+        <p class="line form">
+          <strong><%= label_tag "e-mail" %></strong>
+          <%= text_field_tag :email %>
+        </p>
+        <p class="sub_but">
+            <%= submit_tag "Invia" %>
+        </p>
+    <% end %>
+</div>
+

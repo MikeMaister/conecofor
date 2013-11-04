@@ -6,6 +6,10 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'sessions', :action => 'new'
 
   map.validate_user '/validate_user/:activation_code', :controller => 'users', :action => 'validate_user'
+  map.pass_res_edit 'password_help', :controller => 'users', :action => 'pass_res_edit'
+  map.send_psw_reset 'password_help/send', :controller => 'users', :action => 'send_psw_reset'
+  map.reset_psw '/reset_psw_form/:psw_reset', :controller => 'users', :action => 'reset_psw'
+  map.set_psw 'reset_psw', :controller => 'users', :action => 'set_psw'
 
   map.contacts 'contacts', :controller => 'home', :action => 'contacts'
 

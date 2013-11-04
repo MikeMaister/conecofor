@@ -1,0 +1,30 @@
+#instruction_form{
+    clear: both;
+    border: 1px solid #5db900;
+    background-color: #e0f59d;
+    border-radius: 25px;
+    box-shadow: 0 0px 10px  #888888;
+    padding: 25px;
+    margin:20px 35px;
+}
+
+.line{
+    margin: 0 0 15px 0;
+}
+
+.sub_but{
+    margin: 0;
+}
+
+div#err_list{
+    border: dashed 1px #F62217;
+    color:#F62217;
+    clear: both;
+    padding: 5px 7px;
+    margin: 15px 30px;
+}
+
+div#err_list ul{
+    margin: 0;
+    padding-left:25px;
+}

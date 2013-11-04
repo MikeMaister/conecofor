@@ -9,16 +9,19 @@
         <div id="login_box">
             <% form_tag sessions_path do %>
                 <p class ="log_line">
-                    <%= label_tag :login, "Email Address" %><br />
+                    <strong><%= label_tag :login, "Indirizzo E-mail" %></strong><br />
                     <%= text_field_tag :login, params[:login] %>
                 </p>
                 <p class ="log_line">
-                    <%= label_tag :password %><br />
+                    <strong><%= label_tag :password %></strong><br />
                     <%= password_field_tag :password %>
                 </p>
                 <p class ="log_line">
                     <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-                    <%= label_tag :remember_me %>
+                    <%= label_tag :ricordami %>
+                </p>
+                <p class="log_line">
+                  Non ricordi la password? <%= link_to "Clicca qui", pass_res_edit_path %>
                 </p>
                 <p class ="log_line_last"><%= submit_tag "Log in" %></p>
             <% end %>
