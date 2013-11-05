@@ -1,0 +1,31 @@
+<% content_for :title, "Account - CONECOFOR" %>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "account"%>
+<%end%>
+
+
+<h2>Account</h2>
+<div id="userinfo">
+    <p class="infoline">
+      <strong>Nome:</strong> <%= @user.nome %>
+    </p>
+    <p class="infoline">
+      <strong>Cognome:</strong> <%= @user.cognome %>
+    </p>
+    <% if @user.user_kind.kind != 'Admin' %>
+        <p class="infoline">
+          <strong>Codice Fiscale:</strong> <%= @user.codice_fiscale %>
+        </p>
+    <% end %>
+    <p class="infoline">
+      <strong>E-mail:</strong> <%= @user.email %> <%=  link_to_remote "Modifica",:url => edit_info_path(:update => "editinfo",:attr => "email") %>
+    </p>
+
+    <p class="infoline">
+     <strong>Password</strong> <%=  link_to_remote "Modifica",:url => edit_info_path(:update => "editinfo",:attr => "psw") %>
+    </p>
+</div>
+
+<div id="editinfo" style="display: none;"></div>
+
+<div id="stop_float"></div>

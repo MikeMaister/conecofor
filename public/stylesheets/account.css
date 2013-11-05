@@ -1,0 +1,38 @@
+h2{
+    color: #8b4513;
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 35px 0 35px;
+}
+
+p.infoline{
+    margin: 10px 0 0 0;
+}
+
+div#userinfo{
+    float: left;
+    margin: 0 40px 0 35px;
+    padding: 10px;
+    width: 450px;
+}
+
+div#editinfo{
+    float: left;
+    border: 1px solid orange;
+    width: 400px;
+    padding: 10px;
+    background-color: #fdff9e;
+
+}
+
+.advice{
+    color: #8b0000;
+}
+
+.zero{
+    margin: 0;
+}
+
+#stop_float{
+    margin-bottom: 35px;
+}

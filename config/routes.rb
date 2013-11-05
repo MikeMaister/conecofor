@@ -10,6 +10,9 @@ ActionController::Routing::Routes.draw do |map|
   map.send_psw_reset 'password_help/send', :controller => 'users', :action => 'send_psw_reset'
   map.reset_psw '/reset_psw_form/:psw_reset', :controller => 'users', :action => 'reset_psw'
   map.set_psw 'reset_psw', :controller => 'users', :action => 'set_psw'
+  map.edit_info 'edit', :controller => 'users', :action => 'edit_info'
+  map.update_info 'up', :controller => 'users', :action => 'update_info'
+
 
   map.contacts 'contacts', :controller => 'home', :action => 'contacts'
 

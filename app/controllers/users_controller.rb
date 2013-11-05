@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :logout_required
+  before_filter :logout_required, :except => [:show,:edit_info,:update_info]
   before_filter :valid_psw_token , :only => "reset_psw"
+  before_filter :login_required, :only => [:show,:edit_info,:update_info]
+
+  def show
+    @user = current_user
+  end
 
   def new_rilevatore
     @user = User.new
@@ -105,6 +110,64 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_info
+    @user = current_user
+    case params[:attr]
+      when "email"
+        render :update do |page|
+          page.show "editinfo"
+          page.replace_html "editinfo", :partial => "edit_email", :object => @user
+        end
+      when "psw"
+        render :update do |page|
+          page.show "editinfo"
+          page.replace_html "editinfo", :partial => "edit_psw", :object => @user
+        end
+      else
+    end
+  end
+
+  def update_info
+    @user = current_user
+    #se la psw è corretta
+    if @user.matching_password?(params[:psw])
+      case params[:attr]
+        when "email"
+          @user.email = params[:new_email]
+          status,message = custom_email_validation(@user.email,params[:conf_email])
+          if status.blank?
+            @user.save
+            #disattivo l'account e spedisco la mail di notifica.
+            deactivate_account!
+            flash[:notice] = "E' stata spedita bla bla bla"
+            redirect_to root_url
+          else
+            flash[:error] = message
+            redirect_to user_path(current_user)
+          end
+        when "psw"
+          status,message = custom_psw_validation(params[:new_psw],params[:confirm])
+          if status.blank?
+            @user.password = params[:new_psw]
+            @user.save
+            flash[:notice] = "Account aggiornato."
+            redirect_to user_path(current_user)
+          else
+            flash[:error] = message
+            redirect_to user_path(current_user)
+          end
+        else
+          flash[:error] = "Something went wrong..."
+          redirect_to root_path
+      end
+    #psw non corretta
+    else
+      flash[:error] = "Password errata."
+      redirect_to user_path(current_user)
+    end
+  end
+
+
   private
 
   def valid_psw_token
@@ -113,6 +176,62 @@ class UsersController < ApplicationController
       flash[:error] = "Invalid Token."
       redirect_to root_path
     end
+  end
+
+  def custom_email_validation(email,confirm)
+    status = ""
+    message = ""
+    #se il campo è vuoto
+    if email.blank?
+      message << "E-mail non può essere vuoto. <br />"
+      status = "stop"
+    else
+      #controllo se la nuova email è già inserita nel sistema
+      user = User.find_by_email(email)
+      if !user.blank?
+        message << "E-mail già in uso. <br />"
+        status = "stop"
+      end
+      regexp = /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+      unless email =~ regexp
+        message << "E-mail formato non valido. <br />"
+        status = "stop"
+      end
+    end
+    if email != confirm
+      message << "E-mail di conferma errata. <br />"
+      status = "stop"
+    end
+    return status,message
+  end
+
+  def custom_psw_validation(psw,confirm)
+    status = ""
+    message = ""
+    #se il campo è vuoto
+    if psw.blank?
+      message << "Password non può essere vuoto. <br />"
+      status = "stop"
+    else
+      #controllo se la nuova psw è abbastanza lunga
+      unless psw.size >= 6
+        message << "Password deve contenere minimo 6 caratteri. <br />"
+        status = "stop"
+      end
+    end
+    if psw != confirm
+      message << "Password di conferma errata. <br />"
+      status = "stop"
+    end
+    return status,message
+  end
+
+  def deactivate_account!
+    current_user.validate = 0
+    current_user.save
+    current_user.generate_perishable_token
+    Notifier.deliver_activation_instructions(current_user)
+    cookies.delete :rem_token
   end
 
 end

@@ -1,0 +1,22 @@
+<p class="zero">
+    Inserisci e conferma la nuova password.<br />
+    La vecchia password è necessaria per salvare le modifiche.
+</p>
+<% form_tag(update_info_path) do %>
+    <p>
+      <strong>Nuova Password:</strong><br />
+      <%= password_field_tag :new_psw %>
+      <%= hidden_field_tag :attr, "psw" %>
+    </p>
+    <p>
+      <strong>Conferma:</strong><br />
+      <%= password_field_tag :confirm %>
+    </p>
+    <p>
+      <strong>Vecchia Password:</strong><br />
+      <%= password_field_tag :psw %>
+    </p>
+    <p class="zero">
+      <%= submit_tag "Salva" %> <%= button_to_function "Annulla", "editinfo.hide()" %>
+    </p>
+<% end %>

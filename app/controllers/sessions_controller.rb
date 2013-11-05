@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
       end
 
       flash[:notice] = "Logged in successfully."
-      redirect_to_target_or_default(root_url)
+      #redirect_to_target_or_default(root_url)
+      redirect_to root_path
     else
       flash[:error] = "Invalid login or password."
       redirect_to :controller => "home"

@@ -1,0 +1,22 @@
+<p class="zero">
+  <strong class="advice">Attenzione:</strong> modificare il campo e-mail, necessita la validazione della stessa.<br />
+  Ciò comporterà la disattivazione dell'account fino al compimento della validazione.
+</p>
+<% form_tag(update_info_path) do %>
+    <p>
+      <strong>Nuova E-mail:</strong><br />
+      <%= text_field_tag :new_email %>
+      <%= hidden_field_tag :attr, "email" %>
+    </p>
+    <p>
+      <strong>Conferma E-mail:</strong><br />
+      <%= text_field_tag :conf_email %>
+    </p>
+    <p>
+      <strong>Password:</strong><br />
+      <%= password_field_tag :psw %>
+    </p>
+    <p class="zero">
+      <%= submit_tag "Salva" %> <%= button_to_function "Annulla", "editinfo.hide()" %>
+    </p>
+<% end %>
