@@ -13,4 +13,13 @@ class ApplicationController < ActionController::Base
     return active_campaign = Campagne.find(:first, :conditions => ["active = true"])
   end
 
+  def errors_message(item)
+    full_message = ""
+    item.errors.full_messages.each do |message|
+      full_message << message
+      full_message << "<br />"
+    end
+    full_message
+  end
+
 end
