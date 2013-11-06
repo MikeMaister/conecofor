@@ -27,7 +27,7 @@
       <%= select_tag :survey,"<option value = ' ' >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Copl" => "copl","Cops" =>"cops"}) %>
     </p>
     <p class="null_margin null_padding">
-      <%= submit_tag 'Carica' %>
+      <%= submit_tag 'Carica', :confirm => "Una volta caricato il file, potrà essere eliminato solamente da un admin CONECOFOR. Procedere?" %>
     </p>
 <% end %>
 </div>
