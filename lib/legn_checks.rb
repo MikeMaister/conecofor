@@ -210,8 +210,8 @@ module Legn_checks
       pk = Legnose.find(:first,:conditions => ["campagne_id = ? AND plot_id = ? AND subplot = ? AND file_name_id = ? AND import_num = ? AND specie_id = ?", active_campaign_id, plot_id, record.subplot, file.id, file.import_num,specie_id])
       #se già è presente
       unless pk.blank?
-        #salvo l'errore
-        save_error(record,"Copertura già presente per questa specie in questo plot, subplot",row)
+        #salvo l'errore #Copertura già presente per questa specie in questo plot, subplot#
+        save_error(record,"Presenza duplicato",row)
         #segnalo che c'è stato un errore sulla riga
         session[:row_error] = true
         #e segnalo l'errore sul file

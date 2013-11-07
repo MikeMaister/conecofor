@@ -291,7 +291,7 @@ module Copl_checks
     #se già è presente
     if pk
       #salvo l'errore
-      save_error(record,"Duplicate row",row)
+      save_error(record,"Presenza duplicato",row)
       #segnalo che c'è stato un errore sulla riga
       session[:row_error] = true
       #e segnalo l'errore sul file
