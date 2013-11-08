@@ -12,6 +12,7 @@
 <div id="vs_spe_list">
   <%= render :partial => "specie_vs_list"%>
 </div>
+<%= will_paginate @specie_vs %>
 
 <%= button_to_remote "+",{:url => { :controller =>"admin/specie_vs",:action => "new",:page =>params[:page], :update => "new_specie_vs"}},{:class=>"add_button"} %>
 

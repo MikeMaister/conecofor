@@ -34,6 +34,8 @@ th,td{
 div.pagination{
     padding: 5px;
     background-color: #9fcc12;
+    width: 614px;
+    margin-left: 35px;
 }
 
 .prev_page{
