@@ -12,6 +12,7 @@
 <div id="euflora_list" >
   <%= render :partial => "eu_list"%>
 </div>
+<%= will_paginate @euflora %>
 
 <%= button_to_remote "+",{:url => { :controller =>"admin/euflora",:action => "new",:page =>params[:page], :update => "new_euflora"}},{:class=>"add_button"} %>
 
