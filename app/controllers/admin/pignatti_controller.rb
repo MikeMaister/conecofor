@@ -1,4 +1,5 @@
 class Admin::PignattiController < ApplicationController
+
   def index
     @pignatti = Specie.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)
   end
