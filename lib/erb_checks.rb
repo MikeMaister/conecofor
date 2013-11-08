@@ -494,7 +494,7 @@ module Erb_checks
       if row.copertura == 0
         unless  row.copertura_esterna.nil? && row.altezza_media.nil? && row.numero_cespi.nil? && row.numero_stoloni.nil? && row.numero_stoloni_radicanti.nil? && row.numero_foglie.nil? && row.numero_getti.nil?
           #segnalo l'errore
-          multiple_parameter_error(row,"Se la copertura = 0, non devono essere presenti altri parametri.")
+          multiple_parameter_error(row,"Copertura = 0, other null")
         end
       end
     end
@@ -534,7 +534,7 @@ module Erb_checks
         end
       end
       #genero il warning se trovato == false
-      warning_error(record,"habitual species",file) if trovato == false
+      warning_error(record,"Speci abituali",file) if trovato == false
     end
   end
 

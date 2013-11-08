@@ -378,7 +378,7 @@ module Cops_checks
         #a meno che il codice europeo della specie del record non inizi per 3,4 o 5 allora c'è un errore
         unless eu_specie.codice_eu.to_s =~ str
           #segnalo l'errore
-          multiple_parameter_error(record,"[strato - specie - eu code] violation")
+          multiple_parameter_error(record,"Violazione strato - specie - eucode")
         end
       end
     end
@@ -424,7 +424,7 @@ module Cops_checks
         end
       end
       #genero il warning se trovato == false
-      warning_error(record,"habitual species",file) if trovato == false
+      warning_error(record,"Speci abituali",file) if trovato == false
     end
   end
 

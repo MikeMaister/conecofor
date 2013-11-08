@@ -398,7 +398,7 @@ module Legn_checks
       if row.radicanti_esterni == 1
         if row.altezza.nil? || row.eta_strutturale.nil? || row.danni_meccanici.nil? || row.danni_parassitari.nil?
           #segnalo l'errore
-          multiple_parameter_error(row,"Radicanti Esterni = 1, violazioine not null in Altezza,età strutturale,danni meccanici,danni parassitari")
+          multiple_parameter_error(row,"Radicanti Esterni = 1, not null in Altezza,età strutturale,danni meccanici,danni parassitari")
         end
       end
     end
@@ -410,7 +410,7 @@ module Legn_checks
       if row.radicanti_esterni == 2
         unless !row.copertura.nil? && !row.altezza.nil? && row.eta_strutturale.nil? && row.danni_meccanici.nil? && row.danni_parassitari.nil?
           #segnalo l'errore
-          multiple_parameter_error(row,"Radicanti Esterni = 2, violazione not null in copertura,altezza null in eta strutturale,danni meccanici,danni parassitari")
+          multiple_parameter_error(row,"Radicanti Esterni = 2, not null in copertura,altezza null in eta strutturale,danni meccanici,danni parassitari")
         end
       end
     end
@@ -422,7 +422,7 @@ module Legn_checks
       if row.copertura != 0
         if row.altezza.nil?
           #segnalo l'errore
-          multiple_parameter_error(row,"L'altezza non può essere nulla per un individuo.")
+          multiple_parameter_error(row,"L'altezza non può essere nulla per un individuo")
         end
       end
     end
@@ -433,7 +433,7 @@ module Legn_checks
     unless row.copertura.nil?
       if row.copertura != 0 && row.specie_id.nil?
         #segnalo l'errore
-        multiple_parameter_error(row,"La specie non può essere nulla per un individuo.")
+        multiple_parameter_error(row,"La specie non può essere nulla per un individuo")
       end
     end
   end
@@ -444,7 +444,7 @@ module Legn_checks
       if row.copertura == 0
         unless row.altezza.nil? && row.specie_id.nil? && row.eta_strutturale.nil? && row.danni_meccanici.nil? && row.danni_parassitari.nil? && row.radicanti_esterni.nil?
           #segnalo l'errore
-          multiple_parameter_error(row,"Se la copertura = 0, non devono essere presenti altri parametri.")
+          multiple_parameter_error(row,"Copertura = 0, other null")
         end
       end
     end
@@ -468,7 +468,7 @@ module Legn_checks
         end
       end
       #genero il warning se trovato == false
-      warning_error(record,"habitual species",file) if trovato == false
+      warning_error(record,"Speci abituali",file) if trovato == false
     end
   end
 
