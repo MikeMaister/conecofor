@@ -96,4 +96,26 @@ class Notifier < ActionMailer::Base
     @content_type = "text/html"
   end
 
+  def approve_import(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Dati Approvati"
+    @sent_on = Time.now
+    @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
+    @content_type = "text/html"
+  end
+
+  def deleted_import(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Dati non approvati"
+    @sent_on = Time.now
+    @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
+    @content_type = "text/html"
+  end
+
 end
