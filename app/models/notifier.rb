@@ -63,4 +63,37 @@ class Notifier < ActionMailer::Base
     @content_type = "text/html"
   end
 
+  def add_import_permits(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Permessi d'import"
+    @sent_on = Time.now
+    @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
+    @content_type = "text/html"
+  end
+
+  def remove_import_permits(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Permessi d'import"
+    @sent_on = Time.now
+    @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
+    @content_type = "text/html"
+  end
+
+  def deleted_survey_sheet(user,import)
+    @user = user
+    @import = import
+    @url = "www.conecofor.net"
+    @from = user.email
+    @subject = "Scheda di rilevamento"
+    @sent_on = Time.now
+    @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
+    @content_type = "text/html"
+  end
+
 end

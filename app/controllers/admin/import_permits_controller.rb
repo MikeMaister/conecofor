@@ -27,8 +27,9 @@ class Admin::ImportPermitsController < ApplicationController
     render :update do |page|
       page.replace_html "file_list", :partial => "schede", :object => @file
     end
-    #TODO
     #SPEDIRE AVVISO VIA MAIL CHE IL PERMESSO E' STATO ASSEGNATO
+    user = User.find(file.rilevatore_id)
+    Notifier.deliver_add_import_permits(user,file.survey)
   end
 
   def delete_permit
@@ -41,21 +42,23 @@ class Admin::ImportPermitsController < ApplicationController
     render :update do |page|
       page.replace_html "file_list", :partial => "schede", :object => @file
     end
-    #TODO
     #SPEDIRE AVVISO VIA MAIL CHE IL PERMESSO E' STATO RIMOSSO
+    user = User.find(file.rilevatore_id)
+    Notifier.deliver_remove_import_permits(user,file.survey)
   end
 
   def delete_file
     file = SheetFile.find(params[:file_id])
     #ricarico i file
     @file = SheetFile.find(:all,:conditions => ["rilevatore_id = ? AND year = ? AND id != ?",file.rilevatore_id,file.year,file.id])
+    #SPEDIRE AVVISO VIA MAIL CHE IL FILE E' STATO RESPINTO E SI NECESSITA DI NUOVO L'UPLOAD
+    user = User.find(file.rilevatore_id)
+    Notifier.deliver_deleted_survey_sheet(user,file.survey)
     #elimino il file
     file.destroy
     render :update do |page|
       page.replace_html "file_list", :partial => "schede", :object => @file
     end
-    #TODO
-    #SPEDIRE AVVISO VIA MAIL CHE IL FILE E' STATO RESPINTO E SI NECESSITA DI NUOVO L'UPLOAD
 
   end
 
