@@ -19,6 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   map.download_admin_manual 'admin_manual', :controller => 'home', :action => 'download_admin_manual'
   map.download_rilevatore_manual 'rilevatore_manual', :controller => 'home', :action => 'download_rilevatore_manual'
 
+  map.download_ss '/download/ss/:id', :controller => 'survey_sheet', :action => 'download_survey_sheet'
+
   map.resources :sessions
 
   map.resources :users

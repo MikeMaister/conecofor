@@ -1,8 +1,8 @@
 class SurveySheetController < ApplicationController
   include Import_survey
   before_filter :login_required
-  before_filter :rilevatore_authorization_required
-  before_filter :rilevatore_approvato
+  before_filter :rilevatore_authorization_required, :except => :download_survey_sheet
+  before_filter :rilevatore_approvato, :except => :download_survey_sheet
   before_filter :campaign_active?
   before_filter :file? , :only => :import_file
   before_filter :pdf_file?, :only => :import_file
@@ -22,6 +22,13 @@ class SurveySheetController < ApplicationController
     redirect_to :action => "index"
   end
 
+  before_filter [:login_required,:admin_authorization_required], :only => :download_survey_sheet
+  def download_survey_sheet
+    file = SheetFile.find(params[:id])
+    rilevatore = User.find(file.rilevatore_id)
+    send_file "#{RAILS_ROOT}/file privati app/schede rilevatori/#{rilevatore.full_name}/#{file.survey}/#{file.name}"
+  end
+
   private
 
   def survey_blank?
@@ -34,8 +41,10 @@ class SurveySheetController < ApplicationController
   def upload_save_file!(file,survey)
     name = (file)['datafile'].original_filename
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
-    directory = "#{RAILS_ROOT}/public/schede_rilevatori/#{current_user.full_name}/#{survey}/"
-    relative_path = "schede_rilevatori/#{current_user.full_name}/#{survey}/" + name
+    #directory = "#{RAILS_ROOT}/public/schede_rilevatori/#{current_user.full_name}/#{survey}/"
+    #relative_path = "schede_rilevatori/#{current_user.full_name}/#{survey}/" + name
+    directory = "#{RAILS_ROOT}/file privati app/schede rilevatori/#{current_user.full_name}/#{survey}/"
+    relative_path = "schede rilevatori/#{current_user.full_name}/#{survey}/" + name
     #creo la cartella
     require 'ftools'
     File.makedirs directory
