@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.download_psp '/download/psp/:id', :controller => 'admin/presenza_specie', :action => 'download_psp'
   map.download_stat '/download/stat', :controller => 'admin/statistics', :action => 'download_stat'
   map.download_spestat '/download/spestat', :controller => 'admin/spe_stat', :action => 'download_spestat'
+  map.download_sustat '/download/sustat', :controller => 'admin/su_stat', :action => 'download_sustat'
 
 
   map.resources :sessions
