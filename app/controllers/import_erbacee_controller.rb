@@ -1,6 +1,7 @@
 class ImportErbaceeController < ApplicationController
   include Erb_checks,Import_survey
 
+  before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
   before_filter :campaign_active?, :only => "index"
   before_filter :import_permit_erb?
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,

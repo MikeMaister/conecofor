@@ -1,4 +1,6 @@
 class ImportPublicViewController < ApplicationController
+  before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
+
   def index
     @campaign = Campagne.find(:all,:conditions => ["deleted = false"], :order => "inizio DESC")
     @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => "id_plot")

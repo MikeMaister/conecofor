@@ -1,6 +1,7 @@
 class ImportLegnoseController < ApplicationController
   include Legn_checks,Import_survey
 
+  before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
   before_filter :campaign_active?, :only => "index"
   before_filter :import_permit_leg?
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,

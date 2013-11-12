@@ -49,14 +49,14 @@ module Authentication
   def rilevatore_approvato
     unless (current_user.user_kind_id == UserKind.find_by_kind("Rilevatore").identifier) && (User.find(:first, :conditions => ["id = ? AND approved = true", current_user.id]))
       flash[:error] = "La sua richiesta di registrazione non è stata ancora approvata."
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
   def rilevatore_authorization_required
     if current_user.user_kind_id != UserKind.find_by_kind("Rilevatore").identifier
       flash[:error] = "Non hai l'autorizzazione necessaria per accedere alla pagina."
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
