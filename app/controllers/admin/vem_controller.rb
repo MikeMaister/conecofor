@@ -33,6 +33,11 @@ class Admin::VemController < ApplicationController
     end
   end
 
+  def download_vem
+    file = OutputFile.find(params[:id])
+    send_file "#{RAILS_ROOT}/file privati app/VEM/#{file.file_name}"
+  end
+
   private
 
   def check_input
@@ -94,7 +99,7 @@ class Admin::VemController < ApplicationController
     10.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/VEM/"
+    dir = "#{RAILS_ROOT}/file privati app/VEM/"
     #imposto il nome del file
     file_name = "05#{anno}.xls"
     #imposto il full_path e la relative_path
@@ -103,7 +108,7 @@ class Admin::VemController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    vem.write "#{RAILS_ROOT}/public/VEM/#{file_name}"
+    vem.write "#{RAILS_ROOT}/file privati app/VEM/#{file_name}"
     #controllo se il file è già stato salvato
     file = OutputFile.find(:first,:conditions => ["file_name = ? AND file_type = 'VEM'",file_name])
     if file.blank?

@@ -41,7 +41,7 @@
 </table>
 </div>
 <p class="link_file">
-  <%= link_to "Download File", @new_vem_file.relative_path %>
+  <%= link_to "Download File", download_vem_path(@new_vem_file) %>
 </p>
 <p class="back">
   <%= link_to "VEM", :controller => "admin/vem" %>
