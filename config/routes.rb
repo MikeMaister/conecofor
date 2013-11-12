@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.contacts 'contacts', :controller => 'home', :action => 'contacts'
+  map.help 'help', :controller => 'home', :action => 'help'
 
   map.resources :sessions
 
