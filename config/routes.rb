@@ -29,6 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.download_stat '/download/stat', :controller => 'admin/statistics', :action => 'download_stat'
   map.download_spestat '/download/spestat', :controller => 'admin/spe_stat', :action => 'download_spestat'
   map.download_sustat '/download/sustat', :controller => 'admin/su_stat', :action => 'download_sustat'
+  map.download_eusum '/download/eusum', :controller => 'admin/riepilogativi_europei', :action => 'download_eusum'
+
 
 
   map.resources :sessions

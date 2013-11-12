@@ -106,6 +106,11 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
 
   end
 
+
+  def download_eusum
+    send_file "#{RAILS_ROOT}/file privati app/Eu Summary/eu.xls"
+  end
+
   private
 
   def format_data(plot,unita,niferb,nifleg,coperb,copbrio,coplich,copleg,nspecerb,nspecbrio,nspeclich,nspecleg)
@@ -172,7 +177,7 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
     12.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Eu Summary/"
+    dir = "#{RAILS_ROOT}/file privati app/Eu Summary/"
     #imposto il nome del file
     file_name = "eu.xls"
     #imposto il full_path e la relative_path
@@ -181,7 +186,7 @@ class Admin::RiepilogativiEuropeiController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    eu_file.write "#{RAILS_ROOT}/public/Eu Summary/#{file_name}"
+    eu_file.write "#{RAILS_ROOT}/file privati app/Eu Summary/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill(file_name,full_path,relative_path,"Eu Sum")
