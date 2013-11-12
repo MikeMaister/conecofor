@@ -1,5 +1,5 @@
 class ImportPublicViewController < ApplicationController
-  before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
+  before_filter :login_required
 
   def index
     @campaign = Campagne.find(:all,:conditions => ["deleted = false"], :order => "inizio DESC")
