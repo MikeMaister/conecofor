@@ -2,7 +2,6 @@ class Admin::EvoluzioneSpecieController < ApplicationController
   before_filter :login_required,:admin_authorization_required
 
   def index
-
   end
 
   def input_mask_all
@@ -215,7 +214,7 @@ class Admin::EvoluzioneSpecieController < ApplicationController
     end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Evoluzione Specie Plot/"
+    dir = "#{RAILS_ROOT}/file privati app/Evoluzione Specie Plot/"
     #imposto il nome del file
     file_name = "tracking specie.xls"
     #imposto il full_path e la relative_path
@@ -224,7 +223,7 @@ class Admin::EvoluzioneSpecieController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Evoluzione Specie Plot/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Evoluzione Specie Plot/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill_and_save(file_name,full_path,relative_path,"Tracking Specie")
@@ -410,7 +409,7 @@ class Admin::EvoluzioneSpecieController < ApplicationController
     end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Evoluzione Specie Complete/"
+    dir = "#{RAILS_ROOT}/file privati app/Evoluzione Specie Complete/"
     #imposto il nome del file
     file_name = "tracking specie.xls"
     #imposto il full_path e la relative_path
@@ -419,7 +418,7 @@ class Admin::EvoluzioneSpecieController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Evoluzione Specie Complete/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Evoluzione Specie Complete/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill_and_save(file_name,full_path,relative_path,"Tracking Specie")
