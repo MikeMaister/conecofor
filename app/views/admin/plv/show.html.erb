@@ -70,7 +70,7 @@
 </div>
 </div>
 <p class="link_file">
-  <%= link_to "Download File", @new_plv_file.relative_path %>
+  <%= link_to "Download File", download_plv_path(@new_plv_file) %>
 </p>
 <p class="back">
   <%= link_to "PLV", :controller => "admin/plv" %>

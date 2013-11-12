@@ -95,6 +95,13 @@ class Admin::PlvController < ApplicationController
     end
   end
 
+  def download_plv
+    file = OutputFile.find(params[:id])
+    send_file "#{RAILS_ROOT}/file privati app/PLV/#{file.file_name}"
+  end
+
+
+
   private
 
   def check_input
@@ -183,7 +190,7 @@ class Admin::PlvController < ApplicationController
     23.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/PLV/"
+    dir = "#{RAILS_ROOT}/file privati app/PLV/"
     #imposto il nome del file
     file_name = "05#{anno}.xls"
     #imposto il full_path e la relative_path
@@ -192,7 +199,7 @@ class Admin::PlvController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    plv.write "#{RAILS_ROOT}/public/PLV/#{file_name}"
+    plv.write "#{RAILS_ROOT}/file privati app/PLV/#{file_name}"
     #controllo se il file è già stato salvato
     file = OutputFile.find(:first,:conditions => ["file_name = ? AND file_type = 'PLV'",file_name])
     if file.blank?

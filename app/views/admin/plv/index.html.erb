@@ -23,7 +23,7 @@
 <ul class="file_list">
   <% for i in 0..@plv_file.size-1 %>
       <li>
-        <%= link_to @plv_file.at(i).file_name,@plv_file.at(i).relative_path %>
+        <%= link_to @plv_file.at(i).file_name,download_plv_path(@plv_file.at(i).id) %>
       </li>
   <% end %>
 </ul>

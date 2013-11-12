@@ -23,6 +23,8 @@ ActionController::Routing::Routes.draw do |map|
   map.download_if '/download/if/:id', :controller => 'import_public_view', :action => 'download_import_file'
   map.download_af '/download/af/:id', :controller => 'admin/plot', :action => 'download_accessory_info'
   map.download_vem '/download/vem/:id', :controller => 'admin/vem', :action => 'download_vem'
+  map.download_plv '/download/plv/:id', :controller => 'admin/plv', :action => 'download_plv'
+
 
   map.resources :sessions
 
