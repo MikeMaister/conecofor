@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.download_rilevatore_manual 'rilevatore_manual', :controller => 'home', :action => 'download_rilevatore_manual'
 
   map.download_ss '/download/ss/:id', :controller => 'survey_sheet', :action => 'download_survey_sheet'
+  map.download_if '/download/if/:id', :controller => 'import_public_view', :action => 'download_import_file'
 
   map.resources :sessions
 

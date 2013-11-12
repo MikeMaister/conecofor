@@ -45,4 +45,10 @@ class ImportPublicViewController < ApplicationController
 
   end
 
+  def download_import_file
+    file = ImportFile.find(params[:id])
+    season = Season.find(Campagne.find(file.campagne_id).season_id)
+    send_file "#{RAILS_ROOT}/file privati app/import/#{file.survey_kind}/#{season.nome}/#{file.file_name}"
+  end
+
 end

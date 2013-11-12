@@ -140,7 +140,8 @@ module Import_survey
   def update_file!(file,camp,survey)
     name = (file)['datafile'].original_filename
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
-    directory = "#{RAILS_ROOT}/public/file_importati/#{survey}/#{Season.find(camp.season_id).nome}"
+    #directory = "#{RAILS_ROOT}/public/file_importati/#{survey}/#{Season.find(camp.season_id).nome}"
+    directory = "#{RAILS_ROOT}/file privati app/import/#{survey}/#{Season.find(camp.season_id).nome}"
     #create the file path
     path = File.join(directory, name)
     #write the file
@@ -157,8 +158,10 @@ module Import_survey
   def upload_save_file!(file,camp,survey)
     name = (file)['datafile'].original_filename
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
-    directory = "#{RAILS_ROOT}/public/file_importati/#{survey}/#{Season.find(camp.season_id).nome}"
-    relative_path = "/file_importati/#{survey}/#{Season.find(camp.season_id).nome}/" + name
+    #directory = "#{RAILS_ROOT}/public/file_importati/#{survey}/#{Season.find(camp.season_id).nome}"
+    #relative_path = "/file_importati/#{survey}/#{Season.find(camp.season_id).nome}/" + name
+    directory = "#{RAILS_ROOT}/file privati app/import/#{survey}/#{Season.find(camp.season_id).nome}"
+    relative_path = "/import/#{survey}/#{Season.find(camp.season_id).nome}/" + name
     #creo la cartella
     require 'ftools'
     File.makedirs directory
