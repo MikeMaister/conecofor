@@ -383,6 +383,11 @@ class Admin::StatisticsController < ApplicationController
     end
   end
 
+  def download_stat
+    send_file "#{RAILS_ROOT}/file privati app/Stat/stats.xls"
+  end
+
+
   private
 
   def pop_camp_null?(data)
@@ -515,7 +520,7 @@ class Admin::StatisticsController < ApplicationController
     8.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Stat/"
+    dir = "#{RAILS_ROOT}/file privati app/Stat/"
     #imposto il nome del file
     file_name = "stats.xls"
     #imposto il full_path e la relative_path
@@ -524,7 +529,7 @@ class Admin::StatisticsController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Stat/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill(file_name,full_path,relative_path,"Stats")
@@ -594,7 +599,7 @@ class Admin::StatisticsController < ApplicationController
     10.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Stat/"
+    dir = "#{RAILS_ROOT}/file privati app/Stat/"
     #imposto il nome del file
     file_name = "stats.xls"
     #imposto il full_path e la relative_path
@@ -603,7 +608,7 @@ class Admin::StatisticsController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Stat/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill(file_name,full_path,relative_path,"Stats")
@@ -705,7 +710,7 @@ class Admin::StatisticsController < ApplicationController
     12.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Stat/"
+    dir = "#{RAILS_ROOT}/file privati app/Stat/"
     #imposto il nome del file
     file_name = "stats.xls"
     #imposto il full_path e la relative_path
@@ -714,7 +719,7 @@ class Admin::StatisticsController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Stat/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill(file_name,full_path,relative_path,"Stats")
@@ -784,7 +789,7 @@ class Admin::StatisticsController < ApplicationController
     12.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Stat/"
+    dir = "#{RAILS_ROOT}/file privati app/Stat/"
     #imposto il nome del file
     file_name = "stats.xls"
     #imposto il full_path e la relative_path
@@ -793,7 +798,7 @@ class Admin::StatisticsController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    stat_file.write "#{RAILS_ROOT}/public/Stat/#{file_name}"
+    stat_file.write "#{RAILS_ROOT}/file privati app/Stat/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill(file_name,full_path,relative_path,"Stats")

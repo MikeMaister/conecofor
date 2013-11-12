@@ -18,6 +18,12 @@ class Admin::PresenzaSpecieController < ApplicationController
     @file = create_xls(@view_50x50,@view_10x10,@year,@plot)
   end
 
+  def download_psp
+    file = OutputFile.find(params[:id])
+    send_file (file.path)
+  end
+
+
   private
 
   def get_data_50x50(plot,year)
@@ -357,7 +363,7 @@ class Admin::PresenzaSpecieController < ApplicationController
 
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/Presenza Specie Plot/"
+    dir = "#{RAILS_ROOT}/file privati app/Presenza Specie Plot/"
     #imposto il nome del file
     file_name = "presenza specie.xls"
     #imposto il full_path e la relative_path
@@ -366,7 +372,7 @@ class Admin::PresenzaSpecieController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    presence_file.write "#{RAILS_ROOT}/public/Presenza Specie Plot/#{file_name}"
+    presence_file.write "#{RAILS_ROOT}/file privati app/Presenza Specie Plot/#{file_name}"
     #creo l'oggetto file
     new_stat_file = OutputFile.new
     new_stat_file.fill_and_save(file_name,full_path,relative_path,"Presenza Specie")
