@@ -1,5 +1,5 @@
 <ul class="file_list">
   <% for i in 0..@file_list.size-1 %>
-    <li><%= link_to "#{@file_list.at(i).file_name}",@file_list.at(i).relative_path %></li>
+    <li><%= link_to "#{@file_list.at(i).file_name}",download_af_path(@file_list.at(i).id) %></li>
   <% end %>
 </ul>

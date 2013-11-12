@@ -134,6 +134,12 @@ class Admin::PlotController < ApplicationController
     end
   end
 
+  def download_accessory_info
+    file = PlotFile.find(params[:id])
+    plot = Plot.find(file.plot_id)
+    send_file "#{RAILS_ROOT}/file privati app/accessory info plot/#{plot.id_plot}/#{file.file_name}"
+  end
+
 
   private
 
@@ -141,8 +147,8 @@ class Admin::PlotController < ApplicationController
     name = (file)['datafile'].original_filename
     id_plot = Plot.find(plot).id_plot
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
-    directory = "#{RAILS_ROOT}/public/file_accessori_plot/#{id_plot}"
-    relative_path = "/file_accessori_plot/#{id_plot}/" + name
+    directory = "#{RAILS_ROOT}/file privati app/accessory info plot/#{id_plot}"
+    relative_path = "/file accessori plot/#{id_plot}/" + name
     #creo la cartella
     require 'ftools'
     File.makedirs directory
