@@ -37,7 +37,7 @@ class Admin::CheckSpeciesController < ApplicationController
     #imposto la codifica dei caratteri
     Spreadsheet.client_encoding = 'UTF-8'
     #apro il file
-    doc = Spreadsheet.open "public/file controllo specie/#{file_name}"
+    doc = Spreadsheet.open "file privati app/controllo specie/#{file_name}"
     #imposto il foglio di lavoro
     sheet = doc.worksheet 0
 
@@ -96,7 +96,7 @@ class Admin::CheckSpeciesController < ApplicationController
   def upload_file(file)
     name = (file)['datafile'].original_filename
     #CAMBIARE LA DIRECTORY CON QUELLA DEL SERVER(non nella cartella public)
-    directory = "#{RAILS_ROOT}/public/file controllo specie"
+    directory = "#{RAILS_ROOT}/file privati app/controllo specie"
     #creo la cartella
     require 'ftools'
     File.makedirs directory
