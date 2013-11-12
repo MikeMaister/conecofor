@@ -30,6 +30,11 @@ class Admin::VsController < ApplicationController
     end
   end
 
+  def download_vs
+    file = OutputFile.find(params[:id])
+    send_file "#{RAILS_ROOT}/file privati app/VS/#{file.file_name}"
+  end
+
   private
 
   def check_input
@@ -97,7 +102,7 @@ class Admin::VsController < ApplicationController
     19.times do |x| sheet1.row(0).set_format(x, bold) end
 
     #creo la directory
-    dir = "#{RAILS_ROOT}/public/VS/"
+    dir = "#{RAILS_ROOT}/file privati app/VS/"
     #imposto il nome del file
     file_name = "IM It#{anno}vs.xls"
     #imposto il full_path e la relative_path
@@ -106,7 +111,7 @@ class Admin::VsController < ApplicationController
     require 'ftools'
     File.makedirs dir
     #scrivo il file
-    vs.write "#{RAILS_ROOT}/public/VS/#{file_name}"
+    vs.write "#{RAILS_ROOT}/file privati app/VS/#{file_name}"
     #controllo se il file è già stato salvato
     file = OutputFile.find(:first,:conditions => ["file_name = ? AND file_type = 'VS'",file_name])
     if file.blank?

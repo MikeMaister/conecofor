@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.download_af '/download/af/:id', :controller => 'admin/plot', :action => 'download_accessory_info'
   map.download_vem '/download/vem/:id', :controller => 'admin/vem', :action => 'download_vem'
   map.download_plv '/download/plv/:id', :controller => 'admin/plv', :action => 'download_plv'
+  map.download_vs '/download/vs/:id', :controller => 'admin/vs', :action => 'download_vs'
 
 
   map.resources :sessions

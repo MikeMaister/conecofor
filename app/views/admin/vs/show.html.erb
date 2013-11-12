@@ -63,7 +63,7 @@
 </div>
 
 <p class="link_file">
-  <%= link_to "Download File", @new_vs_file.relative_path %>
+  <%= link_to "Download File", download_vs_path(@new_vs_file) %>
 </p>
 <p class="back">
   <%= link_to "VS", :controller => "admin/vs" %>
