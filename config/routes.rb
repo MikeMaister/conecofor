@@ -16,6 +16,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.contacts 'contacts', :controller => 'home', :action => 'contacts'
   map.help 'help', :controller => 'home', :action => 'help'
+  map.download_admin_manual 'admin_manual', :controller => 'home', :action => 'download_admin_manual'
+  map.download_rilevatore_manual 'rilevatore_manual', :controller => 'home', :action => 'download_rilevatore_manual'
 
   map.resources :sessions
 
