@@ -57,7 +57,7 @@ class Notifier < ActionMailer::Base
     @import = import
     @url = "www.conecofor.net"
     @from = user.email
-    @subject = "Scheda di rilevamento"
+    @subject = "Rilevamento completato"
     @sent_on = Time.now
     @recipients = "michele.balestrini@gmail.com" #sostituire con email admin
     @content_type = "text/html"
