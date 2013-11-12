@@ -1,4 +1,6 @@
 class Admin::StatisticsController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
 
   def index
     @plot = Plot.find(:all,:conditions => "deleted = false",:order => "id_plot")

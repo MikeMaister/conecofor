@@ -1,4 +1,6 @@
 class Admin::CheckSpeciesController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
   def index
   end
 

@@ -1,4 +1,5 @@
 class Admin::EufloraController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
 
   def index
     @euflora = Euflora.paginate(:conditions=>"deleted = false",:order=>"codice_eu", :page => params[:page], :per_page => 30)

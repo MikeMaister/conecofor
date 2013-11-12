@@ -31,7 +31,7 @@ module Authentication
 
   def login_required
     unless logged_in?
-      flash[:error] = "Deve essere un utente registrato e loggato per poter accedere alla pagina richiesta."
+      flash[:error] = "Devi essere un utente registrato e loggato per poter accedere alla pagina richiesta."
       #store_target_location
       #redirect_to root_url
       redirect_to root_path
@@ -55,15 +55,15 @@ module Authentication
 
   def rilevatore_authorization_required
     if current_user.user_kind_id != UserKind.find_by_kind("Rilevatore").identifier
-      flash[:error] = "You don't have the authorization to access the requested page."
+      flash[:error] = "Non hai l'autorizzazione necessaria per accedere alla pagina."
       redirect_to root_url
     end
   end
 
   def admin_authorization_required
     unless (current_user.user_kind_id == UserKind.find_by_kind("Admin").identifier)
-      flash[:error] = "You don't have the authorization to access the requested page."
-      redirect_to :controller => "home" , :action => "index"
+      flash[:error] = "Non hai l'autorizzazione necessaria per accedere alla pagina."
+      redirect_to root_path
     end
   end
 

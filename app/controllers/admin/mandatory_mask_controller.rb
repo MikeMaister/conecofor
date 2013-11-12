@@ -1,5 +1,5 @@
 class Admin::MandatoryMaskController < ApplicationController
-
+  before_filter :login_required,:admin_authorization_required
   before_filter :mask_deletable? , :only => :delete_mask
 
   def index

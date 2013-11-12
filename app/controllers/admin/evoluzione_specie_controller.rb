@@ -1,4 +1,5 @@
 class Admin::EvoluzioneSpecieController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
 
   def index
 

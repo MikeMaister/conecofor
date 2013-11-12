@@ -1,5 +1,7 @@
 class Admin::PresenzaSpecieController < ApplicationController
   include Riepilogo_specie
+  before_filter :login_required,:admin_authorization_required
+
 
   def index
   end

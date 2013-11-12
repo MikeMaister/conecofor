@@ -1,5 +1,5 @@
 class Admin::VsController < ApplicationController
-
+  before_filter :login_required,:admin_authorization_required
   before_filter :check_input, :only => :show
 
   def index

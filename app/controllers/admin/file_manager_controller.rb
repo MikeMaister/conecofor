@@ -1,4 +1,5 @@
 class Admin::FileManagerController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
 
   def index
   end

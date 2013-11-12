@@ -1,5 +1,5 @@
 class Admin::SimpleRangeModelController < ApplicationController
-
+  before_filter :login_required,:admin_authorization_required
   before_filter [:srm_form_blank?,:srm_form_numeric?,:srm_duplicate_name?], :only => "create"
   before_filter :srm_deletable?, :only => :delete_srm
 

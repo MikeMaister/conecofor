@@ -1,4 +1,6 @@
 class Admin::SpecieVsController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
 
   def index
     @specie_vs = SpecieVs.paginate(:all,:conditions => "deleted = false", :page => params[:page], :per_page => 30)

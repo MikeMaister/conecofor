@@ -1,4 +1,6 @@
 class Admin::CampagneController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
   layout "application"
 
   def index

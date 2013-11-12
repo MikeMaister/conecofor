@@ -1,4 +1,6 @@
 class Admin::ImportQuickViewController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
   def index
     @campaign = Campagne.find(:all,:conditions => ["deleted = false"], :order => "inizio DESC")
     @plot = Plot.find(:all,:conditions => ["deleted = false"], :order => "id_plot")

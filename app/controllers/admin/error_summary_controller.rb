@@ -1,4 +1,5 @@
 class Admin::ErrorSummaryController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
 
   def index
     id_rilevatore = UserKind.find(:first,:conditions => ["identifier = 2"]).id

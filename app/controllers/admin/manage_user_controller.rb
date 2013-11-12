@@ -1,4 +1,6 @@
 class Admin::ManageUserController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
 
   def index
     @user = User.find(:all, :conditions => "invisible = false and user_kind_id = (select id from user_kinds where kind = 'Rilevatore')", :order => :id)

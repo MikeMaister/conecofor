@@ -1,4 +1,6 @@
 class Admin::RiepilogativiEuropeiController < ApplicationController
+  before_filter :login_required,:admin_authorization_required
+
 
   def index
     @anno = Campagne.find_by_sql "SELECT DISTINCT(anno) FROM campagne WHERE deleted = false ORDER BY anno"
