@@ -295,6 +295,7 @@ class Admin::PresenzaSpecieController < ApplicationController
       #scorro tutti gli anni
       for j in 0..year.size-1
         if data10x10.at(i).pres_list_col_pi.at(j).presenza_column.size == 0
+          # PER PROVA sheet2[row,column]="pi"
           row += 1
         else
           #scorro tutti i pri in
@@ -306,6 +307,7 @@ class Admin::PresenzaSpecieController < ApplicationController
           end
         end
         if data10x10.at(i).pres_list_col_po.at(j).presenza_column.size == 0
+         #PER PROVA sheet2[row,column] = "po"
           row += 1
         else
           #scorro tutti i pri out
@@ -317,6 +319,7 @@ class Admin::PresenzaSpecieController < ApplicationController
           end
         end
         if data10x10.at(i).pres_list_col_ei.at(j).presenza_column.size == 0
+          #PER PROVA sheet2[row,column] = "ei"
           row += 1
         else
           #scorro tutti i est in
@@ -328,6 +331,7 @@ class Admin::PresenzaSpecieController < ApplicationController
           end
         end
         if data10x10.at(i).pres_list_col_eo.at(j).presenza_column.size == 0
+          #PER PROVA sheet2[row,column]="eo"
           row += 1
         else
           #scorro tutti i est out
@@ -350,7 +354,7 @@ class Admin::PresenzaSpecieController < ApplicationController
       #imposto la colonna al punto di partenza
       column = 4
       #aggiornare il punto di partenza alla distanza massima
-      start_row = point_row
+      row = point_row
     end
 
     #formattazione
