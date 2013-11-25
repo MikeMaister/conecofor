@@ -1,6 +1,8 @@
 class MandatoryMask < ActiveRecord::Base
   set_table_name "mandatory_mask"
 
+  has_many :mandatory_mask_associations, :foreign_key => :mandatory_mask_id
+
   def fill_and_save(survey,name,time,parameter)
     self.survey = survey
     self.parameter = parameter

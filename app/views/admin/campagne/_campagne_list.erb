@@ -24,8 +24,8 @@
         <td class="col3"><%= @campagne.at(i).fine %></td>
         <td class="col4"><%= @campagne.at(i).note_stagione %></td>
         <td class="col5"><%= @campagne.at(i).note %></td>
-        <td class="col6"><%= SimpleRangeModel.find(SimpleRangeAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).simple_range_model_id).nome %></td>
-        <td class="col7"><%= MandatoryMask.find(MandatoryMaskAssociation.find(:first,:conditions => ["campagna_id = ? AND deleted = false",@campagne.at(i).id]).mandatory_mask_id).mask_name %></td>
+        <td class="col6"><%= @campagne.at(i).simple_range_association.first.simple_range_model.nome %></td>
+        <td class="col7"><%= @campagne.at(i).mandatory_mask_associations.first.mandatory_mask.mask_name %></td>
 
         <% if @campagne.at(i).active == true %>
             <td class="col8"><%= button_to_remote("Disattiva",:url=>{ :controller => "admin/campagne", :action => "disattiva_campagna"}) %></td>

@@ -1,6 +1,9 @@
 class Campagne < ActiveRecord::Base
   set_table_name "campagne"
 
+  has_many :simple_range_association, :foreign_key => :campagna_id
+  has_many :mandatory_mask_associations, :foreign_key => :campagna_id
+
   attr_accessible :season_id,:inizio,:fine,:note,:active,:note_stagione,:deleted,:descrizione
 
   validates_presence_of :season_id,:inizio,:fine , :message => "non può essere vuoto."
