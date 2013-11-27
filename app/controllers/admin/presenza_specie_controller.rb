@@ -26,6 +26,7 @@ class Admin::PresenzaSpecieController < ApplicationController
 
   private
 
+  #CONTIENE SIA LEGNOSE CHE ERBACEE (anche se non sembra)
   def get_data_50x50(plot,year)
     #array finale che contiene tutti i dati formattati
     tabella = Array.new
