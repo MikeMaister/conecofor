@@ -103,6 +103,7 @@ a {
 
 a:hover{
     color: #a17f1f;
+
 }
 
 .clear {
@@ -195,6 +196,31 @@ a:hover{
 #stop_float{
     clear: both;
     width: 1000px;
+}
+
+
+/*Nuovo banner*/
+
+#banner_menu ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#banner_menu ul a{
+    display: block;
+    float: left;
+    border-right: 1px solid #CDB803;
+    padding: 7px 10px;
+    text-decoration: none;
+    color: #806517;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#banner_menu ul a:hover{
+    background-color: #fff250;
+    color: #a17f1f;
 }
 
 

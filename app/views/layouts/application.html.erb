@@ -19,31 +19,13 @@
       <div id="logo"></div>
       <% if logged_in? %>
           <div id="banner_menu">
-            <div class="button">
-              <p class="b_link">
-                <%= link_to "Home", root_path %>
-              </p>
-            </div>
-            <div class="button">
-              <p class="b_link">
-                <%= link_to "Account", user_path(current_user.id) %>
-              </p>
-            </div>
-            <div class="button">
-              <p class="b_link">
-                <%= link_to "Contatti",contacts_path %>
-              </p>
-            </div>
-            <div class="button">
-              <p class="b_link">
-                <%= link_to "Help",help_path %>
-              </p>
-            </div>
-            <div class="button">
-              <p class="b_link">
-                <%= link_to "Log Out", logout_path %>
-              </p>
-            </div>
+            <ul>
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "Account", user_path(current_user.id) %></li>
+              <li><%= link_to "Contatti",contacts_path %></li>
+              <li><%= link_to "Help",help_path %></li>
+              <li><%= link_to "Log Out", logout_path %></li>
+            </ul>
           </div>
       <% end %>
 

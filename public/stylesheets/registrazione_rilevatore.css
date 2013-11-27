@@ -86,11 +86,11 @@ p.module{
     width: 930px;
 }
 
-ul,li{
+#err_list ul,li{
     margin: 0;
 }
 
-li{
+#err_list li{
     margin-left: -15px;
     padding-left: 3px;
     color:#F62217;
