@@ -101,3 +101,7 @@ p#download{
     margin: 0;
     margin-top: 15px;
 }
+
+th.row, td.row{
+    width: auto;
+}

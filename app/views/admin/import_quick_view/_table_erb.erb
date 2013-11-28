@@ -5,6 +5,7 @@
 <div id="wrap_result" class="overx">
     <table>
       <tbody>
+      <th class="row">Riga</th>
       <th>Data</th>
       <th>ID plot</th>
       <th>Subplot</th>
@@ -28,6 +29,7 @@
       <tbody>
       <% for i in 0..@import_data.size-1 %>
           <tr>
+            <td class="row"><%= i+2 %></td>
             <td><%= @import_data.at(i).data %></td>
             <td><%= @import_data.at(i).id_plot %></td>
             <td><%= @import_data.at(i).subplot %></td>
