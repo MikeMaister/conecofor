@@ -6,8 +6,10 @@ h2,h3,h4,h5{
 
 div.box_menu{
     padding: 15px;
-    border: 1px solid #000000;
-    border-radius: 25px;
+    border: 2px solid #8cb94d;
+    /*border-radius: 25px;*/
+    border-top-left-radius:25px;
+    border-bottom-right-radius:25px;
     width: 40%;
     margin: 2.5% 0 0 0;
 }
@@ -30,22 +32,23 @@ div#ril,div#tab{
 
 div#ril{
     background-color: #d0ff72;
-    border: 1px solid #006400;
+    /*border: 1px solid #006400;*/
 }
 
 div#tab{
     background-color: rgba(192, 198, 1, 0.60);
-    border: 1px solid #006400;
+    /*border: 1px solid #006400;*/
+
 }
 
 div#elab{
     background-color: #fff573;
-    border: 1px solid #006400;
+    /*border: 1px solid #006400;*/
 }
 
 div#str{
     background-color: #eaff6a;
-    border: 1px solid #006400;
+    /*border: 1px solid #006400;*/
 }
 
 div#page{
@@ -64,6 +67,5 @@ div#benvenuto_container{
     margin:0 30px;
     border: 1px solid transparent;
 }
-
 
 
