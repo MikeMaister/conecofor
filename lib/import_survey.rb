@@ -115,14 +115,28 @@ module Import_survey
     open_camp = Campagne.find(:first, :conditions => ["active = true"])
     #carico la maschera d'obbligatorietà nella sessione
     session[:mask_name] = MandatoryMask.find(MandatoryMaskAssociation.find(:first,:conditions => ["campagna_id = ?",open_camp.id]).mandatory_mask_id).mask_name
-    #se il file è già stato importato
-    if imported_file?(params[:upload],open_camp)
-      #lo aggiorno
-      update_file!(params[:upload],open_camp,params[:survey].capitalize)
-      #se il file non è già stato importato
-    else
+    #cerco il file che si vuole importare
+    #prendo il nome
+    file_name = (params[:upload])['datafile'].original_filename
+    #cerco il file nel db
+    file = ImportFile.find(:first,:conditions => ["file_name = ? AND campagne_id = ? AND deleted = false",file_name,open_camp.id])
+    #se non è mai stato importato un file con quel nome
+    if file.blank?
       #upload del file + traccia nel db
       upload_save_file!(params[:upload],open_camp,params[:survey].capitalize)
+    else
+      #controllo chi l'ha importato
+      #chi sta importando il file ora, è lo stesso che lo ha importato la prima volta?
+      if file.user_id == current_user.id
+        #lo aggiorno
+        update_file!(params[:upload],open_camp,params[:survey].capitalize)
+      #se non è lo stesso user
+      else
+        #segnalo l'errore
+        flash[:error] = "Il file denominato #{file_name} è stato importato da un altro utente.
+                         Se questa risulta essere un anomalia, contattare un admin CONECOFOR."
+        redirect_to :back
+      end
     end
   end
 
