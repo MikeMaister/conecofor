@@ -2,7 +2,7 @@
     float:left;
     padding: 1px;
     width:202px;
-    border: solid 2px #B9D749;
+    border: solid 3px #B9D749;
     border-radius: 27px;
     background-color: #ffffff;
     margin-left: 30px;
@@ -28,9 +28,10 @@ p.log_line_last{
     clear: both;
     margin:30px;
     padding: 20px;
-    border: 2px solid #91AF21;
-    border-radius: 25px;
-    background-color: rgba(173, 255, 47, 0.76);
+    border: 2px solid #8cb94d;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
+    background-color: rgba(173, 255, 46, 0.67);
     box-shadow: 0 0px 10px  #888888;
 }
 
