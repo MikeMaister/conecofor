@@ -8,8 +8,8 @@
 #import_scheda{
     background-color: #D7FF67;
     float: left;
-    width: 450px;
-    border: 1px solid #6AA121;
+    width: 448px;
+    border: 2px solid #8cb94d;
     border-top-right-radius:25px;
     border-bottom-left-radius:25px;
     margin-right: 35px;
@@ -18,8 +18,8 @@
 
 #import_survey{
     float: left;
-    width: 450px;
-    border: 1px solid #6AA121;
+    width: 448px;
+    border: 2px solid #8cb94d;
     border-top-right-radius:25px;
     border-bottom-left-radius:25px;
     background-color: #BCE954;
@@ -28,8 +28,8 @@
 
 #data_review{
     float: left;
-    width: 937px;
-    border: 1px solid #6AA121;
+    width: 935px;
+    border: 2px solid #8cb94d;
     border-top-right-radius:25px;
     border-bottom-left-radius:25px;
     margin-top:15px ;
