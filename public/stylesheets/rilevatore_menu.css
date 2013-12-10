@@ -10,7 +10,8 @@
     float: left;
     width: 450px;
     border: 1px solid #6AA121;
-    border-radius: 25px;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
     margin-right: 35px;
     box-shadow: 0 0px 15px  #888888;
 }
@@ -19,7 +20,8 @@
     float: left;
     width: 450px;
     border: 1px solid #6AA121;
-    border-radius:25px;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
     background-color: #BCE954;
     box-shadow: 0 0px 15px  #888888;
 }
@@ -28,7 +30,8 @@
     float: left;
     width: 937px;
     border: 1px solid #6AA121;
-    border-radius:25px;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
     margin-top:15px ;
     background-color: #C6D65C;
     box-shadow: 0 0px 15px  #888888;
