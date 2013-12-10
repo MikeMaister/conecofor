@@ -6,7 +6,7 @@ h2,h3,h4,h5{
 
 div.box_menu{
     padding: 15px;
-    border: 2px solid #8cb94d;
+    border: 2px solid rgba(163, 124, 32, 0.74);
     /*border-radius: 25px;*/
     border-top-left-radius:25px;
     border-bottom-right-radius:25px;
