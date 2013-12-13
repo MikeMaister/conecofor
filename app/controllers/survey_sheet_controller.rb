@@ -45,7 +45,7 @@ on p.id_plot = s.id_plot",@active_campaign.id,current_user.id]
     redirect_to :action => "index"
   end
 
-  before_filter [:login_required,:admin_authorization_required], :only => :download_survey_sheet
+  before_filter :admin_authorization_required, :only => :download_survey_sheet
   def download_survey_sheet
     file = SheetFile.find(params[:id])
     rilevatore = User.find(file.rilevatore_id)
