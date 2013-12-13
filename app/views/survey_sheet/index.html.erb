@@ -8,41 +8,63 @@
   <p id="description">
     Prima di poter procedere con qualsiasi tipo di import,<strong> è necessario eseguire l'upload della
     corrispettiva scheda di rilevamento in formato <em>file.pdf</em>, inerente alla campagna corrente.</strong><br />
-    Schegliere quindi il file ed indicare di che tipo di rilevazione si tratta, scegliendo dal menu a tendina.<br />
-    Eseguire l'upload cliccando sul bottone carica.<br />
-    Una volta compiuta quest'operazione,<strong> prima di poter eseguire l'import dei dati, è necessario attendere che un amministratore approvi il caricamento.</strong><br />
-    Verrete avvertiti tramite e-mail del risultato dell'operazione.
+    <strong>Il file dovrà avere il nome così composto: SS[anno campagna][id plot][survey];</strong> ad esempio
+    per una scheda di rilevamento erbacee del plot 01ABR1 dell'anno 2011 si avrà il nome
+    <strong>SS201101ABR1ERB</strong>.<br />
+    Tramite il nome del file l'applicazione richiedera il permesso d'import appropriato all'amministratore.<br />
+    Una volta eseguito l'upload del file,<strong> prima di poter passare all'import dei dati, è necessario attendere che un amministratore approvi il caricamento.</strong><br />
+    Una notifica e-mail avvertirà del risultato dell'operazione.
   </p>
+  <p>
+  I tipi di rilevamento previsti sono:
+  </p>
+  <ul>
+    <li>Erbacee = ERB</li>
+    <li>Legnose = LEG</li>
+    <li>Copl = COPL</li>
+    <li>Cops = COPS</li>
+  </ul>
 </div>
 
-<div id="float_container">
+
 <div id="comand_panel">
 <% form_tag({:controller=>'survey_sheet', :action => 'import_file'},:multipart => true) do %>
     <p class="comand">
-      <%= label_tag "Scheda di rilevamento" %><br />
+      <%= label_tag "scheda di rilevamento:" %>
       <%= file_field 'upload', 'datafile' %>
-    </p>
-    <p class="comand">
-      <%= label_tag "Tipo di rilevazione" %><br />
-      <%= select_tag :survey,"<option value = ' ' >-Seleziona-</option>" + options_for_select({"Erbacee" => "erb","Legnose" => "leg","Copl" => "copl","Cops" =>"cops"}) %>
-    </p>
-    <p class="null_margin null_padding">
       <%= submit_tag 'Carica', :confirm => "Una volta caricato il file, potrà essere eliminato solamente da un admin CONECOFOR. Procedere?" %>
     </p>
 <% end %>
 </div>
 
-<div id="caricamenti">
-  <h3>Caricamenti: <em><%= @active_campaign.descrizione %></em></h3>
-    <div id="loaded_file">
-      <% unless @loaded_file.blank? %>
-        <ul id="ul_list">
-        <% @loaded_file.each do |lf| %>
-            <li class ="list"><strong><%= lf.survey.capitalize %>:</strong> <%= lf.name %> </li>
-        <% end %>
-        </ul>
-      <% end %>
-    </div>
-</div>
+<table id="file_head">
+  <tbody>
+  <tr>
+    <td colspan="5" id ="tab_title">Caricamenti: <em><%= @active_campaign.descrizione %></em></td>
+  </tr>
+  <tr>
+    <td class="plot">Plot</td>
+    <td>Erb</td>
+    <td>Leg</td>
+    <td>Copl</td>
+    <td>Cops</td>
+  </tr>
+  </tbody>
+</table>
 
-</div>
+    <div id="loaded_file">
+        <table id="file_content">
+          <tbody>
+          <% for i in 0..@file_erb.size-1 %>
+            <tr>
+              <td class="plot"><%= @file_erb.at(i).id_plot %></td>
+              <%= red_green(@file_erb.at(i).name) %>
+              <%= red_green(@file_leg.at(i).name) %>
+              <%= red_green(@file_copl.at(i).name) %>
+              <%= red_green(@file_cops.at(i).name) %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+

@@ -1,5 +1,4 @@
 #instruction{
-    float: left;
     margin: 0px 30px;
     padding: 10px 10px;
     clear: both;
@@ -13,12 +12,6 @@ h2{
     color: #8b4513;
 }
 
-h3{
-    margin: 5px 2px;
-    font-size: small;
-    font-weight: bold;
-    color: #8b4513;
-}
 
 #description{
     text-align: left;
@@ -30,41 +23,64 @@ em{
 }
 
 #comand_panel{
-    float: left;
     border: 1px solid orange;
-    border-radius: 25px ;
-    padding: 15px;
-    margin: 10px 35px;
+    padding: 10px;
+    margin: 10px 25% 20px 25%;
     background-color: #FFFF8C;
-    height:135px;
     box-shadow: 0 0px 15px  #888888;
+    display: inline-block;
 }
 
 #loaded_file{
-    border: 1px dotted #ff8c00;
+    /*border: 1px dotted #ff8c00;*/
+    border-top:2px solid orange ;
+    border-bottom: 2px solid orange;
     overflow-x: hidden ;
     overflow-y: scroll;
-    width: 350px;
-    height:120px;
-    background-color: #eee8aa;
-    box-shadow: 0 0px 15px  #888888;
+    width:auto;
+    height:170px;
+    /*background-color: #eee8aa;*/
+    background-color: #ffffff;
+    margin: 0 35px 35px 35px;
+    display: inline-block;
+}
+#file_head{
+    margin: 0 35px;
 }
 
+#file_head tbody tr td{
+    width: 185px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#file_content tbody tr td{
+    width: 185px;
+    font-size: small;
+    text-align: center;
+}
+
+#file_head tbody tr td.plot,#file_content tbody tr td.plot{
+    width: 100px;
+}
+
+#file_content tbody tr td.plot{
+    background-color: rgba(226, 177, 34, 0.71);
+    color: #743a12;
+}
+
+#file_head td.plot{
+    color: #743a12;
+}
+
+
 .comand{
-    margin: 0 0 10px 0;
+    margin: 0;
     font-size: small;
     font-weight: bold;
     color: #006400;
 }
 
-#caricamenti{
-    float: left;
-    margin: 10px 35px;
-    width: 350px;
-    height:150px;
-    /*border: 1px solid;*/
-    clear: right;
-}
 
 li.list{
     font-size: smaller;
@@ -76,11 +92,22 @@ li.list{
     padding-left: 15px;
 }
 
-#float_container{
-    height: 200px;
-    width: 1000px;
-   /*border: 1px solid;*/
-    clear: both;
-    position: relative;
-
+td#tab_title{
+    color: orange;
 }
+
+td#tab_title em{
+    color: #6495ed;
+}
+#file_head td.plot ~ td{
+    color: #70e000;
+}
+
+td.red{
+    background-color: rgba(255, 38, 33, 0.80);
+}
+td.green{
+    background-color: rgba(146, 242, 41, 0.73);
+    color: green;
+}
+

@@ -14,9 +14,9 @@
 <h2>Scheda di rilevamento</h2>
 
 <p>
-  L'utente <%= @user.email %> ha appena caricato una scheda di rilevamento <%= @surveysheet %>.<br />
-  Si prega di controllare e in caso di responso positivo assegnare il relativo permesso d'import,
-  in caso di responso negativo, eliminare la scheda caricata.
+  L'utente <%= @user.email %> ha appena caricato una scheda di rilevamento <%= @surveysheet.survey %>
+  per il plot <%= @surveysheet.plot.id_plot %> relativa alla campagna corrente.<br />
+  Si prega di controllare ed assegnare il permesso d'import o richiedere un nuovo upload della scheda di rilevamento.
 </p>
 
 

@@ -1,15 +1,17 @@
 class SheetFile < ActiveRecord::Base
   set_table_name "sheet_file"
 
-  def fill_and_save!(id_ril,name,survey,year,path,relpath)
+  belongs_to :plot, :foreign_key => :plot_id
+
+  def fill!(id_ril,name,survey,path,relpath,plot_id,campagna_id)
     self.rilevatore_id = id_ril
     self.name = name
     self.survey = survey
-    self.year = year
     self.path = path
     self.relative_path = relpath
     self.created_at = DateTime.now
-    self.save
+    self.plot_id = plot_id
+    self.campagna_id = campagna_id
   end
 
   def permits?
