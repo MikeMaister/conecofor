@@ -3,6 +3,7 @@ class Admin::ImportPermitsController < ApplicationController
 
   def index
     @campagne = Campagne.find(:all,:conditions => ["deleted = false"],:order => "descrizione desc")
+    @campagna_attiva = current_active_campaign
   end
 
   def load_rilev

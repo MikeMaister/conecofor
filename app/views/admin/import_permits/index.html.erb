@@ -19,6 +19,7 @@
   <strong>Campagna:</strong>
   <%= select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + options_from_collection_for_select(@campagne,:id,:descrizione) %>
   <%= observe_field(:campagna,:url=>{:action => "load_rilev"},:with => :camp_id) %>
+  (Attiva: <em><%= @campagna_attiva.descrizione%></em>)
 </p>
 <p id="load_rilev" class="input" style="display: none;">
 
