@@ -12,6 +12,7 @@ class SheetFile < ActiveRecord::Base
     self.created_at = DateTime.now
     self.plot_id = plot_id
     self.campagna_id = campagna_id
+    self.import_permit = false
   end
 
   def permits?

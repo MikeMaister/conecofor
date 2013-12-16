@@ -1,5 +1,13 @@
-<ul class="list_f">
-  <% for i in 0..@file.size-1 %>
-    <li><%= @file.at(i).survey %>: <%= link_to "#{@file.at(i).name}", download_ss_path(@file.at(i).id) %> <% if @file.at(i).permits? == true %> <%= button_to_remote "Disattiva", :url =>{:action => "delete_permit", :file_id => @file.at(i).id } %> <%else%> <%= button_to_remote "Attiva", :url =>{:action => "create_permit", :file_id => @file.at(i).id } %> <%= button_to_remote("Elimina",{:url =>{:action => "delete_file", :file_id => @file.at(i).id },:confirm => "Eliminare il file? Questo comporterà un nuovo upload del file da parte del rilevatore."}) %> <% end %></li>
+<table id="file_content">
+  <tbody>
+  <% for i in 0..@file_erb.size-1 %>
+    <tr>
+      <td class="plot"><%= @file_erb.at(i).id_plot %></td>
+      <%= admin_red_green(@file_erb.at(i)) %>
+      <%= admin_red_green(@file_leg.at(i)) %>
+      <%= admin_red_green(@file_copl.at(i)) %>
+      <%= admin_red_green(@file_cops.at(i)) %>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>

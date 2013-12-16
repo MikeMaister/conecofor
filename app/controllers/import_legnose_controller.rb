@@ -3,7 +3,7 @@ class ImportLegnoseController < ApplicationController
 
   before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
   before_filter :campaign_active?, :only => "index"
-  before_filter :import_permit_leg?
+  before_filter :import_permit_leg? ,:only => "import_procedure"
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,
                  :set_file,:delete_old_record_cache!],
                 :only => "import_procedure"

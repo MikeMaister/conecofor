@@ -2,36 +2,82 @@ module Import_survey
 
   private
 
+  def get_plot_num(file_name,survey)
+    number = file_name[6..7] if survey == "cops".upcase || survey == "copl".upcase
+    number = file_name[5..6] if survey == "erb".upcase || survey == "leg".upcase
+    return number
+  end
+
   def import_permit_erb?
-    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"erb"])
-    if permit.blank?
-      flash[:error] = "Non hai il permesso per eseguire un import di tipo Erbacee. Controlla di aver caricato l'apposita scheda di rilevamento."
+    permits = SheetFile.find(:all,:conditions => ["rilevatore_id = ? and campagna_id = ? and survey = ?",current_user.id,current_active_campaign.id,"ERB"])
+    file_name = (params[:upload])['datafile'].original_filename
+    plot_num = get_plot_num(file_name,"erb".upcase)
+    #SECURITY REASON
+    permesso = false
+    permits.each do |p|
+      if p.plot.numero_plot.to_i == plot_num.to_i
+        permesso = true
+        break
+      end
+    end
+    if permesso == false
+      flash[:error] = "Non hai il permesso per eseguire l'import del file #{file_name}. Controlla di aver caricato l'apposita scheda di rilevamento."
       redirect_to root_path
     end
   end
 
   def import_permit_leg?
-    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"leg"])
-    if permit.blank?
-      flash[:error] = "Non hai il permesso per eseguire un import di tipo Legnose. Controlla di aver caricato l'apposita scheda di rilevamento."
+    permits = SheetFile.find(:all,:conditions => ["rilevatore_id = ? and campagna_id = ? and survey = ?",current_user.id,current_active_campaign.id,"LEG"])
+    file_name = (params[:upload])['datafile'].original_filename
+    plot_num = get_plot_num(file_name,"leg".upcase)
+    #SECURITY REASON
+    permesso = false
+    permits.each do |p|
+      if p.plot.numero_plot.to_i == plot_num.to_i
+        permesso = true
+        break
+      end
+    end
+    if permesso == false
+      flash[:error] = "Non hai il permesso per eseguire l'import del file #{file_name}. Controlla di aver caricato l'apposita scheda di rilevamento."
       redirect_to root_path
     end
   end
 
 
   def import_permit_copl?
-    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"copl"])
-    if permit.blank?
-      flash[:error] = "Non hai il permesso per eseguire un import di tipo Copl. Controlla di aver caricato l'apposita scheda di rilevamento."
+    permits = SheetFile.find(:all,:conditions => ["rilevatore_id = ? and campagna_id = ? and survey = ?",current_user.id,current_active_campaign.id,"COPL"])
+    file_name = (params[:upload])['datafile'].original_filename
+    plot_num = get_plot_num(file_name,"copl".upcase)
+    #SECURITY REASON
+    permesso = false
+    permits.each do |p|
+      if p.plot.numero_plot.to_i == plot_num.to_i
+        permesso = true
+        break
+      end
+    end
+    if permesso == false
+      flash[:error] = "Non hai il permesso per eseguire l'import del file #{file_name}. Controlla di aver caricato l'apposita scheda di rilevamento."
       redirect_to root_path
     end
   end
 
 
   def import_permit_cops?
-    permit = ImportPermits.find(:first,:conditions => ["rilevatore_id = ? and year = ? and survey = ?",current_user.id,current_active_campaign.anno,"cops"])
-    if permit.blank?
-      flash[:error] = "Non hai il permesso per eseguire un import di tipo Cops. Controlla di aver caricato l'apposita scheda di rilevamento."
+    permits = SheetFile.find(:all,:conditions => ["rilevatore_id = ? and campagna_id = ? and survey = ?",current_user.id,current_active_campaign.id,"COPS"])
+    file_name = (params[:upload])['datafile'].original_filename
+    plot_num = get_plot_num(file_name,"cops".upcase)
+    #SECURITY REASON
+    permesso = false
+    permits.each do |p|
+      if p.plot.numero_plot.to_i == plot_num.to_i
+        permesso = true
+        break
+      end
+    end
+    if permesso == false
+      flash[:error] = "Non hai il permesso per eseguire l'import del file #{file_name}. Controlla di aver caricato l'apposita scheda di rilevamento."
       redirect_to root_path
     end
   end

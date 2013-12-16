@@ -1,0 +1,2 @@
+<strong><%= label_tag :rilevatore %>:</strong>
+<%= select_tag :rilevatore, "<option value = '' selected>-Seleziona-</option>" + options_from_collection_for_select(@rilevatore,:id,:full_name)  %>

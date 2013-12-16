@@ -49,7 +49,9 @@ on p.id_plot = s.id_plot",@active_campaign.id,current_user.id]
   def download_survey_sheet
     file = SheetFile.find(params[:id])
     rilevatore = User.find(file.rilevatore_id)
-    send_file "#{RAILS_ROOT}/file privati app/schede rilevatori/#{rilevatore.full_name}/#{file.survey}/#{file.name}"
+    campagna = Campagne.find(file.campagna_id)
+    plot = Plot.find(file.plot_id)
+    send_file "#{RAILS_ROOT}/file privati app/schede rilevatori/#{rilevatore.full_name}/#{campagna.descrizione}/#{plot.id_plot}/#{file.survey}/#{file.name}"
   end
 
   private

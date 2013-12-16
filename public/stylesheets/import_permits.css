@@ -12,28 +12,31 @@ p.desc{
 div#view_mask{
     border-radius: 25px;
     padding: 15px;
-    float: left;
     margin: 15px 35px;
     border: 1px solid orange;
     background-color: #FFFF8C;
     box-shadow: 0 0px 15px  #888888;
+    display: inline-block;
 }
 
 p.input{
-    margin: 0 0 10px 0;
+    float: left;
+    margin: 0 35px 0 0;
+
 }
 
-div#file_list{
-    float: left;
-    border: 1px solid #72801e;
-    background-color: #e3ff9e;
-    margin-top: 15px;
-    padding: 10px;
-    height: 150px;
-    min-width: 400px;
-    overflow-x: hidden;
+div#tab_content{
+    /*border: 1px dotted #ff8c00;*/
+    border-top:2px solid orange ;
+    border-bottom: 2px solid orange;
+    overflow-x: hidden ;
     overflow-y: scroll;
-    box-shadow: 0 0px 15px  #888888;
+    width:auto;
+    height:300px;
+    /*background-color: #eee8aa;*/
+    background-color: #ffffff;
+    margin: 0 35px 35px 35px;
+    display: inline-block;
 }
 
 ul.list_f{
@@ -42,5 +45,62 @@ ul.list_f{
 }
 
 p.last{
-    margin-bottom: 0;
+    float: right;
+    margin: 0;
 }
+
+p#no_ss{
+    margin: 25px 35%;
+    padding: 5px;
+    background-color: rgba(255, 0, 0, 0.76);
+    border: 1px solid red;
+    color: white;
+    display: inline-block;
+}
+
+#file_head{
+    margin: 25px 35px 0 35px;
+}
+
+#file_head tbody tr td{
+    width: 185px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#file_content tbody tr td{
+    width: 185px;
+    font-size: small;
+    text-align: center;
+}
+
+
+#file_content tbody tr:hover{
+    opacity: 0.93;
+}
+
+#file_head tbody tr td.plot,#file_content tbody tr td.plot{
+    width: 100px;
+}
+
+#file_content tbody tr td.plot{
+    background-color: rgba(226, 177, 34, 0.71);
+    color: #743a12;
+}
+
+#file_head td.plot{
+    color: #743a12;
+}
+
+#file_head td.plot ~ td{
+    color: #70e000;
+}
+
+td.red{
+    background-color: rgba(255, 38, 33, 0.80);
+}
+td.green{
+    background-color: rgba(146, 242, 41, 0.73);
+    color: green;
+}
+

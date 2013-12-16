@@ -1,6 +1,9 @@
 <% content_for :title, "Import Permits - CONECOFOR" %>
 <% content_for :head do %>
     <%= stylesheet_link_tag "import_permits" %>
+    <script type="text/javascript">
+
+    </script>
 <% end %>
 
 <h2>Permessi d'import</h2>
@@ -13,12 +16,12 @@
 <div id="view_mask">
 <% form_remote_tag(:url => {:action => "show_file"}) do -%>
 <p class="input">
-  <strong>Anno Campagna</strong><br />
-  <%= select_tag :year,"<option>-Seleziona-</option>" + options_from_collection_for_select(@year,:anno,:anno) %>
+  <strong>Campagna:</strong>
+  <%= select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + options_from_collection_for_select(@campagne,:id,:descrizione) %>
+  <%= observe_field(:campagna,:url=>{:action => "load_rilev"},:with => :camp_id) %>
 </p>
-<p class="input">
-  <strong><%= label_tag :rilevatore %></strong><br />
-  <%= select_tag :rilevatore, "<option>-Seleziona-</option>" + options_from_collection_for_select(@rilevatore,:id,:full_name)  %>
+<p id="load_rilev" class="input" style="display: none;">
+
 </p>
 <p class="last">
   <%= submit_tag "Mostra Schede" %>
@@ -27,4 +30,24 @@
 <% end %>
 </div>
 
-<div id="file_list"></div>
+
+
+<div id="no_data" style="display: none;">
+  <p id="no_ss"> Nessuna scheda da visualizzare.</p>
+</div>
+
+<div id="file_list" style="display: none;">
+  <table id="file_head">
+    <tbody>
+    <tr>
+      <td class="plot">Plot</td>
+      <td>Erbacee</td>
+      <td>Legnose</td>
+      <td>Copl</td>
+      <td>Cops</td>
+    </tr>
+    </tbody>
+  </table>
+  <div id="tab_content"></div>
+</div>
+
