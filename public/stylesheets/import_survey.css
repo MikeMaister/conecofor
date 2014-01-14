@@ -6,7 +6,7 @@
 }
 
 h1{
-    margin: 0 0 15px 0;
+    margin: 0 0 17px 0;
     font-size: large;
     color: #8b4513;
 }
@@ -29,7 +29,7 @@ strong.subtitle{
     border: 1px solid orange;
     border-radius:25px;
     padding: 15px;
-    margin: 0 305px 30px 305px;
+    margin: 0 305px 35px 305px;
     background-color: #FFFF8C;
     box-shadow: 0 0px 15px  #888888;
 }
@@ -38,12 +38,7 @@ p.mask{
     margin: 0 0 7px 0;
 }
 
-h2{
-    margin: 0 35px 25px 35px;
-    font-size: large;
-    font-weight: bold;
-    color: #8b4513;
-}
+
 
 p#instr{
     margin: 25px 35px;

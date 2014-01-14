@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :logout_required, :except => [:show,:edit_info,:update_info]
   before_filter :valid_psw_token , :only => "reset_psw"
-  before_filter :login_required, :only => [:show,:edit_info,:update_info]
+  before_filter :login_required, :only => [:show,:edit_info,:update_info,:new_admin,:create_admin]
 
   def show
     @user = current_user
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
       #spedisco la mail con le istruzioni
       user.generate_psw_per_token
       Notifier.deliver_psw_reset_instructions(user)
-      flash[:notice] = "Controllare la propria casella di posta elettronica, e seguire le istruzioni presenti nella e-mail di Password Reset."
+      flash[:notice] = "Abbiamo inviato una mail con le istruzioni per reimpostare la password all'indirizzo #{params[:email]}, relative allo stesso account."
       redirect_to root_path
     end
   end
@@ -139,7 +139,7 @@ class UsersController < ApplicationController
             @user.save
             #disattivo l'account e spedisco la mail di notifica.
             deactivate_account!
-            flash[:notice] = "E' stata spedita bla bla bla"
+            flash[:notice] = "Il tuo account è stato temporaneamente disattivato. Controlla la casella di posta e valida l'indirizzo e-mail fornitoci per riattivare l'account."
             redirect_to root_url
           else
             flash[:error] = message

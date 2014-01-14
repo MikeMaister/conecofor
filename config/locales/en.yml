@@ -10,3 +10,11 @@ en:
         id_plot: "Identificativo"
       campagne:
         note_stagione: "Giustifica stagione"
+        season_id: "Stagione"
+      simple_range_association:
+        simple_range_model_id: "Modello simple range check"
+      mandatory_mask_association:
+        mandatory_mask_id: "Maschera d'obbligatorietà"
+      user:
+        email: "E-mail"
+        password_confirmation: "Conferma Password"

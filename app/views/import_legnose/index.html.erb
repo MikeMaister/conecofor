@@ -3,7 +3,10 @@
     <%= stylesheet_link_tag "import_survey"%>
 <%end%>
 
-<%= render :partial => "import_cops/instruction"%>
+<div id="istruzioni">
+  <h1>Legnose</h1>
+  <%= render :partial => "import_cops/instruction"%>
+</div>
 
 <div id="import_mask">
 <% if @active_campaign.blank? %>

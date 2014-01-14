@@ -88,10 +88,13 @@ div#new_campagna{
 }
 
 div#display_input_errors{
-    border: 1px dashed #F62217;
+    /*border: 1px dashed #F62217;*/
     width: 935px;
     padding: 5px;
     margin-bottom: 20px;
+    background-color: rgba(255, 150, 136, 0.73);
+    border: solid 1px #f65a58;
+    color: #ee2a26;
 }
 
 ul.err{

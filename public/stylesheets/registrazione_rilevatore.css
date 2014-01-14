@@ -2,7 +2,7 @@
     float: left;
     width: 940px;
     #border: 1px solid #000000;
-    margin: 20px 30px;
+    margin: 15px 30px 20px 35px;
 }
 
 #module{
@@ -30,7 +30,7 @@
     float: left;
     width: 600px;
     #border: 1px solid #000000;
-    margin-bottom: 20px;
+    margin-bottom: 17px;
 }
 
 #disclaimer{
@@ -80,11 +80,13 @@ p.module{
 
 #err_list{
     float:left;
-    border: 1px dashed #F62217;
+    border: solid 1px #f65a58;
+    background-color: rgba(255, 150, 136, 0.73);
     padding: 5px;
     margin: 0 30px;
     width: 930px;
 }
+
 
 #err_list ul,li{
     margin: 0;
@@ -93,7 +95,7 @@ p.module{
 #err_list li{
     margin-left: -15px;
     padding-left: 3px;
-    color:#F62217;
+    color: #ee2a26;
 }
 
 .disclaimer{

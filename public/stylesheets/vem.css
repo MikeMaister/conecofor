@@ -70,7 +70,7 @@ th,td{
 
 table#head{
     margin: 15px 35px 0 35px;
-    background-color: rgba(139, 69, 19, 0.67);
+    background-color: rgba(139, 116, 66, 0.65);
 }
 
 table#body tr:hover{
@@ -83,7 +83,7 @@ table#body tr:hover{
     height: 230px;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: rgba(139, 69, 19, 0.43);
+    background-color: rgba(139, 116, 66, 0.40);
 }
 
 .link_file{

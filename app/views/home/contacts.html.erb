@@ -6,19 +6,19 @@
 <% if logged_in? %>
 
 <h2>Responsabile Progetto</h2>
-<p class="line">resp.proj@dominio.com</p>
+<p class="line">admin@groundvegetationdb-web.com</p>
 
 <h3>Webmaster</h3>
-<p class="line">resp.it@dominio.com</p>
+<p class="line">webmaster@groundvegetationdb-web.com</p>
 
 <% else %>
 
     <%= render :partial => "users/logout_banner" %>
 
     <h2>Responsabile Progetto</h2>
-    <p class="line">resp.proj@dominio.com</p>
+    <p class="line">admin@groundvegetationdb-web.com</p>
 
-    <h3>Responsabile IT</h3>
-    <p class="line">resp.it@dominio.com</p>
+    <h3>Webmaster</h3>
+    <p class="line">webmaster@groundvegetationdb-web.com</p>
 
 <% end %>

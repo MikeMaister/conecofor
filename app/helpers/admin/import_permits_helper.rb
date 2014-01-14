@@ -16,4 +16,14 @@ module Admin::ImportPermitsHelper
       end
     end
   end
+
+  def special_select(campagne,active)
+    if active.blank?
+      select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+    else
+      group_op = [['Attiva',[["#{active.descrizione}","#{active.id}"]]] ]
+      select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + grouped_options_for_select(group_op) + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+    end
+  end
+
 end

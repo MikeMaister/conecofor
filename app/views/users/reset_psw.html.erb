@@ -8,18 +8,19 @@
 <%= render :partial => "users/input_errors" %>
 
 <div id="instruction_form">
+  <h1>Password Reset</h1>
   <p class="line">
-    <strong>Attenzione:</strong> Salvando le nuove informazioni, la vecchia password verrà definitivamente eliminata.
+    <strong id="alert">Attenzione:</strong> Salvando le nuove informazioni, la vecchia password verrà definitivamente eliminata.
   </p>
 
  <% form_tag(set_psw_path,:method => :put) do %>
   <p class="line">
     <%= hidden_field_tag :uid, @user.id  if @user%>
-    Nuova password:<br />
+    <strong>Nuova password</strong><br />
     <%= password_field_tag "new_psw" %>
   </p>
   <p class="line">
-    Conferma password:<br />
+    <strong>Conferma password</strong><br />
     <%= password_field_tag "confirm" %>
   </p>
   <p class="sub_but">

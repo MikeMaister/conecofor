@@ -4,14 +4,14 @@
 <%end%>
 
 <div id="instruction">
-  <h2>Caricamento scheda di rilevamento</h2>
+  <h2>Carica scheda di rilevamento</h2>
   <p id="description">
     Prima di poter procedere con qualsiasi tipo di import,<strong> è necessario eseguire l'upload della
     corrispettiva scheda di rilevamento in formato <em>file.pdf</em>, inerente alla campagna corrente.</strong><br />
     <strong>Il file dovrà avere il nome così composto: SS[anno campagna][id plot][survey];</strong> ad esempio
     per una scheda di rilevamento erbacee del plot 01ABR1 dell'anno 2011 si avrà il nome
     <strong>SS201101ABR1ERB</strong>.<br />
-    Tramite il nome del file l'applicazione richiedera il permesso d'import appropriato all'amministratore.<br />
+    Tramite il nome del file, l'applicazione richiedera il permesso d'import appropriato all'amministratore.<br />
     Una volta eseguito l'upload del file,<strong> prima di poter passare all'import dei dati, è necessario attendere che un amministratore approvi il caricamento.</strong><br />
     Una notifica e-mail avvertirà del risultato dell'operazione.
   </p>
@@ -32,7 +32,7 @@
     <p class="comand">
       <%= label_tag "scheda di rilevamento:" %>
       <%= file_field 'upload', 'datafile' %>
-      <%= submit_tag 'Carica', :confirm => "Una volta caricato il file, potrà essere eliminato solamente da un admin CONECOFOR. Procedere?" %>
+      <%= submit_tag 'Carica', :confirm => "Una volta caricato il file, potrà essere eliminato solamente da un admin. Procedere?" %>
     </p>
 <% end %>
 </div>

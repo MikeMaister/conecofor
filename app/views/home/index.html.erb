@@ -1,5 +1,5 @@
 <% unless logged_in? %>
-    <% content_for :title, "Home - CONECOFOR" %>
+    <% content_for :title, "Home - ?" %>
     <% content_for :head do %>
         <%= stylesheet_link_tag "home"%>
     <%end%>
@@ -33,21 +33,19 @@
     <div id="registration">
       <h2>Registrazione Rilevatori</h2>
       <p class="reg_desc">
-        Se sei un rilevatore designato, clicca su
+        Sei un rilevatore designato?<br />Clicca su
         <strong>
-          <%= link_to "Registrati", signup_path %>
-        </strong>
-
-        per poter in seguito accedere allo strumento.
+          <%= link_to "registrati", signup_path %>
+        </strong> per poter eseguire il primo accesso allo strumento.
       </p>
       <p class="null_margin">
-        <strong>Attenzione</strong> <em>quest'area è riservata solamente ai membri facenti parte del team del progetto</em>.
+        <strong>Attenzione</strong> <em>quest'area è riservata solamente ai membri facenti parte del team di progetto</em>.
       </p>
     </div>
     </div>
 
 <div id="presentation">
-  <h1>Benvenuto in Conecofor!</h1>
+  <h1>Benvenuto in ???!</h1>
   <p class="null_margin">
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
   </p>
@@ -107,7 +105,6 @@
           </li>
         </ul>
       </div>
-
     </div>
 
 

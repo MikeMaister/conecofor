@@ -35,10 +35,8 @@ div.pagination{
     padding: 5px;
     background-color: #9fcc12;
     margin: 0 72px 0 65px;
-}
+    text-align: center;
 
-.prev_page{
-    margin-left: 16%;
 }
 
 table#body tr:hover{

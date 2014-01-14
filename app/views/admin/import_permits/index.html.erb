@@ -17,9 +17,8 @@
 <% form_remote_tag(:url => {:action => "show_file"}) do -%>
 <p class="input">
   <strong>Campagna:</strong>
-  <%= select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + options_from_collection_for_select(@campagne,:id,:descrizione) %>
+  <%= special_select(@campagne,@active) %>
   <%= observe_field(:campagna,:url=>{:action => "load_rilev"},:with => :camp_id) %>
-  (Attiva: <em><%= @campagna_attiva.descrizione%></em>)
 </p>
 <p id="load_rilev" class="input" style="display: none;">
 

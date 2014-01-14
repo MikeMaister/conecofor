@@ -3,10 +3,11 @@ class ImportLegnoseController < ApplicationController
 
   before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
   before_filter :campaign_active?, :only => "index"
-  before_filter :import_permit_leg? ,:only => "import_procedure"
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,
                  :set_file,:delete_old_record_cache!],
                 :only => "import_procedure"
+  before_filter :import_permit_leg? ,:only => "import_procedure"
+
 
   def index
     @active_campaign = Campagne.find(:first, :conditions => ["active = true"])
@@ -21,8 +22,6 @@ class ImportLegnoseController < ApplicationController
       case result
         when 0
           set_permanent_data!("leg")
-          #mando la mail di notifica
-          Notifier.deliver_user_import_complete(current_user,"leg")
           flash[:notice] = "Complimenti nessun errore."
           redirect_to :action => "finish"
         when 1  #COMPLIANCE
@@ -140,6 +139,8 @@ class ImportLegnoseController < ApplicationController
       redirect_to :controller => "import_legnose"
     else
       @file = ImportFile.find(session[:file_id])
+      #mando la mail di notifica
+      Notifier.deliver_user_import_complete(current_user,@file)
       session_reset!
     end
   end

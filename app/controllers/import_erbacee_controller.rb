@@ -3,10 +3,11 @@ class ImportErbaceeController < ApplicationController
 
   before_filter :login_required,:rilevatore_authorization_required,:rilevatore_approvato
   before_filter :campaign_active?, :only => "index"
-  before_filter :import_permit_erb?, :only => "import_procedure"
   before_filter [:session_reset!,:file?,:file_type?,:file_date_conformity?,
                  :set_file,:delete_old_record_cache!],
                 :only => "import_procedure"
+  before_filter :import_permit_erb?, :only => "import_procedure"
+
 
 
   def index
@@ -22,8 +23,6 @@ class ImportErbaceeController < ApplicationController
       case result
         when 0
           set_permanent_data!("erb")
-          #mando la mail di notifica
-          Notifier.deliver_user_import_complete(current_user,"erb")
           flash[:notice] = "Complimenti nessun errore."
           redirect_to :action => "finish"
         when 1  #COMPLIANCE
@@ -140,6 +139,8 @@ class ImportErbaceeController < ApplicationController
       redirect_to :controller => "import_erbacee"
     else
       @file = ImportFile.find(session[:file_id])
+      #mando la mail di notifica
+      Notifier.deliver_user_import_complete(current_user,@file)
       session_reset!
     end
   end

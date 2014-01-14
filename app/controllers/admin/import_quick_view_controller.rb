@@ -43,45 +43,50 @@ class Admin::ImportQuickViewController < ApplicationController
     survey_kind = params[:class]
     id_to_approve = params[:records]
     user = nil
+    file = nil
     case survey_kind
       when "Copl"
         for i in 0..id_to_approve.size-1
           record_to_approve = Copl.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.approve_it!
         end
         #spedisco la mail di notifica
-        Notifier.deliver_approve_import(user,survey_kind)
+        Notifier.deliver_approve_import(user,file)
         flash[:notice] = "Record Approvati"
         redirect_to :controller => "admin/import_quick_view"
       when "Cops"
         for i in 0..id_to_approve.size-1
           record_to_approve = Cops.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.approve_it!
         end
         #spedisco la mail di notifica
-        Notifier.deliver_approve_import(user,survey_kind)
+        Notifier.deliver_approve_import(user,file)
         flash[:notice] = "Record Approvati"
         redirect_to :controller => "admin/import_quick_view"
       when "Erbacee"
         for i in 0..id_to_approve.size-1
           record_to_approve = Erbacee.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.approve_it!
         end
         #spedisco la mail di notifica
-        Notifier.deliver_approve_import(user,survey_kind)
+        Notifier.deliver_approve_import(user,file)
         flash[:notice] = "Record Approvati"
         redirect_to :controller => "admin/import_quick_view"
       when "Legnose"
         for i in 0..id_to_approve.size-1
           record_to_approve = Legnose.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.approve_it!
         end
         #spedisco la mail di notifica
-        Notifier.deliver_approve_import(user,survey_kind)
+        Notifier.deliver_approve_import(user,file)
         flash[:notice] = "Record Approvati"
         redirect_to :controller => "admin/import_quick_view"
       end
@@ -91,45 +96,50 @@ class Admin::ImportQuickViewController < ApplicationController
     survey_kind = params[:class]
     id_to_approve = params[:records]
     user = nil
+    file = nil
     case survey_kind
       when "Copl"
         for i in 0..id_to_approve.size-1
           record_to_approve = Copl.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.destroy
         end
         #spedisco la mail di notifica
-        Notifier.deliver_deleted_import(user,survey_kind)
+        Notifier.deliver_deleted_import(user,file)
         flash[:notice] = "Record Eliminati"
         redirect_to :controller => "admin/import_quick_view"
       when "Cops"
         for i in 0..id_to_approve.size-1
           record_to_approve = Cops.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.destroy
         end
         #spedisco la mail di notifica
-        Notifier.deliver_deleted_import(user,survey_kind)
+        Notifier.deliver_deleted_import(user,file)
         flash[:notice] = "Record Eliminati"
         redirect_to :controller => "admin/import_quick_view"
       when "Erbacee"
         for i in 0..id_to_approve.size-1
           record_to_approve = Erbacee.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.destroy
         end
         #spedisco la mail di notifica
-        Notifier.deliver_deleted_import(user,survey_kind)
+        Notifier.deliver_deleted_import(user,file)
         flash[:notice] = "Record Eliminati"
         redirect_to :controller => "admin/import_quick_view"
       when "Legnose"
         for i in 0..id_to_approve.size-1
           record_to_approve = Legnose.find(id_to_approve.at(i))
-          user = User.find(ImportFile.find(record_to_approve.file_name_id).user_id) if user.blank?
+          file = ImportFile.find(record_to_approve.file_name_id) if file.blank?
+          user = User.find(file.user_id) if user.blank?
           record_to_approve.destroy
         end
         #spedisco la mail di notifica
-        Notifier.deliver_deleted_import(user,survey_kind)
+        Notifier.deliver_deleted_import(user,file)
         flash[:notice] = "Record Eliminati"
         redirect_to :controller => "admin/import_quick_view"
     end

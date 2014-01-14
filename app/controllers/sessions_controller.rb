@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         cookies[:rem_token] = user.remember_token
       end
 
-      flash[:notice] = "Logged in successfully."
+      flash[:notice] = "Login effettuato."
       #redirect_to_target_or_default(root_url)
       redirect_to root_path
     else
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete :rem_token
-    flash[:notice] = "You have been logged out."
+    flash[:notice] = "Logout effettuato."
     redirect_to root_url
   end
 

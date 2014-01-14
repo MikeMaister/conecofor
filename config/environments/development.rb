@@ -17,18 +17,16 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 
-
-#SOSTITUIRE LA CONFIGURAZIONE MAIL CON QUELLA DEL SERVER
-
-#impostazione email
+#MAILER
 config.action_mailer.delivery_method = :smtp
 
 config.action_mailer.smtp_settings = {
-    :address => "mail.stock-signals-db.net",
-    :port => 26,
-    :user_name => 'admin+stock-signals-db.net',
-    :password => '%MH(==i;?_Sn',
-    :authentication =>'plain',
-    :enable_starttls_auto => false }
+	:address => "mail.groundvegetationdb-web.com",
+	:port => 25,
+	:user_name => 'info@groundvegetationdb-web.com',
+	:password => '23HKTZK3n8f{',
+	:authentication => 'plain',
+	:enable_starttls_auto => false
+}
 
-config.action_mailer.default_url_options = { :host => "www.stock-signals-db.net" }
+config.action_mailer.default_url_options = { :host => 'www.groundvegetationdb-web.com' }

@@ -2,8 +2,8 @@ class Admin::ImportPermitsController < ApplicationController
   before_filter :login_required,:admin_authorization_required
 
   def index
-    @campagne = Campagne.find(:all,:conditions => ["deleted = false"],:order => "descrizione desc")
-    @campagna_attiva = current_active_campaign
+    @campagne = Campagne.find(:all,:conditions => ["deleted = false and active = false"],:order => "descrizione desc")
+    @active = current_active_campaign
   end
 
   def load_rilev

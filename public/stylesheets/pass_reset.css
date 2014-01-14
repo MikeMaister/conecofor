@@ -1,11 +1,23 @@
+h1{
+    font-size: large;
+    margin: 0 0 12px 0;
+    color:#8b4513;
+}
+
+#banner_menu{
+    margin-bottom:25px;
+}
+
+
 #instruction_form{
     clear: both;
-    border: 1px solid #5db900;
+    border: 2px solid #8eb93a;
     background-color: #e0f59d;
-    border-radius: 25px;
-    box-shadow: 0 0px 10px  #888888;
-    padding: 25px;
-    margin:20px 35px;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
+    box-shadow: 0 0px 7px  #888888;
+    padding: 15px 20px;
+    margin: 25px 35px;
 }
 
 .line{
@@ -14,6 +26,10 @@
 
 .sub_but{
     margin: 0;
+}
+
+#alert{
+    color: red;
 }
 
 div#err_list{
