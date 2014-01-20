@@ -174,6 +174,16 @@ module Copl_checks
       session[:file_error] = true
     end
     #FACOLTATIVI
+    if mandatory?(session[:mask_name],"Copl","copertura_complessiva")
+      if record.cop_comp.nil?
+        #registro l'errore
+        save_error(record,"Violazione not null - Copertura Complessiva",row)
+        #segnalo che c'è stato un errore sulla riga
+        session[:row_error] = true
+        #e segnalo l'errore sul file
+        session[:file_error] = true
+      end
+    end
     if mandatory?(session[:mask_name],"Copl","copertura_arboreo")
       if record.cop_arbo.nil?
         #registro l'errore
@@ -428,7 +438,7 @@ module Copl_checks
     #solo se altezza arboreo non è nullo
     unless row.altezza_arboreo.nil?
       alt_arbo = SimpleRangeModel.find_by_sql ["SELECT * FROM simple_range_model WHERE attr = 'altezza_arboreo' AND reference_table = 'copl' AND deleted = false AND id IN (SELECT simple_range_model_id FROM simple_range_association WHERE campagna_id = ? AND deleted = false )",camp_id]
-      unless row.altezza_arboreo <= alt_arbo[0].max && row.altezza_arboreo >= alt_arbo[0].min
+      unless row.altezza_arboreo <= alt_arbo[0].max && row.altezza_arboreo > alt_arbo[0].min
         #registro l'errore 'out of range NOME CAMPO'
         simple_range_error(row,"Out of range: #{alt_arbo[0].attr}")
       end
@@ -446,7 +456,7 @@ module Copl_checks
     #solo se altezza arbustivo non è nullo
     unless row.altezza_arbustivo.nil?
       alt_arbu = SimpleRangeModel.find_by_sql ["SELECT * FROM simple_range_model WHERE attr = 'altezza_arbustivo' AND reference_table = 'copl' AND deleted = false AND id IN (SELECT simple_range_model_id FROM simple_range_association WHERE campagna_id = ? AND deleted = false )",camp_id]
-      unless row.altezza_arbustivo <= alt_arbu[0].max && row.altezza_arbustivo >= alt_arbu[0].min
+      unless row.altezza_arbustivo <= alt_arbu[0].max && row.altezza_arbustivo > alt_arbu[0].min
         #registro l'errore 'out of range NOME CAMPO'
         simple_range_error(row,"Out of range: #{alt_arbu[0].attr}")
       end
@@ -464,7 +474,7 @@ module Copl_checks
     #solo se altezza erbaceo non è nullo
     unless row.altezza_erbaceo.nil?
       alt_erb = SimpleRangeModel.find_by_sql ["SELECT * FROM simple_range_model WHERE attr = 'altezza_erbaceo' AND reference_table = 'copl' AND deleted = false AND id IN (SELECT simple_range_model_id FROM simple_range_association WHERE campagna_id = ? AND deleted = false )",camp_id]
-      unless row.altezza_erbaceo <= alt_erb[0].max && row.altezza_erbaceo >= alt_erb[0].min
+      unless row.altezza_erbaceo <= alt_erb[0].max && row.altezza_erbaceo > alt_erb[0].min
         #registro l'errore 'out of range NOME CAMPO'
         simple_range_error(row,"Out of range: #{alt_erb[0].attr}")
       end

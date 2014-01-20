@@ -18,11 +18,22 @@ module Admin::ImportPermitsHelper
   end
 
   def special_select(campagne,active)
-    if active.blank?
-      select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+    #se non ci sono campagne
+    if campagne.blank? && active.blank?
+      select_tag :campagna,"<option value = '' selected>-Seleziona-</option>"
     else
-      group_op = [['Attiva',[["#{active.descrizione}","#{active.id}"]]] ]
-      select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + grouped_options_for_select(group_op) + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+      #se ci sono campagne ma non c'è una campagna attiva, ma solo non attive
+      if active.blank?
+        select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+      #se ci sono campagne ma non non attive, ma solo quella attiva
+      elsif !active.blank? && campagne.blank?
+        group_op = [['Attiva',[["#{active.descrizione}","#{active.id}"]]] ]
+        select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + grouped_options_for_select(group_op)
+      #se ci sono campagne, sia quella attiva che quelle non attive
+      else
+        group_op = [['Attiva',[["#{active.descrizione}","#{active.id}"]]] ]
+        select_tag :campagna,"<option value = '' selected>-Seleziona-</option>" + grouped_options_for_select(group_op) + "<optgroup label='Non attive'>" + options_from_collection_for_select(campagne,:id,:descrizione) + "</optgroup>"
+      end
     end
   end
 

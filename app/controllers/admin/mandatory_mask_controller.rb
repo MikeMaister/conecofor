@@ -52,6 +52,7 @@ class Admin::MandatoryMaskController < ApplicationController
           cops_parameter_list << "certainty_species_determination" if params[:csd] == not_null
 
         copl_parameter_list = Array.new
+          copl_parameter_list << "copertura_complessiva" if params[:copertura_complessiva] == not_null
           copl_parameter_list << "copertura_arboreo" if params[:copertura_arboreo] == not_null
           copl_parameter_list << "altezza_arboreo" if params[:altezza_arboreo] == not_null
           copl_parameter_list << "copertura_arbustivo" if params[:copertura_arbustivo] == not_null

@@ -93,7 +93,7 @@ table#body tr:hover{
 
 #ver_scroll{
     /*border: 1px solid #000000;*/
-    height: 165px;
+    height: 157px;
     overflow-x: hidden;
     overflow-y: scroll;
     display: block;
